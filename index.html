@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>פרשת השבוע — אריאל ז'יטניצקי</title>
+<meta name="description" content="דפי פרשת השבוע של אריאל ז'יטניצקי — לצפייה, להורדה ולשולחן שבת. הארכיון המלא לפי חמשת חומשי תורה, חגים ומועדים.">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container site-header__inner">
+    <a href="#" class="wordmark">
+      <span class="wordmark__title">פרשת השבוע</span>
+      <span class="wordmark__sub">אריאל ז'יטניצקי</span>
+    </a>
+    <nav class="site-nav" id="site-nav" aria-label="ספרי התורה"></nav>
+    <label class="input">
+      <span class="input__field">
+        <span class="icon" aria-hidden="true" style="--icon:url('assets/icons/search.svg');width:16px;height:16px"></span>
+        <input id="search" type="search" placeholder="חיפוש פרשה…" aria-label="חיפוש פרשה">
+      </span>
+    </label>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="container hero__inner">
+    <div>
+      <div class="hero__laky">לק"י</div>
+      <h1>דפי פרשת השבוע — לצפייה, להורדה ולשולחן שבת</h1>
+      <p class="hero__lead">הדפים שנכתבו והופצו בדוא"ל לאורך השנים — קריאה מחודשת בפסוקים, שאלות, מדרשים והרבה סימני שאלה — מכונסים כאן לפי חמשת חומשי תורה וחגים.</p>
+      <div class="hero__actions">
+        <button type="button" class="btn btn--primary" id="hero-example">
+          <span class="icon" aria-hidden="true" style="--icon:url('assets/icons/eye.svg');width:17px;height:17px"></span>
+          לדוגמה: דף פרשת שופטים
+        </button>
+        <a class="btn btn--secondary" href="#bereshit">
+          <span class="icon" aria-hidden="true" style="--icon:url('assets/icons/book-open.svg');width:17px;height:17px"></span>
+          לארכיון המלא
+        </a>
+      </div>
+    </div>
+    <figure class="pasuk-quote">
+      <blockquote>שֹׁפְטִים וְשֹׁטְרִים תִּתֶּן־לְךָ בְּכָל־שְׁעָרֶיךָ… וְשָׁפְטוּ אֶת־הָעָם מִשְׁפַּט־צֶדֶק</blockquote>
+      <figcaption>דברים ט"ז, י"ח</figcaption>
+    </figure>
+  </div>
+</section>
+
+<main class="site-main container">
+  <div class="site-main__grid">
+    <div id="sections"></div>
+
+    <aside class="sidebar">
+      <aside class="riddle-box">
+        <div class="riddle-box__title">
+          <span class="icon" aria-hidden="true" style="--icon:url('assets/icons/lightbulb.svg');width:17px;height:17px"></span>
+          חידה לשולחן שבת
+        </div>
+        <div class="riddle-box__body">אילו שש ערים קולטות רוצח בשגגה — ולמה דווקא הלוויים מנהלים אותן? (רמז בדף פרשת שופטים)</div>
+      </aside>
+
+      <div class="sidebar-card">
+        <div class="sidebar-card__title">כל הדפים בתיקייה אחת</div>
+        <p>הארכיון המלא — כל קובצי ה-PDF — זמין גם בתיקיית Google Drive מרוכזת.</p>
+        <a class="btn btn--primary btn--sm" data-drive-folder href="#" target="_blank" rel="noopener">
+          <span class="icon" aria-hidden="true" style="--icon:url('assets/icons/external-link.svg');width:15px;height:15px"></span>
+          לתיקייה בדרייב
+        </a>
+      </div>
+
+      <div class="sidebar-card">
+        <div class="sidebar-card__title">קבלת הדף בדוא"ל</div>
+        <p>כפי שהופץ מאז הדף הראשון — ישירות לתיבה, מדי שבוע.</p>
+        <form class="sidebar-card__row" id="subscribe-form">
+          <label class="input" style="flex:1">
+            <span class="input__field">
+              <input id="subscribe-email" type="email" required placeholder="כתובת דוא״ל" aria-label="כתובת דוא״ל">
+            </span>
+          </label>
+          <button type="submit" class="btn btn--gold">
+            <span class="icon" aria-hidden="true" style="--icon:url('assets/icons/mail.svg');width:16px;height:16px"></span>
+            הרשמה
+          </button>
+        </form>
+      </div>
+
+      <div class="sidebar__note">דפים ללא כפתור צפייה זמינים בינתיים דרך קישורי Box מהאתר הישן ובתיקיית הדרייב; הם יעלו לכאן בהדרגה.</div>
+    </aside>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="container site-footer__inner">
+    <div>
+      <div class="site-footer__brand">פרשת השבוע — אריאל ז'יטניצקי</div>
+      <div class="site-footer__tagline">הדברים הושפעו רבות משעורים ששמעתי — וכנראה עוד כמה אשמים אחרים…</div>
+    </div>
+    <div style="display:flex;gap:16px">
+      <a data-drive-folder href="#" target="_blank" rel="noopener">תיקיית הדרייב</a>
+      <a href="https://ariel-parasha.blogspot.com/" target="_blank" rel="noopener">הבלוג הישן (Blogspot)</a>
+    </div>
+  </div>
+</footer>
+
+<div class="pdf-modal" id="pdf-modal" hidden role="dialog" aria-modal="true" aria-label="צפייה בדף הפרשה">
+  <div class="pdf-modal__dialog">
+    <div class="pdf-modal__bar">
+      <span class="pdf-modal__title"></span>
+      <a class="btn btn--ghost btn--sm" id="pdf-modal-download" href="#" download>
+        <span class="icon" aria-hidden="true" style="--icon:url('assets/icons/download.svg');width:15px;height:15px"></span>
+        הורדה
+      </a>
+      <button type="button" class="btn btn--secondary btn--sm" id="pdf-modal-close">סגירה</button>
+    </div>
+    <iframe src="about:blank" title="דף הפרשה"></iframe>
+  </div>
+</div>
+
+<script src="js/data.js"></script>
+<script src="js/site.js"></script>
+</body>
+</html>

@@ -1,0 +1,131 @@
+@import './tokens/fonts.css';
+@import './tokens/colors.css';
+@import './tokens/typography.css';
+@import './tokens/spacing.css';
+@import './tokens/effects.css';
+
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;min-height:100vh}
+
+/* ---------- אייקונים (mask, כמו Icon.jsx) ---------- */
+.icon{display:inline-flex;width:18px;height:18px;flex:none;background-color:currentColor;
+  -webkit-mask:var(--icon) no-repeat center / contain;mask:var(--icon) no-repeat center / contain}
+
+/* ---------- כפתורים ---------- */
+.btn{display:inline-flex;align-items:center;gap:8px;font-family:var(--font-body);font-weight:500;
+  font-size:16px;padding:9px 20px;border-radius:var(--radius-s);cursor:pointer;text-decoration:none;
+  transition:filter var(--dur) var(--ease),background var(--dur) var(--ease)}
+.btn:hover{filter:brightness(.93);text-decoration:none}
+.btn:active{filter:brightness(.85)}
+.btn--sm{font-size:14px;padding:6px 14px}
+.btn--primary{background:var(--primary);color:var(--text-on-accent);border:1px solid var(--primary)}
+.btn--primary:hover{color:var(--text-on-accent)}
+.btn--secondary{background:transparent;color:var(--primary);border:1px solid var(--blue-300)}
+.btn--gold{background:var(--gold-600);color:#fff;border:1px solid var(--gold-600)}
+.btn--gold:hover{color:#fff}
+.btn--ghost{background:transparent;color:var(--primary);border:1px solid transparent}
+.btn--ghost:hover{background:var(--blue-100);filter:none}
+
+/* ---------- תגית ---------- */
+.tag{display:inline-flex;align-items:center;gap:6px;font-family:var(--font-body);font-size:13px;
+  font-weight:500;padding:3px 12px;border-radius:var(--radius-pill);background:var(--gold-100);color:var(--gold-700)}
+
+/* ---------- כותרת מדור ---------- */
+.section-header{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;
+  border-bottom:var(--rule-gold);padding-bottom:10px;margin-bottom:var(--sp-5)}
+.section-header h2{margin:0;font-size:var(--fs-h2)}
+.section-header__subtitle{font-size:var(--fs-small);color:var(--text-muted);margin-top:2px}
+
+/* ---------- שדה קלט ---------- */
+.input{display:flex;flex-direction:column;gap:6px;font-family:var(--font-body)}
+.input__field{display:flex;align-items:center;gap:8px;background:var(--surface-raised);
+  border:1px solid var(--border-subtle);border-radius:var(--radius-s);padding:8px 12px;
+  transition:border-color var(--dur) var(--ease),box-shadow var(--dur) var(--ease)}
+.input__field:focus-within{border-color:var(--blue-500);box-shadow:0 0 0 3px var(--blue-100)}
+.input__field .icon{color:var(--ink-300)}
+.input input{border:none;outline:none;background:transparent;font-family:var(--font-body);
+  font-size:16px;color:var(--text-body);width:100%}
+
+/* ---------- שורת פרשה ---------- */
+.parasha-row{display:flex;align-items:center;gap:12px;padding:10px 16px;
+  border-bottom:1px solid var(--parchment-200);transition:background var(--dur) var(--ease)}
+.parasha-row:last-child{border-bottom:none}
+.parasha-row:hover{background:var(--parchment-50)}
+.parasha-row__icon{color:var(--ink-300)}
+.parasha-row--has-pdf .parasha-row__icon{color:var(--gold-600)}
+.parasha-row__name{font-family:var(--font-display);font-size:18px;font-weight:500;color:var(--text-heading);flex:1 1 auto}
+.parasha-row__note{font-size:13px;color:var(--text-muted)}
+.parasha-row__actions{display:flex;gap:8px}
+.parasha-row__soon{font-size:13px;color:var(--ink-300);padding:6px 8px}
+
+/* ---------- ציטוט פסוק ---------- */
+.pasuk-quote{margin:0;background:var(--surface-card);border:var(--border-card);
+  border-radius:var(--radius-m);padding:var(--sp-5) var(--sp-6);text-align:center}
+.pasuk-quote blockquote{margin:0;font-size:20px;color:var(--blue-900)}
+.pasuk-quote figcaption{margin-top:10px;font-family:var(--font-body);font-size:13.5px;color:var(--gold-700);letter-spacing:.02em}
+
+/* ---------- חידה לשולחן שבת ---------- */
+.riddle-box{background:var(--burgundy-100);border:1px solid #E4C6CA;border-radius:var(--radius-m);
+  padding:var(--sp-4) var(--sp-5);font-family:var(--font-body)}
+.riddle-box__title{display:flex;align-items:center;gap:8px;color:var(--burgundy-700);font-weight:600;font-size:15px;margin-bottom:6px}
+.riddle-box__body{color:var(--ink-900);font-size:16px;line-height:1.65}
+
+/* ---------- מבנה עמוד ---------- */
+.container{max-width:var(--page-width);margin:0 auto;padding-inline:24px}
+
+.site-header{background:var(--blue-900);color:var(--text-on-dark)}
+.site-header__inner{display:flex;align-items:center;gap:24px;padding-block:14px;flex-wrap:wrap}
+.wordmark{text-decoration:none;display:flex;flex-direction:column}
+.wordmark:hover{text-decoration:none}
+.wordmark__title{font-family:var(--font-display);font-weight:900;font-size:26px;color:#F7F2E7;line-height:1.2}
+.wordmark__sub{font-size:12.5px;color:var(--gold-400);letter-spacing:.06em}
+.site-nav{display:flex;gap:20px;flex:1 1 auto;font-size:15px;flex-wrap:wrap}
+.site-nav a{color:#DCE4F0}
+.site-nav a:hover{color:#fff}
+.site-header .input{width:240px}
+
+.hero{background:var(--parchment-100);border-bottom:var(--rule-gold)}
+.hero__inner{display:grid;grid-template-columns:1.15fr .85fr;gap:48px;align-items:center;padding-block:56px 48px}
+.hero__laky{font-size:14px;color:var(--gold-700);font-weight:600;letter-spacing:.04em;margin-bottom:10px}
+.hero h1{margin:0;font-size:var(--fs-hero);font-weight:900}
+.hero__lead{max-width:560px;color:var(--ink-700);margin-top:16px}
+.hero__actions{display:flex;gap:12px;margin-top:24px;flex-wrap:wrap}
+
+.site-main{padding-top:48px}
+.site-main__grid{display:grid;grid-template-columns:2.2fr 1fr;gap:40px;align-items:start}
+
+.sefer-section{margin-bottom:var(--sp-7)}
+.sefer-section__list{background:var(--surface-raised);border:var(--border-card);
+  border-radius:var(--radius-m);box-shadow:var(--shadow-card);overflow:hidden}
+
+.sidebar{display:flex;flex-direction:column;gap:20px;position:sticky;top:24px}
+.sidebar-card{background:var(--surface-card);border:var(--border-card);border-radius:var(--radius-m);padding:var(--sp-5)}
+.sidebar-card__title{font-family:var(--font-display);font-weight:700;font-size:19px;color:var(--text-heading);margin-bottom:6px}
+.sidebar-card p{margin:0 0 12px;font-size:14.5px;color:var(--ink-700)}
+.sidebar-card__row{display:flex;gap:8px}
+.sidebar__note{font-size:13.5px;color:var(--text-muted);line-height:1.6}
+
+.site-footer{background:var(--blue-900);color:#B9C5D8;margin-top:var(--sp-8)}
+.site-footer__inner{display:flex;justify-content:space-between;align-items:center;gap:16px;font-size:14px;padding-block:28px;flex-wrap:wrap}
+.site-footer__brand{font-family:var(--font-display);font-weight:700;font-size:18px;color:#F7F2E7}
+.site-footer__tagline{margin-top:4px}
+.site-footer a{color:var(--gold-400)}
+
+/* ---------- מודאל צפייה ב-PDF ---------- */
+.pdf-modal{position:fixed;inset:0;background:rgba(20,25,35,.55);display:flex;align-items:center;
+  justify-content:center;z-index:50;padding:24px}
+.pdf-modal[hidden]{display:none}
+.pdf-modal__dialog{background:var(--surface-raised);border-radius:var(--radius-l);box-shadow:var(--shadow-raised);
+  width:min(860px,100%);height:90vh;display:flex;flex-direction:column;overflow:hidden}
+.pdf-modal__bar{display:flex;align-items:center;gap:12px;padding:12px 20px;border-bottom:1px solid var(--parchment-200)}
+.pdf-modal__title{font-family:var(--font-display);font-weight:700;font-size:20px;color:var(--text-heading);flex:1}
+.pdf-modal iframe{border:none;flex:1;width:100%}
+
+/* ---------- רספונסיביות ---------- */
+@media (max-width:920px){
+  .hero__inner,.site-main__grid{grid-template-columns:1fr}
+  .sidebar{position:static}
+  .hero h1{font-size:var(--fs-h1)}
+  .site-header .input{width:100%}
+  .parasha-row{flex-wrap:wrap}
+}

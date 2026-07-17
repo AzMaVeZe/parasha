@@ -1,0 +1,14 @@
+:root{
+--font-display:'Frank Ruhl Libre',Georgia,serif;/* כותרות */
+--font-body:'Heebo',Arial,sans-serif;/* טקסט רץ, UI */
+--font-quote:'David Libre','Frank Ruhl Libre',serif;/* פסוקים וציטוטים */
+--fs-hero:44px;--fs-h1:34px;--fs-h2:26px;--fs-h3:20px;--fs-body:17px;--fs-small:14px;--fs-caption:12.5px;
+--lh-heading:1.25;--lh-body:1.7;--lh-quote:1.9;
+--fw-heading:700;--fw-body:400;
+}
+html{direction:rtl}
+body{font-family:var(--font-body);font-size:var(--fs-body);line-height:var(--lh-body);color:var(--text-body);background:var(--surface-page)}
+h1,h2,h3,h4{font-family:var(--font-display);color:var(--text-heading);line-height:var(--lh-heading);font-weight:var(--fw-heading)}
+a{color:var(--link);text-decoration:none}
+a:hover{color:var(--link-hover);text-decoration:underline}
+blockquote{font-family:var(--font-quote);line-height:var(--lh-quote)}

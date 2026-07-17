@@ -1,0 +1,8 @@
+:root{
+--radius-s:6px;--radius-m:10px;--radius-l:16px;--radius-pill:999px;
+--shadow-card:0 1px 3px rgba(38,36,30,.07),0 4px 14px rgba(38,36,30,.06);
+--shadow-raised:0 6px 24px rgba(20,41,77,.14);
+--border-card:1px solid var(--border-subtle);
+--rule-gold:2px solid var(--gold-600);
+--ease:cubic-bezier(.25,.6,.3,1);--dur:160ms;
+}
