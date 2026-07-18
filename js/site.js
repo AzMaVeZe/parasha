@@ -275,17 +275,20 @@
             heroTarget = { title: title, pdf: entry.pdf };
             label.textContent = 'לדף ' + (kind === 'פרשת השבוע' ? 'פרשת ' : '') + heName;
             const side = document.getElementById('hero-side');
-            side.textContent = '';
+            const quote = side.querySelector('.pasuk-quote');
             const card = el('div', 'hero-preview');
             const bar = el('div', 'hero-preview__bar');
             bar.append(el('span', 'hero-preview__title', 'הצצה לדף ' + heName));
             bar.append(button({ variant: 'ghost', sm: true, icon: 'eye', label: 'לדף המלא', ariaLabel: 'צפייה בדף ' + title + ' המלא', onClick: () => viewPdf(title, entry.pdf) }));
-            const frame = document.createElement('iframe');
-            frame.src = encodeURI(entry.pdf) + '#toolbar=0&navpanes=0&view=FitH';
-            frame.title = 'תצוגה מקדימה: ' + title;
-            frame.setAttribute('aria-hidden', 'true');
-            frame.tabIndex = -1;
-            card.append(bar, frame);
+            // תמונת העמוד הראשון — iframe של PDF לא נתמך באנדרואיד ולא ממורכז ב-iOS
+            const img = document.createElement('img');
+            img.className = 'hero-preview__img';
+            img.src = encodeURI(entry.pdf.replace('assets/pdfs/', 'assets/previews/').replace(/\.pdf$/i, '.jpg'));
+            img.alt = 'העמוד הראשון של דף ' + title;
+            img.addEventListener('click', () => viewPdf(title, entry.pdf));
+            img.addEventListener('error', () => { card.remove(); if (quote) quote.hidden = false; });
+            card.append(bar, img);
+            if (quote) quote.hidden = true;
             side.append(card);
           });
         } else if (entry.box) {
