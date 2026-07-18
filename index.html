@@ -29,12 +29,17 @@
   <div class="container hero__inner">
     <div>
       <div class="hero__laky">לק"י</div>
+      <div class="hero-badge" id="hero-badge" hidden>
+        <span class="hero-badge__kind" id="hero-badge-kind"></span>
+        <span class="hero-badge__name" id="hero-badge-name"></span>
+        <span class="hero-badge__date" id="hero-badge-date"></span>
+      </div>
       <h1>דפי פרשת השבוע — לצפייה, להורדה ולשולחן שבת</h1>
       <p class="hero__lead">הדפים שנכתבו והופצו בדוא"ל לאורך השנים — קריאה מחודשת בפסוקים, שאלות, מדרשים והרבה סימני שאלה — מכונסים כאן לפי חמשת חומשי תורה וחגים.</p>
       <div class="hero__actions">
         <button type="button" class="btn btn--primary" id="hero-example">
           <span class="icon" aria-hidden="true" style="--icon:url('assets/icons/eye.svg');width:17px;height:17px"></span>
-          לדוגמה: דף פרשת שופטים
+          <span id="hero-cta-label">לדוגמה: דף פרשת שופטים</span>
         </button>
         <a class="btn btn--secondary" href="#bereshit">
           <span class="icon" aria-hidden="true" style="--icon:url('assets/icons/book-open.svg');width:17px;height:17px"></span>
@@ -42,10 +47,12 @@
         </a>
       </div>
     </div>
-    <figure class="pasuk-quote">
-      <blockquote>שֹׁפְטִים וְשֹׁטְרִים תִּתֶּן־לְךָ בְּכָל־שְׁעָרֶיךָ… וְשָׁפְטוּ אֶת־הָעָם מִשְׁפַּט־צֶדֶק</blockquote>
-      <figcaption>דברים ט"ז, י"ח</figcaption>
-    </figure>
+    <div id="hero-side">
+      <figure class="pasuk-quote">
+        <blockquote>שֹׁפְטִים וְשֹׁטְרִים תִּתֶּן־לְךָ בְּכָל־שְׁעָרֶיךָ… וְשָׁפְטוּ אֶת־הָעָם מִשְׁפַּט־צֶדֶק</blockquote>
+        <figcaption>דברים ט"ז, י"ח</figcaption>
+      </figure>
+    </div>
   </div>
 </section>
 
