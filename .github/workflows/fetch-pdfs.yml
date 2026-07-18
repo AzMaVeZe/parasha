@@ -1,0 +1,44 @@
+name: Fetch parasha PDFs from Google Drive
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: claude/parasha-website-kjw9xa
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Download the public Drive folder
+        run: |
+          pip install --quiet gdown
+          gdown --folder 'https://drive.google.com/drive/folders/1waquTTctSg9xvaC6ehHtS4pLDhNDIP9l' -O drive_files --remaining-ok
+          echo "--- downloaded files ---"
+          find drive_files -type f | sort
+
+      - name: Copy PDFs into the site archive
+        run: |
+          find drive_files -type f -iname '*.pdf' -exec cp -v {} assets/pdfs/ \;
+          rm -rf drive_files
+          ls -la assets/pdfs/
+
+      - name: Commit and push
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets/pdfs
+          if git diff --cached --quiet; then
+            echo "No new files to commit"
+          else
+            git commit -m "Add parasha PDF archive from Google Drive folder"
+            git push origin claude/parasha-website-kjw9xa
+          fi
