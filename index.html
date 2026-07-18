@@ -3,11 +3,23 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self' https://www.hebcal.com https://docs.google.com; frame-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self' mailto:">
+<meta name="referrer" content="strict-origin-when-cross-origin">
 <title>פרשת השבוע — אריאל ז'יטניצקי</title>
 <meta name="description" content="דפי פרשת השבוע של אריאל ז'יטניצקי — לצפייה, להורדה ולשולחן שבת. הארכיון המלא לפי חמשת חומשי תורה, חגים ומועדים.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="פרשת השבוע — אריאל ז'יטניצקי">
+<meta property="og:description" content="דפי פרשת השבוע לצפייה, להורדה ולשולחן שבת — הארכיון המלא לפי חמשת חומשי תורה, חגים ומועדים.">
+<meta property="og:url" content="https://azmaveze.github.io/parasha/">
+<meta property="og:image" content="https://azmaveze.github.io/parasha/assets/og-image.png">
+<meta property="og:locale" content="he_IL">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="icon" href="favicon.png" type="image/png" sizes="48x48">
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+
+<a href="#main-content" class="skip-link">דלג לתוכן הראשי</a>
 
 <header class="site-header">
   <div class="container site-header__inner">
@@ -22,6 +34,7 @@
         <input id="search" type="search" placeholder="חיפוש פרשה…" aria-label="חיפוש פרשה">
       </span>
     </label>
+    <div id="search-status" role="status" aria-live="polite" class="visually-hidden"></div>
   </div>
 </header>
 
@@ -56,47 +69,64 @@
   </div>
 </section>
 
-<main class="site-main container">
+<main class="site-main container" id="main-content">
   <div class="site-main__grid">
     <div id="sections"></div>
 
-    <aside class="sidebar">
-      <aside class="riddle-box">
-        <div class="riddle-box__title">
+    <aside class="sidebar" aria-label="מידע נוסף">
+      <section class="riddle-box">
+        <h2 class="riddle-box__title">
           <span class="icon" aria-hidden="true" style="--icon:url('assets/icons/lightbulb.svg');width:17px;height:17px"></span>
-          חידה לשולחן שבת
-        </div>
-        <div class="riddle-box__body">אילו שש ערים קולטות רוצח בשגגה — ולמה דווקא הלוויים מנהלים אותן? (רמז בדף פרשת שופטים)</div>
-      </aside>
+          <span id="riddle-title">חידה לשולחן שבת</span>
+        </h2>
+        <div class="riddle-box__body" id="riddle-body">אילו שש ערים קולטות רוצח בשגגה — ולמה דווקא הלוויים מנהלים אותן? (רמז בדף פרשת שופטים)</div>
+        <details class="riddle-box__prev" id="riddle-prev" hidden>
+          <summary id="riddle-prev-summary">הפתרון לחידה של שבוע שעבר</summary>
+          <p class="riddle-box__prev-q" id="riddle-prev-q"></p>
+          <p class="riddle-box__prev-a" id="riddle-prev-a"></p>
+        </details>
+      </section>
 
-      <div class="sidebar-card">
-        <div class="sidebar-card__title">כל הדפים בתיקייה אחת</div>
+      <section class="sidebar-card">
+        <h2 class="sidebar-card__title">כל הדפים בתיקייה אחת</h2>
         <p>הארכיון המלא — כל קובצי ה-PDF — זמין גם בתיקיית Google Drive מרוכזת.</p>
-        <a class="btn btn--primary btn--sm" data-drive-folder href="#" target="_blank" rel="noopener">
+        <a class="btn btn--primary btn--sm" data-drive-folder href="#" target="_blank" rel="noopener noreferrer">
           <span class="icon" aria-hidden="true" style="--icon:url('assets/icons/external-link.svg');width:15px;height:15px"></span>
-          לתיקייה בדרייב
+          לתיקייה בדרייב<span class="visually-hidden"> (נפתח בחלון חדש)</span>
         </a>
-      </div>
+      </section>
 
-      <div class="sidebar-card">
-        <div class="sidebar-card__title">קבלת הדף בדוא"ל</div>
+      <section class="sidebar-card">
+        <h2 class="sidebar-card__title">קבלת הדף בדוא"ל</h2>
         <p>כפי שהופץ מאז הדף הראשון — ישירות לתיבה, מדי שבוע.</p>
-        <form class="sidebar-card__row" id="subscribe-form">
-          <label class="input" style="flex:1">
-            <span class="input__field">
-              <input id="subscribe-email" type="email" required placeholder="כתובת דוא״ל" aria-label="כתובת דוא״ל">
-            </span>
-          </label>
-          <button type="submit" class="btn btn--gold">
-            <span class="icon" aria-hidden="true" style="--icon:url('assets/icons/mail.svg');width:16px;height:16px"></span>
-            הרשמה
-          </button>
-        </form>
-      </div>
+        <a class="btn btn--gold" id="subscribe-btn" href="#" target="_blank" rel="noopener noreferrer">
+          <span class="icon" aria-hidden="true" style="--icon:url('assets/icons/mail.svg');width:16px;height:16px"></span>
+          להרשמה בטופס<span class="visually-hidden"> (נפתח בחלון חדש)</span>
+        </a>
+        <div id="subscribe-fallback" hidden>
+          <p style="margin:0 0 8px">לקבלת הדף כתבו אל:<br><strong dir="ltr">ariel.zitnitski@gmail.com</strong></p>
+          <button type="button" class="btn btn--secondary btn--sm" id="copy-email">העתקת הכתובת</button>
+        </div>
+      </section>
 
-      <div class="sidebar__note">דפים ללא כפתור צפייה זמינים בינתיים דרך קישורי Box מהאתר הישן ובתיקיית הדרייב; הם יעלו לכאן בהדרגה.</div>
+      <div class="sidebar__note">דפים שעדיין אין להם קובץ באתר זמינים בתיקיית הדרייב; הארכיון מתעדכן בהדרגה.</div>
     </aside>
   </div>
+
+  <section class="comments" id="comments">
+    <div class="section-header">
+      <div>
+        <h2>תגובות</h2>
+        <div class="section-header__subtitle">התגובות נשלחות עם כתובת דוא"ל מאומתת</div>
+      </div>
+      <a class="btn btn--primary btn--sm" id="comments-add" href="#" target="_blank" rel="noopener noreferrer">
+        <span class="icon" aria-hidden="true" style="--icon:url('assets/icons/mail.svg');width:15px;height:15px"></span>
+        כתיבת תגובה<span class="visually-hidden"> (נפתח בחלון חדש)</span>
+      </a>
+    </div>
+    <p id="comments-note"></p>
+    <ul id="comments-list" class="comments__list"></ul>
+  </section>
 </main>
 
 <footer class="site-footer">
@@ -105,17 +135,22 @@
       <div class="site-footer__brand">פרשת השבוע — אריאל ז'יטניצקי</div>
       <div class="site-footer__tagline">הדברים הושפעו רבות משעורים ששמעתי — וכנראה עוד כמה אשמים אחרים…</div>
     </div>
-    <div style="display:flex;gap:16px">
-      <a data-drive-folder href="#" target="_blank" rel="noopener">תיקיית הדרייב</a>
-      <a href="https://ariel-parasha.blogspot.com/" target="_blank" rel="noopener">הבלוג הישן (Blogspot)</a>
+    <div style="display:flex;gap:16px;flex-wrap:wrap">
+      <a href="accessibility.html">הצהרת נגישות</a>
+      <a data-drive-folder href="#" target="_blank" rel="noopener noreferrer">תיקיית הדרייב<span class="visually-hidden"> (נפתח בחלון חדש)</span></a>
+      <a href="https://ariel-parasha.blogspot.com/" target="_blank" rel="noopener noreferrer">הבלוג הישן (Blogspot)<span class="visually-hidden"> (נפתח בחלון חדש)</span></a>
     </div>
   </div>
 </footer>
 
-<div class="pdf-modal" id="pdf-modal" hidden role="dialog" aria-modal="true" aria-label="צפייה בדף הפרשה">
+<button type="button" id="to-top" class="to-top" hidden aria-label="חזרה לראש העמוד">
+  <span class="icon" aria-hidden="true" style="--icon:url('assets/icons/chevron-left.svg');width:18px;height:18px;transform:rotate(90deg)"></span>
+</button>
+
+<div class="pdf-modal" id="pdf-modal" hidden role="dialog" aria-modal="true" aria-labelledby="pdf-modal-title">
   <div class="pdf-modal__dialog">
     <div class="pdf-modal__bar">
-      <span class="pdf-modal__title"></span>
+      <span class="pdf-modal__title" id="pdf-modal-title"></span>
       <a class="btn btn--ghost btn--sm" id="pdf-modal-download" href="#" download>
         <span class="icon" aria-hidden="true" style="--icon:url('assets/icons/download.svg');width:15px;height:15px"></span>
         הורדה
@@ -127,6 +162,8 @@
 </div>
 
 <script src="js/data.js"></script>
+<script src="js/pdf-manifest.js"></script>
+<script src="js/riddles.js"></script>
 <script src="js/site.js"></script>
 </body>
 </html>

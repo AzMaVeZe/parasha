@@ -1,7 +1,15 @@
 // כל הקבצים זמינים גם בתיקיית Google Drive המרוכזת:
 window.DRIVE_FOLDER = 'https://drive.google.com/drive/folders/1waquTTctSg9xvaC6ehHtS4pLDhNDIP9l';
 
-const B = id => 'http://www.box.net/shared/' + id;
+// טופס Google Forms להרשמה לרשימת התפוצה (להדביק את קישור הטופס בין הגרשיים):
+window.SUBSCRIBE_FORM_URL = '';
+// מערכת תגובות מבוססת Google Forms עם איסוף אימייל מאומת:
+// COMMENTS_FORM_URL — קישור לטופס התגובה; COMMENTS_CSV_URL — קישור ה-CSV של גיליון
+// התשובות אחרי "פרסום באינטרנט" (קובץ ‹ שיתוף ‹ פרסום באינטרנט ‹ CSV).
+window.COMMENTS_FORM_URL = '';
+window.COMMENTS_CSV_URL = '';
+
+const B = id => 'https://www.box.net/shared/' + id;
 // קובץ מקומי בארכיון האתר. שורה מקבלת כפתורי צפייה/הורדה רק אם הקובץ אכן קיים
 // ב-assets/pdfs (נבדק בזמן טעינה), כך שאפשר להוסיף קבצים בהדרגה בלי לגעת בקוד.
 const P = f => 'assets/pdfs/' + f;

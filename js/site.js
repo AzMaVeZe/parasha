@@ -25,12 +25,14 @@
     const b = el(isLink ? 'a' : 'button', 'btn btn--' + (opts.variant || 'primary') + (opts.sm ? ' btn--sm' : ''));
     if (isLink) {
       b.href = opts.href;
-      if (opts.external) { b.target = '_blank'; b.rel = 'noopener'; }
+      if (opts.external) { b.target = '_blank'; b.rel = 'noopener noreferrer'; }
       if (opts.download) b.setAttribute('download', '');
     } else {
       b.type = 'button';
       if (opts.onClick) b.addEventListener('click', opts.onClick);
     }
+    if (opts.ariaLabel) b.setAttribute('aria-label', opts.ariaLabel + (opts.external ? ' (נפתח בחלון חדש)' : ''));
+    else if (opts.external) b.setAttribute('aria-label', opts.label + ' (נפתח בחלון חדש)');
     if (opts.icon) b.append(icon(opts.icon, opts.iconSize || 15));
     b.append(document.createTextNode(opts.label));
     return b;
@@ -38,29 +40,52 @@
 
   /* ---------- מודאל צפייה ---------- */
   const modal = document.getElementById('pdf-modal');
-  const modalTitle = modal.querySelector('.pdf-modal__title');
+  const modalTitle = document.getElementById('pdf-modal-title');
   const modalFrame = modal.querySelector('iframe');
   const modalDownload = document.getElementById('pdf-modal-download');
+  let lastFocused = null;
 
-  function openPdf(name, url) {
-    modalTitle.textContent = 'פרשת ' + name;
+  // במסכי מגע/צרים iframe של PDF שבור (בעיקר iOS) — פותחים בלשונית חדשה
+  const preferNewTab = () => window.matchMedia('(pointer: coarse)').matches || window.innerWidth < 700;
+
+  function viewPdf(title, url) {
+    if (preferNewTab()) { window.open(encodeURI(url), '_blank', 'noopener'); return; }
+    openPdf(title, url);
+  }
+
+  function openPdf(title, url) {
+    lastFocused = document.activeElement;
+    modalTitle.textContent = title;
     modalFrame.src = encodeURI(url);
+    modalFrame.title = title;
     modalDownload.href = encodeURI(url);
     modal.hidden = false;
     document.body.style.overflow = 'hidden';
+    document.getElementById('pdf-modal-close').focus();
   }
   function closePdf() {
     modal.hidden = true;
     modalFrame.src = 'about:blank';
     document.body.style.overflow = '';
+    if (lastFocused && document.contains(lastFocused)) lastFocused.focus();
   }
   modal.addEventListener('click', e => { if (e.target === modal) closePdf(); });
   document.getElementById('pdf-modal-close').addEventListener('click', closePdf);
   document.addEventListener('keydown', e => { if (e.key === 'Escape' && !modal.hidden) closePdf(); });
+  // מלכודת פוקוס בתוך הדיאלוג
+  modal.addEventListener('keydown', e => {
+    if (e.key !== 'Tab') return;
+    const f = modal.querySelectorAll('a[href], button, iframe');
+    const first = f[0], last = f[f.length - 1];
+    if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+    else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+  });
 
-  /* בדיקה אילו קבצים אכן קיימים בארכיון המקומי — כפתורי צפייה/הורדה מופיעים רק להם */
+  /* זמינות קבצים: מניפסט סטטי (js/pdf-manifest.js); HEAD רק כשאין מניפסט */
+  const manifest = Array.isArray(window.PDF_FILES) ? new Set(window.PDF_FILES) : null;
   const availability = new Map();
   function checkPdf(url) {
+    if (manifest) return Promise.resolve(manifest.has(url.replace('assets/pdfs/', '')));
     if (!availability.has(url)) {
       availability.set(url, fetch(encodeURI(url), { method: 'HEAD' }).then(r => r.ok).catch(() => false));
     }
@@ -75,9 +100,11 @@
     nav.append(a);
   });
 
+  const rowTitle = (sefer, p) => (sefer.id === 'chagim' ? p.name : 'פרשת ' + p.name);
+
   /* ---------- שורת פרשה ---------- */
-  function parashaRow(p) {
-    const row = el('div', 'parasha-row');
+  function parashaRow(sefer, p) {
+    const row = el('li', 'parasha-row');
     const rowIcon = icon('file-text', 18);
     rowIcon.classList.add('parasha-row__icon');
     row.append(rowIcon);
@@ -91,7 +118,7 @@
 
     function showFallback() {
       if (p.box) {
-        actions.append(button({ variant: 'ghost', sm: true, href: p.box, external: true, icon: 'external-link', label: 'Box' }));
+        actions.append(button({ variant: 'ghost', sm: true, href: p.box, external: true, icon: 'external-link', label: 'Box', ariaLabel: 'דף ' + p.name + ' בקישור Box הישן' }));
       } else {
         actions.append(el('span', 'parasha-row__soon', 'בקרוב'));
       }
@@ -102,8 +129,8 @@
         if (ok) {
           row.classList.add('parasha-row--has-pdf');
           actions.append(
-            button({ variant: 'secondary', sm: true, icon: 'eye', label: 'צפייה', onClick: () => openPdf(p.name, p.pdf) }),
-            button({ variant: 'ghost', sm: true, href: encodeURI(p.pdf), download: true, icon: 'download', label: 'הורדה' })
+            button({ variant: 'secondary', sm: true, icon: 'eye', label: 'צפייה', ariaLabel: 'צפייה בדף ' + rowTitle(sefer, p), onClick: () => viewPdf(rowTitle(sefer, p), p.pdf) }),
+            button({ variant: 'ghost', sm: true, href: encodeURI(p.pdf), download: true, icon: 'download', label: 'הורדה', ariaLabel: 'הורדת דף ' + rowTitle(sefer, p) + ' (PDF)' })
           );
         } else {
           showFallback();
@@ -126,13 +153,13 @@
     header.append(headText);
     if (sefer.compilation) {
       checkPdf(sefer.compilation).then(ok => {
-        if (ok) header.append(button({ variant: 'gold', sm: true, href: encodeURI(sefer.compilation), download: true, icon: 'download', label: 'האסופה המלאה (PDF)' }));
+        if (ok) header.append(button({ variant: 'gold', sm: true, href: encodeURI(sefer.compilation), download: true, icon: 'download', label: 'האסופה המלאה (PDF)', ariaLabel: 'הורדת אסופת ' + sefer.name + ' המלאה (PDF)' }));
       });
     }
     section.append(header);
 
-    const list = el('div', 'sefer-section__list');
-    sefer.parshiot.forEach(p => list.append(parashaRow(p)));
+    const list = el('ul', 'sefer-section__list');
+    sefer.parshiot.forEach(p => list.append(parashaRow(sefer, p)));
     section.append(list);
     return section;
   }
@@ -140,20 +167,33 @@
   const sectionsRoot = document.getElementById('sections');
   data.forEach(sefer => sectionsRoot.append(seferSection(sefer)));
 
+  const emptyState = el('div', 'search-empty');
+  emptyState.hidden = true;
+  sectionsRoot.append(emptyState);
+
   /* ---------- חיפוש ---------- */
   const search = document.getElementById('search');
+  const searchStatus = document.getElementById('search-status');
+  const norm = s => (s || '').replace(/["'׳״]/g, '').replace(/[־–—-]/g, ' ').replace(/\s+/g, ' ').trim();
   search.addEventListener('input', () => {
-    const q = search.value.trim();
+    const q = norm(search.value);
+    let total = 0;
     data.forEach(sefer => {
       const section = document.getElementById(sefer.id);
       let visible = 0;
       section.querySelectorAll('.parasha-row').forEach(row => {
-        const hit = !q || row.querySelector('.parasha-row__name').textContent.includes(q);
+        const hit = !q || norm(row.querySelector('.parasha-row__name').textContent).includes(q);
         row.style.display = hit ? '' : 'none';
         if (hit) visible++;
       });
       section.style.display = visible ? '' : 'none';
+      total += visible;
     });
+    emptyState.hidden = !(q && total === 0);
+    if (!emptyState.hidden) {
+      emptyState.textContent = 'לא נמצאה פרשה בשם "' + search.value.trim() + '" — נסו שם אחר, או מצאו את הקובץ בתיקיית הדרייב.';
+    }
+    searchStatus.textContent = q ? (total ? 'נמצאו ' + total + ' דפים' : 'לא נמצאו תוצאות') : '';
   });
 
   /* ---------- הכפתור הראשי בהירו ---------- */
@@ -162,9 +202,9 @@
   let heroBoxUrl = null;   // fallback לקישור Box של הפרשה הקרובה
   document.getElementById('hero-example').addEventListener('click', () => {
     if (heroBoxUrl) { window.open(heroBoxUrl, '_blank', 'noopener'); return; }
-    const t = heroTarget || example;
+    const t = heroTarget || { title: 'פרשת שופטים', pdf: example.pdf };
     checkPdf(t.pdf).then(ok => {
-      if (ok) openPdf(t.name, t.pdf);
+      if (ok) viewPdf(t.title, t.pdf);
       else window.open(driveFolder, '_blank', 'noopener');
     });
   });
@@ -173,22 +213,42 @@
   const stripNikud = s => (s || '').replace(/[֑-ׇ]/g, '');
   function findEntry(name) {
     const clean = stripNikud(name).replace(/^פרשת\s+/, '').split(/[־–-]/)[0].trim();
-    const all = data.flatMap(s => s.parshiot);
+    const all = data.flatMap(s => s.parshiot.map(p => ({ p, sefer: s })));
     // התאמה מדויקת קודם — אחרת "פינחס" נתפס על "נח" בהתאמה חלקית
-    return all.find(p => p.name === clean)
-        || all.find(p => p.name.includes(clean))
-        || all.find(p => clean.includes(p.name))
-        || null;
+    const hit = all.find(x => x.p.name === clean)
+        || all.find(x => x.p.name.includes(clean))
+        || all.find(x => clean.includes(x.p.name));
+    return hit || null;
   }
+
+  function setRiddle(currentName, prevName) {
+    const riddles = window.PARASHA_RIDDLES || {};
+    const cur = riddles[currentName];
+    if (!cur) return; // נשארת חידת ברירת המחדל
+    document.getElementById('riddle-title').textContent = 'חידה לשולחן שבת — ' + currentName;
+    document.getElementById('riddle-body').textContent = cur.q;
+    const prev = prevName && riddles[prevName];
+    if (prev) {
+      const details = document.getElementById('riddle-prev');
+      details.hidden = false;
+      document.getElementById('riddle-prev-summary').textContent = 'הפתרון לחידה של שבוע שעבר (' + prevName + ')';
+      document.getElementById('riddle-prev-q').textContent = prev.q;
+      document.getElementById('riddle-prev-a').textContent = prev.a;
+    }
+  }
+
   (function loadUpcoming() {
     const iso = d => d.toISOString().slice(0, 10);
-    const start = new Date(), end = new Date(Date.now() + 15 * 864e5);
+    const start = new Date(Date.now() - 9 * 864e5), end = new Date(Date.now() + 15 * 864e5);
+    const today = iso(new Date());
     fetch('https://www.hebcal.com/hebcal?v=1&cfg=json&maj=on&s=on&il=on&start=' + iso(start) + '&end=' + iso(end))
       .then(r => r.json())
       .then(j => {
         const items = (j.items || []).filter(i => i.category === 'parashat' || i.category === 'holiday');
-        const par = items.find(i => i.category === 'parashat');
-        const hol = items.find(i => i.category === 'holiday' && (!par || i.date <= par.date));
+        const parshiot = items.filter(i => i.category === 'parashat');
+        const par = parshiot.find(i => i.date >= today);
+        const prevPar = [...parshiot].reverse().find(i => i.date < today);
+        const hol = items.find(i => i.category === 'holiday' && i.date >= today && (!par || i.date <= par.date));
         const pick = hol || par;
         if (!pick) return;
         const heName = stripNikud(pick.hebrew).replace(/^פרשת\s+/, '');
@@ -202,23 +262,29 @@
           + new Intl.DateTimeFormat('he-u-ca-hebrew', { day: 'numeric', month: 'long', year: 'numeric' }).format(dt);
         document.getElementById('hero-badge').hidden = false;
 
-        const entry = findEntry(pick.hebrew);
-        if (!entry) return;
+        const hit = findEntry(pick.hebrew);
+        const prevHit = prevPar ? findEntry(prevPar.hebrew) : null;
+        setRiddle(hit ? hit.p.name : null, prevHit ? prevHit.p.name : null);
+        if (!hit) return;
+        const entry = hit.p;
+        const title = rowTitle(hit.sefer, entry);
         const label = document.getElementById('hero-cta-label');
         if (entry.pdf) {
           checkPdf(entry.pdf).then(ok => {
             if (!ok) return;
-            heroTarget = entry;
+            heroTarget = { title: title, pdf: entry.pdf };
             label.textContent = 'לדף ' + (kind === 'פרשת השבוע' ? 'פרשת ' : '') + heName;
             const side = document.getElementById('hero-side');
             side.textContent = '';
             const card = el('div', 'hero-preview');
             const bar = el('div', 'hero-preview__bar');
             bar.append(el('span', 'hero-preview__title', 'הצצה לדף ' + heName));
-            bar.append(button({ variant: 'ghost', sm: true, icon: 'eye', label: 'לדף המלא', onClick: () => openPdf(entry.name, entry.pdf) }));
+            bar.append(button({ variant: 'ghost', sm: true, icon: 'eye', label: 'לדף המלא', ariaLabel: 'צפייה בדף ' + title + ' המלא', onClick: () => viewPdf(title, entry.pdf) }));
             const frame = document.createElement('iframe');
             frame.src = encodeURI(entry.pdf) + '#toolbar=0&navpanes=0&view=FitH';
-            frame.title = heName;
+            frame.title = 'תצוגה מקדימה: ' + title;
+            frame.setAttribute('aria-hidden', 'true');
+            frame.tabIndex = -1;
             card.append(bar, frame);
             side.append(card);
           });
@@ -232,12 +298,85 @@
   /* ---------- קישורי דרייב ---------- */
   document.querySelectorAll('[data-drive-folder]').forEach(a => { a.href = driveFolder; });
 
-  /* ---------- הרשמה בדוא"ל ---------- */
-  document.getElementById('subscribe-form').addEventListener('submit', e => {
-    e.preventDefault();
-    const email = document.getElementById('subscribe-email').value.trim();
-    location.href = 'mailto:ariel.zitnitski@gmail.com'
-      + '?subject=' + encodeURIComponent('הרשמה לדף פרשת השבוע')
-      + '&body=' + encodeURIComponent('אשמח לקבל את הדף השבועי לכתובת: ' + email);
-  });
+  /* ---------- הרשמה: Google Forms עם fallback לדוא"ל ---------- */
+  (function initSubscribe() {
+    const btn = document.getElementById('subscribe-btn');
+    const fallback = document.getElementById('subscribe-fallback');
+    if (window.SUBSCRIBE_FORM_URL) {
+      btn.href = window.SUBSCRIBE_FORM_URL;
+      fallback.hidden = true;
+    } else {
+      btn.hidden = true;
+      fallback.hidden = false;
+      document.getElementById('copy-email').addEventListener('click', () => {
+        navigator.clipboard.writeText('ariel.zitnitski@gmail.com').then(() => {
+          document.getElementById('copy-email').textContent = 'הועתק!';
+          setTimeout(() => { document.getElementById('copy-email').textContent = 'העתקת הכתובת'; }, 2000);
+        }).catch(() => {});
+      });
+    }
+  })();
+
+  /* ---------- תגובות: Google Forms (אימייל מאומת) + גיליון תשובות מפורסם ---------- */
+  (function initComments() {
+    const section = document.getElementById('comments');
+    const list = document.getElementById('comments-list');
+    const addBtn = document.getElementById('comments-add');
+    const note = document.getElementById('comments-note');
+    if (!window.COMMENTS_FORM_URL) {
+      addBtn.hidden = true;
+      note.textContent = 'מערכת התגובות תופעל בקרוב.';
+      return;
+    }
+    addBtn.href = window.COMMENTS_FORM_URL;
+    if (!window.COMMENTS_CSV_URL) return;
+    // CSV מפורסם של גיליון התשובות: Timestamp, Email, Name, Comment
+    fetch(window.COMMENTS_CSV_URL)
+      .then(r => r.text())
+      .then(text => {
+        const rows = parseCsv(text).slice(1).filter(r => (r[3] || '').trim());
+        if (!rows.length) { note.textContent = 'עדיין אין תגובות — שמחים להיות הראשונים לשמוע מכם.'; return; }
+        note.textContent = '';
+        rows.slice(-30).reverse().forEach(r => {
+          const item = el('li', 'comment');
+          const head = el('div', 'comment__head');
+          head.append(el('span', 'comment__name', (r[2] || 'אנונימי').trim()));
+          const d = new Date(r[0]);
+          if (!isNaN(d)) head.append(el('span', 'comment__date', d.toLocaleDateString('he-IL', { day: 'numeric', month: 'long', year: 'numeric' })));
+          item.append(head, el('div', 'comment__body', r[3].trim()));
+          list.append(item);
+        });
+        section.querySelector('h2').textContent = 'תגובות (' + rows.length + ')';
+      })
+      .catch(() => { note.textContent = 'לא הצלחנו לטעון את התגובות כרגע.'; });
+  })();
+
+  // מפרק CSV מינימלי עם תמיכה במרכאות
+  function parseCsv(text) {
+    const rows = [];
+    let row = [], field = '', inQ = false;
+    for (let i = 0; i < text.length; i++) {
+      const c = text[i];
+      if (inQ) {
+        if (c === '"' && text[i + 1] === '"') { field += '"'; i++; }
+        else if (c === '"') inQ = false;
+        else field += c;
+      } else if (c === '"') inQ = true;
+      else if (c === ',') { row.push(field); field = ''; }
+      else if (c === '\n' || c === '\r') {
+        if (c === '\r' && text[i + 1] === '\n') i++;
+        row.push(field); field = '';
+        if (row.some(f => f !== '')) rows.push(row);
+        row = [];
+      } else field += c;
+    }
+    row.push(field);
+    if (row.some(f => f !== '')) rows.push(row);
+    return rows;
+  }
+
+  /* ---------- חזרה למעלה ---------- */
+  const toTop = document.getElementById('to-top');
+  window.addEventListener('scroll', () => { toTop.hidden = window.scrollY < 600; }, { passive: true });
+  toTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 })();
