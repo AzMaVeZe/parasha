@@ -393,6 +393,12 @@
   /* ---------- קישורי דרייב ---------- */
   document.querySelectorAll('[data-drive-folder]').forEach(a => { a.href = driveFolder; });
 
+  /* ---------- קישור לתוכנית המלאה בספוטיפיי ---------- */
+  if (window.SPOTIFY_SHOW_URL) {
+    document.querySelectorAll('[data-spotify-show]').forEach(a => { a.href = window.SPOTIFY_SHOW_URL; });
+    document.getElementById('spotify-card').hidden = false;
+  }
+
   /* ---------- הרשמה: Google Forms עם fallback לדוא"ל ---------- */
   (function initSubscribe() {
     const btn = document.getElementById('subscribe-btn');
