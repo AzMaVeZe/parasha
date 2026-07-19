@@ -3,13 +3,13 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data:; media-src 'self'; connect-src 'self' https://www.hebcal.com https://docs.google.com; frame-src 'self' https://open.spotify.com; object-src 'none'; base-uri 'self'; form-action 'self' mailto:">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data:; media-src 'self'; connect-src 'self' https://www.hebcal.com https://docs.google.com; frame-src 'self' https://open.spotify.com; object-src 'none'; base-uri 'self'; form-action 'self'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
-<title>פרשת השבוע — אריאל ז'יטניצקי</title>
-<meta name="description" content="דפי פרשת השבוע של אריאל ז'יטניצקי — לצפייה, להורדה ולשולחן שבת. הארכיון המלא לפי חמשת חומשי תורה, חגים ומועדים.">
+<title>בין הנכתב לנגלה — על פרשת השבוע מאת אריאל ז'יטניצקי</title>
+<meta name="description" content="בין הנכתב לנגלה — דפי פרשת השבוע מאת אריאל ז'יטניצקי, לצפייה, להורדה ולהדפסה לשולחן שבת ולהאזנה. הארכיון המלא לפי חמשת חומשי תורה, חגים ומועדים.">
 <meta property="og:type" content="website">
-<meta property="og:title" content="פרשת השבוע — אריאל ז'יטניצקי">
-<meta property="og:description" content="דפי פרשת השבוע לצפייה, להורדה ולשולחן שבת — הארכיון המלא לפי חמשת חומשי תורה, חגים ומועדים.">
+<meta property="og:title" content="בין הנכתב לנגלה — על פרשת השבוע מאת אריאל ז'יטניצקי">
+<meta property="og:description" content="דפי פרשת השבוע לצפייה, להורדה ולהדפסה לשולחן שבת ולהאזנה — הארכיון המלא לפי חמשת חומשי תורה, חגים ומועדים.">
 <meta property="og:url" content="https://azmaveze.github.io/parasha/">
 <meta property="og:image" content="https://azmaveze.github.io/parasha/assets/og-image.png">
 <meta property="og:locale" content="he_IL">
@@ -24,8 +24,8 @@
 <header class="site-header">
   <div class="container site-header__inner">
     <a href="#" class="wordmark">
-      <span class="wordmark__title">פרשת השבוע</span>
-      <span class="wordmark__sub">אריאל ז'יטניצקי</span>
+      <span class="wordmark__title">בין הנכתב לנגלה</span>
+      <span class="wordmark__sub">על פרשת השבוע · <span class="wordmark__byline">מאת אריאל ז'יטניצקי</span></span>
     </a>
     <nav class="site-nav" id="site-nav" aria-label="ספרי התורה"></nav>
     <a class="header-podcast" id="header-podcast" data-spotify-show href="#" target="_blank" rel="noopener noreferrer" hidden>
@@ -51,7 +51,7 @@
         <span class="hero-badge__name" id="hero-badge-name"></span>
         <span class="hero-badge__date" id="hero-badge-date"></span>
       </div>
-      <h1>דפי פרשת השבוע — לצפייה, להורדה ולשולחן שבת</h1>
+      <h1>דפי פרשת השבוע — לצפייה, להורדה ולהדפסה לשולחן שבת ולהאזנה</h1>
       <p class="hero__lead">הדפים שנכתבו והופצו בדוא"ל לאורך השנים — קריאה מחודשת בפסוקים, שאלות, מדרשים והרבה סימני שאלה — מכונסים כאן לפי חמשת חומשי תורה וחגים.</p>
       <div class="hero__actions">
         <button type="button" class="btn btn--primary" id="hero-example">
@@ -119,10 +119,7 @@
           <span class="icon" aria-hidden="true" style="--icon:url('assets/icons/mail.svg');width:16px;height:16px"></span>
           להרשמה בטופס<span class="visually-hidden"> (נפתח בחלון חדש)</span>
         </a>
-        <div id="subscribe-fallback" hidden>
-          <p style="margin:0 0 8px">לקבלת הדף כתבו אל:<br><strong dir="ltr">ariel.zitnitski@gmail.com</strong></p>
-          <button type="button" class="btn btn--secondary btn--sm" id="copy-email">העתקת הכתובת</button>
-        </div>
+        <p id="subscribe-fallback" hidden style="margin:0;font-size:14px;color:var(--ink-500)">טופס ההרשמה ייפתח כאן בקרוב.</p>
       </section>
 
       <div class="sidebar__note">דפים שעדיין אין להם קובץ באתר זמינים בתיקיית הדרייב; הארכיון מתעדכן בהדרגה.</div>
@@ -134,7 +131,8 @@
 <footer class="site-footer">
   <div class="container site-footer__inner">
     <div>
-      <div class="site-footer__brand">פרשת השבוע — אריאל ז'יטניצקי</div>
+      <div class="site-footer__brand">בין הנכתב לנגלה — על פרשת השבוע</div>
+      <div class="site-footer__byline">מאת אריאל ז'יטניצקי</div>
       <div class="site-footer__tagline">הדברים הושפעו רבות משעורים ששמעתי — וכנראה עוד כמה אשמים אחרים…</div>
     </div>
     <div style="display:flex;gap:16px;flex-wrap:wrap">

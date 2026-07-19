@@ -441,12 +441,6 @@
     } else {
       btn.hidden = true;
       fallback.hidden = false;
-      document.getElementById('copy-email').addEventListener('click', () => {
-        navigator.clipboard.writeText('ariel.zitnitski@gmail.com').then(() => {
-          document.getElementById('copy-email').textContent = 'הועתק!';
-          setTimeout(() => { document.getElementById('copy-email').textContent = 'העתקת הכתובת'; }, 2000);
-        }).catch(() => {});
-      });
     }
   })();
 
