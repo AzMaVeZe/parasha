@@ -361,9 +361,21 @@
           img.addEventListener('error', () => { card.remove(); if (quote) quote.hidden = false; });
           imgLink.append(img);
           card.append(bar, imgLink);
-          // נגן הפודקאסט מתחת לתצוגה המקדימה
+          // נגן הפודקאסט מתחת לתצוגה המקדימה; אם אין פרק לדף הזה — קישור לסדרה
           const pod = buildPodcast(entry, title);
-          if (pod) { pod.classList.add('hero-preview__podcast'); card.append(pod); }
+          if (pod) {
+            pod.classList.add('hero-preview__podcast');
+            card.append(pod);
+          } else if (window.SPOTIFY_SHOW_URL) {
+            const wrap = el('div', 'hero-preview__podcast');
+            const a = el('a', 'podcast__title podcast__showlink', 'האזנה לפודקאסט');
+            a.href = window.SPOTIFY_SHOW_URL;
+            a.target = '_blank';
+            a.rel = 'noopener noreferrer';
+            a.append(el('span', 'visually-hidden', ' (נפתח בחלון חדש)'));
+            wrap.append(a);
+            card.append(wrap);
+          }
           if (quote) quote.hidden = true;
           side.append(card);
         }

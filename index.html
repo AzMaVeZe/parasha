@@ -136,39 +136,6 @@
 
 </main>
 
-<footer class="site-footer">
-  <div class="container site-footer__inner">
-    <div>
-      <div class="site-footer__brand">בין הנכתב לנגלה — על פרשת השבוע</div>
-      <div class="site-footer__byline">מאת אריאל ז'יטניצקי</div>
-      <div class="site-footer__tagline">הדברים הושפעו רבות משעורים ששמעתי — וכנראה עוד כמה אשמים אחרים…</div>
-    </div>
-    <div style="display:flex;gap:16px;flex-wrap:wrap">
-      <a href="accessibility.html">הצהרת נגישות</a>
-      <a data-drive-folder href="#" target="_blank" rel="noopener noreferrer">תיקיית הדרייב<span class="visually-hidden"> (נפתח בחלון חדש)</span></a>
-      <a href="https://ariel-parasha.blogspot.com/" target="_blank" rel="noopener noreferrer">הבלוג הישן (Blogspot)<span class="visually-hidden"> (נפתח בחלון חדש)</span></a>
-    </div>
-  </div>
-</footer>
-
-<button type="button" id="to-top" class="to-top" hidden aria-label="חזרה לראש העמוד">
-  <span class="icon" aria-hidden="true" style="--icon:url('assets/icons/chevron-left.svg');width:18px;height:18px;transform:rotate(90deg)"></span>
-</button>
-
-<div class="pdf-modal" id="pdf-modal" hidden role="dialog" aria-modal="true" aria-labelledby="pdf-modal-title">
-  <div class="pdf-modal__dialog">
-    <div class="pdf-modal__bar">
-      <span class="pdf-modal__title" id="pdf-modal-title"></span>
-      <a class="btn btn--ghost btn--sm" id="pdf-modal-download" href="#" download>
-        <span class="icon" aria-hidden="true" style="--icon:url('assets/icons/download.svg');width:15px;height:15px"></span>
-        הורדה
-      </a>
-      <button type="button" class="btn btn--secondary btn--sm" id="pdf-modal-close">סגירה</button>
-    </div>
-    <iframe src="about:blank" title="דף הפרשה"></iframe>
-  </div>
-</div>
-
 <main class="parasha-page container" id="parasha-page" hidden>
   <a class="parasha-page__back" id="parasha-back" href="#top">
     <span class="icon" aria-hidden="true" style="--icon:url('assets/icons/chevron-left.svg');width:16px;height:16px;transform:scaleX(-1)"></span>
@@ -205,6 +172,39 @@
     </section>
   </div>
 </main>
+
+<footer class="site-footer">
+  <div class="container site-footer__inner">
+    <div>
+      <div class="site-footer__brand">בין הנכתב לנגלה — על פרשת השבוע</div>
+      <div class="site-footer__byline">מאת אריאל ז'יטניצקי</div>
+      <div class="site-footer__tagline">הדברים הושפעו רבות משעורים ששמעתי — וכנראה עוד כמה אשמים אחרים…</div>
+    </div>
+    <div style="display:flex;gap:16px;flex-wrap:wrap">
+      <a href="accessibility.html">הצהרת נגישות</a>
+      <a data-drive-folder href="#" target="_blank" rel="noopener noreferrer">תיקיית הדרייב<span class="visually-hidden"> (נפתח בחלון חדש)</span></a>
+      <a href="https://ariel-parasha.blogspot.com/" target="_blank" rel="noopener noreferrer">הבלוג הישן (Blogspot)<span class="visually-hidden"> (נפתח בחלון חדש)</span></a>
+    </div>
+  </div>
+</footer>
+
+<button type="button" id="to-top" class="to-top" hidden aria-label="חזרה לראש העמוד">
+  <span class="icon" aria-hidden="true" style="--icon:url('assets/icons/chevron-left.svg');width:18px;height:18px;transform:rotate(90deg)"></span>
+</button>
+
+<div class="pdf-modal" id="pdf-modal" hidden role="dialog" aria-modal="true" aria-labelledby="pdf-modal-title">
+  <div class="pdf-modal__dialog">
+    <div class="pdf-modal__bar">
+      <span class="pdf-modal__title" id="pdf-modal-title"></span>
+      <a class="btn btn--ghost btn--sm" id="pdf-modal-download" href="#" download>
+        <span class="icon" aria-hidden="true" style="--icon:url('assets/icons/download.svg');width:15px;height:15px"></span>
+        הורדה
+      </a>
+      <button type="button" class="btn btn--secondary btn--sm" id="pdf-modal-close">סגירה</button>
+    </div>
+    <iframe src="about:blank" title="דף הפרשה"></iframe>
+  </div>
+</div>
 
 <script src="js/data.js"></script>
 <script src="js/pdf-manifest.js"></script>
