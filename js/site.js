@@ -127,6 +127,7 @@
     if (!spotifyId && !hasFile) return;
 
     const player = el('div', 'parasha-row__player');
+    player.id = 'podcast-player-' + (addAudio.seq = (addAudio.seq || 0) + 1);
     player.hidden = true;
     let built = false;
     function build() {
@@ -171,6 +172,7 @@
       },
     });
     btn.setAttribute('aria-expanded', 'false');
+    btn.setAttribute('aria-controls', player.id);
     actions.append(btn);
     row.append(player);
   }
