@@ -103,6 +103,44 @@
   const rowTitle = (sefer, p) => (sefer.id === 'chagim' ? p.name : 'פרשת ' + p.name);
   const rowActions = new Map(); // שם שורה -> אזור הכפתורים שלה (לכפתור התגובות)
 
+  /* ---------- פודקאסט (NotebookLM) לכל דף ---------- */
+  const audioManifest = Array.isArray(window.AUDIO_FILES) ? new Set(window.AUDIO_FILES) : null;
+  function audioSrcFor(p) {
+    if (p.audio) return /^https?:/.test(p.audio) ? p.audio : 'assets/audio/' + p.audio;
+    if (p.pdf) return p.pdf.replace('assets/pdfs/', 'assets/audio/').replace(/\.pdf$/i, '.m4a');
+    return null;
+  }
+  function audioAvailable(src) {
+    if (!src) return false;
+    if (/^https?:/.test(src)) return true;
+    return audioManifest ? audioManifest.has(src.replace('assets/audio/', '')) : false;
+  }
+  function addAudio(sefer, p, row, actions) {
+    const src = audioSrcFor(p);
+    if (!audioAvailable(src)) return;
+    const player = el('div', 'parasha-row__player');
+    player.hidden = true;
+    const audio = document.createElement('audio');
+    audio.controls = true;
+    audio.preload = 'none';
+    audio.src = encodeURI(src);
+    audio.setAttribute('aria-label', 'פודקאסט על ' + rowTitle(sefer, p));
+    player.append(audio);
+    const btn = button({
+      variant: 'ghost', sm: true, icon: 'headphones', label: 'האזנה',
+      ariaLabel: 'האזנה לפודקאסט על ' + rowTitle(sefer, p),
+      onClick: () => {
+        const opening = player.hidden;
+        player.hidden = !opening;
+        btn.setAttribute('aria-expanded', String(opening));
+        if (opening) audio.play().catch(() => {});
+      },
+    });
+    btn.setAttribute('aria-expanded', 'false');
+    actions.append(btn);
+    row.append(player);
+  }
+
   /* ---------- שורת פרשה ---------- */
   function parashaRow(sefer, p) {
     const row = el('li', 'parasha-row');
@@ -141,6 +179,7 @@
     } else {
       showFallback();
     }
+    addAudio(sefer, p, row, actions);
     return row;
   }
 

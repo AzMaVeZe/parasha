@@ -56,7 +56,7 @@ html{scroll-behavior:smooth}
   font-size:16px;color:var(--text-body);width:100%}
 
 /* ---------- שורת פרשה ---------- */
-.parasha-row{display:flex;align-items:center;gap:12px;padding:10px 16px;
+.parasha-row{display:flex;align-items:center;flex-wrap:wrap;gap:12px;padding:10px 16px;
   border-bottom:1px solid var(--parchment-200);transition:background var(--dur) var(--ease)}
 .parasha-row:last-child{border-bottom:none}
 .parasha-row:hover{background:var(--parchment-50)}
@@ -64,8 +64,10 @@ html{scroll-behavior:smooth}
 .parasha-row--has-pdf .parasha-row__icon{color:var(--gold-600)}
 .parasha-row__name{font-family:var(--font-display);font-size:18px;font-weight:500;color:var(--text-heading);flex:1 1 auto}
 .parasha-row__note{font-size:15px;color:var(--text-muted)}
-.parasha-row__actions{display:flex;gap:8px}
+.parasha-row__actions{display:flex;gap:8px;flex-wrap:wrap}
 .parasha-row__soon{font-size:14px;color:var(--ink-500);padding:6px 8px}
+.parasha-row__player{flex-basis:100%;order:10;padding-top:4px}
+.parasha-row__player audio{width:100%;height:40px}
 
 /* ---------- ציטוט פסוק ---------- */
 .pasuk-quote{margin:0;background:var(--surface-card);border:var(--border-card);
@@ -172,10 +174,11 @@ html{scroll-behavior:smooth}
   .site-header .input{width:100%}
   .site-nav{flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;padding-bottom:4px}
   .site-nav a{flex:none;padding:10px 2px}
-  .parasha-row{display:grid;grid-template-columns:auto 1fr;grid-template-areas:"icon name" "icon note" "icon actions";row-gap:4px}
+  .parasha-row{display:grid;grid-template-columns:auto 1fr;grid-template-areas:"icon name" "icon note" "icon actions" "player player";row-gap:4px}
   .parasha-row__icon{grid-area:icon;align-self:start;margin-top:4px}
   .parasha-row__name{grid-area:name}
   .parasha-row__note{grid-area:note}
   .parasha-row__actions{grid-area:actions;justify-self:start}
   .parasha-row__actions .btn--sm{padding:9px 16px}
+  .parasha-row__player{grid-area:player}
 }

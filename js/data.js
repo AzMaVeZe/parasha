@@ -17,6 +17,10 @@ const B = id => 'https://www.box.net/shared/' + id;
 // ב-assets/pdfs (נבדק בזמן טעינה), כך שאפשר להוסיף קבצים בהדרגה בלי לגעת בקוד.
 const P = f => 'assets/pdfs/' + f;
 
+// פודקאסט (NotebookLM) לכל דף: כפתור "האזנה" מופיע אוטומטית כשקובץ שמע קיים
+// ב-assets/audio באותו שם בסיס של ה-PDF (למשל bereshit-נח.m4a לצד bereshit-נח.pdf).
+// אפשר גם לקבוע קובץ/כתובת מפורשים לשורה עם השדה audio: 'שם-קובץ.m4a' או כתובת מלאה.
+
 window.PARASHA_DATA = [
  { id: 'bereshit', name: 'ספר בראשית', compilation: P('sefer-בראשית.pdf'), parshiot: [
   { name: 'בראשית', box: B('pztmqj0ulp'), pdf: P('bereshit-בראשית.pdf') },
