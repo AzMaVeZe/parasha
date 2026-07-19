@@ -41,7 +41,7 @@ window.PARASHA_DATA = [
   { name: 'ויגש', box: B('l7y1v36820'), pdf: P('bereshit-ויגש.pdf') },
   { name: 'ויחי', box: B('qa92ennyuc'), pdf: P('bereshit-ויחי.pdf') } ] },
  { id: 'shmot', name: 'ספר שמות', compilation: P('sefer-שמות.pdf'), parshiot: [
-  { name: 'שמות', box: B('xfgl8q1ql6'), pdf: P('shmot-שמות.pdf') },
+  { name: 'שמות', box: B('xfgl8q1ql6'), pdf: P('shmot-שמות.pdf'), spotify: 'https://open.spotify.com/episode/05YILH9WcwrKbhDjf52BC3' },
   { name: 'וארא', box: B('j07xoxj06q'), pdf: P('shmot-וארא.pdf') },
   { name: 'בא', box: B('ihl79iempt'), pdf: P('shmot-בא.pdf') },
   { name: 'בשלח', box: B('9k7hx5r0td'), pdf: P('shmot-בשלח.pdf') },
@@ -53,7 +53,7 @@ window.PARASHA_DATA = [
   { name: 'ויקהל', box: B('t6kxh7srlh'), pdf: P('shmot-ויקהל-פקודי.pdf'), note: 'עם פקודי' },
   { name: 'פקודי', box: B('t6kxh7srlh'), pdf: P('shmot-ויקהל-פקודי.pdf'), note: 'עם ויקהל' } ] },
  { id: 'vayikra', name: 'ספר ויקרא', compilation: P('sefer-ויקרא.pdf'), parshiot: [
-  { name: 'ויקרא', box: B('htftjts84g'), pdf: P('vayikra-ויקרא.pdf') },
+  { name: 'ויקרא', box: B('htftjts84g'), pdf: P('vayikra-ויקרא.pdf'), spotify: 'https://open.spotify.com/episode/50yFrXsKOz8sipIykodjeu' },
   { name: 'צו', box: B('n3c3cqmgrj'), pdf: P('vayikra-צו.pdf') },
   { name: 'שמיני', box: B('zpnf59qvns'), pdf: P('vayikra-שמיני.pdf') },
   { name: 'תזריע', box: B('ux61fbljxp'), pdf: P('vayikra-תזריע-מצורע.pdf'), note: 'עם מצורע' },
@@ -64,7 +64,7 @@ window.PARASHA_DATA = [
   { name: 'בהר סיני', box: B('jdnp24jl98'), pdf: P('vayikra-בהר-בחוקותי.pdf'), note: 'עם בחוקותי' },
   { name: 'בחוקותי', box: B('jdnp24jl98'), pdf: P('vayikra-בהר-בחוקותי.pdf'), note: 'עם בהר' } ] },
  { id: 'bamidbar', name: 'ספר במדבר', parshiot: [
-  { name: 'במדבר', box: B('d4l93mmm9v'), pdf: P('bamidbar-במדבר.pdf') },
+  { name: 'במדבר', box: B('d4l93mmm9v'), pdf: P('bamidbar-במדבר.pdf'), spotify: 'https://open.spotify.com/episode/6LkLCj5hp8ZTokCouemaKN' },
   { name: 'נשא', box: B('gjy2ifq026'), pdf: P('bamidbar-נשא.pdf') },
   { name: 'בהעלותך', box: B('g1tupdv2a4'), pdf: P('bamidbar-בהעלותך.pdf') },
   { name: 'שלח לך', box: B('r83vpzrf1h'), pdf: P('bamidbar-שלח-לך.pdf') },
@@ -87,9 +87,9 @@ window.PARASHA_DATA = [
   { name: 'האזינו', box: B('z93ie1dfsq'), pdf: P('devarim-האזינו.pdf') },
   { name: 'וזאת הברכה', box: B('jm08kfgamj'), pdf: P('devarim-וזאת-הברכה.pdf'), note: 'עם הושענא רבה' } ] },
  { id: 'chagim', name: 'חגים ומועדים', parshiot: [
-  { name: 'ראש השנה', box: B('zygnmiucpj'), pdf: P('chagim-ראש-השנה.pdf') },
+  { name: 'ראש השנה', box: B('zygnmiucpj'), pdf: P('chagim-ראש-השנה.pdf'), spotify: 'https://open.spotify.com/episode/6mqMtjQ7YUOPbphSVdg1Uv' },
   { name: 'יום כיפור' },
-  { name: 'סוכות', box: B('0x9rly4uzc'), pdf: P('chagim-סוכות.pdf') },
+  { name: 'סוכות', box: B('0x9rly4uzc'), pdf: P('chagim-סוכות.pdf'), spotify: 'https://open.spotify.com/episode/6bFs9UUmrNPKbn1bzG0f6p' },
   { name: 'הושענא רבה', box: B('jm08kfgamj'), pdf: P('devarim-וזאת-הברכה.pdf'), note: 'עם וזאת הברכה' },
   { name: 'פורים', box: B('ezfumqd0o0'), pdf: P('chagim-פורים.pdf') },
   { name: 'פסח', box: B('eqdf28g8en'), pdf: P('chagim-פסח.pdf') },

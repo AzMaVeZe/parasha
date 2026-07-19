@@ -134,11 +134,12 @@
       built = true;
       if (spotifyId) {
         const frame = document.createElement('iframe');
+        // נגן דק (80px) — נשאר שמיש ומציג את כפתור ה-Play גם בכרטיס צר
         frame.src = 'https://open.spotify.com/embed/episode/' + spotifyId + '?utm_source=generator';
         frame.title = 'נגן ספוטיפיי — פודקאסט על ' + title;
         frame.loading = 'lazy';
         frame.style.borderRadius = '12px';
-        frame.height = 152;
+        frame.height = 80;
         frame.allow = 'encrypted-media; clipboard-write; fullscreen; picture-in-picture';
         player.append(frame);
         const openLink = el('a', 'parasha-row__spotify-link');
@@ -427,6 +428,7 @@
   if (window.SPOTIFY_SHOW_URL) {
     document.querySelectorAll('[data-spotify-show]').forEach(a => { a.href = window.SPOTIFY_SHOW_URL; });
     document.getElementById('spotify-card').hidden = false;
+    document.getElementById('header-podcast').hidden = false;
   }
 
   /* ---------- הרשמה: Google Forms עם fallback לדוא"ל ---------- */
