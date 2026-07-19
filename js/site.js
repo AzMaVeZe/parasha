@@ -101,7 +101,11 @@
   });
 
   const rowTitle = (sefer, p) => (sefer.id === 'chagim' ? p.name : 'פרשת ' + p.name);
-  const rowActions = new Map(); // שם שורה -> אזור הכפתורים שלה (לכפתור התגובות)
+  const cardCountEls = new Map(); // שם דף -> אלמנט מונה התגובות בכרטיס
+  const pdfExists = url => (manifest ? manifest.has(url.replace('assets/pdfs/', '')) : true);
+  // אינדקס לניתוב: שם דף -> {p, sefer}
+  const pageIndex = new Map();
+  data.forEach(s => s.parshiot.forEach(p => { if (!pageIndex.has(p.name)) pageIndex.set(p.name, { p, sefer: s }); }));
 
   /* ---------- פודקאסט לכל דף: קובץ מקומי (NotebookLM) או ספוטיפיי ---------- */
   const audioManifest = Array.isArray(window.AUDIO_FILES) ? new Set(window.AUDIO_FILES) : null;
@@ -119,71 +123,17 @@
     if (/^https?:/.test(src)) return true;
     return audioManifest ? audioManifest.has(src.replace('assets/audio/', '')) : false;
   }
-  function addAudio(sefer, p, row, actions) {
-    const title = rowTitle(sefer, p);
-    const spotifyId = spotifyEpisodeId(p.spotify);
-    const fileSrc = fileAudioSrcFor(p);
-    const hasFile = !spotifyId && fileAudioAvailable(fileSrc);
-    if (!spotifyId && !hasFile) return;
-
-    const player = el('div', 'parasha-row__player');
-    player.id = 'podcast-player-' + (addAudio.seq = (addAudio.seq || 0) + 1);
-    player.hidden = true;
-    let built = false;
-    function build() {
-      if (built) return;
-      built = true;
-      if (spotifyId) {
-        const frame = document.createElement('iframe');
-        // נגן דק (80px) — נשאר שמיש ומציג את כפתור ה-Play גם בכרטיס צר
-        frame.src = 'https://open.spotify.com/embed/episode/' + spotifyId + '?utm_source=generator';
-        frame.title = 'נגן ספוטיפיי — פודקאסט על ' + title;
-        frame.loading = 'lazy';
-        frame.style.borderRadius = '12px';
-        frame.height = 80;
-        frame.allow = 'encrypted-media; clipboard-write; fullscreen; picture-in-picture';
-        player.append(frame);
-        const openLink = el('a', 'parasha-row__spotify-link');
-        openLink.href = p.spotify;
-        openLink.target = '_blank';
-        openLink.rel = 'noopener noreferrer';
-        openLink.textContent = 'פתיחה בספוטיפיי';
-        const hint = el('span', 'visually-hidden', ' (נפתח בחלון חדש)');
-        openLink.append(hint);
-        player.append(openLink);
-      } else {
-        const audio = document.createElement('audio');
-        audio.controls = true;
-        audio.preload = 'none';
-        audio.src = encodeURI(fileSrc);
-        audio.setAttribute('aria-label', 'פודקאסט על ' + title);
-        player.append(audio);
-        audio.play().catch(() => {});
-      }
-    }
-    const btn = button({
-      variant: 'ghost', sm: true, icon: 'headphones', label: 'האזנה',
-      ariaLabel: 'האזנה לפודקאסט על ' + title + (spotifyId ? ' (ספוטיפיי)' : ''),
-      onClick: () => {
-        const opening = player.hidden;
-        player.hidden = !opening;
-        btn.setAttribute('aria-expanded', String(opening));
-        if (opening) build();
-      },
-    });
-    btn.setAttribute('aria-expanded', 'false');
-    btn.setAttribute('aria-controls', player.id);
-    actions.append(btn);
-    row.append(player);
+  function hasPodcast(p) {
+    return !!spotifyEpisodeId(p.spotify) || fileAudioAvailable(fileAudioSrcFor(p));
   }
 
-  // נגן פודקאסט לכרטיס ההצצה בהירו (מוצג ישירות, לצד תמונת הדף)
-  function buildHeroPodcast(p, title) {
+  // בונה נגן פודקאסט (ספוטיפיי מוטמע או קובץ מקומי); מחזיר null אם אין מקור
+  function buildPodcast(p, title) {
     const spotifyId = spotifyEpisodeId(p.spotify);
     const fileSrc = fileAudioSrcFor(p);
     if (!spotifyId && !fileAudioAvailable(fileSrc)) return null;
-    const wrap = el('div', 'hero-preview__podcast');
-    wrap.append(el('div', 'hero-preview__podcast-title', 'האזנה לפודקאסט'));
+    const wrap = el('div', 'podcast');
+    wrap.append(el('div', 'podcast__title', 'האזנה לפודקאסט'));
     if (spotifyId) {
       const frame = document.createElement('iframe');
       frame.src = 'https://open.spotify.com/embed/episode/' + spotifyId + '?utm_source=generator';
@@ -193,6 +143,12 @@
       frame.style.borderRadius = '12px';
       frame.allow = 'encrypted-media; clipboard-write; fullscreen; picture-in-picture';
       wrap.append(frame);
+      const openLink = el('a', 'podcast__link', 'פתיחה בספוטיפיי');
+      openLink.href = p.spotify;
+      openLink.target = '_blank';
+      openLink.rel = 'noopener noreferrer';
+      openLink.append(el('span', 'visually-hidden', ' (נפתח בחלון חדש)'));
+      wrap.append(openLink);
     } else {
       const audio = document.createElement('audio');
       audio.controls = true;
@@ -204,47 +160,45 @@
     return wrap;
   }
 
-  /* ---------- כרטיס פרשה ---------- */
+  /* ---------- כרטיס פרשה (קישור לעמוד הדף) ---------- */
+  function metaItem(iconName, text, color) {
+    const s = el('span', 'parasha-row__metaitem');
+    const ic = icon(iconName, 15);
+    if (color) ic.style.color = color;
+    s.append(ic, document.createTextNode(text));
+    return s;
+  }
   function parashaRow(sefer, p) {
-    const row = el('li', 'parasha-row');
+    const li = el('li', 'parasha-row');
+    const link = el('a', 'parasha-row__link');
+    link.href = '#p=' + encodeURIComponent(p.name);
+    link.setAttribute('aria-label', 'עמוד ' + rowTitle(sefer, p));
+    li.append(link);
 
     const head = el('div', 'parasha-row__head');
     const rowIcon = icon('file-text', 18);
     rowIcon.classList.add('parasha-row__icon');
-    head.append(rowIcon);
-    head.append(el('span', 'parasha-row__name', p.name));
+    head.append(rowIcon, el('span', 'parasha-row__name', p.name));
     if (p.note) head.append(el('span', 'parasha-row__note', p.note));
-    row.append(head);
+    link.append(head);
 
-    const actions = el('span', 'parasha-row__actions');
-    row.append(actions);
-    rowActions.set(p.name, actions);
+    const meta = el('div', 'parasha-row__meta');
+    link.append(meta);
 
-    function showFallback() {
-      if (p.box) {
-        actions.append(button({ variant: 'ghost', sm: true, href: p.box, external: true, icon: 'external-link', label: 'Box', ariaLabel: 'דף ' + p.name + ' בקישור Box הישן' }));
-      } else {
-        actions.append(el('span', 'parasha-row__soon', 'בקרוב'));
-      }
+    const pdfOk = p.pdf && pdfExists(p.pdf);
+    if (pdfOk) { li.classList.add('parasha-row--has-pdf'); meta.append(metaItem('file-text', 'דף לצפייה', 'var(--gold-700)')); }
+    else if (p.box) meta.append(metaItem('external-link', 'Box'));
+    else meta.append(el('span', 'parasha-row__soon', 'בקרוב'));
+
+    if (hasPodcast(p)) meta.append(metaItem('headphones', 'פודקאסט', '#1DB954'));
+
+    if (window.COMMENTS_FORM_URL) {
+      const c = metaItem('mail', '0');
+      c.hidden = true;
+      cardCountEls.set(p.name, c);
+      meta.append(c);
     }
-
-    if (p.pdf) {
-      checkPdf(p.pdf).then(ok => {
-        if (ok) {
-          row.classList.add('parasha-row--has-pdf');
-          actions.append(
-            button({ variant: 'secondary', sm: true, icon: 'eye', label: 'צפייה', ariaLabel: 'צפייה בדף ' + rowTitle(sefer, p), onClick: () => viewPdf(rowTitle(sefer, p), p.pdf) }),
-            button({ variant: 'ghost', sm: true, href: encodeURI(p.pdf), download: true, icon: 'download', label: 'הורדה', ariaLabel: 'הורדת דף ' + rowTitle(sefer, p) + ' (PDF)' })
-          );
-        } else {
-          showFallback();
-        }
-      });
-    } else {
-      showFallback();
-    }
-    addAudio(sefer, p, row, actions);
-    return row;
+    return li;
   }
 
   /* ---------- מדור ספר ---------- */
@@ -302,17 +256,9 @@
   });
 
   /* ---------- הכפתור הראשי בהירו ---------- */
-  const example = data.find(s => s.id === 'devarim').parshiot.find(p => p.name === 'שופטים');
-  let heroTarget = null;   // נקבע כשנמצא דף לפרשה הקרובה
-  let heroBoxUrl = null;   // fallback לקישור Box של הפרשה הקרובה
-  document.getElementById('hero-example').addEventListener('click', () => {
-    if (heroBoxUrl) { window.open(heroBoxUrl, '_blank', 'noopener'); return; }
-    const t = heroTarget || { title: 'פרשת שופטים', pdf: example.pdf };
-    checkPdf(t.pdf).then(ok => {
-      if (ok) viewPdf(t.title, t.pdf);
-      else window.open(driveFolder, '_blank', 'noopener');
-    });
-  });
+  let heroName = 'שופטים';   // שם הדף המוצג בהירו (ברירת מחדל עד טעינת Hebcal)
+  const goToParasha = name => { location.hash = '#p=' + encodeURIComponent(name); };
+  document.getElementById('hero-example').addEventListener('click', () => goToParasha(heroName));
 
   /* ---------- פרשת השבוע / החג הקרוב (Hebcal) ---------- */
   const stripNikud = s => (s || '').replace(/[֑-ׇ]/g, '');
@@ -392,33 +338,26 @@
         const entry = hit.p;
         const title = rowTitle(hit.sefer, entry);
         const label = document.getElementById('hero-cta-label');
-        if (entry.pdf) {
-          checkPdf(entry.pdf).then(ok => {
-            if (!ok) return;
-            heroTarget = { title: title, pdf: entry.pdf };
-            label.textContent = 'לדף ' + (kind === 'פרשת השבוע' ? 'פרשת ' : '') + heName;
-            const side = document.getElementById('hero-side');
-            const quote = side.querySelector('.pasuk-quote');
-            const card = el('div', 'hero-preview');
-            const bar = el('div', 'hero-preview__bar');
-            bar.append(el('span', 'hero-preview__title', 'הצצה לדף ' + heName));
-            bar.append(button({ variant: 'ghost', sm: true, icon: 'eye', label: 'לדף המלא', ariaLabel: 'צפייה בדף ' + title + ' המלא', onClick: () => viewPdf(title, entry.pdf) }));
-            // תמונת העמוד הראשון — iframe של PDF לא נתמך באנדרואיד ולא ממורכז ב-iOS
-            const img = document.createElement('img');
-            img.className = 'hero-preview__img';
-            img.src = encodeURI(entry.pdf.replace('assets/pdfs/', 'assets/previews/').replace(/\.pdf$/i, '.jpg'));
-            img.alt = 'העמוד הראשון של דף ' + title;
-            img.addEventListener('click', () => viewPdf(title, entry.pdf));
-            img.addEventListener('error', () => { card.remove(); if (quote) quote.hidden = false; });
-            card.append(bar, img);
-            const podcast = buildHeroPodcast(entry, title);
-            if (podcast) card.append(podcast);
-            if (quote) quote.hidden = true;
-            side.append(card);
-          });
-        } else if (entry.box) {
-          heroBoxUrl = entry.box;
-          label.textContent = 'לדף ' + heName + ' (Box)';
+        heroName = entry.name;
+        label.textContent = 'לדף ' + (kind === 'פרשת השבוע' ? 'פרשת ' : '') + heName;
+        if (entry.pdf && pdfExists(entry.pdf)) {
+          const side = document.getElementById('hero-side');
+          const quote = side.querySelector('.pasuk-quote');
+          const card = el('a', 'hero-preview');
+          card.href = '#p=' + encodeURIComponent(entry.name);
+          card.setAttribute('aria-label', 'עמוד ' + title);
+          const bar = el('div', 'hero-preview__bar');
+          bar.append(el('span', 'hero-preview__title', 'הצצה לדף ' + heName));
+          bar.append(el('span', 'hero-preview__more', 'לעמוד הדף ←'));
+          // תמונת העמוד הראשון — iframe של PDF לא נתמך באנדרואיד ולא ממורכז ב-iOS
+          const img = document.createElement('img');
+          img.className = 'hero-preview__img';
+          img.src = encodeURI(entry.pdf.replace('assets/pdfs/', 'assets/previews/').replace(/\.pdf$/i, '.jpg'));
+          img.alt = 'העמוד הראשון של דף ' + title;
+          img.addEventListener('error', () => { card.remove(); if (quote) quote.hidden = false; });
+          card.append(bar, img);
+          if (quote) quote.hidden = true;
+          side.append(card);
         }
       }).catch(() => {});
   })();
@@ -484,27 +423,30 @@
     return commentsLoaded;
   }
 
-  const commentsModal = document.getElementById('comments-modal');
-  const commentsList = document.getElementById('comments-modal-list');
-  const commentsNote = document.getElementById('comments-modal-note');
-  let commentsLastFocused = null;
-
-  function openComments(rowName) {
-    commentsLastFocused = document.activeElement;
-    document.getElementById('comments-modal-title').textContent = 'תגובות — ' + rowName;
-    document.getElementById('comments-write').href = commentFormUrl(rowName);
-    commentsList.textContent = '';
-    commentsNote.textContent = 'טוען תגובות…';
-    commentsModal.hidden = false;
-    document.body.style.overflow = 'hidden';
-    document.getElementById('comments-modal-close').focus();
+  // רינדור תגובות הדף בתוך עמוד הפרשה
+  function renderPageComments(name) {
+    const write = document.getElementById('pc-write');
+    const note = document.getElementById('pc-note');
+    const list = document.getElementById('pc-list');
+    const titleEl = document.getElementById('pc-title');
+    list.textContent = '';
+    titleEl.textContent = 'תגובות';
+    if (!window.COMMENTS_FORM_URL) {
+      write.hidden = true;
+      note.textContent = 'מערכת התגובות תופעל בקרוב.';
+      return;
+    }
+    write.hidden = false;
+    write.href = commentFormUrl(name);
+    note.textContent = 'טוען תגובות…';
     loadComments().then(() => {
-      const items = commentsByName.get(rowName) || [];
+      const items = commentsByName.get(name) || [];
+      titleEl.textContent = items.length ? 'תגובות (' + items.length + ')' : 'תגובות';
       if (!items.length) {
-        commentsNote.textContent = 'עדיין אין תגובות לדף הזה — שמחים להיות הראשונים לשמוע מכם.';
+        note.textContent = 'עדיין אין תגובות לדף הזה — שמחים להיות הראשונים לשמוע מכם.';
         return;
       }
-      commentsNote.textContent = '';
+      note.textContent = '';
       [...items].reverse().forEach(c => {
         const item = el('li', 'comment');
         const head = el('div', 'comment__head');
@@ -512,40 +454,96 @@
         const d = new Date(c.date);
         if (!isNaN(d)) head.append(el('span', 'comment__date', d.toLocaleDateString('he-IL', { day: 'numeric', month: 'long', year: 'numeric' })));
         item.append(head, el('div', 'comment__body', c.text));
-        commentsList.append(item);
+        list.append(item);
       });
     });
   }
-  function closeComments() {
-    commentsModal.hidden = true;
-    document.body.style.overflow = '';
-    if (commentsLastFocused && document.contains(commentsLastFocused)) commentsLastFocused.focus();
-  }
-  commentsModal.addEventListener('click', e => { if (e.target === commentsModal) closeComments(); });
-  document.getElementById('comments-modal-close').addEventListener('click', closeComments);
-  document.addEventListener('keydown', e => { if (e.key === 'Escape' && !commentsModal.hidden) closeComments(); });
-  commentsModal.addEventListener('keydown', e => {
-    if (e.key !== 'Tab') return;
-    const f = commentsModal.querySelectorAll('a[href], button');
-    const first = f[0], last = f[f.length - 1];
-    if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
-    else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
-  });
 
-  // כפתור תגובות בכל שורה (עם מונה כשהתגובות נטענות)
-  if (commentsEnabled) {
+  // מונה התגובות בכרטיסים
+  if (window.COMMENTS_FORM_URL && window.COMMENTS_CSV_URL) {
     loadComments().then(() => {
-      rowActions.forEach((actions, rowName) => {
-        const count = (commentsByName.get(rowName) || []).length;
-        actions.append(button({
-          variant: 'ghost', sm: true, icon: 'mail',
-          label: count ? 'תגובות (' + count + ')' : 'תגובות',
-          ariaLabel: 'תגובות לדף ' + rowName + (count ? ' — ' + count + ' תגובות' : ''),
-          onClick: () => openComments(rowName),
-        }));
+      cardCountEls.forEach((elx, name) => {
+        const n = (commentsByName.get(name) || []).length;
+        if (n > 0) { elx.hidden = false; elx.lastChild.nodeValue = String(n); }
       });
     });
   }
+
+  /* ---------- עמוד הדף (ניתוב לפי #p=) ---------- */
+  const heroSection = document.querySelector('.hero');
+  const archiveMain = document.getElementById('main-content');
+  const pageEl = document.getElementById('parasha-page');
+  const SITE_TITLE = 'בין הנכתב לנגלה — על פרשת השבוע מאת אריאל ז\'יטניצקי';
+
+  function printPdf(url) {
+    const f = document.createElement('iframe');
+    f.style.position = 'fixed'; f.style.right = '-9999px'; f.style.width = '0'; f.style.height = '0';
+    f.src = encodeURI(url);
+    f.onload = () => { try { f.contentWindow.focus(); f.contentWindow.print(); } catch (e) { window.open(encodeURI(url), '_blank', 'noopener'); } };
+    document.body.append(f);
+  }
+
+  function openParashaPage(name) {
+    const entry = pageIndex.get(name);
+    if (!entry) { closeParashaPage(); return; }
+    const { p, sefer } = entry;
+    const title = rowTitle(sefer, p);
+    document.getElementById('parasha-page-kicker').textContent = sefer.name;
+    document.getElementById('parasha-page-title').textContent = title;
+    const noteEl = document.getElementById('parasha-page-note');
+    noteEl.textContent = p.note || '';
+    noteEl.hidden = !p.note;
+
+    const doc = document.getElementById('parasha-page-doc');
+    const actions = document.getElementById('parasha-page-actions');
+    const podcastEl = document.getElementById('parasha-page-podcast');
+    doc.textContent = ''; actions.textContent = ''; podcastEl.textContent = '';
+
+    if (p.pdf && pdfExists(p.pdf)) {
+      const img = document.createElement('img');
+      img.className = 'parasha-page__preview';
+      img.src = encodeURI(p.pdf.replace('assets/pdfs/', 'assets/previews/').replace(/\.pdf$/i, '.jpg'));
+      img.alt = 'העמוד הראשון של ' + title;
+      img.addEventListener('click', () => viewPdf(title, p.pdf));
+      img.addEventListener('error', () => { img.style.display = 'none'; });
+      doc.append(img);
+      actions.append(
+        button({ variant: 'primary', icon: 'eye', label: 'צפייה מלאה', ariaLabel: 'צפייה מלאה בדף ' + title, onClick: () => viewPdf(title, p.pdf) }),
+        button({ variant: 'secondary', href: encodeURI(p.pdf), download: true, icon: 'download', label: 'הורדה', ariaLabel: 'הורדת ' + title + ' (PDF)' }),
+        button({ variant: 'ghost', icon: 'printer', label: 'הדפסה', ariaLabel: 'הדפסת ' + title, onClick: () => printPdf(p.pdf) })
+      );
+    } else if (p.box) {
+      actions.append(button({ variant: 'secondary', href: p.box, external: true, icon: 'external-link', label: 'פתיחה ב-Box' }));
+    } else {
+      doc.append(el('p', 'parasha-page__soon', 'הדף לדף זה יעלה בקרוב. בינתיים אפשר לעיין בתיקיית הדרייב.'));
+    }
+
+    const pod = buildPodcast(p, title);
+    if (pod) podcastEl.append(pod);
+
+    renderPageComments(p.name);
+
+    heroSection.hidden = true;
+    archiveMain.hidden = true;
+    pageEl.hidden = false;
+    document.title = title + ' — ' + SITE_TITLE;
+    window.scrollTo(0, 0);
+    document.getElementById('parasha-back').focus();
+  }
+  function closeParashaPage() {
+    if (pageEl.hidden) return;
+    pageEl.hidden = true;
+    heroSection.hidden = false;
+    archiveMain.hidden = false;
+    document.title = SITE_TITLE;
+  }
+  function handleRoute() {
+    const m = /^#p=(.+)$/.exec(location.hash);
+    if (m) openParashaPage(decodeURIComponent(m[1]));
+    else closeParashaPage();
+  }
+  window.addEventListener('hashchange', handleRoute);
+  handleRoute();
 
   // מפרק CSV מינימלי עם תמיכה במרכאות
   function parseCsv(text) {

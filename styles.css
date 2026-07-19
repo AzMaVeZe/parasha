@@ -55,26 +55,35 @@ html{scroll-behavior:smooth}
 .input input{border:none;outline:none;background:transparent;font-family:var(--font-body);
   font-size:16px;color:var(--text-body);width:100%}
 
-/* ---------- כרטיס פרשה (ארכיון בתצוגת רשת) ---------- */
-.parasha-row{position:relative;display:flex;flex-direction:column;gap:10px;
-  padding:14px 16px 12px 20px;background:var(--surface-raised);border:var(--border-card);
+/* ---------- כרטיס פרשה (ארכיון בתצוגת רשת, קישור לעמוד הדף) ---------- */
+.parasha-row{position:relative;background:var(--surface-raised);border:var(--border-card);
   border-radius:var(--radius-m);transition:box-shadow var(--dur) var(--ease), transform var(--dur) var(--ease)}
 .parasha-row::before{content:'';position:absolute;inset-inline-start:0;top:12px;bottom:12px;
-  width:3px;border-radius:3px;background:var(--parchment-300)}
+  width:3px;border-radius:3px;background:var(--parchment-300);z-index:1}
 .parasha-row--has-pdf::before{background:var(--gold-600)}
 .parasha-row:hover{box-shadow:var(--shadow-card);transform:translateY(-2px)}
+.parasha-row__link{display:flex;flex-direction:column;gap:10px;height:100%;
+  padding:14px 16px 12px 20px;color:inherit;text-decoration:none}
+.parasha-row__link:hover{text-decoration:none;color:inherit}
 .parasha-row__head{display:flex;align-items:center;flex-wrap:wrap;gap:8px 10px}
 .parasha-row__icon{color:var(--ink-300);flex:none}
 .parasha-row--has-pdf .parasha-row__icon{color:var(--gold-600)}
 .parasha-row__name{font-family:var(--font-display);font-size:18px;font-weight:500;color:var(--text-heading);flex:1 1 auto}
 .parasha-row__note{font-size:13.5px;font-weight:600;color:#84620E;background:var(--parchment-100);
   border-radius:var(--radius-pill);padding:2px 10px;white-space:nowrap}
-.parasha-row__actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:auto}
-.parasha-row__soon{font-size:14px;color:var(--ink-500);padding:6px 8px}
-.parasha-row__player{padding-top:4px}
-.parasha-row__player audio{width:100%;height:40px}
-.parasha-row__player iframe{width:100%;max-width:420px;border:none;display:block}
-.parasha-row__spotify-link{display:inline-block;margin-top:6px;font-size:13.5px;color:var(--link)}
+.parasha-row__meta{display:flex;align-items:center;flex-wrap:wrap;gap:6px 14px;margin-top:auto;
+  font-size:13px;color:var(--text-muted)}
+.parasha-row__metaitem{display:inline-flex;align-items:center;gap:5px}
+.parasha-row__soon{font-size:14px;color:var(--ink-500)}
+
+/* ---------- נגן פודקאסט (עמוד הדף / הירו) ---------- */
+.podcast{display:flex;flex-direction:column;gap:8px}
+.podcast__title{display:flex;align-items:center;gap:7px;font-weight:600;font-size:14px;color:var(--text-heading)}
+.podcast__title::before{content:'';width:16px;height:16px;flex:none;background-color:#1DB954;
+  -webkit-mask:url('assets/icons/headphones.svg') no-repeat center / contain;mask:url('assets/icons/headphones.svg') no-repeat center / contain}
+.podcast iframe{width:100%;border:none;border-radius:12px;display:block}
+.podcast audio{width:100%;height:44px}
+.podcast__link{font-size:13.5px;color:var(--link)}
 
 /* ---------- ציטוט פסוק ---------- */
 .pasuk-quote{margin:0;background:var(--surface-card);border:var(--border-card);
@@ -122,16 +131,13 @@ html{scroll-behavior:smooth}
 .hero-badge__name{font-family:var(--font-display);font-weight:700;font-size:17px}
 .hero-badge__date{color:#B9C5D8}
 .hero-preview{background:var(--surface-raised);border:var(--border-card);border-radius:var(--radius-m);
-  box-shadow:var(--shadow-card);overflow:hidden;display:flex;flex-direction:column}
+  box-shadow:var(--shadow-card);overflow:hidden;display:flex;flex-direction:column;text-decoration:none;
+  transition:box-shadow var(--dur) var(--ease), transform var(--dur) var(--ease)}
+.hero-preview:hover{box-shadow:var(--shadow-raised);transform:translateY(-2px);text-decoration:none}
 .hero-preview__bar{display:flex;align-items:center;gap:8px;padding:10px 16px;border-bottom:1px solid var(--parchment-200)}
 .hero-preview__title{font-family:var(--font-display);font-weight:700;font-size:17px;color:var(--text-heading);flex:1}
+.hero-preview__more{font-size:13.5px;font-weight:600;color:var(--link)}
 .hero-preview__img{display:block;width:100%;height:320px;object-fit:cover;object-position:top;background:#fff}
-.hero-preview__podcast{padding:12px 16px;border-top:1px solid var(--parchment-200);display:flex;flex-direction:column;gap:8px}
-.hero-preview__podcast-title{display:flex;align-items:center;gap:7px;font-weight:600;font-size:14px;color:var(--text-heading)}
-.hero-preview__podcast-title::before{content:'';width:16px;height:16px;flex:none;background-color:#1DB954;
-  -webkit-mask:url('assets/icons/headphones.svg') no-repeat center / contain;mask:url('assets/icons/headphones.svg') no-repeat center / contain}
-.hero-preview__podcast iframe{width:100%;border:none;display:block}
-.hero-preview__podcast audio{width:100%;height:40px}
 .hero h1{margin:0;font-size:var(--fs-hero);font-weight:900}
 .hero__lead{max-width:560px;color:var(--ink-700);margin-top:16px}
 .hero__actions{display:flex;gap:12px;margin-top:24px;flex-wrap:wrap}
@@ -151,17 +157,29 @@ html{scroll-behavior:smooth}
 .sidebar-card p{margin:0 0 12px;font-size:15px;color:var(--ink-700)}
 .sidebar__note{font-size:15px;color:var(--text-muted);line-height:1.6}
 
+/* ---------- עמוד הדף ---------- */
+.parasha-page{padding-block:28px 64px}
+.parasha-page__back{display:inline-flex;align-items:center;gap:6px;font-size:15px;font-weight:600;color:var(--link);margin-bottom:20px}
+.parasha-page__head{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;
+  border-bottom:var(--rule-gold);padding-bottom:14px;margin-bottom:24px;flex-wrap:wrap}
+.parasha-page__kicker{font-size:14px;color:var(--gold-700);font-weight:600;letter-spacing:.03em;margin-bottom:4px}
+.parasha-page__head h1{margin:0;font-size:var(--fs-h1)}
+.parasha-page__grid{display:grid;grid-template-columns:1.4fr 1fr;gap:40px;align-items:start}
+.parasha-page__main{display:flex;flex-direction:column;gap:20px}
+.parasha-page__preview{display:block;width:100%;max-width:640px;border:var(--border-card);border-radius:var(--radius-m);
+  box-shadow:var(--shadow-card);cursor:zoom-in;background:#fff}
+.parasha-page__actions{display:flex;gap:10px;flex-wrap:wrap}
+.parasha-page__soon{background:var(--surface-card);border:var(--border-card);border-radius:var(--radius-m);padding:var(--sp-5);color:var(--ink-700)}
+.parasha-page__comments{background:var(--surface-card);border:var(--border-card);border-radius:var(--radius-m);padding:var(--sp-5);position:sticky;top:24px}
+
 /* ---------- תגובות ---------- */
-.comments-dialog{height:auto;max-height:85vh;width:min(640px,100%)}
-.comments-dialog__body{padding:16px 20px;overflow-y:auto}
-#comments-modal-note{margin:0 0 12px;color:var(--ink-700);font-size:15px}
 .comments__list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:12px}
 .comment{background:var(--surface-raised);border:var(--border-card);border-radius:var(--radius-m);padding:14px 18px}
 .comment__head{display:flex;align-items:baseline;gap:10px;margin-bottom:4px}
 .comment__name{font-weight:600;color:var(--text-heading)}
 .comment__date{font-size:13.5px;color:var(--text-muted)}
 .comment__body{font-size:16px;line-height:1.6;white-space:pre-line}
-#comments-note{color:var(--ink-700);font-size:15px}
+#pc-note{color:var(--ink-700);font-size:15px;margin:0 0 12px}
 
 /* ---------- חזרה למעלה ---------- */
 .to-top{position:fixed;inset-inline-end:auto;left:20px;bottom:20px;width:46px;height:46px;border-radius:50%;
@@ -188,11 +206,11 @@ html{scroll-behavior:smooth}
 
 /* ---------- רספונסיביות ---------- */
 @media (max-width:920px){
-  .hero__inner,.site-main__grid{grid-template-columns:1fr}
-  .sidebar{position:static}
+  .hero__inner,.site-main__grid,.parasha-page__grid{grid-template-columns:1fr}
+  .sidebar,.parasha-page__comments{position:static}
   .hero h1{font-size:var(--fs-h1)}
   .site-header .input{width:100%}
   .site-nav{flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;padding-bottom:4px}
   .site-nav a{flex:none;padding:10px 2px}
-  .parasha-row__actions .btn--sm{padding:11px 16px;min-height:44px}
+  .parasha-page__actions .btn{padding:11px 18px;min-height:44px}
 }

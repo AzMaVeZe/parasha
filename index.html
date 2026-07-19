@@ -169,22 +169,42 @@
   </div>
 </div>
 
-<div class="pdf-modal" id="comments-modal" hidden role="dialog" aria-modal="true" aria-labelledby="comments-modal-title">
-  <div class="pdf-modal__dialog comments-dialog">
-    <div class="pdf-modal__bar">
-      <span class="pdf-modal__title" id="comments-modal-title"></span>
-      <a class="btn btn--gold btn--sm" id="comments-write" href="#" target="_blank" rel="noopener noreferrer">
-        <span class="icon" aria-hidden="true" style="--icon:url('assets/icons/mail.svg');width:15px;height:15px"></span>
-        כתיבת תגובה<span class="visually-hidden"> (נפתח בחלון חדש)</span>
-      </a>
-      <button type="button" class="btn btn--secondary btn--sm" id="comments-modal-close">סגירה</button>
+<main class="parasha-page container" id="parasha-page" hidden>
+  <a class="parasha-page__back" id="parasha-back" href="#top">
+    <span class="icon" aria-hidden="true" style="--icon:url('assets/icons/chevron-left.svg');width:16px;height:16px;transform:scaleX(-1)"></span>
+    חזרה לארכיון
+  </a>
+  <div class="parasha-page__head">
+    <div>
+      <div class="parasha-page__kicker" id="parasha-page-kicker"></div>
+      <h1 id="parasha-page-title"></h1>
     </div>
-    <div class="comments-dialog__body">
-      <p id="comments-modal-note"></p>
-      <ul id="comments-modal-list" class="comments__list"></ul>
-    </div>
+    <span class="parasha-row__note" id="parasha-page-note" hidden></span>
   </div>
-</div>
+
+  <div class="parasha-page__grid">
+    <div class="parasha-page__main">
+      <div class="parasha-page__doc" id="parasha-page-doc"></div>
+      <div class="parasha-page__actions" id="parasha-page-actions"></div>
+      <div class="parasha-page__podcast" id="parasha-page-podcast"></div>
+    </div>
+
+    <section class="parasha-page__comments" id="parasha-page-comments" aria-labelledby="pc-title">
+      <div class="section-header">
+        <div>
+          <h2 id="pc-title">תגובות</h2>
+          <div class="section-header__subtitle">התגובות נשלחות עם כתובת דוא"ל מאומתת</div>
+        </div>
+        <a class="btn btn--gold btn--sm" id="pc-write" href="#" target="_blank" rel="noopener noreferrer" hidden>
+          <span class="icon" aria-hidden="true" style="--icon:url('assets/icons/mail.svg');width:15px;height:15px"></span>
+          כתיבת תגובה<span class="visually-hidden"> (נפתח בחלון חדש)</span>
+        </a>
+      </div>
+      <p id="pc-note"></p>
+      <ul id="pc-list" class="comments__list"></ul>
+    </section>
+  </div>
+</main>
 
 <script src="js/data.js"></script>
 <script src="js/pdf-manifest.js"></script>
