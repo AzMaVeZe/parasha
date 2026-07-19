@@ -68,6 +68,8 @@ html{scroll-behavior:smooth}
 .parasha-row__soon{font-size:14px;color:var(--ink-500);padding:6px 8px}
 .parasha-row__player{flex-basis:100%;order:10;padding-top:4px}
 .parasha-row__player audio{width:100%;height:40px}
+.parasha-row__player iframe{width:100%;max-width:420px;border:none;display:block}
+.parasha-row__spotify-link{display:inline-block;margin-top:6px;font-size:13.5px;color:var(--link)}
 
 /* ---------- ציטוט פסוק ---------- */
 .pasuk-quote{margin:0;background:var(--surface-card);border:var(--border-card);

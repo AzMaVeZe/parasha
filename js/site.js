@@ -103,37 +103,70 @@
   const rowTitle = (sefer, p) => (sefer.id === 'chagim' ? p.name : 'פרשת ' + p.name);
   const rowActions = new Map(); // שם שורה -> אזור הכפתורים שלה (לכפתור התגובות)
 
-  /* ---------- פודקאסט (NotebookLM) לכל דף ---------- */
+  /* ---------- פודקאסט לכל דף: קובץ מקומי (NotebookLM) או ספוטיפיי ---------- */
   const audioManifest = Array.isArray(window.AUDIO_FILES) ? new Set(window.AUDIO_FILES) : null;
-  function audioSrcFor(p) {
+  function spotifyEpisodeId(url) {
+    const m = /open\.spotify\.com\/episode\/([A-Za-z0-9]+)/.exec(url || '');
+    return m ? m[1] : null;
+  }
+  function fileAudioSrcFor(p) {
     if (p.audio) return /^https?:/.test(p.audio) ? p.audio : 'assets/audio/' + p.audio;
     if (p.pdf) return p.pdf.replace('assets/pdfs/', 'assets/audio/').replace(/\.pdf$/i, '.m4a');
     return null;
   }
-  function audioAvailable(src) {
+  function fileAudioAvailable(src) {
     if (!src) return false;
     if (/^https?:/.test(src)) return true;
     return audioManifest ? audioManifest.has(src.replace('assets/audio/', '')) : false;
   }
   function addAudio(sefer, p, row, actions) {
-    const src = audioSrcFor(p);
-    if (!audioAvailable(src)) return;
+    const title = rowTitle(sefer, p);
+    const spotifyId = spotifyEpisodeId(p.spotify);
+    const fileSrc = fileAudioSrcFor(p);
+    const hasFile = !spotifyId && fileAudioAvailable(fileSrc);
+    if (!spotifyId && !hasFile) return;
+
     const player = el('div', 'parasha-row__player');
     player.hidden = true;
-    const audio = document.createElement('audio');
-    audio.controls = true;
-    audio.preload = 'none';
-    audio.src = encodeURI(src);
-    audio.setAttribute('aria-label', 'פודקאסט על ' + rowTitle(sefer, p));
-    player.append(audio);
+    let built = false;
+    function build() {
+      if (built) return;
+      built = true;
+      if (spotifyId) {
+        const frame = document.createElement('iframe');
+        frame.src = 'https://open.spotify.com/embed/episode/' + spotifyId + '?utm_source=generator';
+        frame.title = 'נגן ספוטיפיי — פודקאסט על ' + title;
+        frame.loading = 'lazy';
+        frame.style.borderRadius = '12px';
+        frame.height = 152;
+        frame.allow = 'encrypted-media; clipboard-write; fullscreen; picture-in-picture';
+        player.append(frame);
+        const openLink = el('a', 'parasha-row__spotify-link');
+        openLink.href = p.spotify;
+        openLink.target = '_blank';
+        openLink.rel = 'noopener noreferrer';
+        openLink.textContent = 'פתיחה בספוטיפיי';
+        const hint = el('span', 'visually-hidden', ' (נפתח בחלון חדש)');
+        openLink.append(hint);
+        player.append(openLink);
+      } else {
+        const audio = document.createElement('audio');
+        audio.controls = true;
+        audio.preload = 'none';
+        audio.src = encodeURI(fileSrc);
+        audio.setAttribute('aria-label', 'פודקאסט על ' + title);
+        player.append(audio);
+        audio.play().catch(() => {});
+      }
+    }
     const btn = button({
       variant: 'ghost', sm: true, icon: 'headphones', label: 'האזנה',
-      ariaLabel: 'האזנה לפודקאסט על ' + rowTitle(sefer, p),
+      ariaLabel: 'האזנה לפודקאסט על ' + title + (spotifyId ? ' (ספוטיפיי)' : ''),
       onClick: () => {
         const opening = player.hidden;
         player.hidden = !opening;
         btn.setAttribute('aria-expanded', String(opening));
-        if (opening) audio.play().catch(() => {});
+        if (opening) build();
       },
     });
     btn.setAttribute('aria-expanded', 'false');

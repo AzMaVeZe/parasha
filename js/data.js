@@ -17,9 +17,11 @@ const B = id => 'https://www.box.net/shared/' + id;
 // ב-assets/pdfs (נבדק בזמן טעינה), כך שאפשר להוסיף קבצים בהדרגה בלי לגעת בקוד.
 const P = f => 'assets/pdfs/' + f;
 
-// פודקאסט (NotebookLM) לכל דף: כפתור "האזנה" מופיע אוטומטית כשקובץ שמע קיים
-// ב-assets/audio באותו שם בסיס של ה-PDF (למשל bereshit-נח.m4a לצד bereshit-נח.pdf).
-// אפשר גם לקבוע קובץ/כתובת מפורשים לשורה עם השדה audio: 'שם-קובץ.m4a' או כתובת מלאה.
+// פודקאסט לכל דף — שני מקורות אפשריים, לפי סדר עדיפות:
+// 1. spotify: 'https://open.spotify.com/episode/...' — מוטמע כנגן ספוטיפיי + קישור לפתיחה באפליקציה.
+// 2. audio: 'שם-קובץ.m4a' או כתובת מלאה — קובץ מקומי מפורש.
+// 3. בלי שדה בכלל: קובץ מקומי לפי שם ה-PDF ב-assets/audio (למשל bereshit-נח.m4a).
+// כפתור "האזנה" מופיע אוטומטית רק כשיש מקור זמין בפועל.
 
 window.PARASHA_DATA = [
  { id: 'bereshit', name: 'ספר בראשית', compilation: P('sefer-בראשית.pdf'), parshiot: [
@@ -71,7 +73,7 @@ window.PARASHA_DATA = [
   { name: 'מסעי', box: B('1za94r0ral'), pdf: P('bamidbar-מטות-מסעי.pdf'), note: 'עם מטות' } ] },
  { id: 'devarim', name: 'ספר דברים', parshiot: [
   { name: 'דברים', box: B('6q99obje57'), pdf: P('devarim-דברים.pdf') },
-  { name: 'ואתחנן', box: B('7pp4mr4qzn'), pdf: P('devarim-ואתחנן.pdf'), note: 'עמוד ראשון על תשעה באב' },
+  { name: 'ואתחנן', box: B('7pp4mr4qzn'), pdf: P('devarim-ואתחנן.pdf'), note: 'עמוד ראשון על תשעה באב', spotify: 'https://open.spotify.com/episode/4aO5YhdafnBWb0TrO9la75' },
   { name: 'עקב', box: B('r0sc7opv2s'), pdf: P('devarim-עקב.pdf'), note: 'עם ט"ו באב' },
   { name: 'ראה', box: B('qi7xhzafmj'), pdf: P('devarim-ראה.pdf') },
   { name: 'שופטים', box: B('7lh0akhdvd'), pdf: P('devarim-שופטים.pdf') },
