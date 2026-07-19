@@ -101,6 +101,7 @@
   });
 
   const rowTitle = (sefer, p) => (sefer.id === 'chagim' ? p.name : 'פרשת ' + p.name);
+  const rowActions = new Map(); // שם שורה -> אזור הכפתורים שלה (לכפתור התגובות)
 
   /* ---------- שורת פרשה ---------- */
   function parashaRow(sefer, p) {
@@ -115,6 +116,7 @@
 
     const actions = el('span', 'parasha-row__actions');
     row.append(actions);
+    rowActions.set(p.name, actions);
 
     function showFallback() {
       if (p.box) {
@@ -211,14 +213,25 @@
 
   /* ---------- פרשת השבוע / החג הקרוב (Hebcal) ---------- */
   const stripNikud = s => (s || '').replace(/[֑-ׇ]/g, '');
+  // התאמה מדויקת בלבד, אחרי נרמול — התאמה חלקית תפסה בעבר את "בא" מתוך "תשעה באב"
+  const normName = s => stripNikud(s || '').replace(/["'׳״]/g, '').replace(/[־–—-]/g, ' ').replace(/\s+/g, ' ').trim();
+  // גישור בין הכתיב החסר של Hebcal לשמות באתר, וכינויי חגים
+  const NAME_ALIASES = {
+    'שפטים': 'שופטים', 'נצבים': 'ניצבים', 'בהעלתך': 'בהעלותך', 'אמר': 'אמור',
+    'מצרע': 'מצורע', 'קדשים': 'קדושים', 'בחקתי': 'בחוקותי', 'בהר': 'בהר סיני',
+    'סכות': 'סוכות', 'יום כפור': 'יום כיפור', 'שמחת תורה': 'וזאת הברכה', 'הושענא רבא': 'הושענא רבה',
+  };
+  const entryByName = new Map();
+  data.forEach(s => s.parshiot.forEach(p => entryByName.set(normName(p.name), { p, sefer: s })));
   function findEntry(name) {
-    const clean = stripNikud(name).replace(/^פרשת\s+/, '').split(/[־–-]/)[0].trim();
-    const all = data.flatMap(s => s.parshiot.map(p => ({ p, sefer: s })));
-    // התאמה מדויקת קודם — אחרת "פינחס" נתפס על "נח" בהתאמה חלקית
-    const hit = all.find(x => x.p.name === clean)
-        || all.find(x => x.p.name.includes(clean))
-        || all.find(x => clean.includes(x.p.name));
-    return hit || null;
+    const base = stripNikud(name).replace(/^פרשת\s+/, '').trim();
+    // מועמדים: השם המלא, ואז כל מקטע של שם מחובר (ניצבים־וילך ← ניצבים)
+    const candidates = [normName(base), ...base.split(/[־–—-]/).map(normName)];
+    for (const c of candidates) {
+      const key = NAME_ALIASES[c] ? normName(NAME_ALIASES[c]) : c;
+      if (entryByName.has(key)) return entryByName.get(key);
+    }
+    return null;
   }
 
   function setRiddle(currentName, prevName) {
@@ -244,12 +257,19 @@
     fetch('https://www.hebcal.com/hebcal?v=1&cfg=json&maj=on&s=on&il=on&start=' + iso(start) + '&end=' + iso(end))
       .then(r => r.json())
       .then(j => {
-        const items = (j.items || []).filter(i => i.category === 'parashat' || i.category === 'holiday');
+        const items = (j.items || []).filter(i =>
+          (i.category === 'parashat' || i.category === 'holiday') && !stripNikud(i.hebrew).startsWith('ערב '));
         const parshiot = items.filter(i => i.category === 'parashat');
         const par = parshiot.find(i => i.date >= today);
         const prevPar = [...parshiot].reverse().find(i => i.date < today);
         const hol = items.find(i => i.category === 'holiday' && i.date >= today && (!par || i.date <= par.date));
-        const pick = hol || par;
+        // חג מוצג רק אם יש לו דף באתר; אחרת — פרשת השבת הקרובה
+        let pick = null;
+        if (hol) {
+          const h = findEntry(hol.hebrew);
+          if (h && h.p.pdf) pick = hol;
+        }
+        if (!pick) pick = par;
         if (!pick) return;
         const heName = stripNikud(pick.hebrew).replace(/^פרשת\s+/, '');
         const dt = new Date(pick.date + 'T12:00:00');
@@ -320,39 +340,106 @@
     }
   })();
 
-  /* ---------- תגובות: Google Forms (אימייל מאומת) + גיליון תשובות מפורסם ---------- */
-  (function initComments() {
-    const section = document.getElementById('comments');
-    const list = document.getElementById('comments-list');
-    const addBtn = document.getElementById('comments-add');
-    const note = document.getElementById('comments-note');
-    if (!window.COMMENTS_FORM_URL) {
-      addBtn.hidden = true;
-      note.textContent = 'מערכת התגובות תופעל בקרוב.';
-      return;
+  /* ---------- תגובות לכל דף בנפרד: Google Forms (אימייל מאומת) + גיליון מפורסם ---------- */
+  const commentsEnabled = !!window.COMMENTS_FORM_URL;
+  const commentsByName = new Map(); // שם שורה -> [{name, date, text}]
+  let commentsLoaded = null;
+
+  function commentFormUrl(rowName) {
+    let url = window.COMMENTS_FORM_URL;
+    if (window.COMMENTS_ENTRY_PARASHA) {
+      url += (url.includes('?') ? '&' : '?') + 'usp=pp_url&'
+        + window.COMMENTS_ENTRY_PARASHA + '=' + encodeURIComponent(rowName);
     }
-    addBtn.href = window.COMMENTS_FORM_URL;
-    if (!window.COMMENTS_CSV_URL) return;
-    // CSV מפורסם של גיליון התשובות: Timestamp, Email, Name, Comment
-    fetch(window.COMMENTS_CSV_URL)
-      .then(r => r.text())
-      .then(text => {
-        const rows = parseCsv(text).slice(1).filter(r => (r[3] || '').trim());
-        if (!rows.length) { note.textContent = 'עדיין אין תגובות — שמחים להיות הראשונים לשמוע מכם.'; return; }
-        note.textContent = '';
-        rows.slice(-30).reverse().forEach(r => {
-          const item = el('li', 'comment');
-          const head = el('div', 'comment__head');
-          head.append(el('span', 'comment__name', (r[2] || 'אנונימי').trim()));
-          const d = new Date(r[0]);
-          if (!isNaN(d)) head.append(el('span', 'comment__date', d.toLocaleDateString('he-IL', { day: 'numeric', month: 'long', year: 'numeric' })));
-          item.append(head, el('div', 'comment__body', r[3].trim()));
-          list.append(item);
-        });
-        section.querySelector('h2').textContent = 'תגובות (' + rows.length + ')';
-      })
-      .catch(() => { note.textContent = 'לא הצלחנו לטעון את התגובות כרגע.'; });
-  })();
+    return url;
+  }
+
+  function loadComments() {
+    if (commentsLoaded) return commentsLoaded;
+    commentsLoaded = !window.COMMENTS_CSV_URL ? Promise.resolve() :
+      fetch(window.COMMENTS_CSV_URL)
+        .then(r => r.text())
+        .then(text => {
+          const rows = parseCsv(text);
+          if (!rows.length) return;
+          // איתור עמודות לפי הכותרות; ברירת מחדל: חותמת זמן, אימייל, פרשה, שם, תגובה
+          const header = rows[0].map(h => h.trim());
+          const col = (label, fallback) => { const i = header.findIndex(h => h.includes(label)); return i >= 0 ? i : fallback; };
+          const iDate = 0, iParasha = col('פרשה', 2), iName = col('שם', 3), iText = col('תגובה', 4);
+          rows.slice(1).forEach(r => {
+            const text2 = (r[iText] || '').trim();
+            const key = (r[iParasha] || '').trim();
+            if (!text2 || !key) return;
+            if (!commentsByName.has(key)) commentsByName.set(key, []);
+            commentsByName.get(key).push({ name: (r[iName] || 'אנונימי').trim(), date: r[iDate], text: text2 });
+          });
+        })
+        .catch(() => {});
+    return commentsLoaded;
+  }
+
+  const commentsModal = document.getElementById('comments-modal');
+  const commentsList = document.getElementById('comments-modal-list');
+  const commentsNote = document.getElementById('comments-modal-note');
+  let commentsLastFocused = null;
+
+  function openComments(rowName) {
+    commentsLastFocused = document.activeElement;
+    document.getElementById('comments-modal-title').textContent = 'תגובות — ' + rowName;
+    document.getElementById('comments-write').href = commentFormUrl(rowName);
+    commentsList.textContent = '';
+    commentsNote.textContent = 'טוען תגובות…';
+    commentsModal.hidden = false;
+    document.body.style.overflow = 'hidden';
+    document.getElementById('comments-modal-close').focus();
+    loadComments().then(() => {
+      const items = commentsByName.get(rowName) || [];
+      if (!items.length) {
+        commentsNote.textContent = 'עדיין אין תגובות לדף הזה — שמחים להיות הראשונים לשמוע מכם.';
+        return;
+      }
+      commentsNote.textContent = '';
+      [...items].reverse().forEach(c => {
+        const item = el('li', 'comment');
+        const head = el('div', 'comment__head');
+        head.append(el('span', 'comment__name', c.name));
+        const d = new Date(c.date);
+        if (!isNaN(d)) head.append(el('span', 'comment__date', d.toLocaleDateString('he-IL', { day: 'numeric', month: 'long', year: 'numeric' })));
+        item.append(head, el('div', 'comment__body', c.text));
+        commentsList.append(item);
+      });
+    });
+  }
+  function closeComments() {
+    commentsModal.hidden = true;
+    document.body.style.overflow = '';
+    if (commentsLastFocused && document.contains(commentsLastFocused)) commentsLastFocused.focus();
+  }
+  commentsModal.addEventListener('click', e => { if (e.target === commentsModal) closeComments(); });
+  document.getElementById('comments-modal-close').addEventListener('click', closeComments);
+  document.addEventListener('keydown', e => { if (e.key === 'Escape' && !commentsModal.hidden) closeComments(); });
+  commentsModal.addEventListener('keydown', e => {
+    if (e.key !== 'Tab') return;
+    const f = commentsModal.querySelectorAll('a[href], button');
+    const first = f[0], last = f[f.length - 1];
+    if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+    else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+  });
+
+  // כפתור תגובות בכל שורה (עם מונה כשהתגובות נטענות)
+  if (commentsEnabled) {
+    loadComments().then(() => {
+      rowActions.forEach((actions, rowName) => {
+        const count = (commentsByName.get(rowName) || []).length;
+        actions.append(button({
+          variant: 'ghost', sm: true, icon: 'mail',
+          label: count ? 'תגובות (' + count + ')' : 'תגובות',
+          ariaLabel: 'תגובות לדף ' + rowName + (count ? ' — ' + count + ' תגובות' : ''),
+          onClick: () => openComments(rowName),
+        }));
+      });
+    });
+  }
 
   // מפרק CSV מינימלי עם תמיכה במרכאות
   function parseCsv(text) {

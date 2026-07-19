@@ -131,8 +131,10 @@ html{scroll-behavior:smooth}
 .sidebar__note{font-size:15px;color:var(--text-muted);line-height:1.6}
 
 /* ---------- תגובות ---------- */
-.comments{margin-top:var(--sp-8)}
-.comments__list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:12px;max-width:var(--content-width)}
+.comments-dialog{height:auto;max-height:85vh;width:min(640px,100%)}
+.comments-dialog__body{padding:16px 20px;overflow-y:auto}
+#comments-modal-note{margin:0 0 12px;color:var(--ink-700);font-size:15px}
+.comments__list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:12px}
 .comment{background:var(--surface-raised);border:var(--border-card);border-radius:var(--radius-m);padding:14px 18px}
 .comment__head{display:flex;align-items:baseline;gap:10px;margin-bottom:4px}
 .comment__name{font-weight:600;color:var(--text-heading)}

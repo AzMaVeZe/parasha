@@ -3,10 +3,13 @@ window.DRIVE_FOLDER = 'https://drive.google.com/drive/folders/1waquTTctSg9xvaC6e
 
 // טופס Google Forms להרשמה לרשימת התפוצה (להדביק את קישור הטופס בין הגרשיים):
 window.SUBSCRIBE_FORM_URL = '';
-// מערכת תגובות מבוססת Google Forms עם איסוף אימייל מאומת:
-// COMMENTS_FORM_URL — קישור לטופס התגובה; COMMENTS_CSV_URL — קישור ה-CSV של גיליון
-// התשובות אחרי "פרסום באינטרנט" (קובץ ‹ שיתוף ‹ פרסום באינטרנט ‹ CSV).
+// מערכת תגובות לכל דף בנפרד, מבוססת Google Forms עם איסוף אימייל מאומת.
+// הטופס צריך שלוש שאלות בסדר הזה: פרשה, שם, תגובה.
+// COMMENTS_FORM_URL — קישור הטופס; COMMENTS_ENTRY_PARASHA — מזהה שדה "פרשה"
+// (מקישור מולא-מראש: שלוש נקודות ‹ קבלת קישור מולא מראש ‹ העתיקו את entry.NNNN);
+// COMMENTS_CSV_URL — קישור ה-CSV של גיליון התשובות אחרי "פרסום באינטרנט".
 window.COMMENTS_FORM_URL = '';
+window.COMMENTS_ENTRY_PARASHA = '';
 window.COMMENTS_CSV_URL = '';
 
 const B = id => 'https://www.box.net/shared/' + id;
