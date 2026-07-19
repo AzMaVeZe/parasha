@@ -174,6 +174,33 @@
     row.append(player);
   }
 
+  // נגן פודקאסט לכרטיס ההצצה בהירו (מוצג ישירות, לצד תמונת הדף)
+  function buildHeroPodcast(p, title) {
+    const spotifyId = spotifyEpisodeId(p.spotify);
+    const fileSrc = fileAudioSrcFor(p);
+    if (!spotifyId && !fileAudioAvailable(fileSrc)) return null;
+    const wrap = el('div', 'hero-preview__podcast');
+    wrap.append(el('div', 'hero-preview__podcast-title', 'האזנה לפודקאסט'));
+    if (spotifyId) {
+      const frame = document.createElement('iframe');
+      frame.src = 'https://open.spotify.com/embed/episode/' + spotifyId + '?utm_source=generator';
+      frame.title = 'נגן ספוטיפיי — פודקאסט על ' + title;
+      frame.loading = 'lazy';
+      frame.height = 152;
+      frame.style.borderRadius = '12px';
+      frame.allow = 'encrypted-media; clipboard-write; fullscreen; picture-in-picture';
+      wrap.append(frame);
+    } else {
+      const audio = document.createElement('audio');
+      audio.controls = true;
+      audio.preload = 'none';
+      audio.src = encodeURI(fileSrc);
+      audio.setAttribute('aria-label', 'פודקאסט על ' + title);
+      wrap.append(audio);
+    }
+    return wrap;
+  }
+
   /* ---------- כרטיס פרשה ---------- */
   function parashaRow(sefer, p) {
     const row = el('li', 'parasha-row');
@@ -381,6 +408,8 @@
             img.addEventListener('click', () => viewPdf(title, entry.pdf));
             img.addEventListener('error', () => { card.remove(); if (quote) quote.hidden = false; });
             card.append(bar, img);
+            const podcast = buildHeroPodcast(entry, title);
+            if (podcast) card.append(podcast);
             if (quote) quote.hidden = true;
             side.append(card);
           });
