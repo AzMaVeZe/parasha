@@ -343,19 +343,27 @@
         if (entry.pdf && pdfExists(entry.pdf)) {
           const side = document.getElementById('hero-side');
           const quote = side.querySelector('.pasuk-quote');
-          const card = el('a', 'hero-preview');
-          card.href = '#p=' + encodeURIComponent(entry.name);
-          card.setAttribute('aria-label', 'עמוד ' + title);
+          const href = '#p=' + encodeURIComponent(entry.name);
+          const card = el('div', 'hero-preview');
           const bar = el('div', 'hero-preview__bar');
           bar.append(el('span', 'hero-preview__title', 'הצצה לדף ' + heName));
-          bar.append(el('span', 'hero-preview__more', 'לעמוד הדף ←'));
-          // תמונת העמוד הראשון — iframe של PDF לא נתמך באנדרואיד ולא ממורכז ב-iOS
+          const more = el('a', 'hero-preview__more', 'לעמוד הדף ←');
+          more.href = href;
+          bar.append(more);
+          // תמונת העמוד הראשון (קישור לעמוד הדף) — iframe של PDF לא נתמך באנדרואיד
+          const imgLink = el('a', 'hero-preview__imglink');
+          imgLink.href = href;
+          imgLink.setAttribute('aria-label', 'לעמוד ' + title);
           const img = document.createElement('img');
           img.className = 'hero-preview__img';
           img.src = encodeURI(entry.pdf.replace('assets/pdfs/', 'assets/previews/').replace(/\.pdf$/i, '.jpg'));
           img.alt = 'העמוד הראשון של דף ' + title;
           img.addEventListener('error', () => { card.remove(); if (quote) quote.hidden = false; });
-          card.append(bar, img);
+          imgLink.append(img);
+          card.append(bar, imgLink);
+          // נגן הפודקאסט מתחת לתצוגה המקדימה
+          const pod = buildPodcast(entry, title);
+          if (pod) { pod.classList.add('hero-preview__podcast'); card.append(pod); }
           if (quote) quote.hidden = true;
           side.append(card);
         }
