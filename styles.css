@@ -55,18 +55,23 @@ html{scroll-behavior:smooth}
 .input input{border:none;outline:none;background:transparent;font-family:var(--font-body);
   font-size:16px;color:var(--text-body);width:100%}
 
-/* ---------- שורת פרשה ---------- */
-.parasha-row{display:flex;align-items:center;flex-wrap:wrap;gap:12px;padding:10px 16px;
-  border-bottom:1px solid var(--parchment-200);transition:background var(--dur) var(--ease)}
-.parasha-row:last-child{border-bottom:none}
-.parasha-row:hover{background:var(--parchment-50)}
-.parasha-row__icon{color:var(--ink-300)}
+/* ---------- כרטיס פרשה (ארכיון בתצוגת רשת) ---------- */
+.parasha-row{position:relative;display:flex;flex-direction:column;gap:10px;
+  padding:14px 16px 12px 20px;background:var(--surface-raised);border:var(--border-card);
+  border-radius:var(--radius-m);transition:box-shadow var(--dur) var(--ease), transform var(--dur) var(--ease)}
+.parasha-row::before{content:'';position:absolute;inset-inline-start:0;top:12px;bottom:12px;
+  width:3px;border-radius:3px;background:var(--parchment-300)}
+.parasha-row--has-pdf::before{background:var(--gold-600)}
+.parasha-row:hover{box-shadow:var(--shadow-card);transform:translateY(-2px)}
+.parasha-row__head{display:flex;align-items:center;flex-wrap:wrap;gap:8px 10px}
+.parasha-row__icon{color:var(--ink-300);flex:none}
 .parasha-row--has-pdf .parasha-row__icon{color:var(--gold-600)}
 .parasha-row__name{font-family:var(--font-display);font-size:18px;font-weight:500;color:var(--text-heading);flex:1 1 auto}
-.parasha-row__note{font-size:15px;color:var(--text-muted)}
-.parasha-row__actions{display:flex;gap:8px;flex-wrap:wrap}
+.parasha-row__note{font-size:13.5px;font-weight:600;color:#84620E;background:var(--parchment-100);
+  border-radius:var(--radius-pill);padding:2px 10px;white-space:nowrap}
+.parasha-row__actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:auto}
 .parasha-row__soon{font-size:14px;color:var(--ink-500);padding:6px 8px}
-.parasha-row__player{flex-basis:100%;order:10;padding-top:4px}
+.parasha-row__player{padding-top:4px}
 .parasha-row__player audio{width:100%;height:40px}
 .parasha-row__player iframe{width:100%;max-width:420px;border:none;display:block}
 .parasha-row__spotify-link{display:inline-block;margin-top:6px;font-size:13.5px;color:var(--link)}
@@ -123,8 +128,8 @@ html{scroll-behavior:smooth}
 .site-main__grid{display:grid;grid-template-columns:2.2fr 1fr;gap:40px;align-items:start}
 
 .sefer-section{margin-bottom:var(--sp-7)}
-.sefer-section__list{background:var(--surface-raised);border:var(--border-card);
-  border-radius:var(--radius-m);box-shadow:var(--shadow-card);overflow:hidden;list-style:none;margin:0;padding:0}
+.sefer-section__list{display:grid;grid-template-columns:repeat(auto-fill, minmax(210px, 1fr));
+  gap:14px;align-items:start;list-style:none;margin:0;padding:0}
 .search-empty{background:var(--surface-card);border:var(--border-card);border-radius:var(--radius-m);
   padding:var(--sp-5);color:var(--ink-700);font-size:16px}
 
@@ -176,11 +181,5 @@ html{scroll-behavior:smooth}
   .site-header .input{width:100%}
   .site-nav{flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;padding-bottom:4px}
   .site-nav a{flex:none;padding:10px 2px}
-  .parasha-row{display:grid;grid-template-columns:auto 1fr;grid-template-areas:"icon name" "icon note" "icon actions" "player player";row-gap:4px}
-  .parasha-row__icon{grid-area:icon;align-self:start;margin-top:4px}
-  .parasha-row__name{grid-area:name}
-  .parasha-row__note{grid-area:note}
-  .parasha-row__actions{grid-area:actions;justify-self:start}
   .parasha-row__actions .btn--sm{padding:9px 16px}
-  .parasha-row__player{grid-area:player}
 }

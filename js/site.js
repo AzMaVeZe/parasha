@@ -174,16 +174,17 @@
     row.append(player);
   }
 
-  /* ---------- שורת פרשה ---------- */
+  /* ---------- כרטיס פרשה ---------- */
   function parashaRow(sefer, p) {
     const row = el('li', 'parasha-row');
+
+    const head = el('div', 'parasha-row__head');
     const rowIcon = icon('file-text', 18);
     rowIcon.classList.add('parasha-row__icon');
-    row.append(rowIcon);
-
-    const name = el('span', 'parasha-row__name', p.name);
-    row.append(name);
-    if (p.note) row.append(el('span', 'parasha-row__note', p.note));
+    head.append(rowIcon);
+    head.append(el('span', 'parasha-row__name', p.name));
+    if (p.note) head.append(el('span', 'parasha-row__note', p.note));
+    row.append(head);
 
     const actions = el('span', 'parasha-row__actions');
     row.append(actions);
