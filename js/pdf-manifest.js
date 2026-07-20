@@ -26,6 +26,7 @@ window.PDF_FILES = [
  'chagim-פורים.pdf',
  'chagim-פסח.pdf',
  'chagim-ראש-השנה.pdf',
+ 'chagim-תשעה-באב.pdf',
  'devarim-דברים.pdf',
  'devarim-האזינו.pdf',
  'devarim-ואתחנן.pdf',
