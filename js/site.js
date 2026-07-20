@@ -299,6 +299,56 @@
     }
   }
 
+  function hebDateText(dt) {
+    return '· ' + dt.toLocaleDateString('he-IL', { weekday: 'long', day: 'numeric', month: 'long' })
+      + ' · ' + new Intl.DateTimeFormat('he-u-ca-hebrew', { day: 'numeric', month: 'long', year: 'numeric' }).format(dt);
+  }
+  function buildBadge(kind, heName, dt) {
+    const badge = el('div', 'hero-badge');
+    badge.append(el('span', 'hero-badge__kind', kind + ':'));
+    badge.append(el('span', 'hero-badge__name', heName));
+    badge.append(el('span', 'hero-badge__date', hebDateText(dt)));
+    return badge;
+  }
+  function buildPreviewCard(hit) {
+    const entry = hit.p;
+    const title = rowTitle(hit.sefer, entry);
+    const href = '#p=' + encodeURIComponent(entry.name);
+    const card = el('div', 'hero-preview');
+    const bar = el('div', 'hero-preview__bar');
+    bar.append(el('span', 'hero-preview__title', 'הצצה לדף ' + entry.name));
+    const more = el('a', 'hero-preview__more', 'לעמוד הדף ←');
+    more.href = href;
+    bar.append(more);
+    // תמונת העמוד הראשון (קישור לעמוד הדף) — iframe של PDF לא נתמך באנדרואיד
+    const imgLink = el('a', 'hero-preview__imglink');
+    imgLink.href = href;
+    imgLink.setAttribute('aria-label', 'לעמוד ' + title);
+    const img = document.createElement('img');
+    img.className = 'hero-preview__img';
+    img.src = encodeURI(entry.pdf.replace('assets/pdfs/', 'assets/previews/').replace(/\.pdf$/i, '.jpg'));
+    img.alt = 'העמוד הראשון של דף ' + title;
+    img.addEventListener('error', () => { card.remove(); });
+    imgLink.append(img);
+    card.append(bar, imgLink);
+    // נגן הפודקאסט מתחת לתצוגה המקדימה; אם אין פרק לדף הזה — קישור לסדרה
+    const pod = buildPodcast(entry, title);
+    if (pod) {
+      pod.classList.add('hero-preview__podcast');
+      card.append(pod);
+    } else if (window.SPOTIFY_SHOW_URL) {
+      const wrap = el('div', 'hero-preview__podcast');
+      const a = el('a', 'podcast__title podcast__showlink', 'האזנה לפודקאסט');
+      a.href = window.SPOTIFY_SHOW_URL;
+      a.target = '_blank';
+      a.rel = 'noopener noreferrer';
+      a.append(el('span', 'visually-hidden', ' (נפתח בחלון חדש)'));
+      wrap.append(a);
+      card.append(wrap);
+    }
+    return card;
+  }
+
   (function loadUpcoming() {
     const iso = d => d.toISOString().slice(0, 10);
     const start = new Date(Date.now() - 9 * 864e5), end = new Date(Date.now() + 15 * 864e5);
@@ -311,73 +361,54 @@
         const parshiot = items.filter(i => i.category === 'parashat');
         const par = parshiot.find(i => i.date >= today);
         const prevPar = [...parshiot].reverse().find(i => i.date < today);
-        const hol = items.find(i => i.category === 'holiday' && i.date >= today && (!par || i.date <= par.date));
-        // חג מוצג רק אם יש לו דף באתר; אחרת — פרשת השבת הקרובה
-        let pick = null;
-        if (hol) {
-          const h = findEntry(hol.hebrew);
-          if (h && h.p.pdf) pick = hol;
+        const holItem = items.find(i => i.category === 'holiday' && i.date >= today);
+
+        const mk = (it, cat) => ({
+          cat, it, hit: findEntry(it.hebrew),
+          heName: stripNikud(it.hebrew).replace(/^פרשת\s+/, ''),
+          dt: new Date(it.date + 'T12:00:00'),
+        });
+        // מועמדים: החג הקרוב (רק אם יש לו דף) + פרשת השבת הקרובה. מסירים כפילות של אותו קובץ.
+        const candidates = [];
+        if (holItem) {
+          const c = mk(holItem, 'holiday');
+          if (c.hit && c.hit.p.pdf && pdfExists(c.hit.p.pdf)) candidates.push(c);
         }
-        if (!pick) pick = par;
-        if (!pick) return;
-        const heName = stripNikud(pick.hebrew).replace(/^פרשת\s+/, '');
-        const dt = new Date(pick.date + 'T12:00:00');
-        const kind = pick.category === 'parashat' ? 'פרשת השבוע' : 'החג הקרוב';
+        if (par) {
+          const c = mk(par, 'parashat');
+          if (!candidates.some(x => x.hit && c.hit && x.hit.p.name === c.hit.p.name)) candidates.push(c);
+        }
+        if (!candidates.length) return;
+        candidates.sort((a, b) => (a.it.date < b.it.date ? -1 : 1));
+        const featured = candidates.slice(0, 2);
 
-        document.getElementById('hero-badge-kind').textContent = kind + ':';
-        document.getElementById('hero-badge-name').textContent = heName;
-        document.getElementById('hero-badge-date').textContent = '· '
-          + dt.toLocaleDateString('he-IL', { weekday: 'long', day: 'numeric', month: 'long' }) + ' · '
-          + new Intl.DateTimeFormat('he-u-ca-hebrew', { day: 'numeric', month: 'long', year: 'numeric' }).format(dt);
-        document.getElementById('hero-badge').hidden = false;
+        // תגיות — אחת לכל דף מוצג (שם קנוני מהאתר כשקיים)
+        const badges = document.getElementById('hero-badges');
+        featured.forEach(c => badges.append(buildBadge(
+          c.cat === 'parashat' ? 'פרשת השבוע' : 'החג הקרוב',
+          c.hit ? c.hit.p.name : c.heName, c.dt)));
+        badges.hidden = false;
 
-        const hit = findEntry(pick.hebrew);
+        // חידה — לפי הפרשה אם קיימת, אחרת לפי הפריט הראשון
+        const parCand = featured.find(c => c.cat === 'parashat') || featured[0];
         const prevHit = prevPar ? findEntry(prevPar.hebrew) : null;
-        setRiddle(hit ? hit.p.name : null, prevHit ? prevHit.p.name : null);
-        if (!hit) return;
-        const entry = hit.p;
-        const title = rowTitle(hit.sefer, entry);
-        const label = document.getElementById('hero-cta-label');
-        heroName = entry.name;
-        label.textContent = 'לדף ' + (kind === 'פרשת השבוע' ? 'פרשת ' : '') + heName;
-        if (entry.pdf && pdfExists(entry.pdf)) {
-          const side = document.getElementById('hero-side');
-          const quote = side.querySelector('.pasuk-quote');
-          const href = '#p=' + encodeURIComponent(entry.name);
-          const card = el('div', 'hero-preview');
-          const bar = el('div', 'hero-preview__bar');
-          bar.append(el('span', 'hero-preview__title', 'הצצה לדף ' + heName));
-          const more = el('a', 'hero-preview__more', 'לעמוד הדף ←');
-          more.href = href;
-          bar.append(more);
-          // תמונת העמוד הראשון (קישור לעמוד הדף) — iframe של PDF לא נתמך באנדרואיד
-          const imgLink = el('a', 'hero-preview__imglink');
-          imgLink.href = href;
-          imgLink.setAttribute('aria-label', 'לעמוד ' + title);
-          const img = document.createElement('img');
-          img.className = 'hero-preview__img';
-          img.src = encodeURI(entry.pdf.replace('assets/pdfs/', 'assets/previews/').replace(/\.pdf$/i, '.jpg'));
-          img.alt = 'העמוד הראשון של דף ' + title;
-          img.addEventListener('error', () => { card.remove(); if (quote) quote.hidden = false; });
-          imgLink.append(img);
-          card.append(bar, imgLink);
-          // נגן הפודקאסט מתחת לתצוגה המקדימה; אם אין פרק לדף הזה — קישור לסדרה
-          const pod = buildPodcast(entry, title);
-          if (pod) {
-            pod.classList.add('hero-preview__podcast');
-            card.append(pod);
-          } else if (window.SPOTIFY_SHOW_URL) {
-            const wrap = el('div', 'hero-preview__podcast');
-            const a = el('a', 'podcast__title podcast__showlink', 'האזנה לפודקאסט');
-            a.href = window.SPOTIFY_SHOW_URL;
-            a.target = '_blank';
-            a.rel = 'noopener noreferrer';
-            a.append(el('span', 'visually-hidden', ' (נפתח בחלון חדש)'));
-            wrap.append(a);
-            card.append(wrap);
+        setRiddle(parCand.hit ? parCand.hit.p.name : null, prevHit ? prevHit.p.name : null);
+
+        // כרטיסים בהירו — עד שניים, כל אחד עם הפודקאסט שלו
+        const side = document.getElementById('hero-side');
+        const quote = side.querySelector('.pasuk-quote');
+        let firstCard = null;
+        featured.forEach(c => {
+          if (c.hit && c.hit.p.pdf && pdfExists(c.hit.p.pdf)) {
+            side.append(buildPreviewCard(c.hit));
+            if (!firstCard) firstCard = c;
           }
+        });
+        if (firstCard) {
           if (quote) quote.hidden = true;
-          side.append(card);
+          heroName = firstCard.hit.p.name;
+          document.getElementById('hero-cta-label').textContent =
+            'לדף ' + (firstCard.cat === 'parashat' ? 'פרשת ' : '') + firstCard.hit.p.name;
         }
       }).catch(() => {});
   })();
