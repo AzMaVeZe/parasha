@@ -397,10 +397,11 @@
         // כרטיסים בהירו — עד שניים, כל אחד עם הפודקאסט שלו
         const side = document.getElementById('hero-side');
         const quote = side.querySelector('.pasuk-quote');
-        let firstCard = null;
+        let firstCard = null, cardCount = 0;
         featured.forEach(c => {
           if (c.hit && c.hit.p.pdf && pdfExists(c.hit.p.pdf)) {
             side.append(buildPreviewCard(c.hit));
+            cardCount++;
             if (!firstCard) firstCard = c;
           }
         });
@@ -410,6 +411,8 @@
           document.getElementById('hero-cta-label').textContent =
             'לדף ' + (firstCard.cat === 'parashat' ? 'פרשת ' : '') + firstCard.hit.p.name;
         }
+        // שני דפים בדסקטופ — פריסה מוערמת (טקסט למעלה, שני כרטיסים זה לצד זה)
+        if (cardCount === 2) document.querySelector('.hero').classList.add('hero--stack');
       }).catch(() => {});
   })();
 
