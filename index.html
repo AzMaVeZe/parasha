@@ -149,23 +149,25 @@
     <div class="parasha-page__main">
       <div class="parasha-page__doc" id="parasha-page-doc"></div>
       <div class="parasha-page__actions" id="parasha-page-actions"></div>
-      <div class="parasha-page__podcast" id="parasha-page-podcast"></div>
     </div>
 
-    <section class="parasha-page__comments" id="parasha-page-comments" aria-labelledby="pc-title">
-      <div class="section-header">
-        <div>
-          <h2 id="pc-title">תגובות</h2>
-          <div class="section-header__subtitle">התגובות נשלחות עם כתובת דוא"ל מאומתת</div>
+    <aside class="parasha-page__aside">
+      <div class="parasha-page__podcast" id="parasha-page-podcast"></div>
+      <section class="parasha-page__comments" id="parasha-page-comments" aria-labelledby="pc-title">
+        <div class="section-header">
+          <div>
+            <h2 id="pc-title">תגובות</h2>
+            <div class="section-header__subtitle">התגובות נשלחות עם כתובת דוא"ל מאומתת</div>
+          </div>
+          <a class="btn btn--gold btn--sm" id="pc-write" href="#" target="_blank" rel="noopener noreferrer" hidden>
+            <span class="icon" aria-hidden="true" style="--icon:url('assets/icons/mail.svg');width:15px;height:15px"></span>
+            כתיבת תגובה<span class="visually-hidden"> (נפתח בחלון חדש)</span>
+          </a>
         </div>
-        <a class="btn btn--gold btn--sm" id="pc-write" href="#" target="_blank" rel="noopener noreferrer" hidden>
-          <span class="icon" aria-hidden="true" style="--icon:url('assets/icons/mail.svg');width:15px;height:15px"></span>
-          כתיבת תגובה<span class="visually-hidden"> (נפתח בחלון חדש)</span>
-        </a>
-      </div>
-      <p id="pc-note"></p>
-      <ul id="pc-list" class="comments__list"></ul>
-    </section>
+        <p id="pc-note"></p>
+        <ul id="pc-list" class="comments__list"></ul>
+      </section>
+    </aside>
   </div>
 </main>
 

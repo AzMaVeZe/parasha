@@ -178,7 +178,9 @@ html{scroll-behavior:smooth}
   box-shadow:var(--shadow-card);cursor:zoom-in;background:#fff}
 .parasha-page__actions{display:flex;gap:10px;flex-wrap:wrap}
 .parasha-page__soon{background:var(--surface-card);border:var(--border-card);border-radius:var(--radius-m);padding:var(--sp-5);color:var(--ink-700)}
-.parasha-page__comments{background:var(--surface-card);border:var(--border-card);border-radius:var(--radius-m);padding:var(--sp-5);position:sticky;top:24px}
+.parasha-page__aside{display:flex;flex-direction:column;gap:20px;position:sticky;top:24px}
+.parasha-page__podcast:not(:empty){background:var(--surface-card);border:var(--border-card);border-radius:var(--radius-m);padding:var(--sp-5)}
+.parasha-page__comments{background:var(--surface-card);border:var(--border-card);border-radius:var(--radius-m);padding:var(--sp-5)}
 
 /* ---------- תגובות ---------- */
 .comments__list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:12px}
@@ -215,7 +217,7 @@ html{scroll-behavior:smooth}
 /* ---------- רספונסיביות ---------- */
 @media (max-width:920px){
   .hero__inner,.site-main__grid,.parasha-page__grid,.hero--stack #hero-side{grid-template-columns:1fr}
-  .sidebar,.parasha-page__comments{position:static}
+  .sidebar,.parasha-page__aside{position:static}
   .hero h1{font-size:var(--fs-h1)}
   .site-header .input{width:100%}
   .site-nav{flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;padding-bottom:4px}
