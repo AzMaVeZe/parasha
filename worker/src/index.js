@@ -236,17 +236,23 @@ export default {
       }), { expirationTtl: 60 * 60 * 24 * 30 });
 
       const confirmUrl = `${env.WORKER_URL}/confirm?token=${encodeURIComponent(token)}&e=${encodeURIComponent(email)}`;
-      await sendEmail(env, {
-        to: email,
-        subject: 'אישור הרשמה — בין הנכתב לנגלה',
-        html: shell(env, `
-          <p>שלום,</p>
-          <p>ביקשת לקבל את דף פרשת השבוע בכל יום <strong>${DAYS[day]}</strong>.</p>
-          <p>לאישור ההרשמה יש ללחוץ על הכפתור:</p>
-          <p><a href="${esc(confirmUrl)}" style="display:inline-block;background:#8F6A10;color:#fff;
-             text-decoration:none;padding:11px 22px;border-radius:6px;font-weight:600">אישור ההרשמה</a></p>
-          <p style="font-size:14px;color:#6B675A">אם לא ביקשת להירשם — אפשר פשוט להתעלם מהמייל הזה.</p>`),
-      });
+      try {
+        await sendEmail(env, {
+          to: email,
+          subject: 'אישור הרשמה — בין הנכתב לנגלה',
+          html: shell(env, `
+            <p>שלום,</p>
+            <p>ביקשת לקבל את דף פרשת השבוע בכל יום <strong>${DAYS[day]}</strong>.</p>
+            <p>לאישור ההרשמה יש ללחוץ על הכפתור:</p>
+            <p><a href="${esc(confirmUrl)}" style="display:inline-block;background:#8F6A10;color:#fff;
+               text-decoration:none;padding:11px 22px;border-radius:6px;font-weight:600">אישור ההרשמה</a></p>
+            <p style="font-size:14px;color:#6B675A">אם לא ביקשת להירשם — אפשר פשוט להתעלם מהמייל הזה.</p>`),
+        });
+      } catch (e) {
+        // ההרשמה נשמרה כ"ממתינה", אבל מייל האישור נכשל — מדווחים במפורש כדי שיהיה מה לאבחן
+        console.error('confirm mail failed', e.message);
+        return json({ error: 'mail_failed', detail: e.message.slice(0, 300) }, 502, origin);
+      }
       return json({ ok: true, state: 'pending' }, 200, origin);
     }
 
@@ -280,6 +286,40 @@ export default {
       if (request.method === 'POST') return new Response('ok');   // List-Unsubscribe One-Click
       return page('הוסרת מהרשימה', '<p>לא יישלחו אליך עוד מיילים. תודה, ומוזמן/ת תמיד לחזור.</p>'
         + (site ? `<p><a href="${esc(site)}">לאתר</a></p>` : ''));
+    }
+
+    /* --- אבחון: /status?key=<ADMIN_KEY> --- */
+    if (url.pathname === '/status') {
+      if (!env.ADMIN_KEY || url.searchParams.get('key') !== env.ADMIN_KEY) {
+        return json({ error: 'unauthorized' }, 401, origin);
+      }
+      const out = {
+        config: {
+          hasResendKey: !!env.RESEND_API_KEY,
+          fromEmail: env.FROM_EMAIL || null,
+          siteUrl: env.SITE_URL || null,
+          workerUrl: env.WORKER_URL || null,
+          workerUrlLooksSet: !/YOUR-SUBDOMAIN/.test(env.WORKER_URL || 'YOUR-SUBDOMAIN'),
+        },
+challenges: {},
+      };
+      try {
+        const r = await fetch(env.SITE_URL.replace(/\/$/, '') + '/assets/parashot.json');
+        out.challenges.parashotJson = r.status;
+      } catch (e) { out.challenges.parashotJson = 'ERR ' + e.message; }
+      try {
+        out.challenges.upcoming = (await upcoming(env)).map(p => p.name);
+      } catch (e) { out.challenges.upcoming = 'ERR ' + e.message; }
+      try {
+        const list = await env.SUBSCRIBERS.list({ prefix: 'sub:' });
+        const subs = [];
+        for (const k of list.keys) {
+          const rec = await env.SUBSCRIBERS.get(k.name, 'json');
+          if (rec) subs.push({ email: rec.email.replace(/(.{2}).*(@.*)/, '$1***$2'), day: rec.day, status: rec.status });
+        }
+        out.subscribers = subs;
+      } catch (e) { out.subscribers = 'ERR ' + e.message; }
+      return json(out, 200, origin);
     }
 
     /* --- הרצה ידנית לבדיקה: /send?day=mon&key=<ADMIN_KEY> --- */

@@ -480,9 +480,17 @@
         headers: { 'content-type': 'application/json' },
         body: JSON.stringify({ email: email, day: day, website: form.website.value }),
       })
-        .then(r => r.json().then(d => ({ ok: r.ok, d: d })))
+        .then(r => r.json().then(d => ({ ok: r.ok, d: d })).catch(() => ({ ok: false, d: {} })))
         .then(res => {
-          if (!res.ok) throw new Error(res.d && res.d.error);
+          if (!res.ok) {
+            const code = res.d && res.d.error;
+            if (code === 'mail_failed') {
+              setMsg('ההרשמה נקלטה, אך שליחת מייל האישור נכשלה. נסו שוב מאוחר יותר.', 'error');
+              return;
+            }
+            if (code === 'invalid_email') { setMsg('כתובת הדוא"ל אינה תקינה.', 'error'); return; }
+            throw new Error(code || 'failed');
+          }
           if (res.d.state === 'already') setMsg('הכתובת כבר רשומה — הכול מסודר.', 'ok');
           else if (res.d.state === 'updated') setMsg('יום הקבלה עודכן. תודה!', 'ok');
           else {
