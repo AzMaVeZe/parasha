@@ -165,6 +165,19 @@ html{scroll-behavior:smooth}
 .sidebar-card p{margin:0 0 12px;font-size:15px;color:var(--ink-700)}
 .sidebar__note{font-size:15px;color:var(--text-muted);line-height:1.6}
 
+/* ---------- טופס הרשמה לרשימת התפוצה ---------- */
+#subscribe-form{display:flex;flex-direction:column;gap:12px}
+.input__label{font-size:14px;font-weight:500;color:var(--ink-700)}
+.subscribe-days{border:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:6px 18px;align-items:center}
+.subscribe-days legend{padding:0;font-size:14px;font-weight:500;color:var(--ink-700);margin-bottom:6px}
+.subscribe-days label{display:inline-flex;align-items:center;gap:6px;font-size:15px;cursor:pointer;min-height:32px}
+.subscribe-days input{width:18px;height:18px;accent-color:var(--blue-700);margin:0}
+.subscribe-consent{margin:0;font-size:13px;color:var(--text-muted);line-height:1.5}
+.subscribe-msg{margin:0;font-size:14.5px;font-weight:500}
+.subscribe-msg--ok{color:var(--success)}
+.subscribe-msg--error{color:var(--danger)}
+#subscribe-submit:disabled{opacity:.6;cursor:default}
+
 /* ---------- עמוד הדף ---------- */
 .parasha-page{padding-block:28px 64px}
 .parasha-page__back{display:inline-flex;align-items:center;gap:6px;font-size:15px;font-weight:600;color:var(--link);margin-bottom:20px}

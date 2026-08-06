@@ -1,0 +1,30 @@
+name = "parasha-newsletter"
+main = "src/index.js"
+compatibility_date = "2024-11-01"
+
+# --- משתנים גלויים (לא סודות) ---
+[vars]
+SITE_URL   = "https://azmaveze.github.io/parasha"
+BRAND      = "בין הנכתב לנגלה"
+# יש להחליף לכתובת שליחה בדומיין שאומת ב-Resend:
+FROM_EMAIL = "פרשת השבוע <parasha@example.com>"
+REPLY_TO   = ""
+# הכתובת של ה-Worker עצמו (מתקבלת אחרי הפריסה הראשונה, ואז מעדכנים כאן ופורסים שוב):
+WORKER_URL = "https://parasha-newsletter.YOUR-SUBDOMAIN.workers.dev"
+
+# --- אחסון הנרשמים ---
+# ליצור עם:  npx wrangler kv namespace create SUBSCRIBERS
+# ואז להדביק כאן את ה-id שהתקבל:
+[[kv_namespaces]]
+binding = "SUBSCRIBERS"
+id = "PUT_YOUR_KV_NAMESPACE_ID_HERE"
+
+# --- תזמון: יום שני ויום חמישי בבוקר ---
+# הזמן ב-UTC: 04:00 UTC = 07:00 בשעון קיץ ישראלי, 06:00 בשעון חורף.
+# כל cron רץ פעם אחת ביומו; ה-Worker מזהה לפי היום למי לשלוח.
+[triggers]
+crons = ["0 4 * * 1", "0 4 * * 4"]
+
+# --- סודות (לא נשמרים בקובץ הזה!) ---
+#   npx wrangler secret put RESEND_API_KEY
+#   npx wrangler secret put ADMIN_KEY

@@ -261,7 +261,8 @@
   document.getElementById('hero-example').addEventListener('click', () => goToParasha(heroName));
 
   /* ---------- פרשת השבוע / החג הקרוב (Hebcal) ---------- */
-  const stripNikud = s => (s || '').replace(/[֑-ׇ]/g, '');
+  // מסיר ניקוד וטעמים בלבד — בלי מקף עברי (U+05BE), כדי ש"ניצבים־וילך" יישאר מפוצל
+  const stripNikud = s => (s || '').replace(/[֑-ׇֽֿׁׂׅׄ]/g, '');
   // התאמה מדויקת בלבד, אחרי נרמול — התאמה חלקית תפסה בעבר את "בא" מתוך "תשעה באב"
   const normName = s => stripNikud(s || '').replace(/["'׳״]/g, '').replace(/[־–—-]/g, ' ').replace(/\s+/g, ' ').trim();
   // גישור בין הכתיב החסר של Hebcal לשמות באתר, וכינויי חגים
@@ -426,17 +427,49 @@
     document.getElementById('header-podcast').hidden = false;
   }
 
-  /* ---------- הרשמה: Google Forms עם fallback לדוא"ל ---------- */
+  /* ---------- הרשמה לרשימת התפוצה (Worker + Resend) ---------- */
   (function initSubscribe() {
-    const btn = document.getElementById('subscribe-btn');
+    const form = document.getElementById('subscribe-form');
     const fallback = document.getElementById('subscribe-fallback');
-    if (window.SUBSCRIBE_FORM_URL) {
-      btn.href = window.SUBSCRIBE_FORM_URL;
-      fallback.hidden = true;
-    } else {
-      btn.hidden = true;
-      fallback.hidden = false;
-    }
+    const api = (window.SUBSCRIBE_API || '').replace(/\/$/, '');
+    if (!api) { form.hidden = true; fallback.hidden = false; return; }
+
+    const msg = document.getElementById('subscribe-msg');
+    const submit = document.getElementById('subscribe-submit');
+    const setMsg = (text, kind) => {
+      msg.textContent = text;
+      msg.className = kind ? 'subscribe-msg subscribe-msg--' + kind : '';
+    };
+
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+      const email = form.email.value.trim();
+      const day = form.querySelector('input[name="day"]:checked').value;
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) {
+        setMsg('נראה שכתובת הדוא"ל אינה תקינה — אפשר לבדוק שוב?', 'error');
+        form.email.focus();
+        return;
+      }
+      submit.disabled = true;
+      setMsg('רגע…', null);
+      fetch(api + '/subscribe', {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({ email: email, day: day, website: form.website.value }),
+      })
+        .then(r => r.json().then(d => ({ ok: r.ok, d: d })))
+        .then(res => {
+          if (!res.ok) throw new Error(res.d && res.d.error);
+          if (res.d.state === 'already') setMsg('הכתובת כבר רשומה — הכול מסודר.', 'ok');
+          else if (res.d.state === 'updated') setMsg('יום הקבלה עודכן. תודה!', 'ok');
+          else {
+            setMsg('כמעט סיימנו — שלחנו אליכם מייל לאישור ההרשמה.', 'ok');
+            form.reset();
+          }
+        })
+        .catch(() => setMsg('משהו השתבש בשליחה. אפשר לנסות שוב בעוד רגע.', 'error'))
+        .finally(() => { submit.disabled = false; });
+    });
   })();
 
   /* ---------- תגובות לכל דף בנפרד: Google Forms (אימייל מאומת) + גיליון מפורסם ---------- */

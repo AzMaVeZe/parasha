@@ -1,0 +1,374 @@
+{
+ "בראשית": {
+  "sefer": "ספר בראשית",
+  "isChag": false,
+  "hasPdf": true,
+  "hasPodcast": false
+ },
+ "נח": {
+  "sefer": "ספר בראשית",
+  "isChag": false,
+  "hasPdf": true,
+  "hasPodcast": false
+ },
+ "לך לך": {
+  "sefer": "ספר בראשית",
+  "isChag": false,
+  "hasPdf": true,
+  "hasPodcast": false
+ },
+ "וירא": {
+  "sefer": "ספר בראשית",
+  "isChag": false,
+  "hasPdf": true,
+  "hasPodcast": false
+ },
+ "חיי שרה": {
+  "sefer": "ספר בראשית",
+  "isChag": false,
+  "hasPdf": true,
+  "hasPodcast": false
+ },
+ "תולדות": {
+  "sefer": "ספר בראשית",
+  "isChag": false,
+  "hasPdf": true,
+  "hasPodcast": false
+ },
+ "ויצא": {
+  "sefer": "ספר בראשית",
+  "isChag": false,
+  "hasPdf": true,
+  "hasPodcast": false
+ },
+ "וישלח": {
+  "sefer": "ספר בראשית",
+  "isChag": false,
+  "hasPdf": true,
+  "hasPodcast": false
+ },
+ "וישב": {
+  "sefer": "ספר בראשית",
+  "isChag": false,
+  "hasPdf": true,
+  "hasPodcast": false
+ },
+ "מקץ": {
+  "sefer": "ספר בראשית",
+  "isChag": false,
+  "hasPdf": true,
+  "hasPodcast": false
+ },
+ "ויגש": {
+  "sefer": "ספר בראשית",
+  "isChag": false,
+  "hasPdf": true,
+  "hasPodcast": false
+ },
+ "ויחי": {
+  "sefer": "ספר בראשית",
+  "isChag": false,
+  "hasPdf": true,
+  "hasPodcast": false
+ },
+ "שמות": {
+  "sefer": "ספר שמות",
+  "isChag": false,
+  "hasPdf": true,
+  "hasPodcast": true
+ },
+ "וארא": {
+  "sefer": "ספר שמות",
+  "isChag": false,
+  "hasPdf": true,
+  "hasPodcast": false
+ },
+ "בא": {
+  "sefer": "ספר שמות",
+  "isChag": false,
+  "hasPdf": true,
+  "hasPodcast": false
+ },
+ "בשלח": {
+  "sefer": "ספר שמות",
+  "isChag": false,
+  "hasPdf": true,
+  "hasPodcast": false
+ },
+ "יתרו": {
+  "sefer": "ספר שמות",
+  "isChag": false,
+  "hasPdf": true,
+  "hasPodcast": false
+ },
+ "משפטים": {
+  "sefer": "ספר שמות",
+  "isChag": false,
+  "hasPdf": true,
+  "hasPodcast": false
+ },
+ "תרומה": {
+  "sefer": "ספר שמות",
+  "isChag": false,
+  "hasPdf": true,
+  "hasPodcast": false
+ },
+ "תצוה": {
+  "sefer": "ספר שמות",
+  "isChag": false,
+  "hasPdf": true,
+  "hasPodcast": false
+ },
+ "כי תשא": {
+  "sefer": "ספר שמות",
+  "isChag": false,
+  "hasPdf": true,
+  "hasPodcast": false
+ },
+ "ויקהל": {
+  "sefer": "ספר שמות",
+  "isChag": false,
+  "hasPdf": true,
+  "hasPodcast": false
+ },
+ "פקודי": {
+  "sefer": "ספר שמות",
+  "isChag": false,
+  "hasPdf": true,
+  "hasPodcast": false
+ },
+ "ויקרא": {
+  "sefer": "ספר ויקרא",
+  "isChag": false,
+  "hasPdf": true,
+  "hasPodcast": true
+ },
+ "צו": {
+  "sefer": "ספר ויקרא",
+  "isChag": false,
+  "hasPdf": true,
+  "hasPodcast": false
+ },
+ "שמיני": {
+  "sefer": "ספר ויקרא",
+  "isChag": false,
+  "hasPdf": true,
+  "hasPodcast": false
+ },
+ "תזריע": {
+  "sefer": "ספר ויקרא",
+  "isChag": false,
+  "hasPdf": true,
+  "hasPodcast": false
+ },
+ "מצורע": {
+  "sefer": "ספר ויקרא",
+  "isChag": false,
+  "hasPdf": true,
+  "hasPodcast": false
+ },
+ "אחרי מות": {
+  "sefer": "ספר ויקרא",
+  "isChag": false,
+  "hasPdf": true,
+  "hasPodcast": false
+ },
+ "קדושים": {
+  "sefer": "ספר ויקרא",
+  "isChag": false,
+  "hasPdf": true,
+  "hasPodcast": false
+ },
+ "אמור": {
+  "sefer": "ספר ויקרא",
+  "isChag": false,
+  "hasPdf": true,
+  "hasPodcast": false
+ },
+ "בהר סיני": {
+  "sefer": "ספר ויקרא",
+  "isChag": false,
+  "hasPdf": true,
+  "hasPodcast": false
+ },
+ "בחוקותי": {
+  "sefer": "ספר ויקרא",
+  "isChag": false,
+  "hasPdf": true,
+  "hasPodcast": false
+ },
+ "במדבר": {
+  "sefer": "ספר במדבר",
+  "isChag": false,
+  "hasPdf": true,
+  "hasPodcast": true
+ },
+ "נשא": {
+  "sefer": "ספר במדבר",
+  "isChag": false,
+  "hasPdf": true,
+  "hasPodcast": false
+ },
+ "בהעלותך": {
+  "sefer": "ספר במדבר",
+  "isChag": false,
+  "hasPdf": true,
+  "hasPodcast": false
+ },
+ "שלח לך": {
+  "sefer": "ספר במדבר",
+  "isChag": false,
+  "hasPdf": true,
+  "hasPodcast": false
+ },
+ "קרח": {
+  "sefer": "ספר במדבר",
+  "isChag": false,
+  "hasPdf": true,
+  "hasPodcast": false
+ },
+ "חקת": {
+  "sefer": "ספר במדבר",
+  "isChag": false,
+  "hasPdf": true,
+  "hasPodcast": false
+ },
+ "בלק": {
+  "sefer": "ספר במדבר",
+  "isChag": false,
+  "hasPdf": true,
+  "hasPodcast": false
+ },
+ "פינחס": {
+  "sefer": "ספר במדבר",
+  "isChag": false,
+  "hasPdf": true,
+  "hasPodcast": false
+ },
+ "מטות": {
+  "sefer": "ספר במדבר",
+  "isChag": false,
+  "hasPdf": true,
+  "hasPodcast": false
+ },
+ "מסעי": {
+  "sefer": "ספר במדבר",
+  "isChag": false,
+  "hasPdf": true,
+  "hasPodcast": false
+ },
+ "דברים": {
+  "sefer": "ספר דברים",
+  "isChag": false,
+  "hasPdf": true,
+  "hasPodcast": false
+ },
+ "ואתחנן": {
+  "sefer": "ספר דברים",
+  "isChag": false,
+  "hasPdf": true,
+  "hasPodcast": true
+ },
+ "עקב": {
+  "sefer": "ספר דברים",
+  "isChag": false,
+  "hasPdf": true,
+  "hasPodcast": true
+ },
+ "ראה": {
+  "sefer": "ספר דברים",
+  "isChag": false,
+  "hasPdf": true,
+  "hasPodcast": true
+ },
+ "שופטים": {
+  "sefer": "ספר דברים",
+  "isChag": false,
+  "hasPdf": true,
+  "hasPodcast": true
+ },
+ "כי תצא": {
+  "sefer": "ספר דברים",
+  "isChag": false,
+  "hasPdf": true,
+  "hasPodcast": false
+ },
+ "כי תבוא": {
+  "sefer": "ספר דברים",
+  "isChag": false,
+  "hasPdf": true,
+  "hasPodcast": false
+ },
+ "ניצבים": {
+  "sefer": "ספר דברים",
+  "isChag": false,
+  "hasPdf": true,
+  "hasPodcast": false
+ },
+ "וילך": {
+  "sefer": "ספר דברים",
+  "isChag": false,
+  "hasPdf": true,
+  "hasPodcast": false
+ },
+ "האזינו": {
+  "sefer": "ספר דברים",
+  "isChag": false,
+  "hasPdf": true,
+  "hasPodcast": false
+ },
+ "וזאת הברכה": {
+  "sefer": "ספר דברים",
+  "isChag": false,
+  "hasPdf": true,
+  "hasPodcast": false
+ },
+ "ראש השנה": {
+  "sefer": "חגים ומועדים",
+  "isChag": true,
+  "hasPdf": true,
+  "hasPodcast": true
+ },
+ "יום כיפור": {
+  "sefer": "חגים ומועדים",
+  "isChag": true,
+  "hasPdf": false,
+  "hasPodcast": false
+ },
+ "סוכות": {
+  "sefer": "חגים ומועדים",
+  "isChag": true,
+  "hasPdf": true,
+  "hasPodcast": true
+ },
+ "הושענא רבה": {
+  "sefer": "חגים ומועדים",
+  "isChag": true,
+  "hasPdf": true,
+  "hasPodcast": false
+ },
+ "פורים": {
+  "sefer": "חגים ומועדים",
+  "isChag": true,
+  "hasPdf": true,
+  "hasPodcast": false
+ },
+ "פסח": {
+  "sefer": "חגים ומועדים",
+  "isChag": true,
+  "hasPdf": true,
+  "hasPodcast": false
+ },
+ "תשעה באב": {
+  "sefer": "חגים ומועדים",
+  "isChag": true,
+  "hasPdf": true,
+  "hasPodcast": true
+ },
+ "ט\"ו באב": {
+  "sefer": "חגים ומועדים",
+  "isChag": true,
+  "hasPdf": true,
+  "hasPodcast": true
+ }
+}
