@@ -518,12 +518,18 @@
     return url;
   }
 
+  let commentsError = null;
   function loadComments() {
     if (commentsLoaded) return commentsLoaded;
     commentsLoaded = !window.COMMENTS_CSV_URL ? Promise.resolve() :
       fetch(window.COMMENTS_CSV_URL)
         .then(r => r.text())
         .then(text => {
+          // גיליון שאינו מפורסם מחזיר דף HTML ולא CSV
+          if (/^\s*</.test(text) || /לא פורסם|not published/i.test(text)) {
+            commentsError = 'unpublished';
+            return;
+          }
           const rows = parseCsv(text);
           if (!rows.length) return;
           // איתור עמודות לפי הכותרות; ברירת מחדל: חותמת זמן, אימייל, פרשה, שם, תגובה
@@ -538,7 +544,7 @@
             commentsByName.get(key).push({ name: (r[iName] || 'אנונימי').trim(), date: r[iDate], text: text2 });
           });
         })
-        .catch(() => {});
+        .catch(() => { commentsError = 'fetch'; });
     return commentsLoaded;
   }
 
@@ -561,6 +567,10 @@
     loadComments().then(() => {
       const items = commentsByName.get(name) || [];
       titleEl.textContent = items.length ? 'תגובות (' + items.length + ')' : 'תגובות';
+      if (commentsError) {
+        note.textContent = 'לא הצלחנו לטעון את התגובות כרגע. אפשר לכתוב תגובה — היא תוצג כאן בהמשך.';
+        return;
+      }
       if (!items.length) {
         note.textContent = 'עדיין אין תגובות לדף הזה — שמחים להיות הראשונים לשמוע מכם.';
         return;
