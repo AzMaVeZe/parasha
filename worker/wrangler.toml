@@ -9,8 +9,8 @@ BRAND      = "בין הנכתב לנגלה"
 # כתובת השליחה — בדומיין שאומת ב-Resend:
 FROM_EMAIL = "פרשת השבוע <parasha@azma.app>"
 REPLY_TO   = ""
-# הכתובת של ה-Worker עצמו (מתקבלת אחרי הפריסה הראשונה, ואז מעדכנים כאן ופורסים שוב):
-WORKER_URL = "https://parasha-newsletter.YOUR-SUBDOMAIN.workers.dev"
+# הכתובת של ה-Worker עצמו (משמשת לקישורי אישור והסרה במיילים):
+WORKER_URL = "https://parasha-newsletter.azma.workers.dev"
 
 # --- אחסון הנרשמים ---
 # ליצור עם:  npx wrangler kv namespace create SUBSCRIBERS

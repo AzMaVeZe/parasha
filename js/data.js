@@ -7,7 +7,7 @@ window.SPOTIFY_SHOW_URL = 'https://open.spotify.com/show/033Slu47b23754GaMTuroo'
 // כתובת ה-Worker שמטפל בהרשמה לרשימת התפוצה (ראו worker/README.md).
 // לדוגמה: 'https://parasha-newsletter.username.workers.dev'
 // כל עוד ריק — טופס ההרשמה מוסתר ומוצגת הודעת "בקרוב".
-window.SUBSCRIBE_API = '';
+window.SUBSCRIBE_API = 'https://parasha-newsletter.azma.workers.dev';
 // מערכת תגובות לכל דף בנפרד, מבוססת Google Forms עם איסוף אימייל מאומת.
 // הטופס צריך שלוש שאלות בסדר הזה: פרשה, שם, תגובה.
 // COMMENTS_FORM_URL — קישור הטופס; COMMENTS_ENTRY_PARASHA — מזהה שדה "פרשה"
