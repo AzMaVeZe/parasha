@@ -214,6 +214,14 @@ const MAX_NAME = 60;
 
 const ownerEmail = env => (env.OWNER_EMAIL || '').trim();
 
+// wrangler secret put שומר לפעמים רווח או ירידת שורה בסוף הערך שהודבק, ואז
+// ההשוואה נכשלת בלי סימן. משווים גזום משני הצדדים.
+const adminKey = env => (env.ADMIN_KEY || '').trim();
+const adminOk = (url, env) => {
+  const k = adminKey(env);
+  return !!k && (url.searchParams.get('key') || '').trim() === k;
+};
+
 // מה שנשלח לדפדפן — בלי מייל, בלי מזהה, בלי כתובת IP
 const publicComment = c => ({ name: c.name, text: c.text, date: c.date });
 
@@ -407,8 +415,8 @@ export default {
 
       // מייל אישור לאריאל — כישלון שליחה לא מפיל את התגובה, היא כבר שמורה
       const owner = ownerEmail(env);
-      if (owner && env.ADMIN_KEY) {
-        const link = a => `${env.WORKER_URL}/moderate?id=${encodeURIComponent(id)}&action=${a}&key=${encodeURIComponent(env.ADMIN_KEY)}`;
+      if (owner && adminKey(env)) {
+        const link = a => `${env.WORKER_URL}/moderate?id=${encodeURIComponent(id)}&action=${a}&key=${encodeURIComponent(adminKey(env))}`;
         try {
           await sendEmail(env, {
             to: owner,
@@ -426,7 +434,7 @@ export default {
                    border:1px solid #8A2B2B;text-decoration:none;padding:10px 20px;border-radius:6px">דחייה</a>
               </p>
               <p style="font-size:14px;color:#6B675A">
-                <a href="${esc(env.WORKER_URL)}/admin?key=${encodeURIComponent(env.ADMIN_KEY)}">לכל התגובות</a>
+                <a href="${esc(env.WORKER_URL)}/admin?key=${encodeURIComponent(adminKey(env))}">לכל התגובות</a>
               </p>`),
           });
         } catch (e) { console.error('moderation mail failed', e.message); }
@@ -437,12 +445,12 @@ export default {
 
     /* --- תגובות: אישור/דחייה מתוך המייל --- */
     if (url.pathname === '/moderate') {
-      if (!env.ADMIN_KEY || url.searchParams.get('key') !== env.ADMIN_KEY) {
+      if (!adminOk(url, env)) {
         return page('אין הרשאה', '<p>הקישור אינו תקף.</p>');
       }
       const id = url.searchParams.get('id') || '';
       const action = url.searchParams.get('action');
-      const back = `<p><a href="${esc(env.WORKER_URL)}/admin?key=${encodeURIComponent(env.ADMIN_KEY)}">לדף הניהול</a></p>`;
+      const back = `<p><a href="${esc(env.WORKER_URL)}/admin?key=${encodeURIComponent(adminKey(env))}">לדף הניהול</a></p>`;
 
       if (action === 'delete') {
         const parasha = url.searchParams.get('parasha') || '';
@@ -467,10 +475,10 @@ export default {
 
     /* --- דף ניהול התגובות: /admin?key=<ADMIN_KEY> --- */
     if (url.pathname === '/admin') {
-      if (!env.ADMIN_KEY || url.searchParams.get('key') !== env.ADMIN_KEY) {
+      if (!adminOk(url, env)) {
         return page('אין הרשאה', '<p>נדרש מפתח ניהול.</p>');
       }
-      const k = encodeURIComponent(env.ADMIN_KEY);
+      const k = encodeURIComponent(adminKey(env));
       const pending = await listPending(env);
       const index = await readIndex(env);
 
@@ -517,8 +525,10 @@ ${html}</main></body></html>`,
 
     /* --- אבחון: /status?key=<ADMIN_KEY> --- */
     if (url.pathname === '/status') {
-      if (!env.ADMIN_KEY || url.searchParams.get('key') !== env.ADMIN_KEY) {
-        return json({ error: 'unauthorized' }, 401, origin);
+      if (!adminOk(url, env)) {
+        // מבחין בין "הסוד לא הוגדר בכלל" לבין "הוגדר, אבל המפתח שנשלח שגוי",
+        // בלי לחשוף את הערך עצמו
+        return json({ error: 'unauthorized', adminKeyConfigured: !!adminKey(env) }, 401, origin);
       }
       const out = {
         config: {
@@ -571,7 +581,7 @@ challenges: {},
     /* --- בדיקת שליחה אמיתית: /testmail?to=<כתובת>&key=<ADMIN_KEY> --- */
     // מחזיר את תשובת Resend כמות שהיא, כדי לראות את סיבת הכישלון המדויקת.
     if (url.pathname === '/testmail') {
-      if (!env.ADMIN_KEY || url.searchParams.get('key') !== env.ADMIN_KEY) {
+      if (!adminOk(url, env)) {
         return json({ error: 'unauthorized' }, 401, origin);
       }
       const to = (url.searchParams.get('to') || '').trim().toLowerCase();
@@ -592,7 +602,7 @@ challenges: {},
 
     /* --- הרצה ידנית לבדיקה: /send?day=mon&key=<ADMIN_KEY> --- */
     if (url.pathname === '/send') {
-      if (!env.ADMIN_KEY || url.searchParams.get('key') !== env.ADMIN_KEY) {
+      if (!adminOk(url, env)) {
         return json({ error: 'unauthorized' }, 401, origin);
       }
       const day = DAYS[url.searchParams.get('day')] ? url.searchParams.get('day') : 'mon';

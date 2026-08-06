@@ -70,6 +70,19 @@ const admin = await (await call('https://w.dev/admin?key=K')).text();
 ok('/admin מציג ממתינות ומפורסמות', admin.includes('ממתינות לאישור') && admin.includes('דף נהדר'));
 ok('/admin חסום למנועי חיפוש', admin.includes('noindex'));
 
+// 8ב. מפתח ניהול שנשמר עם רווח/שורה בסוף עדיין עובד
+{
+  const envWs = { ...env, ADMIN_KEY: 'K\n' };
+  const r2 = await mod.fetch(new Request('https://w.dev/admin?key=K'), envWs);
+  ok('מפתח עם ירידת שורה עדיין מאמת', !/אין הרשאה/.test(await r2.text()));
+  const r3 = await mod.fetch(new Request('https://w.dev/status?key=%20K%20'), envWs);
+  ok('גם המפתח שנשלח נגזם', r3.status === 200, r3.status);
+  const r4 = await mod.fetch(new Request('https://w.dev/status?key=wrong'), envWs);
+  ok('/status מדווח שהסוד מוגדר', (await r4.json()).adminKeyConfigured === true);
+  const r5 = await mod.fetch(new Request('https://w.dev/status?key=x'), { ...env, ADMIN_KEY: '' });
+  ok('/status מדווח שהסוד חסר', (await r5.json()).adminKeyConfigured === false);
+}
+
 // 9. הסרה
 await call(`https://w.dev/moderate?id=${id}&action=delete&parasha=${encodeURIComponent('ראה')}&key=K`);
 ok('הסרה מנקה את הרשימה', JSON.parse(store.get('capp:ראה')).length === 0);
