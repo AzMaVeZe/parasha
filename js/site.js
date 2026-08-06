@@ -311,17 +311,35 @@
 
   function setRiddle(currentName, prevName) {
     const riddles = window.PARASHA_RIDDLES || {};
+    const box = document.querySelector('.riddle-box');
     const cur = riddles[currentName];
-    if (!cur) return; // נשארת חידת ברירת המחדל
+    // יש דפים שאין בהם חידה כלל. מסתירים את התיבה — לא ממציאים לה תוכן.
+    if (!cur) { box.hidden = true; return; }
+    box.hidden = false;
     document.getElementById('riddle-title').textContent = 'חידה לשולחן שבת — ' + currentName;
-    document.getElementById('riddle-body').textContent = cur.q;
+
+    const body = document.getElementById('riddle-body');
+    body.textContent = cur.q;
+    if (cur.img) {
+      // הניסוח בדף מפנה לתמונה שלצידו; בלעדיה החידה חסרת פשר
+      const note = el('div', 'riddle-box__imgnote');
+      const link = document.createElement('a');
+      link.href = '#p=' + encodeURIComponent(currentName);
+      link.textContent = 'החידה מלווה תמונה בדף — לפתיחת הדף';
+      note.append(link);
+      body.append(note);
+    }
+
     const prev = prevName && riddles[prevName];
-    if (prev) {
-      const details = document.getElementById('riddle-prev');
+    const details = document.getElementById('riddle-prev');
+    // מציגים "הפתרון של שבוע שעבר" רק כשהפתרון באמת מודפס באחד הדפים
+    if (prev && prev.a) {
       details.hidden = false;
       document.getElementById('riddle-prev-summary').textContent = 'הפתרון לחידה של שבוע שעבר (' + prevName + ')';
       document.getElementById('riddle-prev-q').textContent = prev.q;
       document.getElementById('riddle-prev-a').textContent = prev.a;
+    } else {
+      details.hidden = true;
     }
   }
 
