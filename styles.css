@@ -166,12 +166,20 @@ html{scroll-behavior:smooth}
 .sidebar__note{font-size:15px;color:var(--text-muted);line-height:1.6}
 
 /* ---------- טופס הרשמה לרשימת התפוצה ---------- */
-#subscribe-form{display:flex;flex-direction:column;gap:12px}
+.subscribe-dialog{height:auto;max-height:90vh;width:min(480px,100%)}
+.subscribe-dialog__body{padding:20px 24px 24px;overflow-y:auto}
+#subscribe-form{display:flex;flex-direction:column;gap:16px}
 .input__label{font-size:14px;font-weight:500;color:var(--ink-700)}
-.subscribe-days{border:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:6px 18px;align-items:center}
-.subscribe-days legend{padding:0;font-size:14px;font-weight:500;color:var(--ink-700);margin-bottom:6px}
-.subscribe-days label{display:inline-flex;align-items:center;gap:6px;font-size:15px;cursor:pointer;min-height:32px}
-.subscribe-days input{width:18px;height:18px;accent-color:var(--blue-700);margin:0}
+.subscribe-days{border:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
+.subscribe-days legend{padding:0;font-size:15px;font-weight:600;color:var(--text-heading);margin-bottom:8px}
+.subscribe-days label{display:flex;align-items:flex-start;gap:10px;font-size:15px;cursor:pointer;
+  border:1px solid var(--border-subtle);border-radius:var(--radius-s);padding:11px 14px;
+  transition:border-color var(--dur) var(--ease),background var(--dur) var(--ease)}
+.subscribe-days label:hover{background:var(--parchment-50)}
+.subscribe-days label:has(input:checked){border-color:var(--blue-500);background:var(--blue-100)}
+.subscribe-days label span{display:flex;flex-direction:column;gap:2px}
+.subscribe-days__hint{font-size:13px;color:var(--text-muted)}
+.subscribe-days input{width:18px;height:18px;accent-color:var(--blue-700);margin:2px 0 0}
 .subscribe-consent{margin:0;font-size:13px;color:var(--text-muted);line-height:1.5}
 .subscribe-msg{margin:0;font-size:14.5px;font-weight:500}
 .subscribe-msg--ok{color:var(--success)}

@@ -12,7 +12,8 @@
  * אחסון:                        KV binding בשם SUBSCRIBERS
  */
 
-const DAYS = { mon: 'שני', thu: 'חמישי' };
+const DAYS = { mon: 'שני', thu: 'חמישי', fri: 'שישי בבוקר' };
+const DAY_OF_WEEK = { 1: 'mon', 4: 'thu', 5: 'fri' };   // getUTCDay -> קוד היום
 
 /* ---------- עזרים ---------- */
 
@@ -213,7 +214,7 @@ export default {
       let body;
       try { body = await request.json(); } catch { return json({ error: 'bad json' }, 400, origin); }
       const email = (body.email || '').trim().toLowerCase();
-      const day = body.day === 'thu' ? 'thu' : body.day === 'mon' ? 'mon' : null;
+      const day = DAYS[body.day] ? body.day : null;
       if (body.website) return json({ ok: true }, 200, origin);        // honeypot — בוטים
       if (!validEmail(email)) return json({ error: 'invalid_email' }, 400, origin);
       if (!day) return json({ error: 'invalid_day' }, 400, origin);
@@ -286,16 +287,17 @@ export default {
       if (!env.ADMIN_KEY || url.searchParams.get('key') !== env.ADMIN_KEY) {
         return json({ error: 'unauthorized' }, 401, origin);
       }
-      const day = url.searchParams.get('day') === 'thu' ? 'thu' : 'mon';
+      const day = DAYS[url.searchParams.get('day')] ? url.searchParams.get('day') : 'mon';
       return json(await sendWeekly(env, day), 200, origin);
     }
 
     return json({ error: 'not_found' }, 404, origin);
   },
 
-  /* Cron: שני 07:00 וחמישי 07:00 בשעון ישראל (מוגדר ב-wrangler.toml ב-UTC) */
+  /* Cron: שני, חמישי ושישי בבוקר (מוגדר ב-wrangler.toml ב-UTC) */
   async scheduled(event, env, ctx) {
-    const day = new Date(event.scheduledTime).getUTCDay() === 1 ? 'mon' : 'thu';
+    const day = DAY_OF_WEEK[new Date(event.scheduledTime).getUTCDay()];
+    if (!day) return;
     ctx.waitUntil(sendWeekly(env, day).then(r => console.log('weekly', day, JSON.stringify(r))));
   },
 };

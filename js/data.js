@@ -10,9 +10,9 @@ window.SUBSCRIBE_API = 'https://parasha-newsletter.azma.workers.dev';
 // COMMENTS_FORM_URL — קישור הטופס; COMMENTS_ENTRY_PARASHA — מזהה שדה "פרשה"
 // (מקישור מולא-מראש: שלוש נקודות ‹ קבלת קישור מולא מראש ‹ העתיקו את entry.NNNN);
 // COMMENTS_CSV_URL — קישור ה-CSV של גיליון התשובות אחרי "פרסום באינטרנט".
-window.COMMENTS_FORM_URL = '';
-window.COMMENTS_ENTRY_PARASHA = '';
-window.COMMENTS_CSV_URL = '';
+window.COMMENTS_FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSetoAQQiYBx4uIQpJlPuuDl1iccwmZZbXJVOzJH_1HzAFDf1Q/viewform';
+window.COMMENTS_ENTRY_PARASHA = 'entry.2124068505';
+window.COMMENTS_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQt7Km9Hmt-yvF1qGm_mbk_nV2iwngBhMoDyOueBye1Pc_-qdYnCa74pBZmljk_7Cdd30o-w0YcqpWS/pub?gid=1654094605&single=true&output=csv';
 
 const B = id => 'https://www.box.net/shared/' + id;
 // קובץ מקומי בארכיון האתר. שורה מקבלת כפתורי צפייה/הורדה רק אם הקובץ אכן קיים

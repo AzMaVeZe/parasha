@@ -19,11 +19,11 @@ WORKER_URL = "https://parasha-newsletter.azma.workers.dev"
 binding = "SUBSCRIBERS"
 id = "e88e26054d6e46c3a318e284f6a9fdfb"
 
-# --- תזמון: יום שני ויום חמישי בבוקר ---
+# --- תזמון: שני, חמישי ושישי בבוקר ---
 # הזמן ב-UTC: 04:00 UTC = 07:00 בשעון קיץ ישראלי, 06:00 בשעון חורף.
-# כל cron רץ פעם אחת ביומו; ה-Worker מזהה לפי היום למי לשלוח.
+# כל cron רץ פעם אחת ביומו; ה-Worker שולח רק לנרשמים שבחרו את אותו יום.
 [triggers]
-crons = ["0 4 * * 1", "0 4 * * 4"]
+crons = ["0 4 * * 1", "0 4 * * 4", "0 4 * * 5"]
 
 # --- סודות (לא נשמרים בקובץ הזה!) ---
 #   npx wrangler secret put RESEND_API_KEY

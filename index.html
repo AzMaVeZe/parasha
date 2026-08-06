@@ -110,35 +110,10 @@
       <section class="sidebar-card" id="subscribe-card">
         <h2 class="sidebar-card__title">קבלת הדף בדוא"ל</h2>
         <p>כפי שהופץ מאז הדף הראשון — ישירות לתיבה, מדי שבוע.</p>
-
-        <form id="subscribe-form" novalidate>
-          <label class="input" for="sub-email">
-            <span class="input__label">כתובת דוא"ל</span>
-            <span class="input__field">
-              <span class="icon" aria-hidden="true" style="--icon:url('assets/icons/mail.svg');width:16px;height:16px"></span>
-              <input id="sub-email" name="email" type="email" required autocomplete="email"
-                     placeholder="name@example.com" dir="ltr">
-            </span>
-          </label>
-
-          <fieldset class="subscribe-days">
-            <legend>מתי לקבל את הדף?</legend>
-            <label><input type="radio" name="day" value="mon" checked> יום שני</label>
-            <label><input type="radio" name="day" value="thu"> יום חמישי</label>
-          </fieldset>
-
-          <p class="visually-hidden" aria-hidden="true">
-            <label>אל תמלאו שדה זה<input type="text" name="website" tabindex="-1" autocomplete="off"></label>
-          </p>
-
-          <button type="submit" class="btn btn--gold" id="subscribe-submit">
-            <span class="icon" aria-hidden="true" style="--icon:url('assets/icons/mail.svg');width:16px;height:16px"></span>
-            הרשמה
-          </button>
-          <p class="subscribe-consent">בהרשמה יישלח אליכם מייל לאישור. אפשר להסיר את ההרשמה בכל עת בקישור שבתחתית כל מייל.</p>
-          <p id="subscribe-msg" role="status" aria-live="polite"></p>
-        </form>
-
+        <button type="button" class="btn btn--gold" id="subscribe-open">
+          <span class="icon" aria-hidden="true" style="--icon:url('assets/icons/mail.svg');width:16px;height:16px"></span>
+          להרשמה לקבלת הדף
+        </button>
         <p id="subscribe-fallback" hidden style="margin:0;font-size:14px;color:var(--ink-500)">ההרשמה תיפתח כאן בקרוב.</p>
       </section>
 
@@ -215,6 +190,48 @@
       <button type="button" class="btn btn--secondary btn--sm" id="pdf-modal-close">סגירה</button>
     </div>
     <iframe src="about:blank" title="דף הפרשה"></iframe>
+  </div>
+</div>
+
+<div class="pdf-modal" id="subscribe-modal" hidden role="dialog" aria-modal="true" aria-labelledby="subscribe-modal-title">
+  <div class="pdf-modal__dialog subscribe-dialog">
+    <div class="pdf-modal__bar">
+      <span class="pdf-modal__title" id="subscribe-modal-title">קבלת דף פרשת השבוע בדוא"ל</span>
+      <button type="button" class="btn btn--secondary btn--sm" id="subscribe-close">סגירה</button>
+    </div>
+    <div class="subscribe-dialog__body">
+      <form id="subscribe-form" novalidate>
+        <label class="input" for="sub-email">
+          <span class="input__label">כתובת דוא"ל</span>
+          <span class="input__field">
+            <span class="icon" aria-hidden="true" style="--icon:url('assets/icons/mail.svg');width:16px;height:16px"></span>
+            <input id="sub-email" name="email" type="email" required autocomplete="email"
+                   placeholder="name@example.com" dir="ltr">
+          </span>
+        </label>
+
+        <fieldset class="subscribe-days">
+          <legend>מתי תרצו לקבל את הדף?</legend>
+          <label><input type="radio" name="day" value="mon" checked>
+            <span><strong>יום שני</strong><span class="subscribe-days__hint">בתחילת השבוע, זמן ללמוד לאט</span></span></label>
+          <label><input type="radio" name="day" value="thu">
+            <span><strong>יום חמישי</strong><span class="subscribe-days__hint">לקראת סוף השבוע</span></span></label>
+          <label><input type="radio" name="day" value="fri">
+            <span><strong>יום שישי בבוקר</strong><span class="subscribe-days__hint">ממש לקראת שבת</span></span></label>
+        </fieldset>
+
+        <p class="visually-hidden" aria-hidden="true">
+          <label>אל תמלאו שדה זה<input type="text" name="website" tabindex="-1" autocomplete="off"></label>
+        </p>
+
+        <button type="submit" class="btn btn--gold" id="subscribe-submit">
+          <span class="icon" aria-hidden="true" style="--icon:url('assets/icons/mail.svg');width:16px;height:16px"></span>
+          הרשמה
+        </button>
+        <p class="subscribe-consent">יישלח אליכם מייל לאישור ההרשמה. אפשר להסיר את ההרשמה בכל עת, בקישור שבתחתית כל מייל.</p>
+        <p id="subscribe-msg" role="status" aria-live="polite"></p>
+      </form>
+    </div>
   </div>
 </div>
 

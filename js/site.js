@@ -427,8 +427,35 @@
   (function initSubscribe() {
     const form = document.getElementById('subscribe-form');
     const fallback = document.getElementById('subscribe-fallback');
+    const openBtn = document.getElementById('subscribe-open');
+    const modal = document.getElementById('subscribe-modal');
     const api = (window.SUBSCRIBE_API || '').replace(/\/$/, '');
-    if (!api) { form.hidden = true; fallback.hidden = false; return; }
+    if (!api) { openBtn.hidden = true; fallback.hidden = false; return; }
+
+    /* פתיחה/סגירה של חלון ההרשמה */
+    let lastFocusedSub = null;
+    function openSub() {
+      lastFocusedSub = document.activeElement;
+      modal.hidden = false;
+      document.body.style.overflow = 'hidden';
+      document.getElementById('sub-email').focus();
+    }
+    function closeSub() {
+      modal.hidden = true;
+      document.body.style.overflow = '';
+      if (lastFocusedSub && document.contains(lastFocusedSub)) lastFocusedSub.focus();
+    }
+    openBtn.addEventListener('click', openSub);
+    document.getElementById('subscribe-close').addEventListener('click', closeSub);
+    modal.addEventListener('click', e => { if (e.target === modal) closeSub(); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape' && !modal.hidden) closeSub(); });
+    modal.addEventListener('keydown', e => {
+      if (e.key !== 'Tab') return;
+      const f = modal.querySelectorAll('a[href], button, input');
+      const first = f[0], last = f[f.length - 1];
+      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+    });
 
     const msg = document.getElementById('subscribe-msg');
     const submit = document.getElementById('subscribe-submit');
@@ -461,6 +488,7 @@
           else {
             setMsg('כמעט סיימנו — שלחנו אליכם מייל לאישור ההרשמה.', 'ok');
             form.reset();
+            setTimeout(() => { if (!modal.hidden) closeSub(); }, 3500);
           }
         })
         .catch(() => setMsg('משהו השתבש בשליחה. אפשר לנסות שוב בעוד רגע.', 'error'))
