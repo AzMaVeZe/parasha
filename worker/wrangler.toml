@@ -4,7 +4,7 @@ compatibility_date = "2024-11-01"
 
 # --- משתנים גלויים (לא סודות) ---
 [vars]
-SITE_URL   = "https://azmaveze.github.io/parasha"
+SITE_URL   = "https://parasha.azma.app"
 BRAND      = "בין הנכתב לנגלה"
 # יש להחליף לכתובת שליחה בדומיין שאומת ב-Resend:
 FROM_EMAIL = "פרשת השבוע <parasha@example.com>"

@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://azmaveze.github.io/parasha/sitemap.xml
+Sitemap: https://parasha.azma.app/sitemap.xml
