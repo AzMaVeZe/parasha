@@ -79,7 +79,7 @@ window.PARASHA_DATA = [
   { name: 'ואתחנן', box: B('7pp4mr4qzn'), pdf: P('devarim-ואתחנן.pdf'), spotify: 'https://open.spotify.com/episode/4aO5YhdafnBWb0TrO9la75' },
   { name: 'עקב', box: B('r0sc7opv2s'), pdf: P('devarim-עקב.pdf'), note: 'עם ט"ו באב', spotify: 'https://open.spotify.com/episode/2Gn2Un5ylM734C88ijStrV' },
   { name: 'ראה', box: B('qi7xhzafmj'), pdf: P('devarim-ראה.pdf'), spotify: 'https://open.spotify.com/episode/205LA2o3PU84d5VVmkUsIV' },
-  { name: 'שופטים', box: B('7lh0akhdvd'), pdf: P('devarim-שופטים.pdf') },
+  { name: 'שופטים', box: B('7lh0akhdvd'), pdf: P('devarim-שופטים.pdf'), spotify: 'https://open.spotify.com/episode/5awFggpT9TgSVzAkXoaGYT' },
   { name: 'כי תצא', box: B('mkchdf5y6b'), pdf: P('devarim-כי-תצא.pdf') },
   { name: 'כי תבוא', box: B('f0tht066j4'), pdf: P('devarim-כי-תבוא.pdf') },
   { name: 'ניצבים', box: B('t5fs6xj46m'), pdf: P('devarim-ניצבים-וילך.pdf'), note: 'כולל וילך' },
