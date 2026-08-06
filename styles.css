@@ -231,6 +231,9 @@ html{scroll-behavior:smooth}
 @media (max-width:920px){
   .hero__inner,.site-main__grid,.parasha-page__grid,.hero--stack #hero-side{grid-template-columns:1fr}
   .sidebar,.parasha-page__aside{position:static}
+  /* בטור אחד הסרגל היה נקבר מתחת לכל הארכיון — מעלים אותו מעליו */
+  .site-main__grid{display:flex;flex-direction:column}
+  .sidebar{order:-1}
   .hero h1{font-size:var(--fs-h1)}
   .site-header .input{width:100%}
   .site-nav{flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;padding-bottom:4px}

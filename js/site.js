@@ -3,7 +3,6 @@
   'use strict';
 
   const data = window.PARASHA_DATA;
-  const driveFolder = window.DRIVE_FOLDER;
 
   function el(tag, className, text) {
     const node = document.createElement(tag);
@@ -250,7 +249,7 @@
     });
     emptyState.hidden = !(q && total === 0);
     if (!emptyState.hidden) {
-      emptyState.textContent = 'לא נמצאה פרשה בשם "' + search.value.trim() + '" — נסו שם אחר, או מצאו את הקובץ בתיקיית הדרייב.';
+      emptyState.textContent = 'לא נמצאה פרשה בשם "' + search.value.trim() + '" — אפשר לנסות שם אחר.';
     }
     searchStatus.textContent = q ? (total ? 'נמצאו ' + total + ' דפים' : 'לא נמצאו תוצאות') : '';
   });
@@ -416,9 +415,6 @@
         if (cardCount === 2) document.querySelector('.hero').classList.add('hero--stack');
       }).catch(() => {});
   })();
-
-  /* ---------- קישורי דרייב ---------- */
-  document.querySelectorAll('[data-drive-folder]').forEach(a => { a.href = driveFolder; });
 
   /* ---------- קישור לתוכנית המלאה בספוטיפיי ---------- */
   if (window.SPOTIFY_SHOW_URL) {
@@ -602,7 +598,7 @@
     } else if (p.box) {
       actions.append(button({ variant: 'secondary', href: p.box, external: true, icon: 'external-link', label: 'פתיחה ב-Box' }));
     } else {
-      doc.append(el('p', 'parasha-page__soon', 'הדף לדף זה יעלה בקרוב. בינתיים אפשר לעיין בתיקיית הדרייב.'));
+      doc.append(el('p', 'parasha-page__soon', 'הדף לפרשה זו יעלה בקרוב.'));
     }
 
     const pod = buildPodcast(p, title);

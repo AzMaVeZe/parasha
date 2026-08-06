@@ -1,6 +1,3 @@
-// כל הקבצים זמינים גם בתיקיית Google Drive המרוכזת:
-window.DRIVE_FOLDER = 'https://drive.google.com/drive/folders/1waquTTctSg9xvaC6ehHtS4pLDhNDIP9l';
-
 // עמוד התוכנית המלא בספוטיפיי (כל הפרקים, לא רק אלה שקושרו לשורה):
 window.SPOTIFY_SHOW_URL = 'https://open.spotify.com/show/033Slu47b23754GaMTuroo';
 
