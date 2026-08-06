@@ -260,8 +260,13 @@ html{scroll-behavior:smooth}
   /* בטור אחד הסרגל היה נקבר מתחת לכל הארכיון — מעלים אותו מעליו */
   .site-main__grid{display:flex;flex-direction:column}
   .sidebar{order:-1}
-  .hero__inner{padding-block:32px 36px}
-  .site-header .input{width:100%}
+  .hero__inner{padding-block:16px 30px}
+  .site-header__inner{gap:10px 14px;padding-block:12px}
+  /* הפודקאסט תפס שורה שלמה לעצמו; מעלים אותו לצד השם, בקצה השמאלי */
+  .wordmark{order:1;flex:1 1 0;min-width:0}   /* min-width:0 מרשה לו להתכווץ במסך צר במקום לדחוף את הפודקאסט לשורה נפרדת */
+  .header-podcast{order:2;margin-inline-start:auto}
+  .site-nav{order:3;flex-basis:100%}
+  .site-header .input{order:4;width:100%}
   /* התפריט נגלל לצד; מסכה מימין מסמנת שיש עוד, במקום מילה חתוכה באמצע */
   .site-nav{flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;padding-bottom:4px;
     scrollbar-width:none;
