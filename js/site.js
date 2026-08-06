@@ -453,10 +453,11 @@
   (function initSubscribe() {
     const form = document.getElementById('subscribe-form');
     const fallback = document.getElementById('subscribe-fallback');
-    const openBtn = document.getElementById('subscribe-open');
     const modal = document.getElementById('subscribe-modal');
+    // שני כפתורים פותחים את אותו חלון: בסרגל הצד ובהירו
+    const openBtns = ['subscribe-open', 'hero-subscribe'].map(id => document.getElementById(id)).filter(Boolean);
     const api = (window.SUBSCRIBE_API || '').replace(/\/$/, '');
-    if (!api) { openBtn.hidden = true; fallback.hidden = false; return; }
+    if (!api) { openBtns.forEach(b => { b.hidden = true; }); fallback.hidden = false; return; }
 
     /* פתיחה/סגירה של חלון ההרשמה */
     let lastFocusedSub = null;
@@ -471,7 +472,7 @@
       document.body.style.overflow = '';
       if (lastFocusedSub && document.contains(lastFocusedSub)) lastFocusedSub.focus();
     }
-    openBtn.addEventListener('click', openSub);
+    openBtns.forEach(b => b.addEventListener('click', openSub));
     document.getElementById('subscribe-close').addEventListener('click', closeSub);
     modal.addEventListener('click', e => { if (e.target === modal) closeSub(); });
     document.addEventListener('keydown', e => { if (e.key === 'Escape' && !modal.hidden) closeSub(); });
