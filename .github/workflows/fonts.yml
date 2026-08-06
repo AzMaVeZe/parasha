@@ -1,0 +1,53 @@
+name: עדכון גופנים
+
+# מוריד את הגופנים מ-Google Fonts ומכניס אותם לריפו, כדי שהאתר יגיש אותם
+# בעצמו. להרצה: לשונית Actions ‹ "עדכון גופנים" ‹ Run workflow, ולבחור את הענף.
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'scripts/build-fonts.py'
+      - '.github/workflows/fonts.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  fonts:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: הורדת הגופנים ובניית fonts.css
+        run: python3 scripts/build-fonts.py
+
+      - name: בדיקה שכל מה שמוזכר ב-CSS אכן קיים
+        run: |
+          python3 - <<'PY'
+          import os, re, sys
+          d = 'assets/fonts'
+          css = open(os.path.join(d, 'fonts.css')).read()
+          refs = set(re.findall(r"url\('([^']+)'\)", css))
+          missing = [r for r in refs if not os.path.exists(os.path.join(d, r))]
+          orphans = [f for f in os.listdir(d) if f.endswith('.woff2') and f not in refs]
+          empty = [r for r in refs if os.path.getsize(os.path.join(d, r)) < 1000]
+          if missing or orphans or empty:
+              sys.exit(f'missing={missing} orphans={orphans} suspiciously_small={empty}')
+          print(f'{len(refs)} font files, {css.count("@font-face")} faces — ok')
+          PY
+
+      - name: דחיפה אם משהו השתנה
+        run: |
+          if [ -z "$(git status --porcelain assets/fonts)" ]; then
+            echo "אין שינוי בגופנים."
+            exit 0
+          fi
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets/fonts
+          git commit -m "Refresh self-hosted fonts from Google Fonts"
+          git push

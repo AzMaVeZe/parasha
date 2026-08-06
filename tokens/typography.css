@@ -1,6 +1,7 @@
 :root{
---font-display:'Frank Ruhl Libre',Georgia,serif;/* כותרות */
---font-body:'Heebo',Arial,sans-serif;/* טקסט רץ, UI */
+--font-display:'Frank Ruhl Libre',Georgia,serif;/* כותרות — פרנק-ריהל, גופן הספר העברי */
+/* טקסט רץ ו-UI. Heebo הוא גיבוי בלבד, עד ש-Action הגופנים מוריד את Assistant */
+--font-body:'Assistant','Heebo',Arial,sans-serif;
 --font-quote:'David Libre','Frank Ruhl Libre',serif;/* פסוקים וציטוטים */
 --fs-hero:44px;--fs-h1:34px;--fs-h2:26px;--fs-h3:20px;--fs-body:17px;--fs-small:14px;--fs-caption:12.5px;
 --lh-heading:1.25;--lh-body:1.7;--lh-quote:1.9;
