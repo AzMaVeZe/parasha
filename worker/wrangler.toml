@@ -28,3 +28,6 @@ crons = ["0 4 * * 1", "0 4 * * 4", "0 4 * * 5"]
 # --- סודות (לא נשמרים בקובץ הזה!) ---
 #   npx wrangler secret put RESEND_API_KEY
 #   npx wrangler secret put ADMIN_KEY
+# הכתובת שאליה נשלחות התראות על תגובות חדשות. סוד ולא var, כדי שכתובת המייל
+# האישית לא תישב ב-git:
+#   npx wrangler secret put OWNER_EMAIL

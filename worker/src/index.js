@@ -7,9 +7,23 @@
  *  GET  /unsubscribe  — הסרה מהרשימה
  *  cron               — כל יום שני וחמישי: שולח את דף הפרשה הקרובה לנרשמים של אותו יום
  *
- * סודות (wrangler secret put):  RESEND_API_KEY
- * משתנים (wrangler.toml vars):  SITE_URL, FROM_EMAIL, REPLY_TO, BRAND
+ * וגם על התגובות:
+ *  POST /comments     — שליחת תגובה; נכנסת כ"ממתינה" ושולחת לאריאל מייל אישור
+ *  GET  /comments     — התגובות המאושרות (?parasha=… לדף בודד, בלי פרמטר = מונים לכרטיסים)
+ *  GET  /moderate     — אישור/דחייה מתוך המייל (דורש ADMIN_KEY)
+ *  GET  /admin        — דף ניהול בעברית לכל התגובות (דורש ADMIN_KEY)
+ *
+ * סודות (wrangler secret put):  RESEND_API_KEY, ADMIN_KEY
+ * משתנים (wrangler.toml vars):  SITE_URL, FROM_EMAIL, REPLY_TO, BRAND, OWNER_EMAIL
  * אחסון:                        KV binding בשם SUBSCRIBERS
+ *
+ * מפתחות ב-KV:
+ *   sub:<email>        — נרשם לרשימת התפוצה
+ *   capp:<parasha>     — מערך התגובות המאושרות של פרשה (מה שהאתר קורא)
+ *   cpend:<id>         — תגובה בודדת הממתינה לאישור
+ *   cindex             — { "<parasha>": <מספר תגובות מאושרות> } למוני הכרטיסים
+ * כתובות המייל של המגיבים נשמרות רק ברשומה ובדף הניהול — לעולם לא ב-capp/cindex,
+ * כלומר לעולם לא מגיעות לדפדפן של הקוראים.
  */
 
 const DAYS = { mon: 'שני', thu: 'חמישי', fri: 'שישי בבוקר' };
@@ -190,6 +204,55 @@ async function sendWeekly(env, day) {
   return { sent, failed, sheets: picks.map(p => p.name) };
 }
 
+/* ---------- תגובות ---------- */
+
+const APPROVED_KEY = name => 'capp:' + name;
+const PENDING_KEY = id => 'cpend:' + id;
+const INDEX_KEY = 'cindex';
+const MAX_COMMENT = 2000;
+const MAX_NAME = 60;
+
+const ownerEmail = env => (env.OWNER_EMAIL || '').trim();
+
+// מה שנשלח לדפדפן — בלי מייל, בלי מזהה, בלי כתובת IP
+const publicComment = c => ({ name: c.name, text: c.text, date: c.date });
+
+async function readIndex(env) {
+  return (await env.SUBSCRIBERS.get(INDEX_KEY, 'json')) || {};
+}
+
+async function approveComment(env, rec) {
+  const list = (await env.SUBSCRIBERS.get(APPROVED_KEY(rec.parasha), 'json')) || [];
+  if (list.some(c => c.id === rec.id)) return list.length;          // אישור כפול — לא מכפילים
+  list.push({ id: rec.id, name: rec.name, text: rec.text, date: rec.date });
+  await env.SUBSCRIBERS.put(APPROVED_KEY(rec.parasha), JSON.stringify(list));
+  const index = await readIndex(env);
+  index[rec.parasha] = list.length;
+  await env.SUBSCRIBERS.put(INDEX_KEY, JSON.stringify(index));
+  await env.SUBSCRIBERS.delete(PENDING_KEY(rec.id));
+  return list.length;
+}
+
+async function deleteApproved(env, parasha, id) {
+  const list = (await env.SUBSCRIBERS.get(APPROVED_KEY(parasha), 'json')) || [];
+  const next = list.filter(c => c.id !== id);
+  await env.SUBSCRIBERS.put(APPROVED_KEY(parasha), JSON.stringify(next));
+  const index = await readIndex(env);
+  if (next.length) index[parasha] = next.length; else delete index[parasha];
+  await env.SUBSCRIBERS.put(INDEX_KEY, JSON.stringify(index));
+}
+
+async function listPending(env) {
+  const out = [];
+  const list = await env.SUBSCRIBERS.list({ prefix: 'cpend:' });
+  for (const k of list.keys) {
+    const rec = await env.SUBSCRIBERS.get(k.name, 'json');
+    if (rec) out.push(rec);
+  }
+  out.sort((a, b) => (a.date < b.date ? 1 : -1));
+  return out;
+}
+
 /* ---------- Worker ---------- */
 
 export default {
@@ -288,6 +351,170 @@ export default {
         + (site ? `<p><a href="${esc(site)}">לאתר</a></p>` : ''));
     }
 
+    /* --- תגובות: קריאה --- */
+    // ?parasha=<שם>  → מערך התגובות המאושרות של אותה פרשה
+    // בלי פרמטר      → מפת מונים { "<פרשה>": <מספר> } למוני הכרטיסים בארכיון
+    if (url.pathname === '/comments' && request.method === 'GET') {
+      const name = (url.searchParams.get('parasha') || '').trim();
+      const headers = {
+        'content-type': 'application/json; charset=utf-8',
+        'access-control-allow-origin': origin,
+        // דקה של מטמון — תגובה מאושרת מופיעה כמעט מיד, בלי להעיר את ה-Worker בכל טעינה
+        'cache-control': 'public, max-age=60',
+      };
+      if (!name) {
+        return new Response(JSON.stringify(await readIndex(env)), { headers });
+      }
+      const list = (await env.SUBSCRIBERS.get(APPROVED_KEY(name), 'json')) || [];
+      return new Response(JSON.stringify(list.map(publicComment)), { headers });
+    }
+
+    /* --- תגובות: שליחה --- */
+    if (url.pathname === '/comments' && request.method === 'POST') {
+      let body;
+      try { body = await request.json(); } catch { return json({ error: 'bad json' }, 400, origin); }
+      if (body.website) return json({ ok: true, state: 'pending' }, 200, origin);   // honeypot
+
+      const parasha = (body.parasha || '').trim();
+      const name = (body.name || '').trim().slice(0, MAX_NAME) || 'אנונימי';
+      const email = (body.email || '').trim().toLowerCase();
+      const text = (body.text || '').trim();
+
+      if (!text) return json({ error: 'empty' }, 400, origin);
+      if (text.length > MAX_COMMENT) return json({ error: 'too_long' }, 400, origin);
+      if (email && !validEmail(email)) return json({ error: 'invalid_email' }, 400, origin);
+
+      // הפרשה חייבת להיות אחת מאלה שבאתר — אחרת אפשר להציף את ה-KV במפתחות שרירותיים
+      let index;
+      try {
+        index = await (await fetch(site + '/assets/parashot.json', { cf: { cacheTtl: 3600 } })).json();
+      } catch { return json({ error: 'unavailable' }, 503, origin); }
+      if (!Object.prototype.hasOwnProperty.call(index, parasha)) {
+        return json({ error: 'unknown_parasha' }, 400, origin);
+      }
+
+      // הגבלת קצב: 3 תגובות לכתובת IP בחמש דקות
+      const ip = request.headers.get('cf-connecting-ip') || 'unknown';
+      const rateKey = 'crate:' + ip;
+      const hits = Number(await env.SUBSCRIBERS.get(rateKey)) || 0;
+      if (hits >= 3) return json({ error: 'rate_limited' }, 429, origin);
+      await env.SUBSCRIBERS.put(rateKey, String(hits + 1), { expirationTtl: 300 });
+
+      const id = crypto.randomUUID();
+      const rec = { id, parasha, name, email, text, date: new Date().toISOString() };
+      // ממתינה שלא אושרה נמחקת מעצמה אחרי 90 יום
+      await env.SUBSCRIBERS.put(PENDING_KEY(id), JSON.stringify(rec), { expirationTtl: 60 * 60 * 24 * 90 });
+
+      // מייל אישור לאריאל — כישלון שליחה לא מפיל את התגובה, היא כבר שמורה
+      const owner = ownerEmail(env);
+      if (owner && env.ADMIN_KEY) {
+        const link = a => `${env.WORKER_URL}/moderate?id=${encodeURIComponent(id)}&action=${a}&key=${encodeURIComponent(env.ADMIN_KEY)}`;
+        try {
+          await sendEmail(env, {
+            to: owner,
+            subject: 'תגובה חדשה ממתינה לאישור — ' + parasha,
+            html: shell(env, `
+              <p><strong>${esc(name)}</strong> כתב/ה תגובה על <strong>${esc(parasha)}</strong>:</p>
+              <blockquote style="margin:0 0 16px;padding:12px 16px;background:#F7F2E7;border-inline-start:3px solid #D4A93C;
+                border-radius:6px;white-space:pre-wrap">${esc(text)}</blockquote>
+              ${email ? `<p style="font-size:14px;color:#6B675A">מייל ליצירת קשר: ${esc(email)}</p>` : ''}
+              <p>
+                <a href="${esc(link('approve'))}" style="display:inline-block;background:#2E6B3E;color:#fff;
+                   text-decoration:none;padding:11px 22px;border-radius:6px;font-weight:600">אישור ופרסום</a>
+                &nbsp;
+                <a href="${esc(link('reject'))}" style="display:inline-block;background:#fff;color:#8A2B2B;
+                   border:1px solid #8A2B2B;text-decoration:none;padding:10px 20px;border-radius:6px">דחייה</a>
+              </p>
+              <p style="font-size:14px;color:#6B675A">
+                <a href="${esc(env.WORKER_URL)}/admin?key=${encodeURIComponent(env.ADMIN_KEY)}">לכל התגובות</a>
+              </p>`),
+          });
+        } catch (e) { console.error('moderation mail failed', e.message); }
+      }
+
+      return json({ ok: true, state: 'pending' }, 200, origin);
+    }
+
+    /* --- תגובות: אישור/דחייה מתוך המייל --- */
+    if (url.pathname === '/moderate') {
+      if (!env.ADMIN_KEY || url.searchParams.get('key') !== env.ADMIN_KEY) {
+        return page('אין הרשאה', '<p>הקישור אינו תקף.</p>');
+      }
+      const id = url.searchParams.get('id') || '';
+      const action = url.searchParams.get('action');
+      const back = `<p><a href="${esc(env.WORKER_URL)}/admin?key=${encodeURIComponent(env.ADMIN_KEY)}">לדף הניהול</a></p>`;
+
+      if (action === 'delete') {
+        const parasha = url.searchParams.get('parasha') || '';
+        await deleteApproved(env, parasha, id);
+        return page('התגובה הוסרה', '<p>התגובה נמחקה מהאתר.</p>' + back);
+      }
+
+      const rec = await env.SUBSCRIBERS.get(PENDING_KEY(id), 'json');
+      if (!rec) return page('התגובה כבר טופלה', '<p>ייתכן שכבר אישרת או דחית אותה.</p>' + back);
+
+      if (action === 'reject') {
+        await env.SUBSCRIBERS.delete(PENDING_KEY(id));
+        return page('התגובה נדחתה', '<p>התגובה לא תפורסם.</p>' + back);
+      }
+      if (action === 'approve') {
+        await approveComment(env, rec);
+        return page('התגובה אושרה', `<p>התגובה של ${esc(rec.name)} מופיעה עכשיו בדף <strong>${esc(rec.parasha)}</strong>.</p>`
+          + (site ? `<p><a href="${esc(site)}/#p=${encodeURIComponent(rec.parasha)}">לדף הפרשה</a></p>` : '') + back);
+      }
+      return page('פעולה לא מוכרת', '<p>יש להשתמש בקישורים שבמייל.</p>' + back);
+    }
+
+    /* --- דף ניהול התגובות: /admin?key=<ADMIN_KEY> --- */
+    if (url.pathname === '/admin') {
+      if (!env.ADMIN_KEY || url.searchParams.get('key') !== env.ADMIN_KEY) {
+        return page('אין הרשאה', '<p>נדרש מפתח ניהול.</p>');
+      }
+      const k = encodeURIComponent(env.ADMIN_KEY);
+      const pending = await listPending(env);
+      const index = await readIndex(env);
+
+      const card = (c, buttons) => `
+        <div style="background:#fff;border:1px solid #E0D5BC;border-radius:10px;padding:16px 18px;margin-bottom:12px;text-align:right">
+          <div style="font-weight:700;color:#14294D">${esc(c.name)}<span style="font-weight:400;color:#6B675A"> · ${esc(c.parasha)}</span></div>
+          <div style="font-size:13px;color:#6B675A;margin-bottom:8px">${esc(String(c.date).slice(0, 16).replace('T', ' '))}${c.email ? ' · ' + esc(c.email) : ''}</div>
+          <div style="white-space:pre-wrap;line-height:1.7;margin-bottom:12px">${esc(c.text)}</div>
+          ${buttons}
+        </div>`;
+      const btn = (href, label, bg, fg, border) =>
+        `<a href="${esc(href)}" style="display:inline-block;background:${bg};color:${fg};border:1px solid ${border};
+          text-decoration:none;padding:7px 16px;border-radius:6px;font-size:14px;margin-inline-end:8px">${esc(label)}</a>`;
+
+      let html = `<h2 style="color:#14294D;font-size:19px;margin:0 0 12px">ממתינות לאישור (${pending.length})</h2>`;
+      html += pending.length
+        ? pending.map(c => card(c,
+            btn(`${env.WORKER_URL}/moderate?id=${encodeURIComponent(c.id)}&action=approve&key=${k}`, 'אישור ופרסום', '#2E6B3E', '#fff', '#2E6B3E')
+            + btn(`${env.WORKER_URL}/moderate?id=${encodeURIComponent(c.id)}&action=reject&key=${k}`, 'דחייה', '#fff', '#8A2B2B', '#8A2B2B')
+          )).join('')
+        : '<p style="color:#6B675A">אין תגובות שממתינות.</p>';
+
+      html += `<h2 style="color:#14294D;font-size:19px;margin:28px 0 12px">מפורסמות באתר</h2>`;
+      const names = Object.keys(index).sort();
+      if (!names.length) html += '<p style="color:#6B675A">עדיין אין תגובות מאושרות.</p>';
+      for (const n of names) {
+        const list = (await env.SUBSCRIBERS.get(APPROVED_KEY(n), 'json')) || [];
+        html += list.map(c => card({ ...c, parasha: n },
+          btn(`${env.WORKER_URL}/moderate?id=${encodeURIComponent(c.id)}&action=delete&parasha=${encodeURIComponent(n)}&key=${k}`,
+            'הסרה מהאתר', '#fff', '#8A2B2B', '#8A2B2B')
+        )).join('');
+      }
+      return new Response(
+        `<!doctype html><html lang="he" dir="rtl"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex">
+<title>ניהול תגובות</title><style>body{font-family:system-ui,'Segoe UI',Arial,sans-serif;background:#F7F2E7;
+color:#26241E;margin:0;padding:24px}main{max-width:720px;margin:0 auto}h1{color:#14294D;font-size:24px;margin:0 0 4px}</style>
+</head><body><main><h1>ניהול תגובות</h1>
+<p style="color:#6B675A;margin:0 0 24px">בין הנכתב לנגלה · <a href="${esc(site)}" style="color:#1B3A6B">לאתר</a></p>
+${html}</main></body></html>`,
+        { headers: { 'content-type': 'text/html; charset=utf-8', 'cache-control': 'no-store', 'x-robots-tag': 'noindex' } }
+      );
+    }
+
     /* --- אבחון: /status?key=<ADMIN_KEY> --- */
     if (url.pathname === '/status') {
       if (!env.ADMIN_KEY || url.searchParams.get('key') !== env.ADMIN_KEY) {
@@ -300,6 +527,8 @@ export default {
           siteUrl: env.SITE_URL || null,
           workerUrl: env.WORKER_URL || null,
           workerUrlLooksSet: !/YOUR-SUBDOMAIN/.test(env.WORKER_URL || 'YOUR-SUBDOMAIN'),
+          hasAdminKey: !!env.ADMIN_KEY,
+          hasOwnerEmail: !!ownerEmail(env),
         },
 challenges: {},
       };
@@ -319,6 +548,9 @@ challenges: {},
         }
         out.subscribers = subs;
       } catch (e) { out.subscribers = 'ERR ' + e.message; }
+      try {
+        out.comments = { pending: (await listPending(env)).length, approved: await readIndex(env) };
+      } catch (e) { out.comments = 'ERR ' + e.message; }
       // הסיבה הנפוצה ביותר לכישלון שליחה: הדומיין של FROM_EMAIL לא אומת ב-Resend
       try {
         const r = await fetch('https://api.resend.com/domains', {

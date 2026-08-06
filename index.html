@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data:; media-src 'self'; connect-src 'self' https://www.hebcal.com https://docs.google.com https://parasha-newsletter.azma.workers.dev; frame-src 'self' https://open.spotify.com; object-src 'none'; base-uri 'self'; form-action 'self'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data:; media-src 'self'; connect-src 'self' https://www.hebcal.com https://parasha-newsletter.azma.workers.dev; frame-src 'self' https://open.spotify.com; object-src 'none'; base-uri 'self'; form-action 'self'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <title>בין הנכתב לנגלה — על פרשת השבוע מאת אריאל ז'יטניצקי</title>
 <meta name="description" content="בין הנכתב לנגלה — דפי פרשת השבוע מאת אריאל ז'יטניצקי, לצפייה, להורדה ולהדפסה לשולחן שבת ולהאזנה. הארכיון המלא לפי חמשת חומשי תורה, חגים ומועדים.">
@@ -147,13 +147,43 @@
         <div class="section-header">
           <div>
             <h2 id="pc-title">תגובות</h2>
-            <div class="section-header__subtitle">התגובות נשלחות עם כתובת דוא"ל מאומתת</div>
+            <div class="section-header__subtitle">כל תגובה נקראת לפני הפרסום</div>
           </div>
-          <a class="btn btn--gold btn--sm" id="pc-write" href="#" target="_blank" rel="noopener noreferrer" hidden>
+          <button type="button" class="btn btn--gold btn--sm" id="pc-write" aria-expanded="false" aria-controls="pc-form" hidden>
             <span class="icon" aria-hidden="true" style="--icon:url('assets/icons/mail.svg');width:15px;height:15px"></span>
-            כתיבת תגובה<span class="visually-hidden"> (נפתח בחלון חדש)</span>
-          </a>
+            כתיבת תגובה
+          </button>
         </div>
+
+        <form class="comment-form" id="pc-form" hidden>
+          <label class="input">
+            <span class="input__label">שם</span>
+            <span class="input__field">
+              <input id="pc-name" name="name" type="text" maxlength="60" autocomplete="name" placeholder="איך לקרוא לך?">
+            </span>
+          </label>
+          <label class="input">
+            <span class="input__label">דוא"ל <span class="input__hint">(לא יפורסם — רק כדי שאוכל להשיב)</span></span>
+            <span class="input__field">
+              <input id="pc-email" name="email" type="email" maxlength="254" autocomplete="email" placeholder="you@example.com">
+            </span>
+          </label>
+          <label class="input">
+            <span class="input__label">התגובה</span>
+            <textarea id="pc-text" name="text" rows="5" maxlength="2000" required
+              placeholder="מה חשבת על הדף?"></textarea>
+          </label>
+          <p class="comment-form__hp" aria-hidden="true">
+            <label for="pc-website">אל תמלאו שדה זה</label>
+            <input id="pc-website" name="website" type="text" tabindex="-1" autocomplete="off">
+          </p>
+          <div class="comment-form__row">
+            <button type="submit" class="btn btn--primary btn--sm" id="pc-submit">שליחת התגובה</button>
+            <button type="button" class="btn btn--ghost btn--sm" id="pc-cancel">ביטול</button>
+          </div>
+          <p class="comment-form__msg" id="pc-msg" role="status" aria-live="polite"></p>
+        </form>
+
         <p id="pc-note"></p>
         <ul id="pc-list" class="comments__list"></ul>
       </section>

@@ -5,14 +5,8 @@ window.SPOTIFY_SHOW_URL = 'https://open.spotify.com/show/033Slu47b23754GaMTuroo'
 // לדוגמה: 'https://parasha-newsletter.username.workers.dev'
 // כל עוד ריק — טופס ההרשמה מוסתר ומוצגת הודעת "בקרוב".
 window.SUBSCRIBE_API = 'https://parasha-newsletter.azma.workers.dev';
-// מערכת תגובות לכל דף בנפרד, מבוססת Google Forms עם איסוף אימייל מאומת.
-// הטופס צריך שלוש שאלות בסדר הזה: פרשה, שם, תגובה.
-// COMMENTS_FORM_URL — קישור הטופס; COMMENTS_ENTRY_PARASHA — מזהה שדה "פרשה"
-// (מקישור מולא-מראש: שלוש נקודות ‹ קבלת קישור מולא מראש ‹ העתיקו את entry.NNNN);
-// COMMENTS_CSV_URL — קישור ה-CSV של גיליון התשובות אחרי "פרסום באינטרנט".
-window.COMMENTS_FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSetoAQQiYBx4uIQpJlPuuDl1iccwmZZbXJVOzJH_1HzAFDf1Q/viewform';
-window.COMMENTS_ENTRY_PARASHA = 'entry.2124068505';
-window.COMMENTS_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQt7Km9Hmt-yvF1qGm_mbk_nV2iwngBhMoDyOueBye1Pc_-qdYnCa74pBZmljk_7Cdd30o-w0YcqpWS/pub?gid=1654094605&single=true&output=csv';
+// התגובות רצות על אותו Worker (נתיב /comments), ולכן אין כאן מה להגדיר.
+// כל תגובה נכנסת כ"ממתינה", אריאל מאשר אותה מהמייל או מ-/admin, ורק אז היא מופיעה.
 
 const B = id => 'https://www.box.net/shared/' + id;
 // קובץ מקומי בארכיון האתר. שורה מקבלת כפתורי צפייה/הורדה רק אם הקובץ אכן קיים

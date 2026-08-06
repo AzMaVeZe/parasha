@@ -191,7 +191,7 @@
 
     if (hasPodcast(p)) meta.append(metaItem('headphones', 'פודקאסט', '#1DB954'));
 
-    if (window.COMMENTS_FORM_URL) {
+    if (window.SUBSCRIBE_API) {
       const c = metaItem('mail', '0');
       c.hidden = true;
       cardCountEls.set(p.name, c);
@@ -530,98 +530,137 @@
     });
   })();
 
-  /* ---------- תגובות לכל דף בנפרד: Google Forms (אימייל מאומת) + גיליון מפורסם ---------- */
-  const commentsEnabled = !!window.COMMENTS_FORM_URL;
-  const commentsByName = new Map(); // שם שורה -> [{name, date, text}]
-  let commentsLoaded = null;
+  /* ---------- תגובות: טופס באתר + מודרציה ב-Worker ---------- */
+  // התגובות נשמרות ב-Cloudflare Worker. תגובה חדשה נכנסת כ"ממתינה", אריאל מאשר
+  // אותה במייל, ורק אז היא מופיעה. כתובות המייל של המגיבים נשארות בצד השרת.
+  const COMMENTS_API = window.SUBSCRIBE_API || '';
+  const commentsCache = new Map();   // שם פרשה -> [{name, date, text}]
 
-  function commentFormUrl(rowName) {
-    let url = window.COMMENTS_FORM_URL;
-    if (window.COMMENTS_ENTRY_PARASHA) {
-      url += (url.includes('?') ? '&' : '?') + 'usp=pp_url&'
-        + window.COMMENTS_ENTRY_PARASHA + '=' + encodeURIComponent(rowName);
-    }
-    return url;
+  function fetchComments(name) {
+    if (commentsCache.has(name)) return Promise.resolve(commentsCache.get(name));
+    return fetch(COMMENTS_API + '/comments?parasha=' + encodeURIComponent(name))
+      .then(r => (r.ok ? r.json() : Promise.reject(new Error('http ' + r.status))))
+      .then(items => {
+        const list = Array.isArray(items) ? items : [];
+        commentsCache.set(name, list);
+        return list;
+      });
   }
 
-  let commentsError = null;
-  function loadComments() {
-    if (commentsLoaded) return commentsLoaded;
-    commentsLoaded = !window.COMMENTS_CSV_URL ? Promise.resolve() :
-      fetch(window.COMMENTS_CSV_URL)
-        .then(r => r.text())
-        .then(text => {
-          // גיליון שאינו מפורסם מחזיר דף HTML ולא CSV
-          if (/^\s*</.test(text) || /לא פורסם|not published/i.test(text)) {
-            commentsError = 'unpublished';
-            return;
-          }
-          const rows = parseCsv(text);
-          if (!rows.length) return;
-          // איתור עמודות לפי הכותרות; ברירת מחדל: חותמת זמן, אימייל, פרשה, שם, תגובה
-          const header = rows[0].map(h => h.trim());
-          const col = (label, fallback) => { const i = header.findIndex(h => h.includes(label)); return i >= 0 ? i : fallback; };
-          const iDate = 0, iParasha = col('פרשה', 2), iName = col('שם', 3), iText = col('תגובה', 4);
-          rows.slice(1).forEach(r => {
-            const text2 = (r[iText] || '').trim();
-            const key = (r[iParasha] || '').trim();
-            if (!text2 || !key) return;
-            if (!commentsByName.has(key)) commentsByName.set(key, []);
-            commentsByName.get(key).push({ name: (r[iName] || 'אנונימי').trim(), date: r[iDate], text: text2 });
-          });
-        })
-        .catch(() => { commentsError = 'fetch'; });
-    return commentsLoaded;
+  function renderCommentList(list, items) {
+    list.textContent = '';
+    items.forEach(c => {
+      const item = el('li', 'comment');
+      const head = el('div', 'comment__head');
+      head.append(el('span', 'comment__name', c.name || 'אנונימי'));
+      const d = new Date(c.date);
+      if (!isNaN(d)) head.append(el('span', 'comment__date', d.toLocaleDateString('he-IL', { day: 'numeric', month: 'long', year: 'numeric' })));
+      item.append(head, el('div', 'comment__body', c.text));
+      list.append(item);
+    });
   }
 
   // רינדור תגובות הדף בתוך עמוד הפרשה
+  let currentParasha = null;
   function renderPageComments(name) {
+    currentParasha = name;
     const write = document.getElementById('pc-write');
+    const form = document.getElementById('pc-form');
     const note = document.getElementById('pc-note');
     const list = document.getElementById('pc-list');
     const titleEl = document.getElementById('pc-title');
     list.textContent = '';
     titleEl.textContent = 'תגובות';
-    if (!window.COMMENTS_FORM_URL) {
+    form.hidden = true;
+    write.setAttribute('aria-expanded', 'false');
+    document.getElementById('pc-msg').textContent = '';
+
+    if (!COMMENTS_API) {
       write.hidden = true;
       note.textContent = 'מערכת התגובות תופעל בקרוב.';
       return;
     }
     write.hidden = false;
-    write.href = commentFormUrl(name);
     note.textContent = 'טוען תגובות…';
-    loadComments().then(() => {
-      const items = commentsByName.get(name) || [];
+    fetchComments(name).then(items => {
+      if (currentParasha !== name) return;        // המשתמש עבר לדף אחר בינתיים
       titleEl.textContent = items.length ? 'תגובות (' + items.length + ')' : 'תגובות';
-      if (commentsError) {
-        note.textContent = 'לא הצלחנו לטעון את התגובות כרגע. אפשר לכתוב תגובה — היא תוצג כאן בהמשך.';
-        return;
-      }
-      if (!items.length) {
-        note.textContent = 'עדיין אין תגובות לדף הזה — שמחים להיות הראשונים לשמוע מכם.';
-        return;
-      }
-      note.textContent = '';
-      [...items].reverse().forEach(c => {
-        const item = el('li', 'comment');
-        const head = el('div', 'comment__head');
-        head.append(el('span', 'comment__name', c.name));
-        const d = new Date(c.date);
-        if (!isNaN(d)) head.append(el('span', 'comment__date', d.toLocaleDateString('he-IL', { day: 'numeric', month: 'long', year: 'numeric' })));
-        item.append(head, el('div', 'comment__body', c.text));
-        list.append(item);
-      });
+      note.textContent = items.length ? '' : 'עדיין אין תגובות לדף הזה — שמחים להיות הראשונים לשמוע מכם.';
+      renderCommentList(list, [...items].reverse());
+    }).catch(() => {
+      if (currentParasha !== name) return;
+      note.textContent = 'לא הצלחנו לטעון את התגובות כרגע. אפשר לכתוב תגובה — היא תוצג כאן לאחר אישור.';
     });
   }
 
-  // מונה התגובות בכרטיסים
-  if (window.COMMENTS_FORM_URL && window.COMMENTS_CSV_URL) {
-    loadComments().then(() => {
-      cardCountEls.forEach((elx, name) => {
-        const n = (commentsByName.get(name) || []).length;
-        if (n > 0) { elx.hidden = false; elx.lastChild.nodeValue = String(n); }
-      });
+  // טופס כתיבת התגובה
+  (function initCommentForm() {
+    const write = document.getElementById('pc-write');
+    const form = document.getElementById('pc-form');
+    if (!write || !form) return;
+    const cancel = document.getElementById('pc-cancel');
+    const submit = document.getElementById('pc-submit');
+    const msg = document.getElementById('pc-msg');
+    const setMsg = (t, kind) => { msg.textContent = t; msg.className = 'comment-form__msg' + (kind ? ' is-' + kind : ''); };
+
+    const toggle = open => {
+      form.hidden = !open;
+      write.setAttribute('aria-expanded', String(open));
+      if (open) document.getElementById('pc-text').focus();
+      else { setMsg(''); write.focus(); }
+    };
+    write.addEventListener('click', () => toggle(form.hidden));
+    cancel.addEventListener('click', () => toggle(false));
+
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+      const text = document.getElementById('pc-text').value.trim();
+      if (!text) { setMsg('אפשר לכתוב כמה מילים?', 'error'); return; }
+      submit.disabled = true;
+      setMsg('שולח…');
+      fetch(COMMENTS_API + '/comments', {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({
+          parasha: currentParasha,
+          name: document.getElementById('pc-name').value.trim(),
+          email: document.getElementById('pc-email').value.trim(),
+          website: document.getElementById('pc-website').value,
+          text,
+        }),
+      })
+        .then(r => r.json().then(d => ({ ok: r.ok, d })))
+        .then(res => {
+          if (res.ok) {
+            setMsg('תודה! התגובה נשלחה ותופיע כאן אחרי שאריאל יקרא אותה.', 'ok');
+            form.reset();
+            setTimeout(() => { if (!form.hidden) toggle(false); }, 4000);
+            return;
+          }
+          const errors = {
+            rate_limited: 'נשלחו כמה תגובות ברצף. אפשר לנסות שוב בעוד כמה דקות.',
+            too_long: 'התגובה ארוכה מדי — עד 2000 תווים.',
+            invalid_email: 'כתובת הדוא"ל אינה תקינה.',
+            empty: 'אפשר לכתוב כמה מילים?',
+          };
+          setMsg(errors[res.d && res.d.error] || 'משהו השתבש בשליחה. אפשר לנסות שוב בעוד רגע.', 'error');
+        })
+        .catch(() => setMsg('משהו השתבש בשליחה. אפשר לנסות שוב בעוד רגע.', 'error'))
+        .finally(() => { submit.disabled = false; });
     });
+  })();
+
+  // מונה התגובות בכרטיסים — קריאה אחת שמחזירה את כל המונים
+  if (COMMENTS_API) {
+    fetch(COMMENTS_API + '/comments')
+      .then(r => (r.ok ? r.json() : {}))
+      .then(index => {
+        cardCountEls.forEach((elx, name) => {
+          const n = Number(index[name]) || 0;
+          if (n > 0) { elx.hidden = false; elx.lastChild.nodeValue = String(n); }
+        });
+      })
+      .catch(() => {});
   }
 
   /* ---------- עמוד הדף (ניתוב לפי #p=) ---------- */
@@ -705,30 +744,6 @@
   }
   window.addEventListener('hashchange', handleRoute);
   handleRoute();
-
-  // מפרק CSV מינימלי עם תמיכה במרכאות
-  function parseCsv(text) {
-    const rows = [];
-    let row = [], field = '', inQ = false;
-    for (let i = 0; i < text.length; i++) {
-      const c = text[i];
-      if (inQ) {
-        if (c === '"' && text[i + 1] === '"') { field += '"'; i++; }
-        else if (c === '"') inQ = false;
-        else field += c;
-      } else if (c === '"') inQ = true;
-      else if (c === ',') { row.push(field); field = ''; }
-      else if (c === '\n' || c === '\r') {
-        if (c === '\r' && text[i + 1] === '\n') i++;
-        row.push(field); field = '';
-        if (row.some(f => f !== '')) rows.push(row);
-        row = [];
-      } else field += c;
-    }
-    row.push(field);
-    if (row.some(f => f !== '')) rows.push(row);
-    return rows;
-  }
 
   /* ---------- חזרה למעלה ---------- */
   const toTop = document.getElementById('to-top');

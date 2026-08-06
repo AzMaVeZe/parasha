@@ -212,6 +212,21 @@ html{scroll-behavior:smooth}
 .comment__body{font-size:16px;line-height:1.6;white-space:pre-line}
 #pc-note{color:var(--ink-700);font-size:15px;margin:0 0 12px}
 
+.comment-form{display:flex;flex-direction:column;gap:14px;background:var(--surface-raised);
+  border:var(--border-card);border-radius:var(--radius-m);padding:18px;margin-bottom:18px}
+.comment-form textarea{border:1px solid var(--parchment-300);border-radius:var(--radius-s);
+  background:var(--surface-card);padding:10px 12px;font-family:var(--font-body);font-size:16px;
+  line-height:1.6;color:var(--ink-900);resize:vertical;min-height:110px;width:100%;box-sizing:border-box}
+.comment-form textarea:focus{outline:none;border-color:var(--blue-500);box-shadow:0 0 0 3px var(--blue-100)}
+.comment-form__row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.input__hint{font-weight:400;color:var(--text-muted);font-size:13px}
+.comment-form__msg{margin:0;font-size:15px;color:var(--ink-700);min-height:1.2em}
+.comment-form__msg.is-ok{color:#2E6B3E}
+.comment-form__msg.is-error{color:#8A2B2B}
+/* מלכודת בוטים — מוסתרת מבני אדם אך לא מ-display:none שבוטים לומדים לזהות */
+.comment-form__hp{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);
+  white-space:nowrap;margin:0}
+
 /* ---------- חזרה למעלה ---------- */
 .to-top{position:fixed;inset-inline-end:auto;left:20px;bottom:20px;width:46px;height:46px;border-radius:50%;
   background:var(--blue-700);color:#fff;border:none;cursor:pointer;box-shadow:var(--shadow-raised);

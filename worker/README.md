@@ -76,6 +76,19 @@ curl "https://<worker>/send?day=mon&key=<ADMIN_KEY>"
 npx wrangler kv key list --binding SUBSCRIBERS
 ```
 
+## תגובות
+```
+# ניהול כל התגובות — ממתינות ומפורסמות
+https://<worker>/admin?key=<ADMIN_KEY>
+```
+תגובה חדשה נכנסת כ"ממתינה" ושולחת מייל ל-`OWNER_EMAIL` עם כפתורי אישור/דחייה.
+רק אחרי אישור היא מופיעה באתר. כתובות המייל של המגיבים לעולם לא נשלחות לדפדפן.
+
+בדיקות (KV ו-Resend מדומים, בלי פריסה):
+```
+node test/comments.test.mjs
+```
+
 ## אבחון תקלות
 ```
 # מצב כללי: מפתחות, כתובות, סטטוס הדומיינים ב-Resend, ורשימת הנרשמים (ממוסכת)
