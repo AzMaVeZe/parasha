@@ -232,15 +232,29 @@
   /* ---------- חיפוש ---------- */
   const search = document.getElementById('search');
   const searchStatus = document.getElementById('search-status');
-  const norm = s => (s || '').replace(/["'׳״]/g, '').replace(/[־–—-]/g, ' ').replace(/\s+/g, ' ').trim();
-  search.addEventListener('input', () => {
+  const norm = s => (s || '').replace(/[֑-ׇֽֿׁׂׅׄ]/g, '')
+    .replace(/["'׳״]/g, '').replace(/[־–—-]/g, ' ').replace(/\s+/g, ' ').trim();
+  let searchWasActive = false;
+
+  function runSearch() {
     const q = norm(search.value);
+
+    // מקלידים בזמן שעמוד דף פתוח? הארכיון מוסתר, אז הסינון "לא עושה כלום".
+    // חוזרים לארכיון (בלי קפיצת עוגן) כדי שהתוצאות באמת ייראו.
+    if (q && !pageEl.hidden) {
+      history.replaceState(null, '', location.pathname + location.search);
+      closeParashaPage();
+    }
+
     let total = 0;
     data.forEach(sefer => {
       const section = document.getElementById(sefer.id);
       let visible = 0;
       section.querySelectorAll('.parasha-row').forEach(row => {
-        const hit = !q || norm(row.querySelector('.parasha-row__name').textContent).includes(q);
+        const name = row.querySelector('.parasha-row__name');
+        const note = row.querySelector('.parasha-row__note');
+        const hay = norm(name.textContent + ' ' + (note ? note.textContent : ''));
+        const hit = !q || hay.includes(q);
         row.style.display = hit ? '' : 'none';
         if (hit) visible++;
       });
@@ -252,6 +266,18 @@
       emptyState.textContent = 'לא נמצאה פרשה בשם "' + search.value.trim() + '" — אפשר לנסות שם אחר.';
     }
     searchStatus.textContent = q ? (total ? 'נמצאו ' + total + ' דפים' : 'לא נמצאו תוצאות') : '';
+
+    // הארכיון יושב הרחק מתחת להירו (בנייד ~1800px), ולכן בלי גלילה נראה כאילו
+    // החיפוש לא מגיב. גוללים אליו פעם אחת, כשמתחילים לחפש.
+    if (q && !searchWasActive) {
+      sectionsRoot.scrollIntoView({ block: 'start', behavior: 'smooth' });
+    }
+    searchWasActive = !!q;
+  }
+
+  search.addEventListener('input', runSearch);
+  search.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && search.value) { search.value = ''; runSearch(); }
   });
 
   /* ---------- הכפתור הראשי בהירו ---------- */
