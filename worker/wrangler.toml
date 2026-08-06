@@ -6,8 +6,8 @@ compatibility_date = "2024-11-01"
 [vars]
 SITE_URL   = "https://parasha.azma.app"
 BRAND      = "בין הנכתב לנגלה"
-# יש להחליף לכתובת שליחה בדומיין שאומת ב-Resend:
-FROM_EMAIL = "פרשת השבוע <parasha@example.com>"
+# כתובת השליחה — בדומיין שאומת ב-Resend:
+FROM_EMAIL = "פרשת השבוע <parasha@azma.app>"
 REPLY_TO   = ""
 # הכתובת של ה-Worker עצמו (מתקבלת אחרי הפריסה הראשונה, ואז מעדכנים כאן ופורסים שוב):
 WORKER_URL = "https://parasha-newsletter.YOUR-SUBDOMAIN.workers.dev"
@@ -17,7 +17,7 @@ WORKER_URL = "https://parasha-newsletter.YOUR-SUBDOMAIN.workers.dev"
 # ואז להדביק כאן את ה-id שהתקבל:
 [[kv_namespaces]]
 binding = "SUBSCRIBERS"
-id = "PUT_YOUR_KV_NAMESPACE_ID_HERE"
+id = "e88e26054d6e46c3a318e284f6a9fdfb"
 
 # --- תזמון: יום שני ויום חמישי בבוקר ---
 # הזמן ב-UTC: 04:00 UTC = 07:00 בשעון קיץ ישראלי, 06:00 בשעון חורף.
