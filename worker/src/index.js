@@ -319,7 +319,43 @@ challenges: {},
         }
         out.subscribers = subs;
       } catch (e) { out.subscribers = 'ERR ' + e.message; }
+      // הסיבה הנפוצה ביותר לכישלון שליחה: הדומיין של FROM_EMAIL לא אומת ב-Resend
+      try {
+        const r = await fetch('https://api.resend.com/domains', {
+          headers: { authorization: 'Bearer ' + env.RESEND_API_KEY },
+        });
+        const b = await r.json();
+        out.resendDomains = r.ok
+          ? (b.data || []).map(d => ({ name: d.name, status: d.status, region: d.region }))
+          : { httpStatus: r.status, body: b };
+        const fromDomain = (env.FROM_EMAIL || '').split('@').pop().replace(/>.*$/, '').trim();
+        out.config.fromDomain = fromDomain;
+        out.config.fromDomainVerified = Array.isArray(out.resendDomains)
+          && out.resendDomains.some(d => d.name === fromDomain && d.status === 'verified');
+      } catch (e) { out.resendDomains = 'ERR ' + e.message; }
       return json(out, 200, origin);
+    }
+
+    /* --- בדיקת שליחה אמיתית: /testmail?to=<כתובת>&key=<ADMIN_KEY> --- */
+    // מחזיר את תשובת Resend כמות שהיא, כדי לראות את סיבת הכישלון המדויקת.
+    if (url.pathname === '/testmail') {
+      if (!env.ADMIN_KEY || url.searchParams.get('key') !== env.ADMIN_KEY) {
+        return json({ error: 'unauthorized' }, 401, origin);
+      }
+      const to = (url.searchParams.get('to') || '').trim().toLowerCase();
+      if (!validEmail(to)) return json({ error: 'invalid_email' }, 400, origin);
+      const r = await fetch('https://api.resend.com/emails', {
+        method: 'POST',
+        headers: { authorization: 'Bearer ' + env.RESEND_API_KEY, 'content-type': 'application/json' },
+        body: JSON.stringify({
+          from: env.FROM_EMAIL,
+          to: [to],
+          subject: 'בדיקת שליחה — בין הנכתב לנגלה',
+          html: '<p dir="rtl">זו הודעת בדיקה. אם הגיעה, השליחה תקינה.</p>',
+        }),
+      });
+      let body; try { body = await r.json(); } catch { body = await r.text(); }
+      return json({ httpStatus: r.status, from: env.FROM_EMAIL, to, body }, 200, origin);
     }
 
     /* --- הרצה ידנית לבדיקה: /send?day=mon&key=<ADMIN_KEY> --- */

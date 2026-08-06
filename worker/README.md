@@ -76,6 +76,18 @@ curl "https://<worker>/send?day=mon&key=<ADMIN_KEY>"
 npx wrangler kv key list --binding SUBSCRIBERS
 ```
 
+## אבחון תקלות
+```
+# מצב כללי: מפתחות, כתובות, סטטוס הדומיינים ב-Resend, ורשימת הנרשמים (ממוסכת)
+https://<worker>/status?key=<ADMIN_KEY>
+
+# שליחת מייל בדיקה — מחזיר את תשובת Resend כמות שהיא
+https://<worker>/testmail?to=<כתובת>&key=<ADMIN_KEY>
+```
+`/status` כולל `config.fromDomainVerified`. אם הוא `false` — הדומיין של
+`FROM_EMAIL` אינו מאומת ב-Resend, וזו הסיבה שכל שליחה נכשלת. יש לאמת אותו
+ב-Resend (או לשנות את `FROM_EMAIL` לדומיין שכן מאומת) ולהריץ `wrangler deploy`.
+
 ## תחזוקה
 - **הוספת דף/פודקאסט**: להריץ `node scripts/build-parashot-json.js` ולדחוף —
   ה-Worker קורא את `assets/parashot.json` מהאתר בכל שליחה, בלי פריסה מחדש.
