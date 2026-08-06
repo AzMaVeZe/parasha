@@ -606,6 +606,10 @@
 
     renderPageComments(p.name);
 
+    // כרטיס ההרשמה עובר לעמוד הדף (אותו אלמנט — בלי כפילות מזהים)
+    const subCard = document.getElementById('subscribe-card');
+    if (subCard) document.querySelector('.parasha-page__aside').append(subCard);
+
     heroSection.hidden = true;
     archiveMain.hidden = true;
     pageEl.hidden = false;
@@ -615,6 +619,8 @@
   }
   function closeParashaPage() {
     if (pageEl.hidden) return;
+    const subCard = document.getElementById('subscribe-card');
+    if (subCard) document.querySelector('.sidebar').append(subCard);   // החזרה לסרגל
     pageEl.hidden = true;
     heroSection.hidden = false;
     archiveMain.hidden = false;
