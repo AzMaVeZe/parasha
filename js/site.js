@@ -319,15 +319,19 @@
     document.getElementById('riddle-title').textContent = 'חידה לשולחן שבת — ' + currentName;
 
     const body = document.getElementById('riddle-body');
-    body.textContent = cur.q;
+    body.textContent = '';
     if (cur.img) {
-      // הניסוח בדף מפנה לתמונה שלצידו; בלעדיה החידה חסרת פשר
-      const note = el('div', 'riddle-box__imgnote');
-      const link = document.createElement('a');
-      link.href = '#p=' + encodeURIComponent(currentName);
-      link.textContent = 'החידה מלווה תמונה בדף — לפתיחת הדף';
-      note.append(link);
-      body.append(note);
+      // חידת ציור: התיבה כפי שהיא מודפסת בדף. הטקסט משמש כתיאור חלופי,
+      // שהרי הניסוח לבדו ("מה בתמונה?") אינו אומר דבר.
+      const im = document.createElement('img');
+      im.className = 'riddle-box__img';
+      im.src = encodeURI('assets/riddles/' + cur.img);
+      im.alt = 'החידה כפי שהיא מופיעה בדף ' + currentName + ': ' + cur.q;
+      im.loading = 'lazy';
+      im.addEventListener('error', () => { im.remove(); body.textContent = cur.q; });
+      body.append(im);
+    } else {
+      body.textContent = cur.q;
     }
 
     const prev = prevName && riddles[prevName];

@@ -286,5 +286,5 @@ html{scroll-behavior:smooth}
   .hero__actions .btn{flex:1 1 auto;justify-content:center}
 }
 
-.riddle-box__imgnote{margin-top:8px;font-size:14.5px}
-.riddle-box__imgnote a{color:var(--burgundy-700);text-decoration:underline}
+.riddle-box__img{display:block;width:100%;max-width:340px;height:auto;margin:4px auto 0;
+  border-radius:var(--radius-s);background:#fff}
