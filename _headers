@@ -5,9 +5,12 @@
 #
 # הכתובות המותרות ב-connect-src ו-frame-src חייבות להישאר זהות לתגית ה-<meta>
 # שב-index.html, אחרת אחת מהן תחסום את השנייה.
+#
+# frame-ancestors 'self' ולא 'none': מציג ה-PDF באתר הוא iframe שטוען קובץ
+# מאותו דומיין. 'none' חוסם גם הטמעה עצמית, ומכבה את הצפייה בדפים.
 
 /*
-  Content-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data:; media-src 'self'; connect-src 'self' https://www.hebcal.com https://parasha-newsletter.azma.workers.dev; frame-src 'self' https://open.spotify.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'
+  Content-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data:; media-src 'self'; connect-src 'self' https://www.hebcal.com https://parasha-newsletter.azma.workers.dev; frame-src 'self' https://open.spotify.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'self'
   X-Content-Type-Options: nosniff
   Referrer-Policy: strict-origin-when-cross-origin
   Permissions-Policy: geolocation=(), camera=(), microphone=(), payment=(), usb=(), interest-cohort=()
