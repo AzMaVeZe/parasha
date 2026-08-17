@@ -288,3 +288,4 @@ html{scroll-behavior:smooth}
 
 .riddle-box__img{display:block;width:100%;max-width:340px;height:auto;margin:4px auto 0;
   border-radius:var(--radius-s);background:#fff}
+.riddle-box__text{margin-top:10px;white-space:pre-line}

@@ -328,8 +328,10 @@
       im.src = encodeURI('assets/riddles/' + cur.img);
       im.alt = 'החידה כפי שהיא מופיעה בדף ' + currentName + ': ' + cur.q;
       im.loading = 'lazy';
-      im.addEventListener('error', () => { im.remove(); body.textContent = cur.q; });
+      im.addEventListener('error', () => { im.remove(); if (!cur.withText) body.append(cur.q); });
       body.append(im);
+      // withText — הסריקה קטנה מכדי לקרוא ממנה, אבל הנוסח תומלל במלואו
+      if (cur.withText) body.append(el('div', 'riddle-box__text', cur.q));
     } else {
       body.textContent = cur.q;
     }
