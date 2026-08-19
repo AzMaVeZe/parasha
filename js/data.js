@@ -76,7 +76,7 @@ window.PARASHA_DATA = [
   { name: 'כי תצא', box: B('mkchdf5y6b'), pdf: P('devarim-כי-תצא.pdf'), spotify: 'https://open.spotify.com/episode/4irSci6Ol4Lc4ygLUM5TJV' },
   { name: 'כי תבוא', box: B('f0tht066j4'), pdf: P('devarim-כי-תבוא.pdf'), spotify: 'https://open.spotify.com/episode/4hN2anRhv17x993qG30O2D' },
   { name: 'ניצבים', box: B('t5fs6xj46m'), pdf: P('devarim-ניצבים-וילך.pdf'), note: 'כולל וילך', spotify: 'https://open.spotify.com/episode/0VdruIWMOwDZuMAgOfHUXs' },
-  { name: 'וילך', box: B('t5fs6xj46m'), pdf: P('devarim-ניצבים-וילך.pdf'), note: 'עם ניצבים' },
+  { name: 'וילך', box: B('t5fs6xj46m'), pdf: P('devarim-ניצבים-וילך.pdf'), note: 'עם ניצבים', spotify: 'https://open.spotify.com/episode/0VdruIWMOwDZuMAgOfHUXs' },
   { name: 'האזינו', box: B('z93ie1dfsq'), pdf: P('devarim-האזינו.pdf') },
   { name: 'וזאת הברכה', box: B('jm08kfgamj'), pdf: P('devarim-וזאת-הברכה.pdf'), note: 'עם הושענא רבה' } ] },
  { id: 'chagim', name: 'חגים ומועדים', parshiot: [
