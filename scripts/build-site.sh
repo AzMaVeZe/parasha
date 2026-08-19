@@ -15,7 +15,7 @@ rm -rf dist
 mkdir -p dist
 
 # קבצים בשורש
-for f in index.html accessibility.html styles.css robots.txt sitemap.xml \
+for f in index.html 404.html accessibility.html styles.css robots.txt sitemap.xml \
          favicon.svg favicon.png CNAME _headers; do
   [ -e "$f" ] && cp "$f" dist/
 done
@@ -40,7 +40,7 @@ for bad in dist/worker dist/scripts dist/.github dist/README.md; do
   if [ -e "$bad" ]; then echo "שגיאה: $bad נכלל בפלט" >&2; exit 1; fi
 done
 # אימות: מה שחייב להיות
-for need in dist/index.html dist/js/site.js dist/js/riddles.js dist/styles.css \
+for need in dist/index.html dist/404.html dist/js/site.js dist/js/riddles.js dist/styles.css \
             dist/_headers dist/assets/fonts/fonts.css; do
   if [ ! -e "$need" ]; then echo "שגיאה: $need חסר" >&2; exit 1; fi
 done

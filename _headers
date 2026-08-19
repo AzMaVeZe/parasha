@@ -17,6 +17,11 @@
   Strict-Transport-Security: max-age=31536000; includeSubDomains
   Cross-Origin-Opener-Policy: same-origin
 
+# הקבצים מכילים עברית. בלי charset מפורש הדפדפן מנחש — סקריפט שנטען מתוך הדף
+# יורש UTF-8 מה-<meta> וזה עובד, אבל פנייה ישירה לקובץ מתפרשת כ-Latin-1.
+/tokens/*
+  Content-Type: text/css; charset=utf-8
+
 # נכסים בעלי שם שאינו משתנה — אפשר לשמור אותם לאורך זמן
 /assets/fonts/*
   Cache-Control: public, max-age=31536000, immutable
@@ -32,5 +37,7 @@
   Cache-Control: public, max-age=0, must-revalidate
 /js/*
   Cache-Control: public, max-age=0, must-revalidate
+  Content-Type: text/javascript; charset=utf-8
 /styles.css
   Cache-Control: public, max-age=0, must-revalidate
+  Content-Type: text/css; charset=utf-8
