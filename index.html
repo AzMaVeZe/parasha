@@ -7,6 +7,8 @@
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <title>בין הנכתב לנגלה — על פרשת השבוע מאת אריאל ז'יטניצקי</title>
 <meta name="description" content="בין הנכתב לנגלה — דפי פרשת השבוע מאת אריאל ז'יטניצקי, לצפייה, להורדה ולהדפסה לשולחן שבת ולהאזנה. הארכיון המלא לפי חמשת חומשי תורה, חגים ומועדים.">
+<meta name="author" content="אריאל ז'יטניצקי">
+<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
 <meta property="og:type" content="website">
 <meta property="og:title" content="בין הנכתב לנגלה — על פרשת השבוע מאת אריאל ז'יטניצקי">
 <meta property="og:description" content="דפי פרשת השבוע לצפייה, להורדה ולהדפסה לשולחן שבת ולהאזנה — הארכיון המלא לפי חמשת חומשי תורה, חגים ומועדים.">
@@ -24,6 +26,59 @@
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="icon" href="favicon.png" type="image/png" sizes="48x48">
 <link rel="stylesheet" href="styles.css">
+<!-- נתונים מובנים לאתר, לכותב ולפודקאסט. אותם מזהים (‎#website, #author, #podcast‎)
+     מופיעים גם בעמודי הדפים שנוצרים ב-scripts/build-pages.js, וכך הכול נקשר
+     לישות אחת. זהו בלוק נתונים, לא סקריפט — script-src 'self' אינו חוסם אותו. -->
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "WebSite",
+   "@id": "https://parasha.azma.app/#website",
+   "url": "https://parasha.azma.app/",
+   "name": "בין הנכתב לנגלה — על פרשת השבוע",
+   "alternateName": "בין הנכתב לנגלה",
+   "description": "דפי פרשת השבוע לצפייה, להורדה ולהדפסה לשולחן שבת ולהאזנה — הארכיון המלא לפי חמשת חומשי תורה, חגים ומועדים.",
+   "inLanguage": "he-IL",
+   "author": { "@id": "https://parasha.azma.app/#author" },
+   "publisher": { "@id": "https://parasha.azma.app/#author" },
+   "hasPart": { "@id": "https://parasha.azma.app/p/#webpage" }
+  },
+  {
+   "@type": "Person",
+   "@id": "https://parasha.azma.app/#author",
+   "name": "אריאל ז'יטניצקי",
+   "url": "https://parasha.azma.app/",
+   "jobTitle": "כותב דפי פרשת השבוע",
+   "sameAs": [
+    "https://ariel-parasha.blogspot.com/",
+    "https://open.spotify.com/show/033Slu47b23754GaMTuroo"
+   ]
+  },
+  {
+   "@type": "PodcastSeries",
+   "@id": "https://parasha.azma.app/#podcast",
+   "name": "בין הנכתב לנגלה — הפודקאסט",
+   "description": "פרקי פודקאסט על דפי פרשת השבוע של אריאל ז'יטניצקי.",
+   "url": "https://open.spotify.com/show/033Slu47b23754GaMTuroo",
+   "webFeed": "https://open.spotify.com/show/033Slu47b23754GaMTuroo",
+   "inLanguage": "he-IL",
+   "author": { "@id": "https://parasha.azma.app/#author" }
+  },
+  {
+   "@type": "CollectionPage",
+   "@id": "https://parasha.azma.app/#webpage",
+   "url": "https://parasha.azma.app/",
+   "name": "בין הנכתב לנגלה — על פרשת השבוע מאת אריאל ז'יטניצקי",
+   "description": "הארכיון המלא של דפי פרשת השבוע: חמשת חומשי תורה, חגים ומועדים.",
+   "inLanguage": "he-IL",
+   "isPartOf": { "@id": "https://parasha.azma.app/#website" },
+   "about": { "@type": "Thing", "name": "פרשת השבוע" }
+  }
+ ]
+}
+</script>
 </head>
 <body>
 
@@ -83,7 +138,12 @@
 
 <main class="site-main container" id="main-content">
   <div class="site-main__grid">
-    <div id="sections"></div>
+    <div id="sections">
+      <noscript>
+        <p>הארכיון נבנה בדפדפן. בלי JavaScript אפשר להגיע לכל הדפים דרך
+          <a href="/p/">מפת הדפים</a> — עמוד לכל פרשה וחג, עם הדף להורדה.</p>
+      </noscript>
+    </div>
 
     <aside class="sidebar" aria-label="מידע נוסף">
       <section class="riddle-box" hidden>
@@ -203,6 +263,7 @@
       <div class="site-footer__tagline">הדברים הושפעו רבות משעורים ששמעתי — וכנראה עוד כמה אשמים אחרים…</div>
     </div>
     <div style="display:flex;gap:16px;flex-wrap:wrap">
+      <a href="/p/">כל הדפים</a>
       <a href="accessibility.html">הצהרת נגישות</a>
       <a href="https://ariel-parasha.blogspot.com/" target="_blank" rel="noopener noreferrer">הבלוג הישן (Blogspot)<span class="visually-hidden"> (נפתח בחלון חדש)</span></a>
     </div>

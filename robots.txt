@@ -1,4 +1,91 @@
+# בין הנכתב לנגלה — דפי פרשת השבוע של אריאל ז'יטניצקי.
+#
+# המדיניות: הכול פתוח. האתר קיים כדי שהדפים יימצאו — במנועי חיפוש וגם
+# בתשובות של מערכות AI. הקבוצות למטה אינן מוסיפות הרשאה מעבר ל-"*" שלמעלה;
+# הן מצהירות במפורש, לכל זחלן בשמו, שמותר לו — כדי שלא יהיה ספק, וכדי
+# שיהיה ברור מה בדיוק הותר אם יוחלט בעתיד לצמצם.
+#
+# שימו לב: חסימה של זחלן אימון (GPTBot, ClaudeBot, Google-Extended, CCBot)
+# אינה משפיעה על דירוג בחיפוש, אבל כן מקטינה את הסיכוי שהאתר יצוטט
+# בתשובות AI. חסימה של זחלני חיפוש (OAI-SearchBot, Claude-SearchBot,
+# PerplexityBot) מוציאה את האתר מתשובות AI כמעט לגמרי.
+
 User-agent: *
+Allow: /
+
+# --- מנועי חיפוש קלאסיים ---
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+# --- OpenAI ---
+# GPTBot: אימון מודלים. OAI-SearchBot: אינדוקס לחיפוש ב-ChatGPT.
+# ChatGPT-User: שליפה יזומה כשמשתמש שואל על הקישור.
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+# --- Anthropic (Claude) ---
+# ClaudeBot: אימון. Claude-SearchBot: אינדוקס לחיפוש. Claude-User: שליפה יזומה.
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-SearchBot
+Allow: /
+
+User-agent: Claude-User
+Allow: /
+
+# --- Google (Gemini / AI Overviews) ---
+# Google-Extended אינו זחלן נפרד אלא מתג: הוא קובע אם התוכן שנסרק
+# ע"י Googlebot ישמש גם את Gemini ואת סיכומי ה-AI.
+User-agent: Google-Extended
+Allow: /
+
+# --- Perplexity ---
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Perplexity-User
+Allow: /
+
+# --- אחרים ---
+# CCBot: Common Crawl — הארכיון הציבורי שרוב מאגרי האימון נשענים עליו.
+User-agent: CCBot
+Allow: /
+
+User-agent: Applebot
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: Amazonbot
+Allow: /
+
+User-agent: meta-externalagent
+Allow: /
+
+User-agent: Bytespider
+Allow: /
+
+User-agent: cohere-ai
+Allow: /
+
+User-agent: DuckAssistBot
+Allow: /
+
+User-agent: MistralAI-User
+Allow: /
+
+User-agent: YouBot
 Allow: /
 
 Sitemap: https://parasha.azma.app/sitemap.xml

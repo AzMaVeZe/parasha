@@ -205,6 +205,9 @@ html{scroll-behavior:smooth}
 .parasha-page__aside{display:flex;flex-direction:column;gap:20px;position:sticky;top:24px}
 .parasha-page__podcast:not(:empty){background:var(--surface-card);border:var(--border-card);border-radius:var(--radius-m);padding:var(--sp-5)}
 .parasha-page__comments{background:var(--surface-card);border:var(--border-card);border-radius:var(--radius-m);padding:var(--sp-5)}
+/* כרטיס בסרגל הצד של העמודים הסטטיים שב-/p/ (נוצרים ב-scripts/build-pages.js) */
+.side-card{background:var(--surface-card);border:var(--border-card);border-radius:var(--radius-m);padding:var(--sp-5)}
+.side-card__title{font-family:var(--font-body);font-weight:600;font-size:14px;color:var(--text-heading);margin:0}
 
 /* ---------- תגובות ---------- */
 .comments__list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:12px}

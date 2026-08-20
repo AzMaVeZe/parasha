@@ -100,6 +100,26 @@
   });
 
   const rowTitle = (sefer, p) => (sefer.id === 'chagim' ? p.name : 'פרשת ' + p.name);
+
+  /* ---------- כתובת עמוד הדף ----------
+     לכל דף יש עמוד HTML אמיתי ב-/p/<שם>/ (נוצר ב-scripts/build-pages.js). זו
+     הכתובת שבקישורים, כדי שמנועי חיפוש ומערכות AI יראו 62 עמודים ולא אחד —
+     מקטע כתובת (‎#p=‎) אינו עמוד נפרד מבחינתם.
+     הלחיצה עצמה נשארת בתוך האתר: המאזין למטה מיירט אותה ופותח את עמוד הדף
+     בלי טעינה מחדש, בדיוק כשהיה. הכתובות הישנות (‎#p=<שם>‎) לא נגעו וממשיכות
+     לעבוד — יש כאלה במיילים שנשלחו לאורך השנים. */
+  // חייב להישאר זהה ל-slug() שב-scripts/build-pages.js, אחרת הקישורים יובילו ל-404
+  const pageSlug = name => name.replace(/["'׳״]/g, '').replace(/\s+/g, '-');
+  const pageHref = name => '/p/' + encodeURIComponent(pageSlug(name)) + '/';
+  const hashHref = name => '#p=' + encodeURIComponent(name);
+  document.addEventListener('click', e => {
+    if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+    const t = e.target;
+    const a = t && t.closest ? t.closest('a[data-parasha]') : null;
+    if (!a) return;
+    e.preventDefault();
+    location.hash = hashHref(a.getAttribute('data-parasha'));
+  });
   const cardCountEls = new Map(); // שם דף -> אלמנט מונה התגובות בכרטיס
   const pdfExists = url => (manifest ? manifest.has(url.replace('assets/pdfs/', '')) : true);
   // אינדקס לניתוב: שם דף -> {p, sefer}
@@ -170,7 +190,8 @@
   function parashaRow(sefer, p) {
     const li = el('li', 'parasha-row');
     const link = el('a', 'parasha-row__link');
-    link.href = '#p=' + encodeURIComponent(p.name);
+    link.href = pageHref(p.name);
+    link.setAttribute('data-parasha', p.name);
     link.setAttribute('aria-label', 'עמוד ' + rowTitle(sefer, p));
     li.append(link);
 
@@ -363,16 +384,18 @@
   function buildPreviewCard(hit) {
     const entry = hit.p;
     const title = rowTitle(hit.sefer, entry);
-    const href = '#p=' + encodeURIComponent(entry.name);
+    const href = pageHref(entry.name);
     const card = el('div', 'hero-preview');
     const bar = el('div', 'hero-preview__bar');
     bar.append(el('span', 'hero-preview__title', 'הצצה לדף ' + entry.name));
     const more = el('a', 'hero-preview__more', 'לעמוד הדף ←');
     more.href = href;
+    more.setAttribute('data-parasha', entry.name);
     bar.append(more);
     // תמונת העמוד הראשון (קישור לעמוד הדף) — iframe של PDF לא נתמך באנדרואיד
     const imgLink = el('a', 'hero-preview__imglink');
     imgLink.href = href;
+    imgLink.setAttribute('data-parasha', entry.name);
     imgLink.setAttribute('aria-label', 'לעמוד ' + title);
     const img = document.createElement('img');
     img.className = 'hero-preview__img';

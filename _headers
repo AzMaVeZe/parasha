@@ -35,6 +35,18 @@
 # קבצים שמתעדכנים עם כל שינוי בתוכן — לוודא שהדפדפן בודק מולנו
 /index.html
   Cache-Control: public, max-age=0, must-revalidate
+# עמודי הדפים הסטטיים (נוצרים ב-scripts/build-pages.js) — מתעדכנים עם js/data.js
+/p/*
+  Cache-Control: public, max-age=0, must-revalidate
+/sitemap.xml
+  Cache-Control: public, max-age=3600
+  Content-Type: application/xml; charset=utf-8
+# הקבצים כוללים עברית — בלי charset מפורש הם מתפרשים כ-Latin-1
+/robots.txt
+  Content-Type: text/plain; charset=utf-8
+/llms.txt
+  Cache-Control: public, max-age=3600
+  Content-Type: text/plain; charset=utf-8
 /js/*
   Cache-Control: public, max-age=0, must-revalidate
   Content-Type: text/javascript; charset=utf-8
