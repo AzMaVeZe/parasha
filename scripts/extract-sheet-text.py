@@ -108,7 +108,8 @@ def join(rows):
     # גליף שחסר כבר בקובץ המקור ומוצג גם שם כריבוע ריק. לא מנחשים מה היה שם.
     text = text.replace('\x00', UNREADABLE).replace('�', UNREADABLE)
     text = re.sub(r'[ \t\xa0]+', ' ', text)
-    return tidy(text).strip()
+    # סדר קנוני לסימני הניקוד, כדי שאותו פסוק ייצא זהה בכל דף
+    return unicodedata.normalize('NFC', tidy(text)).strip()
 
 
 def extract(path):
