@@ -209,6 +209,24 @@ html{scroll-behavior:smooth}
 .side-card{background:var(--surface-card);border:var(--border-card);border-radius:var(--radius-m);padding:var(--sp-5)}
 .side-card__title{font-family:var(--font-body);font-weight:600;font-size:14px;color:var(--text-heading);margin:0}
 
+/* ---------- הדף כטקסט (details סגור — נפתח רק בלחיצה) ---------- */
+.sheet-text{background:var(--surface-card);border:var(--border-card);border-radius:var(--radius-m)}
+.sheet-text summary{display:flex;align-items:center;gap:8px;cursor:pointer;list-style:none;
+  padding:14px var(--sp-5);font-family:var(--font-body);font-weight:600;font-size:15px;color:var(--primary)}
+.sheet-text summary::-webkit-details-marker{display:none}
+.sheet-text summary::after{content:'';width:14px;height:14px;margin-inline-start:auto;background:currentColor;
+  -webkit-mask:url('/assets/icons/chevron-left.svg') no-repeat center / contain;
+  mask:url('/assets/icons/chevron-left.svg') no-repeat center / contain;
+  transform:rotate(-90deg);transition:transform var(--dur) var(--ease)}
+.sheet-text[open] summary::after{transform:rotate(90deg)}
+.sheet-text summary:hover{color:var(--link-hover)}
+.sheet-text__hint{font-weight:400;font-size:13px;color:var(--text-muted)}
+.sheet-text__body{padding:0 var(--sp-5) var(--sp-5);border-top:1px solid var(--border-subtle)}
+.sheet-text__body>p{max-width:70ch}
+.sheet-text__body>blockquote{margin:1em 0;padding-inline-start:16px;border-inline-start:3px solid var(--gold-400);
+  font-size:17.5px;color:var(--ink-900);max-width:70ch}
+.sheet-text__note{font-size:13.5px;color:var(--text-muted);margin:12px 0 4px}
+
 /* ---------- תגובות ---------- */
 .comments__list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:12px}
 .comment{background:var(--surface-raised);border:var(--border-card);border-radius:var(--radius-m);padding:14px 18px}

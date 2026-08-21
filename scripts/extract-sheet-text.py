@@ -34,6 +34,8 @@ from pdf_layout import lines               # noqa: E402
 ROOT = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..')
 PDF_DIR = os.path.join(ROOT, 'assets', 'pdfs')
 OUT = os.path.join(ROOT, 'scripts', 'sheet-text')
+# עותק רזה לאתר: העמודים הסטטיים מטמיעים אותו, והעמוד הדינמי טוען אותו בלחיצה
+SITE_OUT = os.path.join(ROOT, 'assets', 'sheet-text')
 
 MIN_PARAGRAPH = 15          # קצר מזה הוא ריהוט עמוד: 'לק"י', שנה, מספר עמוד
 HEB = 'א-ת'
@@ -143,6 +145,7 @@ def extract(path):
 
 def main():
     os.makedirs(OUT, exist_ok=True)
+    os.makedirs(SITE_OUT, exist_ok=True)
     targets = sys.argv[1:] or sorted(glob.glob(os.path.join(PDF_DIR, '*.pdf')))
     targets = [t if os.path.dirname(t) else os.path.join(PDF_DIR, t) for t in targets]
     total = 0
@@ -151,6 +154,9 @@ def main():
         name = os.path.splitext(r['file'])[0]
         with open(os.path.join(OUT, name + '.json'), 'w') as f:
             json.dump(r, f, ensure_ascii=False, indent=1)
+        with open(os.path.join(SITE_OUT, name + '.json'), 'w') as f:
+            json.dump({'paragraphs': r['paragraphs'], 'notes': r['notes']},
+                      f, ensure_ascii=False)
         total += r['chars']
         flag = '  ← נבדוק' if r['hebrew_ratio'] < 0.5 or r['chars'] < 800 else ''
         print(f"{r['file']:34} {r['chars']:6} תווים  {len(r['paragraphs']):3} פסקאות  "

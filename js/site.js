@@ -717,6 +717,44 @@
   const pageEl = document.getElementById('parasha-page');
   const SITE_TITLE = 'בין הנכתב לנגלה — על פרשת השבוע מאת אריאל ז\'יטניצקי';
 
+  /* הדף כטקסט: <details> סגור שאינו משנה את מראה העמוד. התוכן נטען רק
+     בפתיחה הראשונה, מ-assets/sheet-text (נוצר ב-scripts/extract-sheet-text.py). */
+  const textBox = document.getElementById('parasha-page-text');
+  const textBody = document.getElementById('parasha-page-text-body');
+  let textLoader = null;                    // המאזין של הדף הנוכחי — מוסר במעבר לדף אחר
+  function setupSheetText(p) {
+    textBox.hidden = true;
+    textBox.open = false;
+    textBody.textContent = '';
+    if (textLoader) { textBox.removeEventListener('toggle', textLoader); textLoader = null; }
+    if (!p.pdf || !pdfExists(p.pdf)) return;
+    const src = p.pdf.replace('assets/pdfs/', 'assets/sheet-text/').replace(/\.pdf$/i, '.json');
+    textBox.hidden = false;
+    textBox.addEventListener('toggle', textLoader = function load() {
+      if (!textBox.open) return;
+      textBox.removeEventListener('toggle', load);
+      textLoader = null;
+      fetch(encodeURI(src))
+        .then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
+        .then(t => {
+          const note = el('p', 'sheet-text__note');
+          note.append('הטקסט חולץ אוטומטית מקובץ ה-PDF. הנוסח המחייב הוא ');
+          const a = document.createElement('a');
+          a.href = encodeURI(p.pdf); a.textContent = 'הדף עצמו';
+          note.append(a, '.');
+          textBody.append(note);
+          (t.notes || []).forEach(n => textBody.append(el('p', 'sheet-text__note', n)));
+          t.paragraphs.forEach(par => {
+            const nikud = (par.match(/[֑-ׇ]/g) || []).length;
+            const node = document.createElement(nikud > par.length * 0.08 ? 'blockquote' : 'p');
+            node.textContent = par;
+            textBody.append(node);
+          });
+        })
+        .catch(() => { textBody.append(el('p', 'sheet-text__note', 'הטקסט אינו זמין כרגע — הדף המלא נמצא ב-PDF.')); });
+    });
+  }
+
   function printPdf(url) {
     const f = document.createElement('iframe');
     f.style.position = 'fixed'; f.style.right = '-9999px'; f.style.width = '0'; f.style.height = '0';
@@ -763,6 +801,7 @@
     const pod = buildPodcast(p, title);
     if (pod) podcastEl.append(pod);
 
+    setupSheetText(p);
     renderPageComments(p.name);
 
     // כרטיס ההרשמה עובר לעמוד הדף (אותו אלמנט — בלי כפילות מזהים)

@@ -67,6 +67,19 @@ const pageUrl = name => SITE + pagePath(name);
 const abs = p => SITE + '/' + encodeURI(p.replace(/^\//, ''));
 
 const pdfExists = p => p && PDF_SET.has(p.replace('assets/pdfs/', ''));
+
+/* הטקסט שחולץ מהדף (scripts/extract-sheet-text.py). מוטמע בעמוד בתוך
+ * <details> סגור: המראה נשאר כמו קודם, אבל הטקסט קיים ב-HTML ולכן מנועי
+ * חיפוש קוראים אותו. פסקה שרוב תוכנה מנוקד היא ציטוט, ומוצגת בגופן הפסוקים. */
+const NIKUD = /[֑-ׇ]/g;
+function sheetText(pdf) {
+  if (!pdf) return null;
+  const p = path.join(root, pdf.replace('assets/pdfs/', 'assets/sheet-text/').replace(/\.pdf$/i, '.json'));
+  if (!fs.existsSync(p)) return null;
+  const t = JSON.parse(fs.readFileSync(p, 'utf8'));
+  return t.paragraphs && t.paragraphs.length ? t : null;
+}
+const isQuote = s => (s.match(NIKUD) || []).length > s.length * 0.08;
 const previewPath = p => p.replace('assets/pdfs/', 'assets/previews/').replace(/\.pdf$/i, '.jpg');
 const fileHere = rel => fs.existsSync(path.join(root, rel));
 const episodeId = url => { const m = /open\.spotify\.com\/episode\/([A-Za-z0-9]+)/.exec(url || ''); return m ? m[1] : null; };
@@ -233,6 +246,7 @@ const baseGraph = () => [websiteNode, personNode].concat(podcastNode ? [podcastN
 /* ---------- עמוד דף בודד ---------- */
 function parashaPage(e) {
   const url = e.url;
+  const text = sheetText(e.pdf);
   const pdfUrl = e.pdf ? abs(e.pdf) : null;
   const previewUrl = e.preview ? abs(e.preview) : null;
   const seferAnchor = '/#' + e.sefer.id;
@@ -289,6 +303,9 @@ function parashaPage(e) {
       keywords: [e.title, e.name, 'פרשת השבוע', 'דף לשולחן שבת', e.sefer.name].join(', '),
       associatedMedia: { '@id': pdfUrl },
       image: previewUrl || undefined,
+      wordCount: text
+        ? text.paragraphs.join(' ').split(/\s+/).filter(Boolean).length
+        : undefined,
     });
     graph.push({
       '@type': 'DigitalDocument',
@@ -357,6 +374,21 @@ function parashaPage(e) {
     main += `\n      <div class="parasha-page__actions">
         <a class="btn btn--secondary" href="${esc(e.p.box)}" target="_blank" rel="noopener noreferrer">${iconSpan('external-link', 17)}פתיחה ב-Box</a>
       </div>`;
+  }
+
+  if (text) {
+    main += `\n      <details class="sheet-text">
+        <summary>${iconSpan('book-open', 17)}<span>קריאת הדף כטקסט</span><span class="sheet-text__hint">בלי לפתוח PDF</span></summary>
+        <div class="sheet-text__body">
+          <p class="sheet-text__note">הטקסט חולץ אוטומטית מקובץ ה-PDF. הנוסח המחייב הוא <a href="${esc(encodeURI('/' + e.pdf))}">הדף עצמו</a>.</p>`;
+    for (const n of text.notes || []) main += `\n          <p class="sheet-text__note">${esc(n)}</p>`;
+    for (const par of text.paragraphs) {
+      main += isQuote(par)
+        ? `\n          <blockquote>${esc(par)}</blockquote>`
+        : `\n          <p>${esc(par)}</p>`;
+    }
+    main += `\n        </div>
+      </details>`;
   }
 
   if (e.riddle) {
