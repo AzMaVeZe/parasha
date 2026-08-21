@@ -97,13 +97,16 @@ def tidy(text):
 # שהדף הועבר אליהם). הריפו ציבורי והטקסט מיועד לאתר, ולכן הן יורדות כאן.
 EMAIL = re.compile(r'\b[\w.+-]+ ?@ ?[\w.-]+\.[A-Za-z]{2,}\.?')
 
+UNREADABLE = '□'
+
 
 def join(rows):
     """PDF שומר כל שורה בנפרד. מחברים חזרה לפסקה אחת."""
     text = ' '.join(rows)
     text = EMAIL.sub('[כתובת מייל]', text)
     text = re.sub(r'[‎‏‪-‮]', '', text)   # סימני כיווניות
-    text = text.replace('\x00', '-')      # גליף חסר במקור; ראו notes
+    # גליף שחסר כבר בקובץ המקור ומוצג גם שם כריבוע ריק. לא מנחשים מה היה שם.
+    text = text.replace('\x00', UNREADABLE).replace('�', UNREADABLE)
     text = re.sub(r'[ \t\xa0]+', ' ', text)
     return tidy(text).strip()
 
@@ -120,8 +123,9 @@ def extract(path):
              if len(p) >= MIN_PARAGRAPH and len(re.findall(r'[א-תA-Za-z]', p)) >= 3]
     body = '\n\n'.join(paras)
     notes = []
-    if '\x00' in body:
-        notes.append('בקובץ המקור מופיע ריבוע ריק (גליף חסר). הוצג כמקף.')
+    if UNREADABLE in body:
+        notes.append(f'{body.count(UNREADABLE)} תווים חסרים כבר בקובץ המקור — הוא מציג '
+                     f'שם ריבוע ריק. סומנו כאן {UNREADABLE} ולא נוחשו.')
     left = sorted({c for c in body if c not in '\n\t'
                    and (ord(c) < 32 or unicodedata.category(c) in ('Cc', 'Co'))})
     if left:
