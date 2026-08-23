@@ -464,7 +464,7 @@ function parashaPage(e) {
     imageAlt: 'העמוד הראשון של ' + e.title,
     noindex: !e.indexable,
     jsonld: { '@context': 'https://schema.org', '@graph': graph },
-  }) + '\n' + main + '\n' + footer + '\n</body>\n</html>\n';
+  }) + '\n' + main + '\n' + footer + '\n<script src="/js/a11y.js"></script>\n</body>\n</html>\n';
 }
 
 /* ---------- מפת הארכיון: /p/ ---------- */
@@ -537,7 +537,7 @@ function indexPage() {
     description: 'מפת הארכיון: כל ' + entries.length + ' דפי פרשת השבוע והחגים מאת ' + AUTHOR + ' — לכל דף עמוד משלו, לצפייה, להורדה ולהאזנה.',
     url: url,
     jsonld: { '@context': 'https://schema.org', '@graph': graph },
-  }) + '\n' + main + '\n' + footer + '\n</body>\n</html>\n';
+  }) + '\n' + main + '\n' + footer + '\n<script src="/js/a11y.js"></script>\n</body>\n</html>\n';
 }
 
 /* ---------- sitemap.xml ---------- */

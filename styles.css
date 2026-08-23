@@ -310,3 +310,73 @@ html{scroll-behavior:smooth}
 .riddle-box__img{display:block;width:100%;max-width:340px;height:auto;margin:4px auto 0;
   border-radius:var(--radius-s);background:#fff}
 .riddle-box__text{margin-top:10px;white-space:pre-line}
+
+/* ---------- סרגל נגישות (js/a11y.js, לפי ת"י 5568) ---------- */
+/* הכפתור צף מימין למטה; "חזרה למעלה" יושב משמאל, כך שאין התנגשות.
+   z נמוך מחלונות ה-PDF וההרשמה (50) — כשמודאל פתוח, הסרגל מאחוריו. */
+.a11y{position:fixed;inset-inline-end:auto;right:20px;bottom:20px;z-index:45;font-family:var(--font-body)}
+.a11y__btn{width:48px;height:48px;border-radius:50%;border:2px solid var(--surface-raised);cursor:pointer;
+  background:var(--blue-700);color:#fff;display:flex;align-items:center;justify-content:center;
+  box-shadow:var(--shadow-raised)}
+.a11y__btn:hover{background:var(--blue-500)}
+.a11y__panel{position:absolute;bottom:56px;right:0;width:240px;background:var(--surface-raised);
+  border:1px solid var(--border-subtle);border-radius:var(--radius-m);box-shadow:var(--shadow-raised);
+  padding:10px;display:flex;flex-direction:column;gap:2px}
+.a11y__title{font-weight:600;font-size:14px;color:var(--text-heading);padding:4px 8px 8px;
+  border-bottom:1px solid var(--border-subtle);margin-bottom:4px}
+.a11y__row{display:flex;align-items:center;justify-content:space-between;gap:12px;width:100%;
+  font:inherit;font-size:14.5px;color:var(--text-body);background:none;border:0;border-radius:var(--radius-s);
+  padding:7px 8px;cursor:pointer;text-align:start}
+.a11y__row:hover{background:var(--blue-100)}
+/* המתג: translateX פיזי בכוונה — הוא אינו מתהפך ב-RTL, ולכן המצב עקבי */
+.a11y__track{flex:none;width:38px;height:22px;border-radius:11px;background:var(--parchment-300);
+  position:relative;transition:background var(--dur) var(--ease)}
+.a11y__thumb{position:absolute;top:3px;left:0;width:16px;height:16px;border-radius:50%;background:#fff;
+  box-shadow:0 1px 2px rgba(0,0,0,.25);transform:translateX(3px);transition:transform var(--dur) var(--ease)}
+.a11y__row[aria-checked="true"] .a11y__track{background:var(--success)}
+.a11y__row[aria-checked="true"] .a11y__thumb{transform:translateX(19px)}
+.a11y__reset{font:inherit;font-size:13.5px;color:var(--primary);background:none;cursor:pointer;
+  border:0;border-top:1px solid var(--border-subtle);margin-top:6px;padding:9px 8px;text-align:start}
+.a11y__decl{font-size:13px;padding:2px 8px 4px}
+
+/* מצבי הנגישות — מוחלים כמחלקות על <html> */
+/* ניגודיות: דריסת משתני הצבע. בלי CSS filter — ראו ההערה ב-js/a11y.js */
+html.a11y-contrast{
+  --surface-page:#000;--surface-card:#0b0b0b;--surface-raised:#151515;--surface-inverse:#000;
+  --text-heading:#fff;--text-body:#fff;--text-muted:#d6d6d6;--text-on-dark:#fff;--text-on-accent:#000;
+  --link:#9ad2ff;--link-hover:#c9e8ff;--primary:#9ad2ff;--accent:#ffd35c;
+  --blue-900:#e2eeff;--blue-700:#9ad2ff;--blue-500:#79bff2;--blue-300:#69859f;--blue-100:#1c1c1c;
+  --gold-700:#ffd35c;--gold-600:#ffd35c;--gold-400:#ffcf40;--gold-100:#1c1c1c;
+  --burgundy-700:#ffb3c0;--burgundy-500:#ff9fb0;--burgundy-100:#1c1c1c;
+  --parchment-50:#0b0b0b;--parchment-100:#000;--parchment-200:#181818;--parchment-300:#5a5a5a;
+  --ink-900:#fff;--ink-700:#ececec;--ink-500:#d6d6d6;--ink-300:#b5b5b5;
+  --border-subtle:#5a5a5a;--kids:#ffb3c0;--success:#7ee787;--danger:#ff9f9f}
+html.a11y-contrast body{background:var(--surface-page)}
+html.a11y-contrast .btn--primary,html.a11y-contrast .btn--gold{color:#000!important}
+/* הכותרת העליונה צבועה בכחול-כהה עם טקסט בהיר קבוע; במצב ניגודיות היא נשארת כהה */
+html.a11y-contrast .site-header,html.a11y-contrast .site-footer{background:#000;border-bottom:1px solid #5a5a5a}
+html.a11y-contrast .hero{background:#000}
+html.a11y-contrast .a11y__btn{background:#ffd35c;color:#000;border-color:#000}
+html.a11y-contrast .riddle-box{border-color:#5a5a5a}
+html.a11y-contrast .parasha-page__preview{background:#fff}
+
+/* גודל תצוגה: zoom משנה את קנה המידה כולו, כולל טקסט שנקבע בפיקסלים */
+html.a11y-font-lg body{zoom:1.15}
+html.a11y-font-sm body{zoom:.88}
+
+html.a11y-readable body,html.a11y-readable body *:not(.icon):not(svg){
+  font-family:Arial,Helvetica,sans-serif!important;letter-spacing:.015em}
+
+html.a11y-links a,
+html.a11y-links button:not([role="switch"]):not(.a11y__btn){
+  outline:2px solid var(--link)!important;outline-offset:1px;text-decoration:underline!important}
+
+html.a11y-headings h1,html.a11y-headings h2,html.a11y-headings h3,html.a11y-headings h4{
+  outline:2px dashed var(--gold-600)!important;outline-offset:5px}
+
+html.a11y-no-anim *,html.a11y-no-anim *::before,html.a11y-no-anim *::after{
+  animation-duration:.001ms!important;transition-duration:.001ms!important}
+html.a11y-no-anim{scroll-behavior:auto!important}
+
+html.a11y-keyboard :focus,html.a11y-keyboard :focus-visible{
+  outline:4px solid var(--danger)!important;outline-offset:3px!important}

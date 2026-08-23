@@ -1,0 +1,10 @@
+{
+  "version": 1,
+  "skills": {
+    "wcag-accessibility-widget": {
+      "source": "skills-il/developer-tools",
+      "sourceType": "github",
+      "computedHash": "085ac8b0fe928ba813fcbae801a242ffd15b8166ef0e677e72d64270965c980c"
+    }
+  }
+}
