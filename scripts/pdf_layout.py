@@ -18,10 +18,18 @@ Y_TOLERANCE = 3.0       # גליפים בהפרש קטן מזה נחשבים ל�
 LTR = set('0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ')
 
 
+MIN_SIZE = 3.0     # קטן מזה אינו נראה בדף, ולכן אינו טקסט
+
+
 def _glyphs(page, expand):
     out = []
     for span in page.get_texttrace():
         if span.get('type') != 0:
+            continue
+        # וורד מותיר בקבצים שרידי שדות ("0F", "PP3F") בגודל נקודה אחת. הם
+        # אינם נראים בדף המודפס, ולכן אינם חלק ממנו. הטקסט הקטן ביותר
+        # שבאמת מופיע בדפים הוא 4pt — כיתוב בתוך תמונת חידה.
+        if span['size'] < MIN_SIZE:
             continue
         for ucs, gid, org, bb in span['chars']:
             s = expand(chr(ucs))

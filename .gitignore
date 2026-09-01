@@ -1,2 +1,6 @@
 
 dist/
+
+# תוצרים מקומיים של scripts/notebook-check.py (נגזרים מ-scripts/sheet-text/)
+scripts/notebook-upload/
+scripts/notebook-answers.md
