@@ -43,6 +43,7 @@ const DATA = global.window.PARASHA_DATA;
 const PDF_SET = new Set(global.window.PDF_FILES || []);
 const RIDDLES = global.window.PARASHA_RIDDLES || {};
 const SHOW_URL = global.window.SPOTIFY_SHOW_URL;
+const FEED_URL = (global.window.PODCAST_FEED_URL || '').trim();
 
 /* ---------- עזרים ---------- */
 const esc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;')
@@ -58,6 +59,20 @@ const SLUG_SRC = "name.replace(/[\"'׳״]/g, '').replace(/\\s+/g, '-')";
 if (!fs.readFileSync(path.join(root, 'js/site.js'), 'utf8').includes(SLUG_SRC)) {
   console.error('שגיאה: pageSlug ב-js/site.js אינו זהה ל-slug() כאן. הקישורים באתר יישברו.');
   process.exit(1);
+}
+
+// ה-JSON-LD של index.html נכתב ביד, ולכן ‎webFeed‎ עלול להיפרד מ-data.js.
+// זו הייתה התקלה: השדה הצביע לעמוד התוכנית בספוטיפיי במקום לפיד. שגיאת בנייה
+// ולא הערה בקוד, כדי שהדבר לא יישכח ברגע שהפיד יידלק.
+{
+  const home = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
+  const inHome = /"webFeed"\s*:\s*"([^"]*)"/.exec(home);
+  if ((inHome ? inHome[1] : '') !== FEED_URL) {
+    console.error('שגיאה: ‎webFeed‎ ב-index.html אינו זהה ל-PODCAST_FEED_URL ב-js/data.js.\n' +
+      `  ב-index.html: ${inHome ? inHome[1] : '(אין שדה)'}\n` +
+      `  ב-data.js:    ${FEED_URL || '(ריק)'}`);
+    process.exit(1);
+  }
 }
 
 // עברית בכתובת עובדת, אבל רק כשהיא מקודדת ב-percent. הכתובת המלאה נכנסת
@@ -231,16 +246,17 @@ const websiteNode = {
   author: { '@id': SITE + '/#author' },
   publisher: { '@id': SITE + '/#author' },
 };
-const podcastNode = SHOW_URL ? {
+/* webFeed מצביע לפיד RSS, לא לעמוד של התוכנית. כל עוד אין פיד — השדה יורד:
+ * כתובת שגויה גרועה מהיעדר השדה, כי מי שמנסה לקרוא אותה כפיד מקבל HTML. */
+const podcastNode = SHOW_URL ? Object.assign({
   '@type': 'PodcastSeries',
   '@id': SITE + '/#podcast',
   name: BRAND + ' — הפודקאסט',
   description: 'פרקי פודקאסט על דפי פרשת השבוע של ' + AUTHOR + '.',
   url: SHOW_URL,
-  webFeed: SHOW_URL,
   inLanguage: 'he-IL',
   author: { '@id': SITE + '/#author' },
-} : null;
+}, FEED_URL ? { webFeed: FEED_URL } : null) : null;
 const baseGraph = () => [websiteNode, personNode].concat(podcastNode ? [podcastNode] : []);
 
 /* ---------- עמוד דף בודד ---------- */
@@ -328,7 +344,9 @@ function parashaPage(e) {
       inLanguage: 'he-IL',
       partOfSeries: { '@id': SITE + '/#podcast' },
       author: { '@id': SITE + '/#author' },
-      associatedMedia: { '@type': 'MediaObject', contentUrl: epUrl },
+      // בלי associatedMedia: הוא אמור להצביע לקובץ השמע עצמו, ואין לנו כזה —
+      // הפרקים מתארחים בספוטיפיי, וכתובת הפרק היא עמוד, לא מדיה. ‎url למעלה
+      // הוא השדה הנכון לעמוד הפרק.
     });
   }
 

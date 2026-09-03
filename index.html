@@ -28,7 +28,12 @@
 <link rel="stylesheet" href="styles.css">
 <!-- נתונים מובנים לאתר, לכותב ולפודקאסט. אותם מזהים (‎#website, #author, #podcast‎)
      מופיעים גם בעמודי הדפים שנוצרים ב-scripts/build-pages.js, וכך הכול נקשר
-     לישות אחת. זהו בלוק נתונים, לא סקריפט — script-src 'self' אינו חוסם אותו. -->
+     לישות אחת. זהו בלוק נתונים, לא סקריפט — script-src 'self' אינו חוסם אותו.
+
+     ל-PodcastSeries אין כאן שדה פיד כל עוד PODCAST_FEED_URL ב-js/data.js ריק:
+     השדה מחייב פיד RSS אמיתי. כשמדליקים את הפיד — להוסיף כאן את השדה עם אותה
+     כתובת, וגם <link rel="alternate" type="application/rss+xml"> בראש העמוד.
+     הבנייה נכשלת עם הסבר אם השניים אינם תואמים. -->
 <script type="application/ld+json">
 {
  "@context": "https://schema.org",
@@ -62,7 +67,6 @@
    "name": "בין הנכתב לנגלה — הפודקאסט",
    "description": "פרקי פודקאסט על דפי פרשת השבוע של אריאל ז'יטניצקי.",
    "url": "https://open.spotify.com/show/033Slu47b23754GaMTuroo",
-   "webFeed": "https://open.spotify.com/show/033Slu47b23754GaMTuroo",
    "inLanguage": "he-IL",
    "author": { "@id": "https://parasha.azma.app/#author" }
   },

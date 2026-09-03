@@ -1,6 +1,13 @@
 // עמוד התוכנית המלא בספוטיפיי (כל הפרקים, לא רק אלה שקושרו לשורה):
 window.SPOTIFY_SHOW_URL = 'https://open.spotify.com/show/033Slu47b23754GaMTuroo';
 
+// פיד ה-RSS של הפודקאסט. ריק עד שיידלק RSS Distribution ב-Spotify for
+// Creators (ראו docs/podcast-distribution.md). זו הכתובת שנכנסת ל-webFeed
+// בנתונים המובנים ול-<link rel="alternate"> — שתיהן חייבות פיד אמיתי, לא
+// עמוד HTML, אחרת מנועי חיפוש ומדריכי פודקאסטים מנסים לפרסר אותו ונכשלים.
+// כשמדליקים: לעדכן כאן, ואותה כתובת גם ב-index.html (הבנייה תזכיר).
+window.PODCAST_FEED_URL = '';
+
 // כתובת ה-Worker שמטפל בהרשמה לרשימת התפוצה (ראו worker/README.md).
 // לדוגמה: 'https://parasha-newsletter.username.workers.dev'
 // כל עוד ריק — טופס ההרשמה מוסתר ומוצגת הודעת "בקרוב".
