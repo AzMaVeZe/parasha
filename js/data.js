@@ -29,7 +29,7 @@ const P = f => 'assets/pdfs/' + f;
 window.PARASHA_DATA = [
  { id: 'bereshit', name: 'ספר בראשית', compilation: P('sefer-בראשית.pdf'), parshiot: [
   { name: 'בראשית', box: B('pztmqj0ulp'), pdf: P('bereshit-בראשית.pdf'), spotify: 'https://open.spotify.com/episode/0lovHgQja3i0nQpSDCNgn3' },
-  { name: 'נח', box: B('8fzottnpz9'), pdf: P('bereshit-נח.pdf') },
+  { name: 'נח', box: B('8fzottnpz9'), pdf: P('bereshit-נח.pdf'), spotify: 'https://open.spotify.com/episode/66dyVIWrqUBKmuRTZh4fBt' },
   { name: 'לך לך', box: B('7taibkmo3b'), pdf: P('bereshit-לך-לך.pdf') },
   { name: 'וירא', box: B('hp2ovnivbq'), pdf: P('bereshit-וירא.pdf') },
   { name: 'חיי שרה', box: B('uaf9u05b67'), pdf: P('bereshit-חיי-שרה.pdf') },
