@@ -1,15 +1,14 @@
 #!/usr/bin/env node
 /* תמונות שער לפרקי הפודקאסט, בעיצוב הקיים של סדרת "בין הנכתב לנגלה" בספוטיפיי:
  * קרם למעלה (פרשת השבוע, תגית הספר, כותרת, פסוק הפתיחה עם פס זהב), ופאנל כחול
- * למטה (שאלה מתוך הדף, שם הכותב והשנה).
+ * למטה (שם הכותב והשנה).
  *
  * כל הטקסט נכתב כאן ב-HTML עם הגופנים של האתר ולא בתוך איור: מודלי תמונה
  * משבשים עברית, וכך הכתיב והניקוד נשארים נכונים.
  *
- * התוכן של כל כרטיס לקוח מהדף עצמו, לא מומצא:
- *   verse     פסוק הפתיחה של הפרשה (בלי ניקוד, כמו בכרטיסים הקיימים)
- *   question  משפט שאלה אחד מהדף, מילה במילה
- *   year      השנה שמודפסת בכותרת הדף
+ * הפסוק והשנה מ-scripts/sheets.mjs. line הוא משפט אופציונלי לפאנל הכחול
+ * (משפט מפתח או תמיהה מהדף, או שאלה שנוסחה לפי התוכן) ונכנס רק אחרי אישור
+ * של אריאל. בלעדיו הפאנל מציג את שם הסדרה.
  *
  * הרצה:
  *   node scripts/make-covers.mjs                 PNG ב-3000×3000 ל-assets/covers/ (נדרש playwright)
@@ -19,19 +18,17 @@ import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
+import { SHEETS } from './sheets.mjs';
 
 const root = path.join(path.dirname(fileURLToPath(import.meta.url)), '..');
 const BYLINE = 'אריאל ז\'יטניצקי';
 const SIZE = 1000;                       // פיקסלים לוגיים; הייצוא מוכפל פי 3
 
+// הפרקים שיש להם כרטיס: שם הקובץ (כמו ה-PDF), שם הפרשה, הספר, ו-line אם אושר
 const COVERS = [
-  { file: 'bereshit-בראשית', title: 'בראשית', book: 'ספר בראשית',
-    verse: 'בראשית ברא אלהים את השמים ואת הארץ',
-    question: 'ולשם מה לנו הדיבור בכלל?', year: 'תש״ע' },
-  { file: 'bereshit-נח', title: 'נח', book: 'ספר בראשית',
-    verse: 'נח איש צדיק תמים היה בדרתיו',
-    question: 'מדוע הקב״ה חוזר על הציוויים בשנית?', year: 'תש״ע' },
-];
+  { file: 'bereshit-בראשית', title: 'בראשית', book: 'ספר בראשית' },
+  { file: 'bereshit-נח', title: 'נח', book: 'ספר בראשית' },
+].map(c => ({ ...SHEETS[c.title], ...c }));
 
 /* הכרטיס עצמו: סגנון inline בלבד, כדי שיהיה ניתן לעריכה בלוח העיצוב */
 const card = c => `<div style="width:${SIZE}px;height:${SIZE}px;box-sizing:border-box;display:flex;flex-direction:column;background:#F7F2E7;font-family:'Assistant',Arial,sans-serif;overflow:hidden">
@@ -46,11 +43,13 @@ const card = c => `<div style="width:${SIZE}px;height:${SIZE}px;box-sizing:borde
     </div>
   </div>
   <div style="flex:0 0 344px;box-sizing:border-box;background:#14294D;padding:60px 76px 56px;display:flex;flex-direction:column;justify-content:flex-end;gap:34px">
-    <div style="font-family:'Frank Ruhl Libre',Georgia,serif;font-size:60px;font-weight:700;line-height:1.28;color:#F7F2E7">${c.question}</div>
+    ${c.line
+      ? `<div style="font-family:'Frank Ruhl Libre',Georgia,serif;font-size:60px;font-weight:700;line-height:1.28;color:#F7F2E7;text-wrap:balance">${c.line}</div>`
+      : `<div style="font-family:'Frank Ruhl Libre',Georgia,serif;font-size:72px;font-weight:900;line-height:1.1;color:#F7F2E7">בין הנכתב לנגלה</div>`}
     <div style="display:flex;align-items:center;gap:18px;font-size:32px">
       <span style="color:#DCE4F0">${BYLINE}</span>
-      <span style="color:#D4A93C">•</span>
-      <span style="color:#D4A93C;font-weight:600">${c.year}</span>
+${c.year ? `      <span style="color:#D4A93C">•</span>
+      <span style="color:#D4A93C;font-weight:600">${c.year}</span>` : ''}
     </div>
   </div>
 </div>`;
