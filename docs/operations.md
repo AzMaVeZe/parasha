@@ -82,8 +82,9 @@ npx wrangler secret put ADMIN_KEY
 (נדרש `playwright`). שלושת השדות של התוכן נלקחים מהדף עצמו ולא מנוסחים מחדש:
 
 - `verse` — פסוק הפתיחה של הפרשה, בלי ניקוד כמו בכרטיסים הקיימים
-- `question` — משפט שאלה אחד מהדף, מילה במילה (`scripts/sheet-text/` לחיפוש)
-- `year` — השנה שבכותרת הדף. היא מצוירת כתמונה ולכן לא תמיד נכנסת לטקסט שחולץ: להסתכל בדף
+- `question` — משפט שאלה אחד מהדף, מילה במילה. ההצעה המאושרת לכל פרשה ב-`scripts/cover-questions.json`
+  (`flags`: `part` חלק ממשפט, `mark` נוסף סימן שאלה, `quote` ציטוט שבדף, `long`/`weak` לבדוק שוב)
+- `verse`, `year` — כבר קיימים לכל פרשה ב-`SHEETS` שב-`scripts/make-share.mjs`
 
 לעריכה ויזואלית: `node scripts/make-covers.mjs --dc <תיקייה>` מפיק לוחות עבור Claude Design.
 הכיתוב נכתב ב-HTML ולא בתוך איור, כי מודלי תמונה משבשים עברית.
