@@ -5,9 +5,8 @@
  *   assets/share/<שם>.jpg     לכל פרשה וחג, לפי slug של העמוד (/p/<שם>/)
  *
  * 1200×630, היחס שווטסאפ מציג כתמונה גדולה. העיצוב של כרטיסי הפודקאסט
- * (scripts/make-covers.mjs) בפריסה רוחבית: קרם מימין עם שם הפרשה, פאנל כחול
- * משמאל. לפרשה שיש לה כרטיס פודקאסט — הפסוק, השאלה והשנה מהכרטיס. לשאר —
- * העמוד הראשון של הדף עצמו (assets/previews), כדי לא להמציא תוכן בשם הכותב.
+ * (scripts/make-covers.mjs) בפריסה רוחבית: קרם מימין עם שם הפרשה, פסוק הפתיחה
+ * והשנה; פאנל כחול משמאל ובו העמוד הראשון של הדף עצמו (assets/previews).
  *
  * הרצה (נדרש playwright):  node scripts/make-share.mjs
  * אחרי הוספת כרטיס ב-make-covers.mjs או דף חדש — להריץ שוב ולבנות.
@@ -17,7 +16,6 @@ import os from 'node:os';
 import path from 'node:path';
 import vm from 'node:vm';
 import { fileURLToPath, pathToFileURL } from 'node:url';
-import { COVERS } from './make-covers.mjs';
 
 const root = path.join(path.dirname(fileURLToPath(import.meta.url)), '..');
 const W = 1200, H = 630;
@@ -28,6 +26,73 @@ const NAVY = '#14294D', CREAM = '#F7F2E7', GOLD = '#D4A93C', GOLD_TEXT = '#8F6A1
 // אותו slug כמו ב-scripts/build-pages.js וב-js/site.js
 const slug = name => name.replace(/["'׳״]/g, '').replace(/\s+/g, '-');
 const fileUrl = rel => pathToFileURL(path.join(root, rel)).href;
+
+/* פסוק הפתיחה והשנה, לפי שם העמוד ב-js/data.js.
+ * הפסוק: תחילת הפרשה בנוסח לנינגרד (openscriptures/morphhb), בלי ניקוד וטעמים,
+ *   ושם ה' כ"ה׳" — הקטע שבו מופיע שם הפרשה.
+ * השנה: כפי שהיא כתובה בעיגול שבכותרת הדף, או בשורת הכותרת כשאין עיגול.
+ *   ריקה כשבדף אין שנה. בחגים אין פסוק. */
+const SHEETS = {
+  "בראשית": { verse: "בראשית ברא אלהים את השמים ואת הארץ", year: "תש״ע" },
+  "נח": { verse: "נח איש צדיק תמים היה בדרתיו", year: "תש״ע" },
+  "לך לך": { verse: "לך לך מארצך וממולדתך ומבית אביך", year: "תש״ע" },
+  "וירא": { verse: "וירא אליו ה׳ באלני ממרא", year: "תש״ע" },
+  "חיי שרה": { verse: "ויהיו חיי שרה מאה שנה ועשרים שנה ושבע שנים", year: "תש״ע" },
+  "תולדות": { verse: "ואלה תולדת יצחק בן אברהם", year: "תש״ע" },
+  "ויצא": { verse: "ויצא יעקב מבאר שבע וילך חרנה", year: "תש״ע" },
+  "וישלח": { verse: "וישלח יעקב מלאכים לפניו אל עשו אחיו", year: "תש״ע" },
+  "וישב": { verse: "וישב יעקב בארץ מגורי אביו בארץ כנען", year: "תש״ע" },
+  "מקץ": { verse: "ויהי מקץ שנתים ימים ופרעה חלם", year: "תש״ע" },
+  "ויגש": { verse: "ויגש אליו יהודה ויאמר בי אדני", year: "תש״ע" },
+  "ויחי": { verse: "ויחי יעקב בארץ מצרים שבע עשרה שנה", year: "תש״ע" },
+  "שמות": { verse: "ואלה שמות בני ישראל הבאים מצרימה", year: "תש״ע" },
+  "וארא": { verse: "וארא אל אברהם אל יצחק ואל יעקב באל שדי", year: "" },
+  "בא": { verse: "בא אל פרעה כי אני הכבדתי את לבו", year: "" },
+  "בשלח": { verse: "ויהי בשלח פרעה את העם", year: "תשס״ט" },
+  "יתרו": { verse: "וישמע יתרו כהן מדין חתן משה", year: "תש״ע" },
+  "משפטים": { verse: "ואלה המשפטים אשר תשים לפניהם", year: "תש״ע" },
+  "תרומה": { verse: "דבר אל בני ישראל ויקחו לי תרומה", year: "תשס״ט" },
+  "תצוה": { verse: "ואתה תצוה את בני ישראל ויקחו אליך שמן זית זך", year: "תשס״ט" },
+  "כי תשא": { verse: "כי תשא את ראש בני ישראל לפקדיהם", year: "" },
+  "ויקהל": { verse: "ויקהל משה את כל עדת בני ישראל", year: "תשס״ט" },
+  "פקודי": { verse: "אלה פקודי המשכן משכן העדת", year: "תשס״ט" },
+  "ויקרא": { verse: "ויקרא אל משה וידבר ה׳ אליו מאהל מועד", year: "תשס״ט" },
+  "צו": { verse: "צו את אהרן ואת בניו לאמר זאת תורת העלה", year: "" },
+  "שמיני": { verse: "ויהי ביום השמיני קרא משה לאהרן ולבניו", year: "תשס״ט" },
+  "תזריע": { verse: "אשה כי תזריע וילדה זכר", year: "תשס״ט" },
+  "מצורע": { verse: "זאת תהיה תורת המצרע ביום טהרתו", year: "תשס״ט" },
+  "אחרי מות": { verse: "אחרי מות שני בני אהרן בקרבתם לפני ה׳ וימתו", year: "תשס״ט" },
+  "קדושים": { verse: "קדשים תהיו כי קדוש אני ה׳ אלהיכם", year: "תשס״ט" },
+  "אמור": { verse: "אמר אל הכהנים בני אהרן ואמרת אלהם", year: "תשס״ט" },
+  "בהר סיני": { verse: "וידבר ה׳ אל משה בהר סיני לאמר", year: "תשס״ט" },
+  "בחוקותי": { verse: "אם בחקתי תלכו ואת מצותי תשמרו", year: "תשס״ט" },
+  "במדבר": { verse: "וידבר ה׳ אל משה במדבר סיני באהל מועד", year: "תשס״ט" },
+  "נשא": { verse: "נשא את ראש בני גרשון גם הם", year: "תשס״ט" },
+  "בהעלותך": { verse: "בהעלתך את הנרת אל מול פני המנורה", year: "תשס״ט" },
+  "שלח לך": { verse: "שלח לך אנשים ויתרו את ארץ כנען", year: "תשס״ט" },
+  "קרח": { verse: "ויקח קרח בן יצהר בן קהת בן לוי", year: "תשס״ט" },
+  "חקת": { verse: "זאת חקת התורה אשר צוה ה׳ לאמר", year: "תשס״ט" },
+  "בלק": { verse: "וירא בלק בן צפור את כל אשר עשה ישראל לאמרי", year: "תשס״ט" },
+  "פינחס": { verse: "פינחס בן אלעזר בן אהרן הכהן השיב את חמתי", year: "תשס״ט" },
+  "מטות": { verse: "וידבר משה אל ראשי המטות לבני ישראל", year: "תשס״ט" },
+  "מסעי": { verse: "אלה מסעי בני ישראל אשר יצאו מארץ מצרים", year: "תשס״ט" },
+  "דברים": { verse: "אלה הדברים אשר דבר משה אל כל ישראל", year: "תשס״ט" },
+  "ואתחנן": { verse: "ואתחנן אל ה׳ בעת ההוא לאמר", year: "" },
+  "עקב": { verse: "והיה עקב תשמעון את המשפטים האלה", year: "תשס״ט" },
+  "ראה": { verse: "ראה אנכי נתן לפניכם היום ברכה וקללה", year: "תשס״ט" },
+  "שופטים": { verse: "שפטים ושטרים תתן לך בכל שעריך", year: "תשס״ט" },
+  "כי תצא": { verse: "כי תצא למלחמה על איביך", year: "תשס״ט" },
+  "כי תבוא": { verse: "והיה כי תבוא אל הארץ אשר ה׳ אלהיך נתן לך", year: "תשס״ט" },
+  "ניצבים": { verse: "אתם נצבים היום כלכם לפני ה׳ אלהיכם", year: "תשס״ט" },
+  "וילך": { verse: "וילך משה וידבר את הדברים האלה אל כל ישראל", year: "תשס״ט" },
+  "האזינו": { verse: "האזינו השמים ואדברה ותשמע הארץ אמרי פי", year: "תש״ע" },
+  "וזאת הברכה": { verse: "וזאת הברכה אשר ברך משה איש האלהים", year: "תש״ע" },
+  "ראש השנה": { verse: "", year: "תשס״ט" },
+  "סוכות": { verse: "", year: "תש״ע" },
+  "הושענא רבה": { verse: "", year: "תש״ע" },
+  "תשעה באב": { verse: "", year: "תשס״ט" },
+  "ט\"ו באב": { verse: "", year: "תש״ע" },
+};
 
 const ctx = { window: {} };
 vm.runInNewContext(fs.readFileSync(path.join(root, 'js/data.js'), 'utf8'), ctx);
@@ -40,7 +105,7 @@ for (const sefer of ctx.window.PARASHA_DATA) {
     pages.push({
       name: p.name, book: sefer.name, preview,
       chag: sefer.id === 'chagim',
-      cover: stem ? COVERS.find(c => c.file === stem) : null,
+      ...(SHEETS[p.name] || {}),
     });
   }
 }
@@ -68,26 +133,17 @@ const bottomRow = year => `<div style="display:flex;align-items:center;gap:14px;
 </div>`;
 
 function pageCard(pg) {
-  const c = pg.cover;
   // בחג השם של "הספר" הוא "חגים ומועדים" — כותרת, בלי תגית שחוזרת עליה
   const start = `${pg.chag ? topRow(pg.book, '') : topRow('פרשת השבוע', pg.book)}
   <div style="display:flex;flex-direction:column;gap:22px">
-    <div data-fit style="${serif};font-size:150px;font-weight:900;line-height:1;color:${NAVY};white-space:nowrap">${pg.name}</div>${c ? `
-    <div style="border-inline-start:5px solid ${GOLD};padding-inline-start:20px;${serif};font-size:32px;font-weight:500;line-height:1.35;color:#26241E">${c.verse}</div>` : `
-    <div style="font-size:30px;color:#4A4636">${pg.preview ? BRAND + ' — ' : ''}${pg.chag ? 'דף לשולחן החג' : 'דף לשולחן שבת'}</div>`}
+    <div data-fit style="${serif};font-size:150px;font-weight:900;line-height:1;color:${NAVY};white-space:nowrap">${pg.name}</div>${pg.verse ? `
+    <div style="border-inline-start:5px solid ${GOLD};padding-inline-start:20px;${serif};font-size:32px;font-weight:500;line-height:1.35;color:#26241E">${pg.verse}</div>` : `
+    <div style="font-size:30px;color:#4A4636">${BRAND} — ${pg.chag ? 'דף לשולחן החג' : 'דף לשולחן שבת'}</div>`}
   </div>
-  ${bottomRow(c && c.year)}`;
-  let end;
-  if (c) {
-    end = `<div style="position:absolute;inset:0;padding:54px 52px 50px;display:flex;flex-direction:column;justify-content:space-between">
-      <div style="font-size:24px;font-weight:600;color:${GOLD}">${BRAND}</div>
-      <div style="${serif};font-size:48px;font-weight:700;line-height:1.3;color:${CREAM}">${c.question}</div>
-    </div>`;
-  } else if (pg.preview) {
-    end = `<div style="position:absolute;top:58px;inset-inline:0;display:flex;justify-content:center">${sheet(pg.preview, 340, -2.5)}</div>`;
-  } else {
-    end = `<div style="position:absolute;inset:0;display:flex;align-items:center;padding:52px;${serif};font-size:58px;font-weight:900;line-height:1.15;color:${CREAM}">${BRAND}</div>`;
-  }
+  ${bottomRow(pg.year)}`;
+  const end = pg.preview
+    ? `<div style="position:absolute;top:58px;inset-inline:0;display:flex;justify-content:center">${sheet(pg.preview, 340, -2.5)}</div>`
+    : `<div style="position:absolute;inset:0;display:flex;align-items:center;padding:52px;${serif};font-size:58px;font-weight:900;line-height:1.15;color:${CREAM}">${BRAND}</div>`;
   return shell(start, end);
 }
 
