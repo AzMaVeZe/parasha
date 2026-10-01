@@ -14,6 +14,8 @@
  * הרצה:
  *   node scripts/make-covers.mjs                 PNG ב-3000×3000 ל-assets/covers/ (נדרש playwright)
  *   node scripts/make-covers.mjs --dc <תיקייה>   לוחות .dc.html ל-Claude Design
+ *
+ * אותם נתונים משמשים גם את תמונות השיתוף לווטסאפ (scripts/make-share.mjs).
  */
 import fs from 'node:fs';
 import os from 'node:os';
@@ -24,7 +26,7 @@ const root = path.join(path.dirname(fileURLToPath(import.meta.url)), '..');
 const BYLINE = 'אריאל ז\'יטניצקי';
 const SIZE = 1000;                       // פיקסלים לוגיים; הייצוא מוכפל פי 3
 
-const COVERS = [
+export const COVERS = [
   { file: 'bereshit-בראשית', title: 'בראשית', book: 'ספר בראשית',
     verse: 'בראשית ברא אלהים את השמים ואת הארץ',
     question: 'ולשם מה לנו הדיבור בכלל?', year: 'תש״ע' },
@@ -84,8 +86,11 @@ class Component extends DCLogic {
 </html>
 `;
 
+const isMain = process.argv[1] && import.meta.url === pathToFileURL(path.resolve(process.argv[1])).href;
 const dcIdx = process.argv.indexOf('--dc');
-if (dcIdx > -1) {
+if (!isMain) {
+  // יובא כספרייה (scripts/make-share.mjs) — רק הנתונים
+} else if (dcIdx > -1) {
   const dir = path.resolve(process.argv[dcIdx + 1] || '.');
   fs.mkdirSync(path.join(dir, 'project'), { recursive: true });
   const names = COVERS.map((c, i) => ({ name: (i ? `Cover${i + 1}` : 'Main') + '.dc.html', c }));

@@ -773,6 +773,12 @@
     const noteEl = document.getElementById('parasha-page-note');
     noteEl.textContent = p.note || '';
     noteEl.hidden = !p.note;
+    // הכתובת הסטטית ולא #p= — ממנה ווטסאפ לוקח את תמונת השיתוף של הפרשה
+    // (אותו קישור כמו waHref ב-scripts/build-pages.js)
+    const share = document.getElementById('parasha-page-share');
+    share.href = 'https://wa.me/?text=' + encodeURIComponent(
+      title + ' — בין הנכתב לנגלה\nhttps://parasha.azma.app' + pageHref(name));
+    share.setAttribute('aria-label', 'שיתוף ' + title + ' בווטסאפ (נפתח בחלון חדש)');
 
     const doc = document.getElementById('parasha-page-doc');
     const actions = document.getElementById('parasha-page-actions');

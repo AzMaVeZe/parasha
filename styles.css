@@ -196,6 +196,8 @@ html{scroll-behavior:smooth}
   border-bottom:var(--rule-gold);padding-bottom:14px;margin-bottom:24px;flex-wrap:wrap}
 .parasha-page__kicker{font-size:14px;color:var(--gold-700);font-weight:600;letter-spacing:.03em;margin-bottom:4px}
 .parasha-page__head h1{margin:0;font-size:var(--fs-h1)}
+.parasha-page__tools{display:flex;align-items:center;gap:10px;flex-wrap:wrap;align-self:center}
+.share-wa .icon{color:#1DA851}
 .parasha-page__grid{display:grid;grid-template-columns:1.4fr 1fr;gap:40px;align-items:start}
 .parasha-page__main{display:flex;flex-direction:column;gap:20px}
 .parasha-page__preview{display:block;width:100%;max-width:640px;border:var(--border-card);border-radius:var(--radius-m);

@@ -95,9 +95,26 @@ function sheetText(pdf) {
   return t.paragraphs && t.paragraphs.length ? t : null;
 }
 const isQuote = s => (s.match(NIKUD) || []).length > s.length * 0.08;
+// תמונת השיתוף של העמוד (scripts/make-share.mjs). מה שווטסאפ מציג כששולחים
+// את הקישור; בלעדיה — תמונת האתר הכללית.
+const sharePath = name => 'assets/share/' + slug(name) + '.jpg';
+// ?v= לפי תוכן הקובץ: ווטסאפ שומר תמונה לפי הכתובת, כך שתמונה שהוחלפה
+// (למשל כשנוסף לפרשה כרטיס פודקאסט) נטענת מחדש.
+const shareImage = e => {
+  const rel = sharePath(e.name);
+  if (!fileHere(rel)) return null;
+  const v = require('crypto').createHash('sha1').update(fs.readFileSync(path.join(root, rel))).digest('hex').slice(0, 8);
+  return abs(rel) + '?v=' + v;
+};
 const previewPath = p => p.replace('assets/pdfs/', 'assets/previews/').replace(/\.pdf$/i, '.jpg');
 const fileHere = rel => fs.existsSync(path.join(root, rel));
 const episodeId = url => { const m = /open\.spotify\.com\/episode\/([A-Za-z0-9]+)/.exec(url || ''); return m ? m[1] : null; };
+
+/* שיתוף בווטסאפ: תמיד הכתובת הסטטית /p/<שם>/ ולא #p=. ווטסאפ קורא את
+ * og:image מהעמוד שבקישור, ומה שאחרי # לא מגיע לשרת — כך כל פרשה מגיעה
+ * עם תמונת השיתוף שלה. js/site.js בונה את אותו קישור בתוך האתר. */
+const waText = (title, url) => title + ' — ' + BRAND + '\n' + url;
+const waHref = e => 'https://wa.me/?text=' + encodeURIComponent(waText(e.title, e.url));
 
 const isChag = sefer => sefer.id === 'chagim';
 const rowTitle = (sefer, p) => (isChag(sefer) ? p.name : 'פרשת ' + p.name);
@@ -189,7 +206,9 @@ function head(o) {
   const robots = o.noindex
     ? 'noindex, follow'
     : 'index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1';
-  const image = o.image || abs('assets/og-image.png');
+  // כל תמונות השיתוף 1200×630 (scripts/make-share.mjs), ולכן המידות קבועות.
+  // ?v= משתנה כשהתמונה מוחלפת: ווטסאפ ופייסבוק שומרים תמונה לפי הכתובת שלה.
+  const image = o.image || abs('assets/og-image.png?v=2');
   return `<!DOCTYPE html>
 <html lang="he" dir="rtl">
 <head>
@@ -208,12 +227,14 @@ function head(o) {
 <meta property="og:description" content="${esc(o.description)}">
 <meta property="og:url" content="${esc(o.url)}">
 <meta property="og:image" content="${esc(image)}">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="${esc(o.imageAlt || BRAND_FULL)}">
 <meta property="og:locale" content="he_IL">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="${esc(o.ogTitle || o.title)}">
 <meta name="twitter:description" content="${esc(o.description)}">
-<meta name="twitter:image" content="${esc(abs('assets/og-image.png'))}">
+<meta name="twitter:image" content="${esc(image)}">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="icon" href="/favicon.png" type="image/png" sizes="48x48">
 <link rel="stylesheet" href="/styles.css">
@@ -365,8 +386,11 @@ function parashaPage(e) {
     <div>
       <div class="parasha-page__kicker">${esc(e.sefer.name)}</div>
       <h1>${esc(e.title)}</h1>
-    </div>${e.note ? `
-    <span class="parasha-row__note">${esc(e.note)}</span>` : ''}
+    </div>
+    <div class="parasha-page__tools">${e.note ? `
+      <span class="parasha-row__note">${esc(e.note)}</span>` : ''}
+      <a class="btn btn--secondary btn--sm share-wa" href="${esc(waHref(e))}" target="_blank" rel="noopener noreferrer" aria-label="שיתוף ${esc(e.title)} בווטסאפ (נפתח בחלון חדש)">${iconSpan('whatsapp', 16)}שיתוף</a>
+    </div>
   </div>
 
   <div class="parasha-page__grid">
@@ -478,8 +502,8 @@ function parashaPage(e) {
     description: metaDescription(e),
     url: url,
     ogType: 'article',
-    image: previewUrl,
-    imageAlt: 'העמוד הראשון של ' + e.title,
+    image: shareImage(e) || undefined,
+    imageAlt: e.title + ' — ' + BRAND,
     noindex: !e.indexable,
     jsonld: { '@context': 'https://schema.org', '@graph': graph },
   }) + '\n' + main + '\n' + footer + '\n<script src="/js/a11y.js"></script>\n</body>\n</html>\n';
