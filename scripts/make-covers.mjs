@@ -17,6 +17,7 @@
 import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
+import vm from 'node:vm';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { SHEETS } from './sheets.mjs';
 
@@ -24,22 +25,37 @@ const root = path.join(path.dirname(fileURLToPath(import.meta.url)), '..');
 const BYLINE = 'אריאל ז\'יטניצקי';
 const SIZE = 1000;                       // פיקסלים לוגיים; הייצוא מוכפל פי 3
 
-// הפרקים שיש להם כרטיס: שם הקובץ (כמו ה-PDF), שם הפרשה, הספר, ו-line אם אושר
-const COVERS = [
-  { file: 'bereshit-בראשית', title: 'בראשית', book: 'ספר בראשית' },
-  { file: 'bereshit-נח', title: 'נח', book: 'ספר בראשית' },
-].map(c => ({ ...SHEETS[c.title], ...c }));
+// כרטיס לכל דף שב-js/data.js: דף אחד יכול לשמש שתי פרשות (ויקהל–פקודי), ואז
+// הכותרת מחברת את שתיהן והפסוק הוא של הראשונה. LINES — המשפט לפאנל הכחול,
+// לפי שם הקובץ; נכנס רק אחרי שאריאל אישר אותו.
+const LINES = {};
+const ctx = { window: {} };
+vm.runInNewContext(fs.readFileSync(path.join(root, 'js/data.js'), 'utf8'), ctx);
+const COVERS = [];
+for (const sefer of ctx.window.PARASHA_DATA) {
+  for (const p of sefer.parshiot) {
+    if (!p.pdf) continue;
+    const file = path.basename(p.pdf, '.pdf');
+    const seen = COVERS.find(c => c.file === file);
+    if (seen) {
+      if (sefer.id !== 'chagim' && seen.book === sefer.name) seen.title += '–' + p.name;
+      continue;
+    }
+    COVERS.push({ file, title: p.name.replace(/(?<=[א-ת])"(?=[א-ת])/g, '״'), book: sefer.id === 'chagim' ? '' : sefer.name,
+      ...SHEETS[p.name], line: LINES[file] || '' });
+  }
+}
 
 /* הכרטיס עצמו: סגנון inline בלבד, כדי שיהיה ניתן לעריכה בלוח העיצוב */
 const card = c => `<div style="width:${SIZE}px;height:${SIZE}px;box-sizing:border-box;display:flex;flex-direction:column;background:#F7F2E7;font-family:'Assistant',Arial,sans-serif;overflow:hidden">
   <div style="flex:1 1 0;display:flex;flex-direction:column;justify-content:space-between;padding:72px 76px 56px">
     <div style="display:flex;justify-content:space-between;align-items:center">
-      <div style="font-size:36px;font-weight:700;color:#14294D;letter-spacing:.01em">פרשת השבוע</div>
-      <div style="font-size:28px;font-weight:600;color:#8F6A10;border:2px solid #B8860B;border-radius:999px;padding:6px 28px">${c.book}</div>
+      <div style="font-size:36px;font-weight:700;color:#14294D;letter-spacing:.01em">${c.book ? 'פרשת השבוע' : 'חגים ומועדים'}</div>
+${c.book ? `      <div style="font-size:28px;font-weight:600;color:#8F6A10;border:2px solid #B8860B;border-radius:999px;padding:6px 28px">${c.book}</div>` : ''}
     </div>
     <div style="display:flex;flex-direction:column;gap:34px">
-      <div style="font-family:'Frank Ruhl Libre',Georgia,serif;font-size:200px;font-weight:900;line-height:1;color:#14294D">${c.title}</div>
-      <div style="border-inline-start:6px solid #D4A93C;padding-inline-start:24px;font-family:'Frank Ruhl Libre',Georgia,serif;font-size:42px;font-weight:500;line-height:1.35;color:#26241E">${c.verse}</div>
+      <div style="font-family:'Frank Ruhl Libre',Georgia,serif;font-size:200px;font-weight:900;line-height:1;color:#14294D;white-space:nowrap" data-fit>${c.title}</div>
+      ${c.verse ? `<div style="border-inline-start:6px solid #D4A93C;padding-inline-start:24px;font-family:'Frank Ruhl Libre',Georgia,serif;font-size:42px;font-weight:500;line-height:1.35;color:#26241E">${c.verse}</div>` : ''}
     </div>
   </div>
   <div style="flex:0 0 344px;box-sizing:border-box;background:#14294D;padding:60px 76px 56px;display:flex;flex-direction:column;justify-content:flex-end;gap:34px">
@@ -104,7 +120,14 @@ if (dcIdx > -1) {
     fs.writeFileSync(tmp, `<!doctype html><html lang="he" dir="rtl"><head><meta charset="utf-8">
       <link rel="stylesheet" href="${fonts}"><style>body{margin:0}</style></head><body>${card(c)}</body></html>`);
     await p.goto(pathToFileURL(tmp).href);
-    await p.evaluate(() => document.fonts.ready);
+    await p.evaluate(async () => {
+      await document.fonts.ready;
+      // שם ארוך (אחרי מות–קדושים) מוקטן עד שהוא נכנס בשורה אחת
+      for (const el of document.querySelectorAll('[data-fit]')) {
+        let size = parseFloat(getComputedStyle(el).fontSize);
+        while (el.scrollWidth > el.parentElement.clientWidth && size > 80) el.style.fontSize = (size -= 6) + 'px';
+      }
+    });
     await p.waitForTimeout(300);
     await p.screenshot({ path: path.join(out, c.file + '.png') });
     await p.close();

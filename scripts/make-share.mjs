@@ -37,7 +37,7 @@ for (const sefer of ctx.window.PARASHA_DATA) {
     const preview = stem && fs.existsSync(path.join(root, 'assets/previews', stem + '.jpg'))
       ? 'assets/previews/' + stem + '.jpg' : null;
     pages.push({
-      name: p.name, book: sefer.name, preview,
+      name: p.name.replace(/(?<=[א-ת])"(?=[א-ת])/g, '״'), book: sefer.name, preview,
       chag: sefer.id === 'chagim',
       ...(SHEETS[p.name] || {}),
     });
