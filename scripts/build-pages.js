@@ -28,9 +28,9 @@ const BRAND_FULL = 'בין הנכתב לנגלה — על פרשת השבוע';
 const TAGLINE = 'דפי פרשת השבוע לצפייה, להורדה ולהדפסה לשולחן שבת ולהאזנה';
 
 /* אותו CSP שיושב ב-index.html וב-_headers. שלושתם חייבים להישאר תואמים. */
-const CSP = "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; " +
+const CSP = "default-src 'self'; script-src 'self' https://static.cloudflareinsights.com/beacon.min.js; style-src 'self' 'unsafe-inline'; " +
   "font-src 'self'; img-src 'self' data:; media-src 'self'; " +
-  "connect-src 'self' https://www.hebcal.com https://parasha-newsletter.azma.workers.dev; " +
+  "connect-src 'self' https://www.hebcal.com https://parasha-newsletter.azma.workers.dev https://cloudflareinsights.com; " +
   "frame-src 'self' https://open.spotify.com; object-src 'none'; base-uri 'self'; form-action 'self'";
 
 /* ---------- טעינת הנתונים ---------- */
@@ -506,7 +506,7 @@ function parashaPage(e) {
     imageAlt: e.title + ' — ' + BRAND,
     noindex: !e.indexable,
     jsonld: { '@context': 'https://schema.org', '@graph': graph },
-  }) + '\n' + main + '\n' + footer + '\n<script src="/js/a11y.js"></script>\n</body>\n</html>\n';
+  }) + '\n' + main + '\n' + footer + '\n<script src="/js/a11y.js"></script>\n<script src="/js/analytics.js"></script>\n</body>\n</html>\n';
 }
 
 /* ---------- מפת הארכיון: /p/ ---------- */
@@ -579,7 +579,7 @@ function indexPage() {
     description: 'מפת הארכיון: כל ' + entries.length + ' דפי פרשת השבוע והחגים מאת ' + AUTHOR + ' — לכל דף עמוד משלו, לצפייה, להורדה ולהאזנה.',
     url: url,
     jsonld: { '@context': 'https://schema.org', '@graph': graph },
-  }) + '\n' + main + '\n' + footer + '\n<script src="/js/a11y.js"></script>\n</body>\n</html>\n';
+  }) + '\n' + main + '\n' + footer + '\n<script src="/js/a11y.js"></script>\n<script src="/js/analytics.js"></script>\n</body>\n</html>\n';
 }
 
 /* ---------- sitemap.xml ---------- */

@@ -58,4 +58,11 @@ got=$(find dist/p -mindepth 2 -name index.html | wc -l | tr -d ' ')
 if [ "$want" != "$got" ]; then
   echo "שגיאה: נוצרו $got עמודי דף מתוך $want שב-js/data.js" >&2; exit 1
 fi
+# אימות: סקריפט הסטטיסטיקה מותר בכל מקום שמוגדר בו CSP. אם אחד מהם ישכח
+# אותו, הדפדפן יחסום את הסקריפט בשקט — ושום ביקור לא ייספר.
+for f in dist/_headers dist/index.html dist/accessibility.html "dist/p/index.html"; do
+  if ! grep -q 'static.cloudflareinsights.com' "$f" || ! grep -q 'connect-src[^;]*cloudflareinsights.com' "$f"; then
+    echo "שגיאה: ה-CSP ב-$f אינו מתיר את Cloudflare Web Analytics" >&2; exit 1
+  fi
+done
 echo "  אימות עבר ($got עמודי דף)"

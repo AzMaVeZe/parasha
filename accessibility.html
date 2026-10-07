@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://static.cloudflareinsights.com/beacon.min.js; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data:; connect-src 'self' https://cloudflareinsights.com; object-src 'none'; base-uri 'self'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <title>הצהרת נגישות — בין הנכתב לנגלה</title>
 <meta name="description" content="הצהרת הנגישות של אתר בין הנכתב לנגלה — דפי פרשת השבוע של אריאל ז'יטניצקי: רמת ההנגשה, הדרכים לפנות ומה עדיין חסר.">
@@ -43,12 +43,12 @@
   <p>קובצי ה-PDF עצמם אינם מונגשים במלואם לקוראי מסך. לכן בכל עמוד דף נוסף אזור "קריאת הדף כטקסט" — תוכן הדף המלא כטקסט רגיל, הנגיש לקוראי מסך ולהגדלה. הטקסט חולץ אוטומטית מהקבצים, וייתכנו בו אי-דיוקים קלים; הנוסח המחייב הוא הדף עצמו. נתקלתם בקטע חסר או משובש? ספרו לנו ונתקן.</p>
 
   <h2>פרטיות</h2>
-  <p>האתר אינו אוסף מידע אישי בעצמו. בעת האזנה לפודקאסט נטענת הטמעה של Spotify, שעשויה להציב עוגיות צד-שלישי; פרטי הפרשה או החג הקרוב נטענים משירות Hebcal. שליחת תגובה או הרשמה לרשימת התפוצה מתבצעת ישירות מול השרת של האתר; כתובת הדוא"ל משמשת לדיוור בלבד, אינה מוצגת באתר ואינה נמסרת לגורם שלישי. העדפות סרגל הנגישות נשמרות בדפדפן שלכם בלבד (localStorage) ואינן נשלחות לשרת.</p>
+  <p>האתר אינו אוסף מידע אישי בעצמו. בעת האזנה לפודקאסט נטענת הטמעה של Spotify, שעשויה להציב עוגיות צד-שלישי; פרטי הפרשה או החג הקרוב נטענים משירות Hebcal. שליחת תגובה או הרשמה לרשימת התפוצה מתבצעת ישירות מול השרת של האתר; כתובת הדוא"ל משמשת לדיוור בלבד, אינה מוצגת באתר ואינה נמסרת לגורם שלישי. העדפות סרגל הנגישות נשמרות בדפדפן שלכם בלבד (localStorage) ואינן נשלחות לשרת. לספירת ביקורים האתר משתמש ב-Cloudflare Web Analytics: נספרים ביקורים, עמודים, מדינה וסוג מכשיר, בלי עוגיות ובלי מידע שמזהה אתכם.</p>
 
   <h2>יצירת קשר בנושא נגישות</h2>
   <p>נתקלתם בקושי? נשמח לתקן — אפשר לפנות אלינו דרך טופס ההרשמה לרשימת התפוצה או טופס התגובות שבאתר.</p>
 
-  <p style="color:var(--text-muted)">ההצהרה עודכנה לאחרונה: אוגוסט 2026.</p>
+  <p style="color:var(--text-muted)">ההצהרה עודכנה לאחרונה: אוקטובר 2026.</p>
 
   <p><a href="index.html">חזרה לעמוד הראשי</a></p>
 </main>
@@ -61,5 +61,6 @@
 </footer>
 
 <script src="/js/a11y.js"></script>
+<script src="/js/analytics.js"></script>
 </body>
 </html>
