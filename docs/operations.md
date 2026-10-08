@@ -123,7 +123,7 @@ python scripts/make-episode.py --sources             # המקורות שבמחב
 ## סטטיסטיקת ביקורים
 
 Cloudflare Web Analytics: ביקורים, עמודים, מדינות וסוג מכשיר, בלי עוגיות. גלוי רק בחשבון
-Cloudflare. הקוד ב-`js/analytics.js`, ונטען בכל עמוד; כל עוד `TOKEN` שבו ריק, לא נטען כלום.
+Cloudflare. הקוד ב-`js/analytics.js`, ונטען בכל עמוד. פעיל מאוקטובר 2026.
 
 הפעלה (פעם אחת):
 1. dash.cloudflare.com ‹ **Analytics & Logs** ‹ **Web Analytics** ‹ **Add a site**

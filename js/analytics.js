@@ -11,7 +11,7 @@
  * מזהה ניווט בתוך עמוד אחד. */
 (function () {
   'use strict';
-  var TOKEN = '';
+  var TOKEN = '588427f3469f4e889f9192211a90b7a4';
   if (!TOKEN) return;
   var s = document.createElement('script');
   s.defer = true;
