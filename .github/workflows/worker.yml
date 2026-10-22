@@ -1,0 +1,51 @@
+name: פריסת שרת הרשימה
+
+# מעלה את worker/ ל-Cloudflare בלי מחשב: לשונית Actions ‹ "פריסת שרת הרשימה" ‹
+# Run workflow. רץ גם אוטומטית כשמשהו בתיקיית worker/ משתנה.
+#
+# דורש שני סודות בהגדרות הריפו (Settings ‹ Secrets and variables ‹ Actions):
+#   CLOUDFLARE_API_TOKEN   — טוקן מ-Cloudflare עם התבנית "Edit Cloudflare Workers"
+#   CLOUDFLARE_ACCOUNT_ID  — מזהה החשבון (בלוח של Cloudflare, בצד ימין של דף הבית)
+# הסודות של השרת עצמו (RESEND_API_KEY, ADMIN_KEY, OWNER_EMAIL) כבר שמורים
+# ב-Cloudflare, ופריסה לא נוגעת בהם.
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'worker/**'
+      - '.github/workflows/worker.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: בדיקות
+        run: |
+          node worker/test/comments.test.mjs
+          node worker/test/sends.test.mjs
+
+      - name: בדיקה שהסודות הוגדרו
+        env:
+          TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          ACCOUNT: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          if [ -z "$TOKEN" ] || [ -z "$ACCOUNT" ]; then
+            echo "חסרים CLOUDFLARE_API_TOKEN או CLOUDFLARE_ACCOUNT_ID בסודות הריפו — ראו את ההערה בראש הקובץ."
+            exit 1
+          fi
+
+      - name: פריסה
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          workingDirectory: worker
