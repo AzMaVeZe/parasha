@@ -101,6 +101,11 @@ https://<worker>/testmail?to=<כתובת>&key=<ADMIN_KEY>
 `FROM_EMAIL` אינו מאומת ב-Resend, וזו הסיבה שכל שליחה נכשלת. יש לאמת אותו
 ב-Resend (או לשנות את `FROM_EMAIL` לדומיין שכן מאומת) ולהריץ `wrangler deploy`.
 
+`/status` כולל גם `sends`: עשר השליחות האחרונות. לכל אחת — מתי (UTC), איזה יום, `cron`
+או `manual`, אילו דפים, כמה נשלחו (`sent`), כמה נכשלו (`failed`) ולמה (`errors`, הכתובות
+ממוסכות), כמה נרשמים בחרו יום אחר (`otherDay`) וכמה טרם אישרו (`notActive`). תקלה שעצרה
+את כל השליחה מופיעה ב-`error`. 30 השליחות האחרונות נשמרות ב-KV תחת `log:sends`.
+
 ## תחזוקה
 - **הוספת דף/פודקאסט**: להריץ `node scripts/build-parashot-json.js` ולדחוף —
   ה-Worker קורא את `assets/parashot.json` מהאתר בכל שליחה, בלי פריסה מחדש.

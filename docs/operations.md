@@ -138,7 +138,8 @@ Cloudflare. הקוד ב-`js/analytics.js`, ונטען בכל עמוד. פעיל 
 
 **סדר הבדיקה, מהזול ליקר:**
 
-1. `https://<worker>/status?key=<ADMIN_KEY>` — מפתחות, כתובות, סטטוס הדומיין ב-Resend, נרשמים, מוני תגובות
+1. `https://<worker>/status?key=<ADMIN_KEY>` — מפתחות, כתובות, סטטוס הדומיין ב-Resend, נרשמים, מוני תגובות,
+   ו-`sends`: עשר השליחות האחרונות — מתי, אילו דפים, כמה נשלחו, כמה נכשלו ולמה
 2. `https://<worker>/testmail?to=<כתובת>&key=<ADMIN_KEY>` — מנסה לשלוח באמת ומחזיר את שגיאת Resend מילה במילה
 3. `https://parasha.azma.app/js/data.js?nocache=1` — לוודא איזו גרסה מוגשת בפועל. פרמטר שונה בכל פעם, אחרת הדפדפן מגיש מהמטמון
 4. `npx wrangler tail` — לוגים חיים מה-Worker

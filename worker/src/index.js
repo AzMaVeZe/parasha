@@ -22,6 +22,7 @@
  *   capp:<parasha>     — מערך התגובות המאושרות של פרשה (מה שהאתר קורא)
  *   cpend:<id>         — תגובה בודדת הממתינה לאישור
  *   cindex             — { "<parasha>": <מספר תגובות מאושרות> } למוני הכרטיסים
+ *   log:sends          — 30 השליחות האחרונות: מתי, איזה יום, אילו דפים, כמה נשלחו/נכשלו
  * כתובות המייל של המגיבים נשמרות רק ברשומה ובדף הניהול — לעולם לא ב-capp/cindex,
  * כלומר לעולם לא מגיעות לדפדפן של הקוראים.
  */
@@ -161,9 +162,38 @@ async function upcoming(env) {
 
 /* ---------- שליחה מתוזמנת ---------- */
 
-async function sendWeekly(env, day) {
+/* תוצאת כל שליחה נשמרת ב-KV ומוצגת ב-/status. בלי זה התוצאה נכתבה רק ליומן
+ * הזמני של Cloudflare, ולא הייתה דרך לדעת בדיעבד אם המיילים יצאו. */
+const SENDS_KEY = 'log:sends';
+const MAX_SENDS = 30;
+const maskEmail = e => String(e || '').replace(/(.{2}).*(@.*)/, '$1***$2');
+
+async function readSends(env) {
+  return (await env.SUBSCRIBERS.get(SENDS_KEY, 'json')) || [];
+}
+
+async function sendWeekly(env, day, trigger = 'cron') {
+  const started = new Date().toISOString();
+  let result;
+  try {
+    result = await sendWeeklyCore(env, day);
+  } catch (e) {
+    result = { sent: 0, failed: 0, error: String(e && e.message || e).slice(0, 300) };
+  }
+  const entry = { at: started, day, trigger, ...result };
+  try {
+    const log = await readSends(env);
+    log.unshift(entry);
+    await env.SUBSCRIBERS.put(SENDS_KEY, JSON.stringify(log.slice(0, MAX_SENDS)));
+  } catch (e) {
+    console.error('could not record send', e.message);
+  }
+  return entry;
+}
+
+async function sendWeeklyCore(env, day) {
   const picks = await upcoming(env);
-  if (!picks.length) return { sent: 0, reason: 'no sheet for the upcoming date' };
+  if (!picks.length) return { sent: 0, failed: 0, reason: 'no sheet for the upcoming date' };
 
   const site = env.SITE_URL.replace(/\/$/, '');
   const blocks = picks.map(p => {
@@ -183,10 +213,13 @@ async function sendWeekly(env, day) {
   }).join('');
 
   const list = await env.SUBSCRIBERS.list({ prefix: 'sub:' });
-  let sent = 0, failed = 0;
+  let sent = 0, failed = 0, otherDay = 0, notActive = 0;
+  const errors = [];
   for (const k of list.keys) {
     const rec = await env.SUBSCRIBERS.get(k.name, 'json');
-    if (!rec || rec.status !== 'active' || rec.day !== day) continue;
+    if (!rec) continue;
+    if (rec.status !== 'active') { notActive++; continue; }
+    if (rec.day !== day) { otherDay++; continue; }
     const unsub = `${(env.WORKER_URL || '').replace(/\/$/, '')}/unsubscribe?token=${encodeURIComponent(rec.token)}`;
     try {
       await sendEmail(env, {
@@ -198,10 +231,12 @@ async function sendWeekly(env, day) {
       sent++;
     } catch (e) {
       failed++;
+      errors.push({ to: maskEmail(rec.email), error: String(e.message).slice(0, 200) });
       console.error('send failed', rec.email, e.message);
     }
   }
-  return { sent, failed, sheets: picks.map(p => p.name) };
+  // otherDay — נרשמים שבחרו יום אחר; notActive — טרם אישרו את ההרשמה או הוסרו
+  return { sent, failed, otherDay, notActive, sheets: picks.map(p => p.name), errors };
 }
 
 /* ---------- תגובות ---------- */
@@ -554,10 +589,13 @@ challenges: {},
         const subs = [];
         for (const k of list.keys) {
           const rec = await env.SUBSCRIBERS.get(k.name, 'json');
-          if (rec) subs.push({ email: rec.email.replace(/(.{2}).*(@.*)/, '$1***$2'), day: rec.day, status: rec.status });
+          if (rec) subs.push({ email: maskEmail(rec.email), day: rec.day, status: rec.status });
         }
         out.subscribers = subs;
       } catch (e) { out.subscribers = 'ERR ' + e.message; }
+      try {
+        out.sends = (await readSends(env)).slice(0, 10);
+      } catch (e) { out.sends = 'ERR ' + e.message; }
       try {
         out.comments = { pending: (await listPending(env)).length, approved: await readIndex(env) };
       } catch (e) { out.comments = 'ERR ' + e.message; }
@@ -606,7 +644,7 @@ challenges: {},
         return json({ error: 'unauthorized' }, 401, origin);
       }
       const day = DAYS[url.searchParams.get('day')] ? url.searchParams.get('day') : 'mon';
-      return json(await sendWeekly(env, day), 200, origin);
+      return json(await sendWeekly(env, day, 'manual'), 200, origin);
     }
 
     return json({ error: 'not_found' }, 404, origin);
