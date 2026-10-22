@@ -10,7 +10,8 @@ BRAND      = "בין הנכתב לנגלה"
 FROM_EMAIL = "פרשת השבוע <parasha@azma.app>"
 REPLY_TO   = ""
 # הכתובת של ה-Worker עצמו (משמשת לקישורי אישור והסרה במיילים):
-WORKER_URL = "https://parasha-newsletter.azma.workers.dev"
+# הקישורים במיילים (אישור, הסרה, ניהול) עוברים דרך האתר, לא ישירות ל-workers.dev
+WORKER_URL = "https://parasha.azma.app/api"
 
 # --- אחסון הנרשמים ---
 # ליצור עם:  npx wrangler kv namespace create SUBSCRIBERS

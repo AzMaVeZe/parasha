@@ -11,6 +11,15 @@
     return node;
   }
 
+  // פנייה לשרת עם מגבלת זמן. בלעדיה, בקשה שנחסמה בדרך (סינון של ספק) לא
+  // מסתיימת לעולם, והטופס נשאר תקוע על "רגע…" בלי שום הודעה.
+  function fetchWithin(url, opts, ms) {
+    const ctrl = new AbortController();
+    const timer = setTimeout(() => ctrl.abort(), ms || 20000);
+    return fetch(url, Object.assign({}, opts, { signal: ctrl.signal }))
+      .finally(() => clearTimeout(timer));
+  }
+
   function icon(name, size) {
     const s = el('span', 'icon');
     s.setAttribute('aria-hidden', 'true');
@@ -549,7 +558,7 @@
       }
       submit.disabled = true;
       setMsg('רגע…', null);
-      fetch(api + '/subscribe', {
+      fetchWithin(api + '/subscribe', {
         method: 'POST',
         headers: { 'content-type': 'application/json' },
         body: JSON.stringify({ email: email, day: day, website: form.website.value }),
@@ -586,7 +595,7 @@
 
   function fetchComments(name) {
     if (commentsCache.has(name)) return Promise.resolve(commentsCache.get(name));
-    return fetch(COMMENTS_API + '/comments?parasha=' + encodeURIComponent(name))
+    return fetchWithin(COMMENTS_API + '/comments?parasha=' + encodeURIComponent(name))
       .then(r => (r.ok ? r.json() : Promise.reject(new Error('http ' + r.status))))
       .then(items => {
         const list = Array.isArray(items) ? items : [];
@@ -666,7 +675,7 @@
       if (!text) { setMsg('אפשר לכתוב כמה מילים?', 'error'); return; }
       submit.disabled = true;
       setMsg('שולח…');
-      fetch(COMMENTS_API + '/comments', {
+      fetchWithin(COMMENTS_API + '/comments', {
         method: 'POST',
         headers: { 'content-type': 'application/json' },
         body: JSON.stringify({
@@ -700,7 +709,7 @@
 
   // מונה התגובות בכרטיסים — קריאה אחת שמחזירה את כל המונים
   if (COMMENTS_API) {
-    fetch(COMMENTS_API + '/comments')
+    fetchWithin(COMMENTS_API + '/comments')
       .then(r => (r.ok ? r.json() : {}))
       .then(index => {
         cardCountEls.forEach((elx, name) => {

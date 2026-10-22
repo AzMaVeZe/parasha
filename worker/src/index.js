@@ -437,7 +437,8 @@ export default {
       }
 
       // הגבלת קצב: 3 תגובות לכתובת IP בחמש דקות
-      const ip = request.headers.get('cf-connecting-ip') || 'unknown';
+      // דרך /api של האתר, ה-IP של הגולש מגיע בכותרת נפרדת (functions/api/[[path]].js)
+      const ip = request.headers.get('x-parasha-client-ip') || request.headers.get('cf-connecting-ip') || 'unknown';
       const rateKey = 'crate:' + ip;
       const hits = Number(await env.SUBSCRIBERS.get(rateKey)) || 0;
       if (hits >= 3) return json({ error: 'rate_limited' }, 429, origin);

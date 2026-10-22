@@ -11,7 +11,9 @@ window.PODCAST_FEED_URL = '';
 // כתובת ה-Worker שמטפל בהרשמה לרשימת התפוצה (ראו worker/README.md).
 // לדוגמה: 'https://parasha-newsletter.username.workers.dev'
 // כל עוד ריק — טופס ההרשמה מוסתר ומוצגת הודעת "בקרוב".
-window.SUBSCRIBE_API = 'https://parasha-newsletter.azma.workers.dev';
+// דרך הכתובת של האתר ולא ישירות ל-workers.dev, שחסום אצל חלק מהגולשים —
+// ראו functions/api/[[path]].js
+window.SUBSCRIBE_API = '/api';
 // התגובות רצות על אותו Worker (נתיב /comments), ולכן אין כאן מה להגדיר.
 // כל תגובה נכנסת כ"ממתינה", אריאל מאשר אותה מהמייל או מ-/admin, ורק אז היא מופיעה.
 
