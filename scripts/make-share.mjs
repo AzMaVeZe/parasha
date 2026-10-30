@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /* תמונות השיתוף (og:image) — מה שווטסאפ, פייסבוק וטלגרם מציגים כששולחים קישור.
  *
- *   assets/og-image.png       לאתר כולו (דף הבית, /p/, עמודים בלי תמונה משלהם)
+ *   assets/og-image.jpg       לאתר כולו (דף הבית, /p/, עמודים בלי תמונה משלהם)
  *   assets/share/<שם>.jpg     לכל פרשה וחג, לפי slug של העמוד (/p/<שם>/)
  *
  * 1200×630, היחס שווטסאפ מציג כתמונה גדולה. העיצוב של כרטיסי הפודקאסט
@@ -123,6 +123,6 @@ async function shoot(html, out, type) {
 }
 
 fs.mkdirSync(path.join(root, 'assets/share'), { recursive: true });
-await shoot(siteCard(), path.join(root, 'assets/og-image.png'), 'png');
+await shoot(siteCard(), path.join(root, 'assets/og-image.jpg'), 'jpeg');
 for (const pg of pages) await shoot(pageCard(pg), path.join(root, 'assets/share', slug(pg.name) + '.jpg'), 'jpeg');
 await browser.close();

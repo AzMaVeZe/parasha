@@ -48,7 +48,7 @@ done
 # אימות: מה שחייב להיות
 for need in dist/index.html dist/404.html dist/js/site.js dist/js/riddles.js dist/styles.css \
             dist/_headers dist/_routes.json dist/assets/fonts/fonts.css dist/assets/sheet-text \
-            dist/assets/og-image.png dist/assets/share dist/assets/icons/whatsapp.svg \
+            dist/assets/og-image.jpg dist/assets/share dist/assets/icons/whatsapp.svg \
             dist/sitemap.xml dist/robots.txt dist/llms.txt dist/p/index.html; do
   if [ ! -e "$need" ]; then echo "שגיאה: $need חסר" >&2; exit 1; fi
 done

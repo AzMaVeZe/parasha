@@ -208,7 +208,7 @@ function head(o) {
     : 'index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1';
   // כל תמונות השיתוף 1200×630 (scripts/make-share.mjs), ולכן המידות קבועות.
   // ?v= משתנה כשהתמונה מוחלפת: ווטסאפ ופייסבוק שומרים תמונה לפי הכתובת שלה.
-  const image = o.image || abs('assets/og-image.png?v=2');
+  const image = o.image || abs('assets/og-image.jpg');
   return `<!DOCTYPE html>
 <html lang="he" dir="rtl">
 <head>
@@ -227,6 +227,8 @@ function head(o) {
 <meta property="og:description" content="${esc(o.description)}">
 <meta property="og:url" content="${esc(o.url)}">
 <meta property="og:image" content="${esc(image)}">
+<meta property="og:image:secure_url" content="${esc(image)}">
+<meta property="og:image:type" content="image/jpeg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="${esc(o.imageAlt || BRAND_FULL)}">
