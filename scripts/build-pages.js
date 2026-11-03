@@ -751,6 +751,16 @@ for (const e of entries) {
   write(path.join('p', slug(e.name), 'index.html'), parashaPage(e));
   const src = sheetSources(e.pdf);
   if (src) write(path.join('p', slug(e.name), 'sources.html'), sourcesReportPage(e, src));
+  // מראה מקום שכבר אינו בפסקה (או בהערה) שלו — אחרי חילוץ מחדש של הטקסט — לא יהפוך לקישור.
+  // לא מפיל את הבנייה, אבל צועק: מתקנים ב-scripts/sources/ ומריצים fetch.
+  const txt = sheetText(e.pdf);
+  for (const s of src || []) {
+    if (!s.anchor || !txt) continue;
+    const where = 'fn' in s ? (txt.footnotes || [])[s.fn] && txt.footnotes[s.fn].text : txt.paragraphs[s.para];
+    if (!where || !where.includes(s.anchor)) {
+      console.warn(`אזהרה: ${e.name}: מראה המקום "${s.anchor}" (${s.ref}) אינו במקומו בטקסט`);
+    }
+  }
   pages++;
 }
 write(path.join('p', 'index.html'), indexPage());
