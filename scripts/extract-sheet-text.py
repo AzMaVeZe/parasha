@@ -62,15 +62,21 @@ def caption_glyphs(page, expand, rule):
         x0, y0, x1, y1 = info['bbox']
         if x1 - x0 < 30 or y1 - y0 < 30:
             continue
-        cand = [g for g in gs if x0 - 4 <= g['x'] <= x1 + 4 and y0 <= g['y'] <= y1 + CAPTION_BELOW
-                and g['size'] < body - 1.5 and (rule is None or g['y'] < rule)]
-        rows = {round(g['y'] / 3) for g in cand}
-        # טקסט קטן בתוך תמונה של חידה הוא החידה עצמה, לא כיתוב — נשאר
-        text = ''.join(g['s'] for g in sorted(cand, key=lambda g: (round(g['y'] / 3), -g['x'])))
-        if re.search(r'חיד|לקינוח|פתרון|התשובה', text):
-            continue
-        if cand and len(rows) <= CAPTION_MAX_LINES:
-            out |= {id(g) for g in cand}
+        # מתחת לקו ההערות — רק גופן זעיר מאוד (8.5 ומטה), שהוא כיתוב ולא הערה.
+        ok = lambda g: g['size'] < body - 1.5 and (rule is None or g['y'] < rule or g['size'] <= 8.6)
+        inx = lambda g: x0 - 4 <= g['x'] <= x1 + 4
+        below = [g for g in gs if inx(g) and y1 - 2 < g['y'] <= y1 + CAPTION_BELOW and ok(g)]
+        inside = [g for g in gs if inx(g) and y0 <= g['y'] <= y1 - 2 and ok(g)]
+        # בתוך התמונה: טקסט רגיל שעוקף אותה נוגע לפעמים בתיבה שלה. אם יש שם יותר מדי
+        # שורות, נשאר רק הגופן הזעיר (9 ומטה), שהוא הכיתוב.
+        if len({round(g['y'] / 3) for g in inside}) > CAPTION_MAX_LINES:
+            inside = [g for g in inside if g['size'] <= 9.2]
+        for cand in (below, inside):
+            rows = {round(g['y'] / 3) for g in cand}
+            # טקסט קטן בתוך תמונה של חידה הוא החידה עצמה, לא כיתוב — נשאר
+            text = ''.join(g['s'] for g in sorted(cand, key=lambda g: (round(g['y'] / 3), -g['x'])))
+            if not cand or len(rows) > CAPTION_MAX_LINES or re.search(r'חיד|לקינוח|פתרון|התשובה', text):
+                continue
             out |= {(round(g['x'], 2), round(g['y'], 2), g['s']) for g in cand}
     return out
 
