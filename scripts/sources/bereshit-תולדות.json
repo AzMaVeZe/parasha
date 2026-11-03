@@ -1,35 +1,65 @@
 {
- "reviewed": false,
+ "reviewed": "claude",
  "sources": [
   {
-   "para": 0,
-   "how": "מראה מקום",
-   "ref": "Genesis 25:19-28:9",
-   "anchor": "פרשת תולדות"
-  },
-  {
-   "para": 12,
-   "how": "מובאה",
    "ref": "Genesis 25:22",
-   "snippet": "וַיִתְּרֹצֲצוּ הַבָּנִים בְּקִרְבָּּה וַתֹּאמֶר אִם-כֵּן לָמָּה זֶּה אָנֹכִי"
+   "para": 12
   },
   {
-   "para": 18,
-   "how": "מראה מקום",
+   "ref": "Sefat Emet, Genesis, Toldot 5:4",
+   "para": 16,
+   "anchor": "שפת אמת, פרשת תולדות (תרל\"ה, ד\"ה חז\"ל)"
+  },
+  {
    "ref": "II Samuel 22:26-27",
+   "para": 18,
    "anchor": "שמואל ב כב, כו-כז"
   },
   {
+   "ref": "Bereshit Rabbah 63:10",
    "para": 19,
-   "how": "מראה מקום",
-   "ref": "Bereshit Rabbah 63",
    "anchor": "בראשית רבה, סג"
   },
   {
-   "para": 33,
-   "how": "מראה מקום",
-   "ref": "II Samuel 22:26",
-   "anchor": "West"
+   "ref": "Genesis 25:23",
+   "para": 29
+  },
+  {
+   "ref": "Genesis 27:12",
+   "para": 36
+  },
+  {
+   "ref": "Proverbs 22:6",
+   "para": 38
+  },
+  {
+   "ref": "Genesis 25:19",
+   "para": 44
+  },
+  {
+   "ref": "Genesis 6:9-10",
+   "para": 57,
+   "anchor": "בראשית ו, ט"
+  },
+  {
+   "ref": "Genesis 10:1",
+   "para": 57,
+   "anchor": "בראשית י, א"
+  },
+  {
+   "ref": "Genesis 11:10",
+   "para": 57,
+   "anchor": "בראשית יא, י"
+  },
+  {
+   "ref": "Genesis 36:9",
+   "para": 57,
+   "anchor": "בראשית לו, ט"
+  },
+  {
+   "ref": "Genesis 37:2",
+   "para": 57,
+   "anchor": "בראשית לז, ב"
   }
  ]
 }

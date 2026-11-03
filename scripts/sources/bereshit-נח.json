@@ -1,65 +1,64 @@
 {
- "reviewed": false,
+ "reviewed": "claude",
  "sources": [
   {
-   "para": 0,
-   "how": "מראה מקום",
-   "ref": "Genesis 6:9-11:32",
-   "anchor": "פרשת נח"
+   "ref": "Genesis 6:5-7",
+   "para": 9
   },
   {
-   "para": 9,
-   "how": "מובאה",
-   "ref": "Notes by Rabbi Yehoshua Hartman on Ohr Chadash 5:14:48 | Genesis 6:7",
-   "snippet": "וַיַּרְא ה' כִּי רַבָּה רָעַת הָאָדָם בָּאָרֶץ וְכָל-יֵצֶר מַחְשְׁבֹת לִבּוֹ רַק"
-  },
-  {
-   "para": 13,
-   "how": "מובאה",
    "ref": "Genesis 6:18",
-   "snippet": "וַהֲקִמֹתִי אֶת-בְּרִיתִי אִתָּךְ וּבָאתָ אֶל-הַתֵּבָה אַתָּה וּבָנֶיךָ וְאִשְׁת"
+   "para": 13
   },
   {
-   "para": 18,
-   "how": "מובאה",
-   "ref": "Peninei Halakhah, Kashrut 14:4:4 | Genesis 7:2 | Peninei Halakhah, Kashrut 14:4:4 | Genesis 7:4",
-   "snippet": "וַיֹּאמֶר ה' לְנֹחַ בֹּא-אַתָּה וְכָל-בֵּיתְךָ אֶל-הַתֵּבָה כִּי-אֹתְךָ רָאִיתִי"
+   "ref": "Genesis 6:22",
+   "para": 15
   },
   {
-   "para": 21,
-   "how": "מובאה",
+   "ref": "Genesis 7:1-5",
+   "para": 18
+  },
+  {
    "ref": "Genesis 7:7",
-   "snippet": "וַיָבֹּא נֹחַ וּבָנָיו וְאִשְׁתּוֹ וּנְשֵׁי-בָנָיו אִתּוֹ אֶל-הַתֵּבָה מִפְּנֵי "
-  },
-  {
    "para": 22,
-   "how": "מראה מקום",
-   "ref": "Genesis 7:7",
    "anchor": "בראשית ז, ז"
   },
   {
-   "para": 22,
-   "how": "מראה מקום",
-   "ref": "Genesis 6:18",
-   "anchor": "לבראשית ו, יח"
+   "ref": "Rashi on Genesis 6:18:2",
+   "para": 25
   },
   {
-   "para": 28,
-   "how": "מובאה",
-   "ref": "Genesis 6:18",
-   "snippet": "וַיְדַבֵּר אֱ-לֹהִים אֶל-נֹחַ לֵאמֹר: צֵא מִן-הַתֵּבָה אַתָּה וְאִשְׁתְּךָ וּבָנ"
+   "ref": "Genesis 8:15-16",
+   "para": 28
   },
   {
-   "para": 34,
-   "how": "מובאה",
+   "ref": "Rashi on Genesis 8:16",
+   "para": 30
+  },
+  {
    "ref": "Genesis 8:18",
-   "snippet": "וַיֵצֵּא-נֹחַ וּבָנָיו וְאִשְׁתּוֹ וּנְשֵׁי-בָנָיו אִתּוֹ"
+   "para": 34
   },
   {
-   "para": 62,
-   "how": "מובאה",
+   "ref": "Zohar Chadash, Noach 101",
+   "para": 40
+  },
+  {
+   "ref": "Zohar Chadash, Noach 54",
+   "para": 45,
+   "anchor": "זוהר חדש, מדרש הנעלם, נ\"ב"
+  },
+  {
+   "ref": "Zohar Chadash, Noach 87",
+   "para": 45
+  },
+  {
    "ref": "Genesis 8:21",
-   "snippet": "וַיָּרַח ה' אֶת-רֵיחַ הַנִּיחֹחַ וַיֹּאמֶר ה' אֶל-לִבּוֹ לֹא אֹסִף לְקַלֵּל עוֹד"
+   "para": 62
+  },
+  {
+   "ref": "Zohar Chadash, Noach 109-110",
+   "para": 73,
+   "anchor": "זוהר חדש, מאמר נח לא ביקש רחמים על העולם"
   }
  ]
 }

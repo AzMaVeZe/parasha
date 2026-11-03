@@ -1,59 +1,42 @@
 {
- "reviewed": false,
+ "reviewed": "claude",
  "sources": [
   {
-   "para": 2,
-   "how": "מובאה",
-   "ref": "Deuteronomy 4:42-43",
-   "snippet": "\"אָז יַבְדִּיל מֹשֶׁה שָׁלֹשׁ עָרִים, בְּעֵבֶר הַיַּרְדֵּן, מִזְרְחָה, שָׁמֶשׁ. "
+   "ref": "Deuteronomy 3:23-27",
+   "para": 11
   },
   {
-   "para": 11,
-   "how": "מובאה",
-   "ref": "Deuteronomy 3:24 | Toldot Yaakov Yosef, Vaetchanan 1 | Sforno on Deuteronomy 4:41:1",
-   "snippet": "\"וָאֶתְחַנַּן, אֶל-ה', בָּעֵת הַהִוא, לֵאמֹר. ה' אלוקים, אַתָּה הַחִלּוֹתָ לְהַר"
-  },
-  {
+   "ref": "Sforno on Deuteronomy 4:41:1",
    "para": 12,
-   "how": "מראה מקום",
-   "ref": "Sforno on Deuteronomy 4:41",
    "anchor": "ספורנו דברים ד, מא"
   },
   {
-   "para": 13,
-   "how": "מראה מקום",
    "ref": "Deuteronomy 4:41-43",
+   "para": 13,
    "anchor": "דברים ד, מא-מג"
   },
   {
-   "para": 15,
-   "how": "מראה מקום",
+   "ref": "Deuteronomy 19:2",
+   "para": 15
+  },
+  {
    "ref": "Numbers 35:10-11",
-   "anchor": "בספר במדבר לה, י-יא"
-  },
-  {
    "para": 15,
-   "how": "מובאה",
-   "ref": "Midrash Tanchuma, Masei 11:1 | Numbers 35:11",
-   "snippet": "10 אכן בהמשך משה מספר לבני ישראל כי המצווה להבדיל את הערים הללו עומדת בפני עצמה "
+   "anchor": "במדבר לה, י-יא"
   },
   {
+   "ref": "Rashi on Deuteronomy 4:41:1",
    "para": 16,
-   "how": "מראה מקום",
-   "ref": "Rashi on Deuteronomy 4:41",
    "anchor": "רש\"י דברים ד, מא"
   },
   {
-   "para": 17,
-   "how": "מראה מקום",
    "ref": "Numbers 35:34",
+   "para": 17,
    "anchor": "במדבר, לה, לד"
   },
   {
-   "para": 17,
-   "how": "מובאה",
-   "ref": "Adam Min HaAdamah, The Land 3:120 | Deuteronomy 3:27",
-   "snippet": "12 במדבר, לה, לד: \"וְלֹא תְטַמֵּא אֶת-הָאָרֶץ, אֲשֶׁר אַתֶּם יֹשְׁבִים בָּהּ--אֲ"
+   "ref": "Exodus 2:14-15",
+   "para": 38
   }
  ]
 }

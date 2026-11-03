@@ -1,35 +1,38 @@
 {
- "reviewed": false,
+ "reviewed": "claude",
  "sources": [
   {
-   "para": 11,
-   "how": "מובאה",
-   "ref": "Deuteronomy 23:20",
-   "snippet": "לֹא-תַשִּׁיךְ לְאָחִיךָ, נֶשֶׁךְ כֶּסֶף נֶשֶׁךְ אֹכֶל: נֶשֶׁךְ, כָּל-דָּבָר אֲשֶ"
+   "ref": "Deuteronomy 23:20-21",
+   "para": 10,
+   "anchor": "(כג, כ)"
   },
   {
-   "para": 15,
-   "how": "מראה מקום",
    "ref": "Exodus 22:24",
+   "para": 15,
    "anchor": "שמות כב, כד"
   },
   {
-   "para": 15,
-   "how": "מובאה",
-   "ref": "Exodus 22:24 | Bava Metzia 71a:18 | Introductions to the Babylonian Talmud, Bava Metzia, Introduction to Perek V 2",
-   "snippet": "אִם-כֶּסֶף תַּלְוֶה אֶת-עַמִּי, אֶת-הֶעָנִי עִמָּךְ--לֹא-תִהְיֶה לוֹ, כְּנֹשֶׁה;"
-  },
-  {
-   "para": 18,
-   "how": "מראה מקום",
    "ref": "Leviticus 25:35-37",
+   "para": 18,
    "anchor": "ויקרא כה, לה-לז"
   },
   {
+   "ref": "Bava Metzia 69b:4-6",
    "para": 52,
-   "how": "מראה מקום",
-   "ref": "Bava Metzia 69b",
    "anchor": "בבלי, בבא מציעא סט ע\"ב"
+  },
+  {
+   "ref": "Proverbs 22:7",
+   "para": 71
+  },
+  {
+   "ref": "Rashi on Shabbat 63a:26:1",
+   "para": 76
+  },
+  {
+   "ref": "Shabbat 63a:26",
+   "para": 103,
+   "anchor": "בבלי, שבת סג ע\"א"
   }
  ]
 }

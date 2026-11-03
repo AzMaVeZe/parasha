@@ -1,41 +1,40 @@
 {
- "reviewed": false,
+ "reviewed": "claude",
  "sources": [
   {
+   "ref": "Bava Batra 14b:12",
    "para": 20,
-   "how": "מראה מקום",
-   "ref": "Bava Batra 14b",
    "anchor": "תלמוד בבלי, בבא-בתרא יד ע\"ב"
   },
   {
+   "ref": "Shabbat 89a:5",
    "para": 22,
-   "how": "מראה מקום",
-   "ref": "Shabbat 89a",
    "anchor": "תלמוד בבלי, שבת פט ע\"א"
   },
   {
+   "ref": "Menachot 29b:3-5",
    "para": 24,
-   "how": "מראה מקום",
-   "ref": "Menachot 29b",
    "anchor": "תלמוד בבלי, מנחות כט ע\"ב"
   },
   {
-   "para": 30,
-   "how": "מובאה",
    "ref": "Be'er HaGolah, Well 4 10:1",
-   "snippet": "\"שהכתר מורה על מעלה היותר עליון שאין אחר זה עוד, כי זהו עניין הכתר שאין על המלך "
+   "para": 38,
+   "anchor": "באר הגולה, באר רביעי"
   },
   {
+   "ref": "Sefer Etz Chaim 8:6:2",
+   "para": 39,
+   "anchor": "עץ חיים, שער הנקודים, פרק ו'"
+  },
+  {
+   "ref": "Machshavot Charutz 17:9",
    "para": 40,
-   "how": "מראה מקום",
-   "ref": "Machshavot Charutz 17",
    "anchor": "מחשבות חרוץ, פרק יז"
   },
   {
-   "para": 43,
-   "how": "מראה מקום",
-   "ref": "Deuteronomy 34:5",
-   "anchor": "דברים לד, ה"
+   "ref": "Bava Batra 15a:4",
+   "para": 69,
+   "anchor": "תלמוד בבלי, בבא בתרא, טו ע\"א"
   }
  ]
 }

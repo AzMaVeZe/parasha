@@ -1,46 +1,31 @@
 {
- "reviewed": false,
+ "reviewed": "claude",
  "sources": [
   {
-   "para": 1,
-   "how": "מובאה",
-   "ref": "Maor VaShemesh, Re'eh 17 | Deuteronomy 15:2 | Midrash Tannaim on Deuteronomy 15:3:4",
-   "snippet": "מִקֵּץ שֶׁבַע-שָׁנִים, תַּעֲשֶׂה שְׁמִטָּה. וְזֶה, דְּבַר הַשְּׁמִטָּה--שָׁמוֹט "
+   "ref": "Deuteronomy 15:1-5",
+   "para": 1
   },
   {
-   "para": 10,
-   "how": "מובאה",
-   "ref": "Talmud Series; Shemitah 1:64 | Deuteronomy 15:9-10",
-   "snippet": "כִּי-יִהְיֶה בְךָ אֶבְיוֹן מֵאַחַד אַחֶיךָ, בְּאַחַד שְׁעָרֶיךָ, בְּאַרְצְךָ, אֲ"
+   "ref": "Deuteronomy 15:7-11",
+   "para": 10
   },
   {
-   "para": 13,
-   "how": "מראה מקום",
    "ref": "Mishnah Sheviit 10:2",
+   "para": 13,
    "anchor": "משנה מסכת שביעית י, ב"
   },
   {
+   "ref": "Gittin 36b:9",
    "para": 15,
-   "how": "מראה מקום",
-   "ref": "Gittin 36b",
    "anchor": "בבלי, גיטין לו ע\"ב"
   },
   {
-   "para": 16,
-   "how": "מובאה",
-   "ref": "Sefer Mitzvot Gadol, Positive Commandments 162:1 | Deuteronomy 15:11",
-   "snippet": "מִשְׁלַח יָדֶךָ. כִּי לֹא-יֶחְדַּל אֶבְיוֹן, מִקֶּרֶב הָאָרֶץ; עַל-כֵּן אָנֹכִי "
+   "ref": "Deuteronomy 15:12-18",
+   "para": 18
   },
   {
-   "para": 18,
-   "how": "מובאה",
-   "ref": "Deuteronomy 15:12 | Karati Bekhol Lev, Re'eh 3:3 | The Koren Shalem Siddur; Ashkenaz, Torah Readings, Seventh Day of Pesah 17 | Adam Min HaAdamah, Yovel 12:36 | Deuteronomy 15:17 | The Koren Shalem Siddur; Ashkenaz, Torah Readings, Seventh Day of Pesah 17",
-   "snippet": "כִּי-יִמָּכֵר לְךָ אָחִיךָ הָעִבְרִי, אוֹ הָעִבְרִיָּה--וַעֲבָדְךָ, שֵׁשׁ שָׁנִי"
-  },
-  {
+   "ref": "Sanhedrin 71a:16-17",
    "para": 33,
-   "how": "מראה מקום",
-   "ref": "Sanhedrin 71a",
    "anchor": "בבלי, סנהדרין עא ע\"א"
   }
  ]
