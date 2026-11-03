@@ -27,6 +27,11 @@
     python scripts/make-episode.py --book שמות          # כל ספר שמות, פרק לכל פרשה
     python scripts/make-episode.py --book שמות --out "<תיקייה ב-Google Drive>"
 
+    # סקירות שכבר נוצרו במחברת (ביד, ב-Studio) — רק להוריד, בלי ליצור מחדש:
+    python scripts/make-episode.py --audio                   # אילו סקירות יש, ולאיזו פרשה
+    python scripts/make-episode.py --existing --book בראשית  # הורדה לכל פרשה בלי פרק באתר
+    python scripts/make-episode.py --existing ויצא --artifact <id>
+
 ל-NotebookLM יש מכסה יומית של סקירות קוליות. כשהיא נגמרת הסקריפט עוצר,
 ומה שכבר הוכן נשאר; למחרת מריצים שוב, ופרקים שכבר הורדו מדולגים.
 """
@@ -98,7 +103,7 @@ def norm(s):
     s = ''.join(c for c in unicodedata.normalize('NFD', s) if not unicodedata.combining(c))
     s = re.sub(r'\.(pdf|txt|docx?)$', '', s, flags=re.I)
     s = re.sub(r'["\'׳״]', '', s)
-    return ' ' + re.sub(r'[\s_\-–—.,()]+', ' ', s).strip() + ' '
+    return ' ' + re.sub(r'[\s_\-–—.,:;!?/|()\[\]]+', ' ', s).strip() + ' '
 
 
 def load_pages():
@@ -190,7 +195,51 @@ def make(page, nb, src_id, prompt, length, out):
     print('  מוריד…')
     dl = ['download', 'audio', '-n', nb, '--force', audio]
     run(dl[:2] + (['-a', task] if task else ['--latest']) + dl[2:])
+    extras(page, base)
+    print(f'  מוכן: {audio}')
+    return True
 
+
+def audio_artifacts(nb):
+    """הסקירות הקוליות המוכנות שבמחברת, כל אחת עם הבקשה שממנה נוצרה."""
+    _, out = run(['artifact', 'list', '-n', nb, '--type', 'audio', '--json'])
+    arts = [a for a in as_rows(out, 'artifacts')
+            if str(a.get('status', '')).lower() in ('', 'completed', 'complete', 'ready', 'done')]
+    for a in arts:
+        code, p = run(['artifact', 'get-prompt', str(a.get('id')), '-n', nb, '--json'], check=False)
+        try:
+            a['prompt'] = json.loads(p).get('prompt') or '' if code == 0 else ''
+        except (json.JSONDecodeError, AttributeError):
+            a['prompt'] = ''
+    return arts
+
+
+def find_audio(page, arts):
+    """הסקירה של הפרשה, לפי שם הפרשה בכותרת הסקירה או בבקשה שממנה נוצרה.
+
+    כמו במקורות: אם יש יותר מהתאמה אחת — לא מנחשים."""
+    keys = {norm(page['name']), norm(page['title'])}
+    return [a for a in arts
+            if any(k in norm(str(a.get('title', ''))) or k in norm(str(a.get('prompt', '')))
+                   for k in keys)]
+
+
+def fetch(page, nb, art_id, out):
+    """מוריד סקירה שכבר נוצרה במחברת, ומכין לידה כרטיס ותיאור."""
+    base = os.path.join(out, page['title'])
+    audio = f'{base} - {BRAND}.m4a'
+    if os.path.exists(audio):
+        print(f'  כבר קיים: {audio}')
+        return
+    os.makedirs(out, exist_ok=True)
+    print('  מוריד את הסקירה הקיימת…')
+    run(['download', 'audio', '-n', nb, '-a', art_id, '--force', audio])
+    extras(page, base)
+    print(f'  מוכן: {audio}')
+
+
+def extras(page, base):
+    """כרטיס הפרק ותיאור לספוטיפיי, ליד קובץ השמע."""
     cover = os.path.join(ROOT, 'assets', 'covers', page['stem'] + '.png')
     if os.path.exists(cover):
         shutil.copy(cover, f'{base} - כרטיס.png')
@@ -199,8 +248,6 @@ def make(page, nb, src_id, prompt, length, out):
         f.write(f'כותרת:\n{page["title"]}\n\n'
                 f'תיאור:\n{page["title"]} — מתוך "בין הנכתב לנגלה", דפי פרשת השבוע של אריאל ז\'יטניצקי.\n'
                 f'הדף המלא לצפייה, להורדה ולהדפסה: {url}\n')
-    print(f'  מוכן: {audio}')
-    return True
 
 
 def main():
@@ -216,6 +263,11 @@ def main():
     ap.add_argument('--sources', action='store_true', help='הצגת המקורות שבמחברת')
     ap.add_argument('--prompt', default=PROMPT, help='הבקשה לסקירה; {title} יוחלף בשם הפרשה')
     ap.add_argument('--length', default='default', choices=['short', 'default', 'long'])
+    ap.add_argument('--existing', action='store_true',
+                    help='להוריד סקירה שכבר נוצרה במחברת, במקום ליצור חדשה')
+    ap.add_argument('--artifact', help='מזהה הסקירה, כשבמצב --existing נמצאה יותר מאחת')
+    ap.add_argument('--audio', action='store_true',
+                    help='הצגת הסקירות הקוליות שבמחברת, ולאיזו פרשה כל אחת שייכת')
     args = ap.parse_args()
 
     global CLI
@@ -228,6 +280,15 @@ def main():
     if args.sources:
         for s in srcs:
             print(f'  {s.get("id")}  {s.get("title")}')
+        return
+
+    arts = audio_artifacts(nb) if (args.existing or args.audio) else []
+    if args.audio:
+        for a in sorted(arts, key=lambda a: str(a.get('created_at') or '')):
+            owners = [p['title'] for p in pages if find_audio(p, [a])]
+            day = str(a.get('created_at') or '')[:10]
+            print(f'  {a.get("id")}  {day}  {a.get("title")}'
+                  f'  ←  {", ".join(dict.fromkeys(owners)) or "לא זוהתה פרשה"}')
         return
 
     if args.prompt_file:
@@ -274,7 +335,17 @@ def main():
         print(f'\n{page["title"]}')
         if page['has_episode']:
             print('  לפרשה כבר יש פרק באתר. ממשיך בכל זאת.')
-        hits = [{'id': args.source}] if args.source else find_source(page, srcs)
+        if args.existing:
+            found = [{'id': args.artifact}] if args.artifact else find_audio(page, arts)
+            if len(found) != 1:
+                print('  לא מצאתי במחברת סקירה קולית לדף הזה.' if not found else
+                      '  נמצאה יותר מסקירה אחת. בחרו והריצו שוב עם --artifact <id>:')
+                for a in found:
+                    print(f'    {a.get("id")}  {str(a.get("created_at") or "")[:10]}  {a.get("title")}')
+                continue
+            fetch(page, nb, found[0]['id'], args.out)
+            continue
+        hits =[{'id': args.source}] if args.source else find_source(page, srcs)
         if len(hits) != 1:
             print('  לא מצאתי במחברת מקור אחד ויחיד לדף הזה.' if not hits else
                   '  נמצא יותר ממקור אחד. בחרו והריצו שוב עם --source <id>:')

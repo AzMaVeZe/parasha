@@ -81,11 +81,23 @@ npx wrangler secret put ADMIN_KEY
 ```
 python scripts/make-episode.py "לך לך"               # פרשה אחת
 python scripts/make-episode.py --from "לך לך" --count 3
+python scripts/make-episode.py --book שמות           # כל ספר, רק פרשות בלי פרק באתר
 python scripts/make-episode.py --sources             # המקורות שבמחברת
 ```
 
-בתיקייה `scripts/episodes/<דף>/`: קובץ השמע, `cover.png`, ו-`description.txt` עם
-הכותרת והתיאור, כולל הקישור לעמוד הדף. מעלים ל-Spotify for Creators, שומעים לפני
+סקירה שכבר נוצרה במחברת (ביד, ב-Studio) לא נוצרת שוב — מורידים אותה. הסקריפט
+מזהה את הפרשה לפי כותרת הסקירה או לפי הבקשה שממנה נוצרה; כשאין התאמה אחת ויחידה
+הוא מציג את האפשרויות ומדלג, ומריצים שוב עם `--artifact <id>`:
+
+```
+python scripts/make-episode.py --audio                     # הסקירות שבמחברת, ולאיזו פרשה
+python scripts/make-episode.py --existing --book בראשית
+python scripts/make-episode.py --existing "לך לך" --artifact <id>
+```
+
+בתיקייה `scripts/episodes/` (או `--out`), שלושה קבצים לכל דף ששמם מתחיל בשם הפרשה:
+קובץ השמע, `- כרטיס.png`, ו-`- תיאור.txt` עם הכותרת והתיאור, כולל הקישור לעמוד
+הדף. מעלים ל-Spotify for Creators, שומעים לפני
 פרסום, ושולחים ל-Claude את קישור הפרק כדי שייכנס ל-`js/data.js`. התיקייה מחוץ ל-git.
 יש מכסה יומית לסקירות קוליות: כשהיא נגמרת הסקריפט עוצר, ולמחרת ממשיכים.
 
