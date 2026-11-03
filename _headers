@@ -22,6 +22,12 @@
 # ה-CSP הכללי שלמעלה מוסר מהם ומוחלף ב-CSP צר משלהם, שמתיר את www.sefaria.org —
 # שם רץ ה-Linker. שאר האתר לא נוגע בספריא. אותו CSP בדיוק נמצא ב-SOURCES_CSP
 # שב-scripts/build-pages.js (תגית ה-<meta> של העמוד).
+# Cloudflare מגיש את הקובץ בכתובת בלי ".html" (ומפנה אליה), ולכן הכלל חל על שתיהן.
+/p/:name/sources
+  ! Content-Security-Policy
+  Content-Security-Policy: default-src 'none'; script-src 'self' https://www.sefaria.org; connect-src https://www.sefaria.org; style-src 'self' 'unsafe-inline'; img-src 'self'; base-uri 'none'; form-action 'none'
+  X-Robots-Tag: noindex, nofollow
+
 /p/:name/sources.html
   ! Content-Security-Policy
   Content-Security-Policy: default-src 'none'; script-src 'self' https://www.sefaria.org; connect-src https://www.sefaria.org; style-src 'self' 'unsafe-inline'; img-src 'self'; base-uri 'none'; form-action 'none'

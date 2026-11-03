@@ -69,7 +69,10 @@ for f in dist/_headers dist/index.html dist/accessibility.html "dist/p/index.htm
 done
 # אימות: לכל דף עם מקורות יש עמוד דיווח לספריא, וה-CSP שלו זהה לזה שב-_headers
 # (שני ה-CSP חלים יחד; אם יפרדו, אחד יחסום את ה-Linker של השני בשקט).
-src_csp=$(sed -n 's/^  Content-Security-Policy: \(default-src .none.*\)$/\1/p' dist/_headers)
+src_csp=$(sed -n 's/^  Content-Security-Policy: \(default-src .none.*\)$/\1/p' dist/_headers | sort -u)
+if [ "$(printf '%s\n' "$src_csp" | wc -l)" != 1 ]; then
+  echo "שגיאה: שני הכללים של sources ב-_headers אינם עם אותו CSP" >&2; exit 1
+fi
 for d in $(grep -l 'sefaria-report.js' dist/p/*/index.html); do
   r="$(dirname "$d")/sources.html"
   if [ ! -e "$r" ]; then echo "שגיאה: $r חסר" >&2; exit 1; fi

@@ -4,7 +4,7 @@
 (function () {
   function report() {
     var f = document.createElement('iframe');
-    f.src = 'sources.html';
+    f.src = 'sources';   // sources.html; Cloudflare מגיש אותו בלי הסיומת
     f.hidden = true;
     f.setAttribute('aria-hidden', 'true');
     f.tabIndex = -1;
