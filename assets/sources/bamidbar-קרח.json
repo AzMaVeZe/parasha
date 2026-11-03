@@ -37,7 +37,7 @@
    "version": "Miqra according to the Masorah",
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/Numbers_11:29?lang=he",
-   "para": 15
+   "para": 14
   },
   {
    "ref": "I Samuel 8:7",
@@ -48,7 +48,7 @@
    "version": "Miqra according to the Masorah",
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/I_Samuel_8:7?lang=he",
-   "para": 18
+   "para": 17
   },
   {
    "ref": "Numbers 16:5",
@@ -59,7 +59,7 @@
    "version": "Miqra according to the Masorah",
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/Numbers_16:5?lang=he",
-   "para": 29
+   "para": 25
   },
   {
    "ref": "Bamidbar Rabbah 18:19",
@@ -71,7 +71,7 @@
    "license": "CC-BY-NC",
    "url": "https://www.sefaria.org.il/Bamidbar_Rabbah_18:19?lang=he",
    "anchor": "במדבר רבה יח, יט",
-   "para": 32
+   "para": 28
   },
   {
    "ref": "Sanhedrin 110a:14",
@@ -95,7 +95,7 @@
    "license": "unknown",
    "url": "https://www.sefaria.org.il/Chullin_60b:4?lang=he",
    "anchor": "בבלי, חולין ס:",
-   "para": 37
+   "para": 33
   }
  ]
 }
