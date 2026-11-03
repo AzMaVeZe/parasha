@@ -92,7 +92,7 @@ p.d { font-family: 'Assistant'; font-weight: 400; font-size: .95em; margin-right
 ''',
 }
 
-def page_html(size, design='a'):
+def page_html(size='17x24', design='c'):   # הוחלט: 17×24, עיצוב ג
     w, h, top, bot, inner, outer, fs = SIZES[size]
     paras = []
     for kind, t in body:
@@ -147,6 +147,7 @@ p.d {{ text-indent: 0; margin: 1.2mm 6mm 1.2mm 0; font-family: 'David Libre', se
 os.makedirs(f'{BUILD}/out', exist_ok=True)
 for s in SIZES:
     open(f'{BUILD}/out/sample-{s}.html', 'w', encoding='utf-8').write(page_html(s))
-for d in 'bc':
+for d in 'abc':
     open(f'{BUILD}/out/design-{d}-17x24.html', 'w', encoding='utf-8').write(page_html('17x24', d))
+open(f'{BUILD}/out/chapter.html', 'w', encoding='utf-8').write(page_html())   # הגודל והעיצוב שנבחרו
 print('ok', len(body), 'blocks')
