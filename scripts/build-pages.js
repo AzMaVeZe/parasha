@@ -119,6 +119,42 @@ function linkAnchors(par, i, sources) {
   return h;
 }
 const LICENSE_HE = { 'Public Domain': 'נחלת הכלל' };
+
+/* דיווח לספריא על המקורות שבדף (Sefaria Linker v3, בלי קישורים).
+ * ה-Linker שולח לספריא את התוכן הראשי של העמוד שבו הוא רץ, ואת מראי המקום שהוא
+ * מוצא בו רושמת ספריא כ"דפי אינטרנט שמצטטים את המקור". בעמוד הדף עצמו הוא היה
+ * סורק גם את "קריאת הדף כטקסט" ומדווח על זיהויים שגויים ("פרק ד'" ← במדבר ד).
+ * לכן הוא רץ בעמוד נפרד, p/<שם>/sources.html, שכל תוכנו הוא רשימת המקורות שנבדקו
+ * (בשמות האנגליים, שספריא מזהה במדויק), והכתובת הקנונית שלו היא עמוד הדף —
+ * וכך הדיווח הוא על עמוד הדף. עמוד הדף טוען אותו ב-iframe נסתר אחרי הטעינה
+ * (js/sefaria-report.js). ל-sources.html יש CSP משלו, שמתיר את www.sefaria.org;
+ * ה-CSP של כל שאר האתר לא השתנה. ראו _headers. */
+const SOURCES_CSP = "default-src 'none'; script-src 'self' https://www.sefaria.org; connect-src https://www.sefaria.org; " +
+  "style-src 'self' 'unsafe-inline'; img-src 'self'; base-uri 'none'; form-action 'none'";
+function sourcesReportPage(e, sources) {
+  return `<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="${esc(SOURCES_CSP)}">
+<meta name="robots" content="noindex, nofollow">
+<title>${esc(metaTitle(e))}</title>
+<meta name="description" content="${esc(metaDescription(e))}">
+<link rel="canonical" href="${esc(e.url)}">
+</head>
+<body>
+<article>
+<h1>${esc(e.title)} — המקורות שבדף</h1>
+<p>המקורות שהדף "${esc(e.title)}" מתוך "${esc(BRAND)}" מאת ${esc(AUTHOR)} מצטט, לפי סדר הופעתם בדף:</p>
+<ul>
+${sources.map(s => `<li>${esc(s.ref)}</li>`).join('\n')}
+</ul>
+</article>
+<script src="/js/sefaria-linker.js"></script>
+</body>
+</html>
+`;
+}
 // מקור ארוך (סוגיה שלמה, פרק בפירוש) נקטע בגבול מילה, ושאר הנוסח בקישור לספריא.
 // אותו גבול ב-js/site.js.
 const CLIP = 1800;
@@ -561,7 +597,8 @@ function parashaPage(e) {
     imageAlt: e.title + ' — ' + BRAND,
     noindex: !e.indexable,
     jsonld: { '@context': 'https://schema.org', '@graph': graph },
-  }) + '\n' + main + '\n' + footer + '\n<script src="/js/a11y.js"></script>\n<script src="/js/analytics.js"></script>\n</body>\n</html>\n';
+  }) + '\n' + main + '\n' + footer + '\n<script src="/js/a11y.js"></script>\n<script src="/js/analytics.js"></script>' +
+    (sources ? '\n<script src="/js/sefaria-report.js" defer></script>' : '') + '\n</body>\n</html>\n';
 }
 
 /* ---------- מפת הארכיון: /p/ ---------- */
@@ -703,6 +740,8 @@ function write(rel, content) {
 let pages = 0;
 for (const e of entries) {
   write(path.join('p', slug(e.name), 'index.html'), parashaPage(e));
+  const src = sheetSources(e.pdf);
+  if (src) write(path.join('p', slug(e.name), 'sources.html'), sourcesReportPage(e, src));
   pages++;
 }
 write(path.join('p', 'index.html'), indexPage());

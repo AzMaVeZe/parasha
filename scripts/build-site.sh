@@ -67,4 +67,14 @@ for f in dist/_headers dist/index.html dist/accessibility.html "dist/p/index.htm
     echo "שגיאה: ה-CSP ב-$f אינו מתיר את Cloudflare Web Analytics" >&2; exit 1
   fi
 done
+# אימות: לכל דף עם מקורות יש עמוד דיווח לספריא, וה-CSP שלו זהה לזה שב-_headers
+# (שני ה-CSP חלים יחד; אם יפרדו, אחד יחסום את ה-Linker של השני בשקט).
+src_csp=$(sed -n 's/^  Content-Security-Policy: \(default-src .none.*\)$/\1/p' dist/_headers)
+for d in $(grep -l 'sefaria-report.js' dist/p/*/index.html); do
+  r="$(dirname "$d")/sources.html"
+  if [ ! -e "$r" ]; then echo "שגיאה: $r חסר" >&2; exit 1; fi
+  if ! grep -qF "content=\"$src_csp\"" "$r"; then
+    echo "שגיאה: ה-CSP ב-$r אינו זהה לזה של /p/:name/sources.html ב-_headers" >&2; exit 1
+  fi
+done
 echo "  אימות עבר ($got עמודי דף)"

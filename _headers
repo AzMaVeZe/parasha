@@ -17,6 +17,16 @@
   Strict-Transport-Security: max-age=31536000; includeSubDomains
   Cross-Origin-Opener-Policy: same-origin
 
+
+# עמודי הדיווח לספריא (p/<שם>/sources.html, נוצרים ב-scripts/build-pages.js).
+# ה-CSP הכללי שלמעלה מוסר מהם ומוחלף ב-CSP צר משלהם, שמתיר את www.sefaria.org —
+# שם רץ ה-Linker. שאר האתר לא נוגע בספריא. אותו CSP בדיוק נמצא ב-SOURCES_CSP
+# שב-scripts/build-pages.js (תגית ה-<meta> של העמוד).
+/p/:name/sources.html
+  ! Content-Security-Policy
+  Content-Security-Policy: default-src 'none'; script-src 'self' https://www.sefaria.org; connect-src https://www.sefaria.org; style-src 'self' 'unsafe-inline'; img-src 'self'; base-uri 'none'; form-action 'none'
+  X-Robots-Tag: noindex, nofollow
+
 # הקבצים מכילים עברית. בלי charset מפורש הדפדפן מנחש — סקריפט שנטען מתוך הדף
 # יורש UTF-8 מה-<meta> וזה עובד, אבל פנייה ישירה לקובץ מתפרשת כ-Latin-1.
 /tokens/*

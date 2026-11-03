@@ -4,7 +4,7 @@
 - הריפו ציבורי: אין להכניס כתובות מייל אישיות, מפתחות או טוקנים סודיים לשום קובץ. (הטוקן של Web Analytics ב-`js/analytics.js` אינו סוד: הוא מופיע בכל עמוד.)
 - תוכן שמיוחס לאריאל (שאלה, משפט, שנה) נלקח מהדף עצמו ונכנס לאתר רק אחרי שאריאל אישר אותו במפורש.
 - המראה של האתר נשמר: תוספות לא משנות את מה שכבר קיים.
-- ה-CSP מוגדר בארבעה מקומות שחייבים להתאים: `index.html`, `accessibility.html`, `_headers`, ו-`CSP` שב-`scripts/build-pages.js`.
+- ה-CSP מוגדר בארבעה מקומות שחייבים להתאים: `index.html`, `accessibility.html`, `_headers`, ו-`CSP` שב-`scripts/build-pages.js`. (ל-`p/<שם>/sources.html`, עמוד הדיווח לספריא, יש CSP צר נפרד — ב-`_headers` וב-`SOURCES_CSP`; ראו `docs/operations.md`.)
 - אסור ליצור רשומת DNS שנגמרת ב-`.parasha` (היא מפילה את האתר).
 
 התיעוד המלא ב-[`docs/`](docs/README.md).
