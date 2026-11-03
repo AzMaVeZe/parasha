@@ -119,10 +119,15 @@ def find(name):
             else:
                 cur = {'start': i, 'end': i, 'text': p}
                 blocks.append(cur)
-    for i, p in enumerate(paras):
-        if len(p) > 12:
-            for x in find_refs(p):
-                found.append({'para': i, 'how': 'מראה מקום', 'ref': x['refs'][0], 'anchor': x['text']})
+    # find-refs פעם אחת על כל הדף (כל קריאה אסינכרונית ולוקחת שניות), ואז כל
+    # מראה מקום משויך לפסקה שלו לפי המיקום שלו בטקסט
+    starts, pos = [], 0
+    for p in paras:
+        starts.append(pos)
+        pos += len(p) + 1
+    for x in find_refs('\n'.join(paras)):
+        i = max(k for k, st in enumerate(starts) if st <= x['startChar'])
+        found.append({'para': i, 'how': 'מראה מקום', 'ref': x['refs'][0], 'anchor': x['text']})
     for b in blocks:
         ws = words(b['text'])
         if len(ws) < 4:
@@ -135,7 +140,7 @@ def find(name):
                 hits.append(min(h, key=lambda s: PRIMARY_RANK(s.get('path', '')))['ref'])
         if hits:
             found.append({'para': b['start'], 'how': 'מובאה', 'ref': merge_refs(hits)[0] if len(set(merge_refs(hits))) == 1 else ' | '.join(merge_refs(hits)),
-                          'anchor': b['text'][:80]})
+                          'snippet': b['text'][:80]})
     found.sort(key=lambda x: x['para'])
     return found
 
@@ -199,7 +204,7 @@ if __name__ == '__main__':
             dst = os.path.join(CURATED_DIR, n + '.json')
             res = find(n)
             for x in res:
-                print(x['para'], x['how'], '|', x['ref'], '|', x['anchor'][:60])
+                print(x['para'], x['how'], '|', x['ref'], '|', (x.get('anchor') or x.get('snippet'))[:60])
             if os.path.exists(dst):
                 print(f'{dst} כבר קיים ולא נדרס')
                 continue
