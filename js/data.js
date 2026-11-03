@@ -32,8 +32,8 @@ window.PARASHA_DATA = [
  { id: 'bereshit', name: 'ספר בראשית', compilation: P('sefer-בראשית.pdf'), parshiot: [
   { name: 'בראשית', box: B('pztmqj0ulp'), pdf: P('bereshit-בראשית.pdf'), spotify: 'https://open.spotify.com/episode/0lovHgQja3i0nQpSDCNgn3' },
   { name: 'נח', box: B('8fzottnpz9'), pdf: P('bereshit-נח.pdf'), spotify: 'https://open.spotify.com/episode/66dyVIWrqUBKmuRTZh4fBt' },
-  { name: 'לך לך', box: B('7taibkmo3b'), pdf: P('bereshit-לך-לך.pdf') },
-  { name: 'וירא', box: B('hp2ovnivbq'), pdf: P('bereshit-וירא.pdf') },
+  { name: 'לך לך', box: B('7taibkmo3b'), pdf: P('bereshit-לך-לך.pdf'), spotify: 'https://open.spotify.com/episode/6dCdj1CaZNvN2GS7ef3jAY' },
+  { name: 'וירא', box: B('hp2ovnivbq'), pdf: P('bereshit-וירא.pdf'), spotify: 'https://open.spotify.com/episode/46c0HffJqLiwD7qJgJOSbv' },
   { name: 'חיי שרה', box: B('uaf9u05b67'), pdf: P('bereshit-חיי-שרה.pdf'), spotify: 'https://open.spotify.com/episode/0ppFcEziOE2qSsVbeSlGui' },
   { name: 'תולדות', box: B('fa9s1rnhmj'), pdf: P('bereshit-תולדות.pdf'), spotify: 'https://open.spotify.com/episode/2dUsJVjW7vuDxTDJ0UakaZ' },
   { name: 'ויצא', box: B('t6azco76b4'), pdf: P('bereshit-ויצא.pdf') },
