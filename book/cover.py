@@ -36,7 +36,7 @@ def arg(name, default):
 
 
 def book_pages():
-    pdf = os.path.join(BUILD, 'out', 'book-c.pdf')
+    pdf = os.path.join(BUILD, 'out', 'book-c.pdf')   # הספר ב-B5 (build_book.py, ברירת המחדל)
     if not os.path.exists(pdf):
         return 300
     out = subprocess.check_output(['pdfinfo', pdf], text=True)

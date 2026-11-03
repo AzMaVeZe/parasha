@@ -1,6 +1,6 @@
 """הספר "אללה פרשה" כולו: שער, הקדמה, תוכן עניינים, הפרשות לפי הסדר, והחגים בסוף.
 
-  python3 book/build_book.py [עיצוב] [--sample] [--size 17x24|b5]
+  python3 book/build_book.py [עיצוב] [--sample] [--size b5|17x24]   (ברירת מחדל: b5)
 
 עיצוב: c (ברירת המחדל, ג), c1, c2. עם --sample: רק העמודים הראשונים ושני פרקים, לדוגמה.
 הפלט: book/build/out/book-<עיצוב>[-sample].html, ו-book/render.js הופך אותו ל-PDF.
@@ -206,7 +206,7 @@ p.d { font-family: 'Assistant'; font-size: .95em; margin-right: 4mm }
 '''
 
 
-def build(design='c', sample=False, size='17x24'):
+def build(design='c', sample=False, size='b5'):   # הוחלט: B5, הגודל המוכן של בוקפוד
     parts = chapters()
     if sample:
         parts = [{**parts[0], 'chapters': parts[0]['chapters'][:2]}]
@@ -254,10 +254,10 @@ if __name__ == '__main__':
     args = [a for a in sys.argv[1:] if not a.startswith('--')]
     design = args[0] if args else 'c'
     sample = '--sample' in sys.argv
-    size = sys.argv[sys.argv.index('--size') + 1] if '--size' in sys.argv else '17x24'
+    size = sys.argv[sys.argv.index('--size') + 1] if '--size' in sys.argv else 'b5'
     args = [a for a in args if a not in SIZES]
     os.makedirs(os.path.join(BUILD, 'out'), exist_ok=True)
-    name = f'book-{design}' + ('-sample' if sample else '') + ('' if size == '17x24' else '-' + size)
+    name = f'book-{design}' + ('-sample' if sample else '') + ('' if size == 'b5' else '-' + size)
     open(os.path.join(BUILD, 'out', name + '.html'), 'w', encoding='utf-8').write(build(design, sample, size))
     n = sum(len(p['chapters']) for p in chapters())
     print(name, '—', n, 'chapters in the TOC')
