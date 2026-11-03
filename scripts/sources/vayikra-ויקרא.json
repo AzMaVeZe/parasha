@@ -1,53 +1,46 @@
 {
- "reviewed": false,
+ "reviewed": "claude",
  "sources": [
   {
-   "para": 0,
-   "how": "מראה מקום",
-   "ref": "Leviticus 1:1-5:26",
-   "anchor": "פרשת ויקרא"
+   "ref": "Leviticus 4:1-2",
+   "para": 2
   },
   {
-   "para": 2,
-   "how": "מובאה",
-   "ref": "Siddur Sefard, Torah Readings, Torah Reading for Chol Hamoed Pesach 29 | Leviticus 4:2",
-   "snippet": "\"וַיְדַבֵּר יְהוָה, אֶל-מֹשֶׁה לֵּאמֹר: דַּבֵּר אֶל-בְּנֵי יִשְׂרָאֵל, לֵאמֹר--נ"
+   "ref": "Sforno on Leviticus 4:3",
+   "para": 5
   },
   {
-   "para": 5,
-   "how": "מראה מקום",
-   "ref": "Berakhot 34b",
-   "anchor": "ברכות לד, ב"
+   "ref": "Sforno on Leviticus 4:22",
+   "para": 10
   },
   {
-   "para": 5,
-   "how": "מובאה",
-   "ref": "Sforno on Leviticus 4:3:1 | Mishnah Berakhot 5:5 | Sforno on Leviticus 4:3:1",
-   "snippet": "\"כְּלומַר שֶׁלּא תִּקְרֶה לו שִׁגְגַת חַטָּאת זוּלָתִי מִמּוקְשֵׁי עַם, כְּאָמְר"
+   "ref": "Mishneh Torah, Trespass 8:8",
+   "para": 47
   },
   {
-   "para": 10,
-   "how": "מראה מקום",
-   "ref": "Deuteronomy 32:15",
-   "anchor": "דברים לב, טו"
-  },
-  {
-   "para": 15,
-   "how": "מראה מקום",
-   "ref": "Leviticus 1:1-5:26",
-   "anchor": "פרשת ויקרא"
-  },
-  {
-   "para": 42,
-   "how": "מראה מקום",
-   "ref": "Leviticus 1:1-5:26",
-   "anchor": "פרשת ויקרא"
-  },
-  {
+   "ref": "Chullin 60b:4",
    "para": 49,
-   "how": "מראה מקום",
-   "ref": "Chullin 60b",
    "anchor": "במסכת חולין דף ס ע\"ב"
+  },
+  {
+   "ref": "Guide for the Perplexed, Part 3 46:2",
+   "para": 56,
+   "anchor": "מורה נבוכים חלק ג פרק מ\"ו"
+  },
+  {
+   "ref": "Jerusalem Talmud Pesachim 4:1:7",
+   "para": 58,
+   "anchor": "ירושלמי פסחים פ\"ד ה\"א"
+  },
+  {
+   "ref": "Jerusalem Talmud Taanit 1:6:3",
+   "para": 58,
+   "anchor": "תענית פ\"א ה\"ו"
+  },
+  {
+   "ref": "Rashi on Megillah 22b:3:1",
+   "para": 58,
+   "anchor": "רש\"י מגילה כ\"ב ע\"ב"
   }
  ]
 }

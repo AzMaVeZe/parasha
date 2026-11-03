@@ -1,53 +1,60 @@
 {
- "reviewed": false,
+ "reviewed": "claude",
  "sources": [
   {
-   "para": 9,
-   "how": "מובאה",
-   "ref": "Arakhin 16a:5 | Vayikra Rabbah 17:3",
-   "snippet": "\"א\"ר שמואל בר נחמני א\"ר יוחנן, על שבעה דברים נגעים באין: על לשון הרע, ועל שפיכות"
+   "ref": "Leviticus 12:2",
+   "para": 1
   },
   {
+   "ref": "Rashi on Leviticus 13:46:1",
+   "para": 11
+  },
+  {
+   "ref": "Arakhin 16a:5",
    "para": 17,
-   "how": "מראה מקום",
-   "ref": "Arakhin 16a",
    "anchor": "ערכין טז, א"
   },
   {
+   "ref": "Vayikra Rabbah 17:3",
    "para": 17,
-   "how": "מראה מקום",
-   "ref": "Vayikra Rabbah 17",
    "anchor": "ויקרא רבה יז"
   },
   {
-   "para": 19,
-   "how": "מובאה",
    "ref": "Ketubot 77b:6",
-   "snippet": "\"רבי זירא לא הוה יתיב בזיקיה (=לא היה יושב בסביבתו של בעל ראתן, סוג של צרעת). רב"
-  },
-  {
-   "para": 24,
-   "how": "מובאה",
-   "ref": "Vayikra Rabbah 16:6 | Vayikra Rabbah 16:2",
-   "snippet": "\"אמר ר' יהושע בן לוי: חמש תורות כתובות במצורע: זאת תורת נגע צרעת, זאת תהיה תורת "
-  },
-  {
-   "para": 26,
-   "how": "מובאה",
-   "ref": "Teshuvot Rashi 207:2",
-   "snippet": "\"והראה האיש מעשהו לרעה, והראה עצמו שאינו מזרעו של אברהם אבינו, שדרכו לרחם על הבר"
-  },
-  {
    "para": 28,
-   "how": "מראה מקום",
-   "ref": "Ketubot 77b",
    "anchor": "בבלי, כתובות דף עז ע\"ב"
   },
   {
+   "ref": "Vayikra Rabbah 16:6",
+   "para": 31,
+   "anchor": "מדרש רבה, ויקרא, פרשה טז (ו)"
+  },
+  {
+   "ref": "Teshuvot Rashi 207:2",
    "para": 32,
-   "how": "מראה מקום",
-   "ref": "Teshuvot Rashi 207",
    "anchor": "בשו\"ת רש\"י סימן רז"
+  },
+  {
+   "ref": "Leviticus 15:18",
+   "para": 40
+  },
+  {
+   "ref": "Ecclesiastes 7:14",
+   "para": 40
+  },
+  {
+   "ref": "Sanhedrin 110a:6-7",
+   "para": 45,
+   "anchor": "סנהדרין דף קי ע\"א"
+  },
+  {
+   "ref": "Responsa Maharashdam, Yoreh Deah 143:2",
+   "para": 46,
+   "anchor": "שו\"ת מהרשד\"ם חלק יו\"ד סימן קמג"
+  },
+  {
+   "ref": "Leviticus 16:1",
+   "para": 47
   }
  ]
 }

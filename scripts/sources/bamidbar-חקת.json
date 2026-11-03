@@ -1,47 +1,40 @@
 {
- "reviewed": false,
+ "reviewed": "claude",
  "sources": [
   {
-   "para": 2,
-   "how": "מובאה",
-   "ref": "Maor VaShemesh, Chukat 13 | Numbers 20:17 | Aderet Eliyahu (Rabbi Yosef Chaim), Chukat 21 | Numbers 20:21",
-   "snippet": "וַיִשְּׁלַח מֹשֶׁה מַלְאָכִים מִקָּדֵשׁ, אֶל-מֶלֶךְ אֱדוֹם: (...) נַעְבְּרָה-נָּ"
+   "ref": "Numbers 20:14-21",
+   "para": 2
   },
   {
-   "para": 12,
-   "how": "מובאה",
-   "ref": "Numbers 20:24 | Notes by Rabbi Yehoshua Hartman on Derekh Chayim 1:1:14 | Numbers 20:26",
-   "snippet": "וַיֹּאמֶר ה' אֶל-מֹשֶׁה וְאֶל-אַהֲרֹן, בְּהֹר הָהָר, עַל-גְּבוּל אֶרֶץ-אֱדוֹם, ל"
+   "ref": "Numbers 20:22",
+   "para": 8
   },
   {
-   "para": 24,
-   "how": "מראה מקום",
+   "ref": "Numbers 20:23-26",
+   "para": 12
+  },
+  {
    "ref": "Job 3:25",
+   "para": 24,
    "anchor": "איוב ג, כה"
   },
   {
-   "para": 27,
-   "how": "מראה מקום",
-   "ref": "Numbers 19:1-22:1",
-   "anchor": "פרשת חקת"
+   "ref": "Numbers 21:1-3",
+   "para": 33
   },
   {
-   "para": 33,
-   "how": "מובאה",
-   "ref": "Numbers 21:24",
-   "snippet": "לפנות לה': וַיִשְּׁמַע הַכְּנַעֲנִי מֶלֶךְ-עֲרָד, יֹשֵׁב הַנֶּגֶב, כִּי בָּא יִש"
-  },
-  {
-   "para": 34,
-   "how": "מראה מקום",
    "ref": "Numbers 21:17",
+   "para": 34,
    "anchor": "כא, יז"
   },
   {
-   "para": 35,
-   "how": "מראה מקום",
    "ref": "Numbers 21:21",
+   "para": 35,
    "anchor": "כא, כא"
+  },
+  {
+   "ref": "Numbers 21:24",
+   "para": 36
   }
  ]
 }

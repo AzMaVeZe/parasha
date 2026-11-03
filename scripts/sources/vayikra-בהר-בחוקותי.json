@@ -1,65 +1,38 @@
 {
- "reviewed": false,
+ "reviewed": "claude",
  "sources": [
   {
-   "para": 1,
-   "how": "מראה מקום",
-   "ref": "Leviticus 25:1-26:2",
-   "anchor": "פרשת בהר"
-  },
-  {
-   "para": 6,
-   "how": "מראה מקום",
    "ref": "Leviticus 25:13-17",
+   "para": 6,
    "anchor": "ויקרא כה, יג-יז"
   },
   {
-   "para": 7,
-   "how": "מובאה",
-   "ref": "Arakhin 30b:4 | Ramban on Leviticus 25:14:1 | Leviticus 25:15 | Introductions to the Babylonian Talmud, Arakhin, Introduction to Perek IX 1",
-   "snippet": "\"בִּשְׁנַת הַיּוֹבֵל, הַזֹּאת, תָּשֻׁבוּ, אִישׁ אֶל-אֲחֻזָתּוֹ. וְכִי-תִמְכְּרוּ"
-  },
-  {
-   "para": 22,
-   "how": "מראה מקום",
-   "ref": "Mishnah Bava Metzia 4:6",
-   "anchor": "המשנה (ב\"מ ד, ו)"
-  },
-  {
-   "para": 23,
-   "how": "מראה מקום",
-   "ref": "Exodus 22:20",
-   "anchor": "שמות כב, כ"
-  },
-  {
-   "para": 23,
-   "how": "מובאה",
    "ref": "Mishnah Bava Metzia 4:10",
-   "snippet": "\"כשם שהונאה במקח וממכר, כך הונאה בדברים: לא יאמר לו בכמה חפץ זה, והוא אינו רוצה "
+   "para": 16,
+   "anchor": "מסכת בבא מציעא ד, י"
   },
   {
-   "para": 26,
-   "how": "מראה מקום",
-   "ref": "Leviticus 25",
-   "anchor": "ויקרא כה"
+   "ref": "Mishnah Bava Metzia 4:6",
+   "para": 22,
+   "anchor": "ב\"מ ד, ו"
   },
   {
+   "ref": "Bava Metzia 58b:7-10",
    "para": 27,
-   "how": "מראה מקום",
-   "ref": "Bava Metzia 58b",
    "anchor": "בבלי, בבא מציעא, נח ע\"ב"
   },
   {
-   "para": 28,
-   "how": "מראה מקום",
-   "ref": "Job 4",
-   "anchor": "איוב ד"
+   "ref": "Mishnah Bava Metzia 4:3",
+   "para": 39,
+   "anchor": "ב\"מ ד, ג"
   },
   {
-   "para": 39,
-   "how": "מראה מקום",
-   "ref": "Mishnah Bava Metzia 4:3",
-   "anchor": "המשנה (ב\"מ ד, ג)"
+   "ref": "Leviticus 25:38-42",
+   "para": 47
+  },
+  {
+   "ref": "Bava Metzia 58b:11",
+   "para": 56
   }
  ]
 }

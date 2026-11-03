@@ -1,53 +1,102 @@
 {
- "reviewed": false,
+ "reviewed": "claude",
  "sources": [
   {
-   "para": 0,
-   "how": "מראה מקום",
-   "ref": "Exodus 27:20-30:10",
-   "anchor": "פרשת תצוה"
+   "ref": "Exodus 28:2",
+   "para": 1
   },
   {
-   "para": 4,
-   "how": "מובאה",
-   "ref": "Genesis 27:15 | Genesis 28:20 | Genesis 41:42",
-   "snippet": "הבגדים הראשונים בתנ\"ך נתפרו ע\"י הקב\"ה בעצמו, לאדם וחווה, \"וַיַּעַשׂ ה' אֱלֹקים ל"
+   "ref": "Genesis 3:21",
+   "para": 4
   },
   {
+   "ref": "Genesis 27:15",
+   "para": 4
+  },
+  {
+   "ref": "Genesis 28:20",
+   "para": 4
+  },
+  {
+   "ref": "Genesis 38:14",
+   "para": 5
+  },
+  {
+   "ref": "Genesis 37:3",
+   "para": 6
+  },
+  {
+   "ref": "Genesis 39:12-18",
+   "para": 6
+  },
+  {
+   "ref": "Genesis 41:42",
+   "para": 6
+  },
+  {
+   "ref": "Esther Rabbah 3:13",
+   "para": 11
+  },
+  {
+   "ref": "Avodah Zarah 18a:14-18b:4",
    "para": 25,
-   "how": "מראה מקום",
-   "ref": "Avodah Zarah 18",
    "anchor": "תלמוד בבלי, עבודה זרה, יח"
   },
   {
-   "para": 45,
-   "how": "מובאה",
+   "ref": "Rashi on Avodah Zarah 18b:4:2",
+   "para": 28
+  },
+  {
+   "ref": "Mishnah Shekalim 5:1",
+   "para": 40,
+   "anchor": "המשנה במסכת שקלים (פ\"ה מ\"א)"
+  },
+  {
+   "ref": "Rambam on Mishnah Shekalim 5:1",
+   "para": 42,
+   "anchor": "הרמב\"ם בפירוש המשנה"
+  },
+  {
+   "ref": "Zohar, Mishpatim 3:102",
+   "para": 47,
+   "anchor": "זוהר שמות, חלק ב', צט"
+  },
+  {
+   "ref": "Bereshit Rabbah 20:12",
+   "para": 50,
+   "anchor": "בראשית רבה"
+  },
+  {
+   "ref": "Zevachim 17b:6",
+   "para": 51,
+   "anchor": "זבחים יז:"
+  },
+  {
    "ref": "Sanhedrin 83b:14",
-   "snippet": "\"בזמן שבגדיהם עליהם כהונתם עליהם אין בגדיהם עליהם אין כהונתם עליהם והוו להו זרים"
-  },
-  {
    "para": 51,
-   "how": "מראה מקום",
-   "ref": "Zevachim 17b",
-   "anchor": "תלמוד בבלי, זבחים יז:"
-  },
-  {
-   "para": 51,
-   "how": "מראה מקום",
-   "ref": "Sanhedrin 83b",
    "anchor": "סנהדרין פג:"
   },
   {
+   "ref": "Peri Tzadik, Vayigash 7:1",
    "para": 52,
-   "how": "מראה מקום",
-   "ref": "Genesis 44:18-47:27",
-   "anchor": "בפרשת ויגש"
+   "anchor": "הפרי צדיק"
   },
   {
+   "ref": "Zohar, Sifra DiTzniuta 2:4",
+   "para": 54
+  },
+  {
+   "ref": "Shenei Luchot HaBerit, Torah Shebikhtav, Tetzaveh, Derekh Chayim 2",
+   "para": 57
+  },
+  {
+   "ref": "Esther Rabbah 3:14",
+   "para": 61
+  },
+  {
+   "ref": "Likutei Moharan 1:5:5",
    "para": 76,
-   "how": "מראה מקום",
-   "ref": "Likutei Moharan 1",
-   "anchor": "בליקוטי מוהר\"ן א'"
+   "anchor": "ליקוטי מוהר\"ן א'"
   }
  ]
 }

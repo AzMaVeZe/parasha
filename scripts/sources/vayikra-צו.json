@@ -1,23 +1,18 @@
 {
- "reviewed": false,
+ "reviewed": "claude",
  "sources": [
   {
-   "para": 0,
-   "how": "מובאה",
-   "ref": "Leviticus 6:2 | Kli Yakar on Leviticus 6:2:11 | Abarbanel on Torah, Leviticus 6:2:8",
-   "snippet": "וַיְדַבֵּר ה', אֶל-מֹשֶׁה לֵּאמֹר; צַו אֶת-אַהֲרֹן וְאֶת-בָּנָיו לֵאמֹר, זֹאת תּ"
+   "ref": "Leviticus 6:1-6",
+   "para": 0
   },
   {
+   "ref": "Rashi on Leviticus 6:6:1",
    "para": 12,
-   "how": "מראה מקום",
-   "ref": "Rashi on Leviticus 6:6",
-   "anchor": "ברש\"י ויקרא ו', ו'"
+   "anchor": "רש\"י ויקרא ו', ו'"
   },
   {
-   "para": 29,
-   "how": "מראה מקום",
-   "ref": "Eikhah Rabbah, Petichta",
-   "anchor": "איכה רבה, פתיחתא"
+   "ref": "Psalms 74:16",
+   "para": 23
   }
  ]
 }

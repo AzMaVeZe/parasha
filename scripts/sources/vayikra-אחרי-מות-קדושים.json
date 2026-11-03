@@ -1,53 +1,68 @@
 {
- "reviewed": false,
+ "reviewed": "claude",
  "sources": [
   {
-   "para": 0,
-   "how": "מראה מקום",
-   "ref": "Leviticus 19:1-20:27",
-   "anchor": "וקדושים"
+   "ref": "Leviticus 16:1-3",
+   "para": 1
   },
   {
-   "para": 1,
-   "how": "מובאה",
-   "ref": "Leviticus 16:2 | Machzor Yom Kippur Ashkenaz, Reading of the Torah, Reading for Yom Kippur Morning 2",
-   "snippet": "וַיְדַבֵּר ה', אֶל-מֹשֶׁה, אַחֲרֵי מוֹת, שְׁנֵי בְּנֵי אַהֲרֹן--בְּקָרְבָתָם לִפ"
+   "ref": "Leviticus 16:21-22",
+   "para": 10
   },
   {
-   "para": 20,
-   "how": "מראה מקום",
+   "ref": "Vayikra Rabbah 20:10",
+   "para": 18
+  },
+  {
    "ref": "Mishnah Yoma 6:6",
+   "para": 20,
    "anchor": "משנה יומא ו, ו"
   },
   {
+   "ref": "Yoma 67b:9",
    "para": 22,
-   "how": "מראה מקום",
-   "ref": "Yoma 67b",
    "anchor": "יומא סז ע\"ב"
   },
   {
-   "para": 47,
-   "how": "מראה מקום",
-   "ref": "Genesis 2:4",
-   "anchor": "בבראשית (ב, ד)"
+   "ref": "Guide for the Perplexed, Part 3 46:20",
+   "para": 44,
+   "anchor": "רמב\"ם, מורה נבוכים, חלק ג' מ\"ו"
   },
   {
+   "ref": "Ramban on Leviticus 16:8:1",
+   "para": 45,
+   "anchor": "רמב\"ן עה\"ת ויקרא ט\"ז, ח"
+  },
+  {
+   "ref": "Tzidkat HaTzadik 40",
+   "para": 46,
+   "anchor": "צדקת הצדיק תורה מ'"
+  },
+  {
+   "ref": "Megillah 7b:7",
+   "para": 46
+  },
+  {
+   "ref": "Sifra, Acharei Mot, Chapter 2 1",
    "para": 49,
-   "how": "מראה מקום",
-   "ref": "Sifra, Acharei Mot, Section 2",
    "anchor": "ספרא, אחרי מות, פרשה ב"
   },
   {
+   "ref": "Yoma 38a:2-3",
    "para": 51,
-   "how": "מראה מקום",
-   "ref": "Yoma 38a",
    "anchor": "בבלי, יומא לח ע\"א"
   },
   {
-   "para": 55,
-   "how": "מראה מקום",
-   "ref": "Proverbs 24",
-   "anchor": "משלי כד"
+   "ref": "Vayikra Rabbah 21:4",
+   "para": 53
+  },
+  {
+   "ref": "Vayikra Rabbah 21:5",
+   "para": 55
+  },
+  {
+   "ref": "Ecclesiastes 3:1-8",
+   "para": 57
   }
  ]
 }

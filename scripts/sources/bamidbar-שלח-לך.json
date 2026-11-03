@@ -1,53 +1,48 @@
 {
- "reviewed": false,
+ "reviewed": "claude",
  "sources": [
   {
-   "para": 1,
-   "how": "מראה מקום",
    "ref": "Numbers 13:32",
+   "para": 1,
    "anchor": "במדבר יג, לב"
   },
   {
-   "para": 1,
-   "how": "מובאה",
-   "ref": "Numbers 13:32",
-   "snippet": "הָאָרֶץ אֲשֶׁר עָבַרְנוּ בָּה לָתוּר אֹתָהּ, אֶרֶץ אֹכֶלֶת יוֹשְׁבֶיהָ הִוא, וְכ"
+   "ref": "Bamidbar Rabbah 16:13",
+   "para": 3
   },
   {
-   "para": 10,
-   "how": "מראה מקום",
    "ref": "Pirkei Avot 1:6",
+   "para": 10,
    "anchor": "אבות א, ו"
   },
   {
+   "ref": "Pirkei Avot 2:4",
    "para": 12,
-   "how": "מראה מקום",
-   "ref": "Pirkei Avot 2:5",
    "anchor": "אבות ב, ה"
   },
   {
-   "para": 16,
-   "how": "מראה מקום",
-   "ref": "Avodah Zarah 5b",
-   "anchor": "בגמ' (ע\"ז ה:)"
+   "ref": "Mei HaShiloach, Volume II, Numbers, Sh'lach 2",
+   "para": 16
   },
   {
-   "para": 18,
-   "how": "מראה מקום",
-   "ref": "Deuteronomy 1:22",
-   "anchor": "ספר דברים א, כב"
+   "ref": "Numbers 13:30",
+   "para": 23
   },
   {
-   "para": 26,
-   "how": "מובאה",
-   "ref": "Numbers 14:6 | Arvei Nachal, Sh'lach 3:38 | Aderet Eliyahu (Rabbi Yosef Chaim), Sh'lach 11 | Numbers 14:9",
-   "snippet": "וִיהוֹשֻׁעַ בִּן-נוּן, וְכָלֵב בֶּן-יְפֻנֶּה, מִן-הַתָּרִים, אֶת הָאָרֶץ קָרְעוּ"
+   "ref": "Numbers 14:6-10",
+   "para": 26
   },
   {
-   "para": 34,
-   "how": "מובאה",
-   "ref": "Exodus 40:35",
-   "snippet": "וַיְכַס הֶעָנָן, אֶת-אֹהֶל מוֹעֵד; וּכְבוֹד ה', מָלֵא אֶת-הַמִּשְׁכָּן. וְלֹא-יָ"
+   "ref": "Mei HaShiloach, Volume II, Numbers, Sh'lach 1",
+   "para": 28
+  },
+  {
+   "ref": "Orot HaKodesh 3:1:5:97",
+   "para": 30
+  },
+  {
+   "ref": "Exodus 40:34-35",
+   "para": 34
   }
  ]
 }

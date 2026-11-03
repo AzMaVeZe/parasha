@@ -1,71 +1,71 @@
 {
- "reviewed": false,
+ "reviewed": "claude",
  "sources": [
   {
-   "para": 6,
-   "how": "מובאה",
-   "ref": "Talks of Yeshayahu Leibowitz on the Parasha, Pinchas 14:5",
-   "snippet": "וַיֹּאמֶר ה' אֶל-מֹשֶׁה, עֲלֵה אֶל-הַר הָעֲבָרִים הַזֶּה; וּרְאֵה, אֶת-הָאָרֶץ, "
+   "ref": "Numbers 26:65",
+   "para": 1
   },
   {
-   "para": 11,
-   "how": "מראה מקום",
+   "ref": "Numbers 27:8",
+   "para": 2
+  },
+  {
+   "ref": "Numbers 27:12-14",
+   "para": 6
+  },
+  {
    "ref": "Joshua 24:33",
+   "para": 11,
    "anchor": "יהושע כד, לג"
   },
   {
-   "para": 15,
-   "how": "מראה מקום",
-   "ref": "Genesis 1:1-6:8",
-   "anchor": "לפרשת בראשית"
+   "ref": "Numbers 27:15",
+   "para": 13
   },
   {
-   "para": 15,
-   "how": "מראה מקום",
-   "ref": "Genesis 2",
-   "anchor": "בפרק ב'"
+   "ref": "Exodus 33:12",
+   "para": 14
   },
   {
-   "para": 16,
-   "how": "מובאה",
+   "ref": "Exodus 19:23",
+   "para": 14
+  },
+  {
+   "ref": "Exodus 4:10",
+   "para": 14
+  },
+  {
+   "ref": "Numbers 14:13",
+   "para": 14
+  },
+  {
+   "ref": "Numbers 11:11",
+   "para": 14
+  },
+  {
    "ref": "Genesis 2:7",
-   "snippet": "וַיִיּצֶר ה' אֱ-לֹהִים אֶת-הָאָדָם, עָפָר מִן-הָאֲדָמָה, וַיִפַּּח בְּאַפָּיו, נ"
+   "para": 16
   },
   {
-   "para": 20,
-   "how": "מובאה",
+   "ref": "Numbers 26:54",
+   "para": 18
+  },
+  {
    "ref": "Onkelos Genesis 2:7",
-   "snippet": "וּבְרָא ה' אֱ-לֹהִים יָת אָדָם, עַפְרָא מִן אַרְעָא, וּנְפַח בְּאַפּוֹהִי, נִשְׁ"
+   "para": 20
   },
   {
-   "para": 30,
-   "how": "מראה מקום",
-   "ref": "Deuteronomy 3:23-7:11",
-   "anchor": "לספר דברים לפרשת ואתחנן"
+   "ref": "Deuteronomy 3:23-25",
+   "para": 32
   },
   {
-   "para": 32,
-   "how": "מובאה",
-   "ref": "Deuteronomy 3:24 | Toldot Yaakov Yosef, Vaetchanan 1 | Deuteronomy 3:25",
-   "snippet": "וָאֶתְחַנַּן, אֶל-ה', בָּעֵת הַהִוא, לֵאמֹר. אֲ-דֹנָי ה', אַתָּה הַחִלּוֹתָ לְהַ"
+   "ref": "Numbers 27:16-17",
+   "para": 34
   },
   {
-   "para": 34,
-   "how": "מובאה",
-   "ref": "Numbers 27:17",
-   "snippet": "יִפְקֹד ה', אֱלֹהֵי הָרוּחֹת לְכָל-בָּשָׂר, אִישׁ, עַל-הָעֵדָה. אֲשֶׁר-יֵצֵא לִפ"
-  },
-  {
-   "para": 37,
-   "how": "מראה מקום",
-   "ref": "Deuteronomy 3:23-7:11",
-   "anchor": "בפרשת ואתחנן"
-  },
-  {
-   "para": 42,
-   "how": "מראה מקום",
-   "ref": "Numbers 25:10-30:1",
-   "anchor": "לפרשת פנחס"
+   "ref": "Guide for the Perplexed, Part 1 27:1",
+   "para": 35,
+   "anchor": "מורה מבוכים א' כז'"
   }
  ]
 }

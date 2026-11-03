@@ -1,29 +1,28 @@
 {
- "reviewed": false,
+ "reviewed": "claude",
  "sources": [
   {
-   "para": 1,
-   "how": "מראה מקום",
    "ref": "Jeremiah 2:2-3",
+   "para": 1,
    "anchor": "ירמיהו ב, ב-ג"
   },
   {
-   "para": 1,
-   "how": "מובאה",
-   "ref": "Mekhilta DeRabbi Yishmael, Tractate Pischa 14:14",
-   "snippet": "\"הָלֹךְ וְקָרָאתָ בְאָזְנֵי יְרוּשָׁלִַם לֵאמֹר, כֹּה אָמַר ה', זָכַרְתִּי לָךְ "
+   "ref": "Rashi on Jeremiah 2:2",
+   "para": 7
   },
   {
+   "ref": "Eruvin 54a:21",
    "para": 13,
-   "how": "מראה מקום",
-   "ref": "Eruvin 54a",
    "anchor": "עירובין נ\"ד."
   },
   {
-   "para": 13,
-   "how": "מובאה",
-   "ref": "Eruvin 54a:21",
-   "snippet": "\"אם משים אדם עצמו כמדבר זה שהכל דשין בו - תלמודו מתקיים בידו, ואם לאו - אינו מתק"
+   "ref": "Yoma 20b:10-11",
+   "para": 30
+  },
+  {
+   "ref": "Peri Tzadik, Yitro 2:1",
+   "para": 36,
+   "anchor": "פרי צדיק, פרשת יתרו (ב)"
   }
  ]
 }

@@ -1,59 +1,79 @@
 {
- "reviewed": false,
+ "reviewed": "claude",
  "sources": [
   {
+   "ref": "Leviticus 10:3",
    "para": 3,
-   "how": "מראה מקום",
-   "ref": "Exodus 10:3",
    "anchor": "שמות י, ג"
   },
   {
-   "para": 8,
-   "how": "מובאה",
-   "ref": "Leviticus 10:16",
-   "snippet": "\"וְאֵת שְׂעִיר הַחַטָּאת, דָּרֹשׁ דָּרַשׁ מֹשֶׁה--וְהִנֵּה שֹׂרָף; וַיִּקְצֹף עַ"
+   "ref": "Rashi on Leviticus 10:3:2",
+   "para": 5
   },
   {
+   "ref": "Leviticus 10:16",
    "para": 9,
-   "how": "מראה מקום",
-   "ref": "Exodus 10:16",
    "anchor": "שמות י, טז"
   },
   {
-   "para": 12,
-   "how": "מובאה",
    "ref": "Leviticus 10:19",
-   "snippet": "\" וַיְדַבֵּר אַהֲרֹן אֶל-מֹשֶׁה, הֵן הַיּוֹם הִקְרִיבוּ אֶת-חַטָּאתָם וְאֶת-עֹלָ"
-  },
-  {
    "para": 13,
-   "how": "מראה מקום",
-   "ref": "Exodus 10:19",
    "anchor": "שמות י, יט"
   },
   {
+   "ref": "Yoma 4a:4-5",
    "para": 17,
-   "how": "מראה מקום",
-   "ref": "Yoma 4a",
    "anchor": "בבלי, יומא ד ע\"א"
   },
   {
+   "ref": "Megillah 10b:8",
    "para": 18,
-   "how": "מראה מקום",
-   "ref": "Megillah 10b",
    "anchor": "בבלי, מגילה י ע\"ב"
   },
   {
-   "para": 23,
-   "how": "מובאה",
-   "ref": "Or HaChaim on Leviticus 10:19:1",
-   "snippet": "\"רז\"ל אמרו אין 'דיבור' אלא לשון עז, יורה על דברים קשים. צריך לדעת איך יוצדק עניי"
+   "ref": "Leviticus 10:18",
+   "para": 21,
+   "anchor": "י, יח"
   },
   {
-   "para": 30,
-   "how": "מובאה",
+   "ref": "Rashi on Leviticus 10:19:1",
+   "para": 22,
+   "anchor": "רש\"י שם"
+  },
+  {
+   "ref": "Or HaChaim on Leviticus 10:19:1",
+   "para": 23
+  },
+  {
+   "ref": "Leviticus 10:20",
+   "para": 28
+  },
+  {
    "ref": "Mishnah Tamid 1:4",
-   "snippet": "\"מי שזכה לתרום את המזבח הוא יתרום את המזבח, אומרים לו הזהר שמא תגע בכלי, עד שתקד"
+   "para": 29,
+   "anchor": "במסכת תמיד א, ד"
+  },
+  {
+   "ref": "Zevachim 101a:12",
+   "para": 44
+  },
+  {
+   "ref": "Zohar, Shmini 6:67-70",
+   "para": 53,
+   "anchor": "זוהר שמיני סז-עה"
+  },
+  {
+   "ref": "Onkelos Genesis 2:7",
+   "para": 57
+  },
+  {
+   "ref": "Likutei Moharan 38:4:1",
+   "para": 58,
+   "anchor": "ליקוטי מוהר\"ן לח"
+  },
+  {
+   "ref": "Pirkei Avot 3:13",
+   "para": 59
   }
  ]
 }
