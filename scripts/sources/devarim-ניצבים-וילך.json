@@ -1,53 +1,32 @@
 {
- "reviewed": false,
+ "reviewed": "claude",
  "sources": [
   {
-   "para": 1,
-   "how": "מראה מקום",
-   "ref": "Deuteronomy 29:9-30:20",
-   "anchor": "פרשת ניצבים"
+   "ref": "Deuteronomy 28:69",
+   "para": 2
   },
   {
-   "para": 2,
-   "how": "מובאה",
-   "ref": "Deuteronomy 30:1",
-   "snippet": "בשבוע שעבר התחלנו לפרט את הברכות והקללות והנה, לאחר הפסקה מתודית קצרה בה הזכרנו "
+   "ref": "Deuteronomy 30:1-4",
+   "para": 3
   },
   {
-   "para": 9,
-   "how": "מובאה",
-   "ref": "Deuteronomy 30:11 | Horeb 491:6 | Talks of Yeshayahu Leibowitz on the Parasha, Nitzavim 9:3 | Deuteronomy 30:13",
-   "snippet": "כִּי הַמִּצְוָה הַזֹּאת, אֲשֶׁר אָנֹכִי מְצַוְּךָ הַיּוֹם--לֹא-נִפְלֵאת הִוא מִמ"
+   "ref": "Deuteronomy 30:11-14",
+   "para": 9
   },
   {
-   "para": 12,
-   "how": "מראה מקום",
-   "ref": "Proverbs 24",
-   "anchor": "משלי כד"
+   "ref": "Devarim Rabbah 8:3",
+   "para": 18,
+   "anchor": "מדרש רבה, נצבים אות ג'"
   },
   {
-   "para": 13,
-   "how": "מראה מקום",
-   "ref": "Deuteronomy 24",
-   "anchor": "דברים כד"
-  },
-  {
-   "para": 25,
-   "how": "מובאה",
    "ref": "Zikaron leYom Rishon, Part II; Selichot, Sin Guilt and Covenant 16",
-   "snippet": "\"תחושת חוסר הכנות וחוסר העומק שלנו בימי התשובה היא הבעיה הגדולה. האם אכן אנו מאמ"
+   "para": 34,
+   "anchor": "הרב שג\"ר, זכרון ליום ראשון"
   },
   {
-   "para": 27,
-   "how": "מובאה",
-   "ref": "Deuteronomy 30:1",
-   "snippet": "אם נשים לב לתחילת הפרשיה איתה פתחנו, נראה כי התשובה לא באה רק בגלל הקללות, כי אם"
-  },
-  {
-   "para": 38,
-   "how": "מובאה",
-   "ref": "Zikaron leYom Rishon, Part II; Selichot, Teshuvah; the Eternal Life 15",
-   "snippet": "\"זה היום תחילת מעשיך, זכרון ליום ראשון\" \"משל לזוג הנשוי כבר שנים ארוכות. הם יושב"
+   "ref": "Zikaron leYom Rishon, Part II; Selichot, Teshuvah; the Eternal Life 14-16",
+   "para": 37,
+   "anchor": "(עמ' 31 שם)"
   }
  ]
 }

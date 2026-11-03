@@ -1,23 +1,28 @@
 {
- "reviewed": false,
+ "reviewed": "claude",
  "sources": [
   {
-   "para": 21,
-   "how": "מראה מקום",
    "ref": "Exodus 1:9",
+   "para": 21,
    "anchor": "שמות א, ט"
   },
   {
-   "para": 22,
-   "how": "מראה מקום",
    "ref": "Bereshit Rabbah 96:1",
+   "para": 22,
    "anchor": "בראשית רבה צו, א"
   },
   {
-   "para": 42,
-   "how": "מובאה",
-   "ref": "Midrash Tanchuma, Vayera 6:7",
-   "snippet": "ואמר להם: \"הֵאָסְפוּ וְאַגִּידָה לָכֶם, אֵת אֲשֶׁר-יִקְרָא אֶתְכֶם, בְּאַחֲרִית "
+   "ref": "Genesis 37:11",
+   "para": 28
+  },
+  {
+   "ref": "Genesis 49:1",
+   "para": 42
+  },
+  {
+   "ref": "II Samuel 13:21",
+   "para": 56,
+   "anchor": "שמואל ב יג, כא"
   }
  ]
 }

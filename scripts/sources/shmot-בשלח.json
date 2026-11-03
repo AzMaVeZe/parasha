@@ -1,11 +1,23 @@
 {
- "reviewed": false,
+ "reviewed": "claude",
  "sources": [
   {
-   "para": 59,
-   "how": "מובאה",
-   "ref": "Orot, Lights from Darkness, Lights of Rebirth 18:1",
-   "snippet": "\"שלושה כוחות מתאבקים כעת במחננו... ושרשיהם קבועים הם בתוך ההכרה החודרת במרחבי רו"
+   "ref": "Exodus 22:20",
+   "para": 12
+  },
+  {
+   "ref": "Deuteronomy 23:8",
+   "para": 12
+  },
+  {
+   "ref": "Mekhilta DeRabbi Yishmael, Tractate Vayehi Beshalach 3:27",
+   "para": 28,
+   "anchor": "מכילתא דרבי ישמעאל בשלח"
+  },
+  {
+   "ref": "Orot, Lights from Darkness, Lights of Rebirth 18",
+   "para": 70,
+   "anchor": "אורות, עמ' ע-עב"
   }
  ]
 }

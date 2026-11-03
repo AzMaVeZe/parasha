@@ -1,71 +1,67 @@
 {
- "reviewed": false,
+ "reviewed": "claude",
  "sources": [
   {
-   "para": 16,
-   "how": "מראה מקום",
-   "ref": "Deuteronomy 33:1-34:12",
-   "anchor": "וזאת הברכה"
+   "ref": "Kad HaKemach, Willow 1:1",
+   "para": 2
   },
   {
+   "ref": "Kad HaKemach, Sukkah 1:1-5",
+   "para": 17,
+   "anchor": "בכתבי רבנו בחיי"
+  },
+  {
+   "ref": "Sukkah 2a:12",
    "para": 18,
-   "how": "מראה מקום",
-   "ref": "Sukkah 2a",
    "anchor": "תלמוד בבלי, סוכה ב ע\"א"
   },
   {
-   "para": 19,
-   "how": "מראה מקום",
    "ref": "Genesis 33:17",
+   "para": 19,
    "anchor": "בראשית לג, יז"
   },
   {
+   "ref": "Bamidbar Rabbah 14:2",
    "para": 19,
-   "how": "מובאה",
-   "ref": "Amos 9:11",
-   "snippet": "בראשית לג, יז: \"וְיַעֲקֹב נָסַע סֻכֹּתָה, וַיִּבֶן לוֹ בָּיִת; וּלְמִקְנֵהוּ עָש"
+   "anchor": "במדבר רבה פרשה יד"
   },
   {
-   "para": 20,
-   "how": "מראה מקום",
    "ref": "Amos 9:11",
+   "para": 20,
    "anchor": "עמוס ט, יא"
   },
   {
-   "para": 35,
-   "how": "מראה מקום",
    "ref": "Sifra, Emor, Chapter 17 5",
+   "para": 35,
    "anchor": "ספרא אמור יז, ה"
   },
   {
+   "ref": "Pirkei Avot 2:13",
    "para": 38,
-   "how": "מראה מקום",
-   "ref": "Pirkei Avot 2:3",
    "anchor": "משנה, אבות ב, ג"
   },
   {
-   "para": 39,
-   "how": "מראה מקום",
    "ref": "Mishnah Sukkah 2:9",
+   "para": 39,
    "anchor": "משנה סוכה ב, ט"
   },
   {
-   "para": 51,
-   "how": "מובאה",
    "ref": "Deuteronomy 33:2",
-   "snippet": "\"... מִימִינוֹ, אשדת (אֵשׁ דָּת) לָמוֹ \"."
+   "para": 51
   },
   {
-   "para": 54,
-   "how": "מובאה",
    "ref": "Onkelos Deuteronomy 33:2",
-   "snippet": "כְּתָב יַמִּינֵיּה, מִגּוֹ אִישָׁתָא אוֹרָיְתָא יְהַב לַנָא."
+   "para": 54
   },
   {
+   "ref": "Beitzah 25b:7",
    "para": 61,
-   "how": "מראה מקום",
-   "ref": "Beitzah 28b",
    "anchor": "במסכת ביצה כח ע\"ב"
+  },
+  {
+   "ref": "Shabbat 105a:3",
+   "para": 81,
+   "anchor": "בבלי, שבת דף קה."
   }
  ]
 }

@@ -1,35 +1,81 @@
 {
- "reviewed": false,
+ "reviewed": "claude",
  "sources": [
   {
-   "para": 0,
-   "how": "מראה מקום",
-   "ref": "Exodus 6:2-9:35",
-   "anchor": "בפרשת וארא"
+   "ref": "Exodus 7:26",
+   "para": 2,
+   "anchor": "שמות ז 26"
   },
   {
+   "ref": "Exodus 8:5-6",
    "para": 8,
-   "how": "מובאה",
-   "ref": "Notes by Rabbi Yehoshua Hartman on Derekh Chayim 5:4:122",
-   "snippet": "ח, ה-ו \"וַיֹאמֶר מֹשֶה לְפַרְעֹה, הִתְפָאֵר עָלַי, לְמָתַי אעְתִיר לְך וְלַעֲבָד"
+   "anchor": "ח, ה-ו"
   },
   {
-   "para": 17,
-   "how": "מובאה",
+   "ref": "Exodus 8:8",
+   "para": 12,
+   "anchor": "ח, ח"
+  },
+  {
+   "ref": "Exodus 3:9",
+   "para": 17
+  },
+  {
+   "ref": "Exodus 5:8",
+   "para": 17
+  },
+  {
    "ref": "Exodus 11:6",
-   "snippet": "כך למשל: \"הִנֵה צַעֲקַת בְנֵי-יִשְרָאֵל בָאה אֵלָי\", \"כִי-נִרְפִים הֵם--עַל-כֵן "
+   "para": 17
   },
   {
-   "para": 19,
-   "how": "מובאה",
-   "ref": "Exodus 5:15 | Exodus 22:22",
-   "snippet": "תֹסִף.\", \"וְאֶת-צַעֲקָתָם שָמַעְתִי מִפְנֵי נֹגְשָיו, כִי יָדַעְתִי אֶת-מַכְאֹבָ"
+   "ref": "Exodus 3:7",
+   "para": 19
   },
   {
+   "ref": "Exodus 5:15",
+   "para": 19
+  },
+  {
+   "ref": "Exodus 14:10-11",
+   "para": 19
+  },
+  {
+   "ref": "Exodus 14:15",
+   "para": 19
+  },
+  {
+   "ref": "Exodus 22:22",
+   "para": 20
+  },
+  {
+   "ref": "Psalms 119:126",
+   "para": 21
+  },
+  {
+   "ref": "Exodus 8:9",
+   "para": 21
+  },
+  {
+   "ref": "Exodus 8:24-27",
    "para": 24,
-   "how": "מובאה",
-   "ref": "Exodus 8:25",
-   "snippet": "ח, כד וַיֹאמֶר פַרְעֹה, אנֹכִי אֲשַלַח אֶתְכֶם וזְבַחְתֶם לַה' אֱלהֵיכֶם בַמִדְב"
+   "anchor": "ח, כד"
+  },
+  {
+   "ref": "Exodus 9:28-29",
+   "para": 39
+  },
+  {
+   "ref": "Exodus 9:34",
+   "para": 40
+  },
+  {
+   "ref": "Exodus 4:15",
+   "para": 42
+  },
+  {
+   "ref": "Kiddushin 31a:11",
+   "para": 49
   }
  ]
 }

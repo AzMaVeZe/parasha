@@ -1,17 +1,35 @@
 {
- "reviewed": false,
+ "reviewed": "claude",
  "sources": [
   {
-   "para": 17,
-   "how": "מובאה",
-   "ref": "Leviticus 11:22",
-   "snippet": "\"את אלה מהם תאכלו: את הארבה למינו ואת הסלעם למינהו"
+   "ref": "Exodus 10:15",
+   "para": 0
   },
   {
+   "ref": "Exodus 10:5",
+   "para": 1,
+   "anchor": "י', ה'"
+  },
+  {
+   "ref": "Exodus 10:17",
+   "para": 13
+  },
+  {
+   "ref": "Leviticus 11:22",
+   "para": 17
+  },
+  {
+   "ref": "Numbers 15:39",
+   "para": 24
+  },
+  {
+   "ref": "Nedarim 64b:6",
    "para": 25,
-   "how": "מראה מקום",
-   "ref": "Nedarim 62b",
    "anchor": "נדרים סב ע\"ב"
+  },
+  {
+   "ref": "Exodus 10:16",
+   "para": 27
   }
  ]
 }

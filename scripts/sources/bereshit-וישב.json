@@ -1,89 +1,85 @@
 {
- "reviewed": false,
+ "reviewed": "claude",
  "sources": [
   {
-   "para": 0,
-   "how": "מראה מקום",
-   "ref": "Genesis 37:1-40:23",
-   "anchor": "פרשת וישב"
+   "ref": "Genesis 37:19",
+   "para": 4
   },
   {
+   "ref": "Genesis 37:23",
+   "para": 5
+  },
+  {
+   "ref": "Genesis 37:2",
+   "para": 15
+  },
+  {
+   "ref": "Shabbat 145b:10-15",
    "para": 25,
-   "how": "מראה מקום",
-   "ref": "Shabbat 145b",
    "anchor": "תלמוד בבלי, שבת, דף קמה ע\"ב"
   },
   {
+   "ref": "Rashi on Shabbat 145b:15:1-4",
    "para": 25,
-   "how": "מראה מקום",
-   "ref": "Rashi on Shabbat 145b",
-   "anchor": "ורש\"י שם"
+   "anchor": "רש\"י שם"
   },
   {
-   "para": 28,
-   "how": "מראה מקום",
-   "ref": "Genesis 37:2",
-   "anchor": "בראשית לז, ב"
+   "ref": "Genesis 34:31",
+   "para": 30
   },
   {
-   "para": 34,
-   "how": "מראה מקום",
-   "ref": "Psalms 40:5",
-   "anchor": "תהילים מ ה"
+   "ref": "Genesis 40:14",
+   "para": 36
   },
   {
-   "para": 35,
-   "how": "מראה מקום",
-   "ref": "Isaiah 30:7",
-   "anchor": "ישעיה ל ז"
+   "ref": "Genesis 40:23",
+   "para": 39
   },
   {
-   "para": 48,
-   "how": "מובאה",
-   "ref": "Bereshit Rabbah 89:2",
-   "snippet": "\"האחים תופסים מיד כי החלום מביע את דמיונו של יוסף, שיום אחד יהיה מעמדו רם משל אב"
-  },
-  {
-   "para": 49,
-   "how": "מראה מקום",
    "ref": "Genesis 41:1",
+   "para": 49,
    "anchor": "בראשית מא, א"
   },
   {
-   "para": 50,
-   "how": "מראה מקום",
    "ref": "Rashi on Genesis 40:23",
+   "para": 50,
    "anchor": "רש\"י, בראשית מ, כג"
   },
   {
+   "ref": "Bereshit Rabbah 89:2-3",
    "para": 50,
-   "how": "מראה מקום",
-   "ref": "Bereshit Rabbah 89:2",
-   "anchor": "ובמדרש בראשית רבה פט, ב"
+   "anchor": "מדרש בראשית רבה פט, ב"
   },
   {
-   "para": 50,
-   "how": "מראה מקום",
-   "ref": "Proverbs 14:23",
-   "anchor": "משלי, יד כג"
+   "ref": "Genesis 37:8",
+   "para": 54
   },
   {
-   "para": 50,
-   "how": "מראה מקום",
-   "ref": "Psalms 40:5",
-   "anchor": "תהלים, מ ה"
+   "ref": "Genesis 37:10",
+   "para": 54
   },
   {
-   "para": 58,
-   "how": "מראה מקום",
-   "ref": "Berakhot 55b",
-   "anchor": "ברכות נה, ב"
-  },
-  {
-   "para": 71,
-   "how": "מובאה",
    "ref": "Genesis 41:38",
-   "snippet": "כָזֶה--אִישׁ, אֲשֶׁר רוּחַ אֱלֹהִים בּוֹ\"."
+   "para": 70
+  },
+  {
+   "ref": "Genesis 40:16",
+   "para": 83,
+   "anchor": "בראשית מ, טז"
+  },
+  {
+   "ref": "Sforno on Genesis 40:16",
+   "para": 83,
+   "anchor": "ספורנו בפרושו שם"
+  },
+  {
+   "ref": "Genesis 41:24",
+   "para": 86
+  },
+  {
+   "ref": "Genesis 37:16",
+   "para": 87,
+   "anchor": "בראשית לז, טז"
   }
  ]
 }

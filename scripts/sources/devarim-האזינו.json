@@ -1,53 +1,40 @@
 {
- "reviewed": false,
+ "reviewed": "claude",
  "sources": [
   {
-   "para": 2,
-   "how": "מובאה",
-   "ref": "Deuteronomy 32:44 | HaKtav VeHaKabalah, Deuteronomy 31:18:3 | Deuteronomy 32:46 | Shev Shmateta, Introduction 5 | Deuteronomy 32:47",
-   "snippet": "וַיָבֹּא מֹשֶׁה, וַיְדַבֵּר אֶת-כָּל-דִּבְרֵי הַשִּׁירָה-הַזֹּאת--בְּאָזְנֵי הָע"
+   "ref": "Deuteronomy 32:44-47",
+   "para": 2
   },
   {
-   "para": 8,
-   "how": "מראה מקום",
-   "ref": "Genesis 36:22",
-   "anchor": "בראשית לו, כב"
+   "ref": "Rashi on Deuteronomy 32:47:1",
+   "para": 5
   },
   {
-   "para": 8,
-   "how": "מראה מקום",
-   "ref": "Genesis 36:12",
-   "anchor": "שם לו, יב"
-  },
-  {
-   "para": 16,
-   "how": "מראה מקום",
-   "ref": "Genesis 36:22",
-   "anchor": "בראשית לו, כב"
-  },
-  {
-   "para": 16,
-   "how": "מראה מקום",
-   "ref": "Genesis 36:12",
-   "anchor": "שם לו, יב"
-  },
-  {
+   "ref": "Chagigah 9b:10",
    "para": 18,
-   "how": "מראה מקום",
-   "ref": "Chagigah 9b",
    "anchor": "הגמרא במסכת חגיגה ט:"
   },
   {
-   "para": 21,
-   "how": "מראה מקום",
-   "ref": "Berakhot 24",
-   "anchor": "ברכות כ\"ד"
+   "ref": "Meshekh Chokhmah, Haazinu 14",
+   "para": 21
   },
   {
+   "ref": "Genesis 46:29",
+   "para": 30
+  },
+  {
+   "ref": "Rashi on Genesis 46:29:3",
+   "para": 30
+  },
+  {
+   "ref": "Berakhot 24b:18-21",
    "para": 34,
-   "how": "מראה מקום",
-   "ref": "Berakhot 24b",
    "anchor": "תלמוד בבלי, ברכות דף כד ע\"ב"
+  },
+  {
+   "ref": "Devarim Rabbah 10:2",
+   "para": 55,
+   "anchor": "דברים רבה פרשה י' אות ב'"
   }
  ]
 }

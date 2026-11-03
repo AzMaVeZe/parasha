@@ -1,53 +1,63 @@
 {
- "reviewed": false,
+ "reviewed": "claude",
  "sources": [
   {
+   "ref": "Taanit 29a:18",
    "para": 9,
-   "how": "מראה מקום",
-   "ref": "Taanit 29a",
    "anchor": "בבלי, תענית כ\"ט."
   },
   {
+   "ref": "Tikkunei Zohar 57b:10",
    "para": 16,
-   "how": "מראה מקום",
-   "ref": "Tikkunei Zohar 57",
    "anchor": "תקוני זוהר נ\"ז"
   },
   {
+   "ref": "Torah Ohr, Supplements, Megillat Esther 2:4",
+   "para": 17,
+   "anchor": "תורה אור לאדמו\"ר הזקן, קכא, א"
+  },
+  {
+   "ref": "Esther 1:7",
    "para": 18,
-   "how": "מובאה",
-   "ref": "Sifrei Aggadah on Esther, Midrash Panim Acherim, Version II 2:6 | Esther 3:15 | Esther 4:1 | Esther 7:4",
-   "snippet": "יש הנוהגים כך בפסוקים אלו: א, ז: \"וכלים מכלים שונים\", ב', ו' \"אֲשֶׁר הָגְלָה מִי"
+   "anchor": "א, ז"
   },
   {
-   "para": 20,
-   "how": "מובאה",
+   "ref": "Esther 2:6",
+   "para": 18,
+   "anchor": "ב', ו'"
+  },
+  {
+   "ref": "Esther 3:15",
+   "para": 18,
+   "anchor": "ג', טו"
+  },
+  {
+   "ref": "Esther 4:1",
+   "para": 18,
+   "anchor": "ד', א'"
+  },
+  {
+   "ref": "Esther 4:3",
+   "para": 18,
+   "anchor": "ד', ג'"
+  },
+  {
+   "ref": "Esther 7:4",
+   "para": 18,
+   "anchor": "ז', ד'"
+  },
+  {
    "ref": "Pur Hu HaGoral; Homilies for Purim, Part II; Purim, Flashes of Fire 16",
-   "snippet": "\"לא פעם נתפסת השמחה כשטחית בהשוואה לטראגי ולמלנכולי: המגע עם העמוק עובר על-פי רו"
+   "para": 20
   },
   {
-   "para": 26,
-   "how": "מובאה",
-   "ref": "Peninei Halakhah, Days of Awe 3:6:2",
-   "snippet": "\"וכל הרשעה כולה כעשן תכלה, כי תעביר ממשלת זדון מן הארץ... ותמלוך אתה הוא ה' אלוק"
-  },
-  {
-   "para": 29,
-   "how": "מובאה",
    "ref": "Chagigah 15a:5-7",
-   "snippet": "\"חזא [אלישע] מיטטרון דאתיהבא ליה רשותא למיתב למיכתב זכוותא דישראל, אמר: גמירא דל"
-  },
-  {
    "para": 33,
-   "how": "מראה מקום",
-   "ref": "Chagigah 15a",
    "anchor": "תלמוד בבלי, חגיגה טו ע\"א"
   },
   {
-   "para": 44,
-   "how": "מובאה",
    "ref": "Esther 9:1",
-   "snippet": "\"וְנַהֲפוֹךְ הוּא אֲשֶׁר יִשְׁלְטוּ הַיְּהוּדִים הֵמָּה בְּשׂנְאֵיהֶם\""
+   "para": 44
   }
  ]
 }
