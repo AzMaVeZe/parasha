@@ -431,6 +431,14 @@ function parashaPage(e) {
         ? `\n          <blockquote>${esc(par)}</blockquote>`
         : `\n          <p>${esc(par)}</p>`;
     }
+    // הערות השוליים בסוף, ממוספרות כמו בדף — ולא באמצע הטקסט, בין עמוד לעמוד
+    if (text.footnotes && text.footnotes.length) {
+      main += `\n          <h3 class="sheet-text__fn-title">הערות שוליים</h3>\n          <ol class="sheet-text__fn">`;
+      for (const f of text.footnotes) {
+        main += `\n            <li><span class="sheet-text__fn-n">${esc(f.n ?? '')}</span>${esc(f.text)}</li>`;
+      }
+      main += `\n          </ol>`;
+    }
     main += `\n        </div>
       </details>`;
   }

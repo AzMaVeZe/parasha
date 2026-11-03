@@ -759,6 +759,17 @@
             node.textContent = par;
             textBody.append(node);
           });
+          // הערות השוליים בסוף, ממוספרות כמו בדף
+          if (t.footnotes && t.footnotes.length) {
+            textBody.append(el('h3', 'sheet-text__fn-title', 'הערות שוליים'));
+            const ol = el('ol', 'sheet-text__fn');
+            t.footnotes.forEach(f => {
+              const li = document.createElement('li');
+              li.append(el('span', 'sheet-text__fn-n', f.n == null ? '' : String(f.n)), f.text);
+              ol.append(li);
+            });
+            textBody.append(ol);
+          }
         })
         .catch(() => { textBody.append(el('p', 'sheet-text__note', 'הטקסט אינו זמין כרגע — הדף המלא נמצא ב-PDF.')); });
     });

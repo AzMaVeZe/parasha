@@ -42,8 +42,111 @@ HEB = 'א-ת'
 
 
 def page_lines(doc, expand):
-    """שורות כל עמוד, עמוד־עמוד."""
-    return [rows for rows in (lines(page, expand) for page in doc) if rows]
+    """שורות כל עמוד, עמוד־עמוד, וגובה הקו שמפריד את הערות השוליים (או None)."""
+    out = []
+    for page in doc:
+        rows = lines(page, expand)
+        if rows:
+            out.append((rows, footnote_rule(page, rows), page.rect.height - 50))
+    return out
+
+
+def footnote_rule(page, rows):
+    """Word מפריד את הערות השוליים בקו קצר בצד ימין, מעליהן בתחתית העמוד.
+
+    הקו הוא מלבן דק (גובה פחות מ-2 נקודות), ברוחב 100–200 נקודות, בחצי
+    התחתון של העמוד, והקצה הימני שלו צמוד לקצה ההערות שמתחתיו. מתחתיו יש
+    רק שורות בגופן קטן מגוף הטקסט (או כותרת תחתונה גדולה) — אחרת זה סתם קו."""
+    best = None
+    for d in page.get_drawings():
+        for it in d['items']:
+            r = it[1] if it[0] == 're' else None
+            if it[0] == 'l' and abs(it[1].y - it[2].y) < 1:
+                r = pymupdf_rect(it[1], it[2])
+            # קו קצר (כ-144) מעל הערות שמתחילות בעמוד; קו ארוך (עד רוחב
+            # הטקסט) מעל המשך של הערה מהעמוד הקודם
+            if not r or r.height > 2 or not 100 <= r.width <= 450:
+                continue
+            if r.y0 < page.rect.height * 0.5:
+                continue
+            # גודל גוף הטקסט נמדד רק מעל הקו: בדף עם הרבה הערות, החציון של כל
+            # העמוד יוצא בגודל של ההערות עצמן
+            above = sorted(x['size'] for x in rows if x['y'] <= r.y0)
+            if not above:
+                continue
+            body = above[len(above) // 2]
+            # מספר העמוד והכותרת התחתונה יושבים מתחת להערות ואינם חלק מהן
+            foot = page.rect.height - 50
+            below = [x for x in rows if r.y0 < x['y'] <= foot]
+            small = [x for x in below if x['size'] < body - 0.5]
+            # השוליים הימניים נמדדים מההערות עצמן: בראש העמוד יש לפעמים עיגול
+            # "לק"י" או כיתוב תמונה שחורגים מהם
+            # ההערה הראשונה מתחת לקו נפתחת במספר זעיר. כשההערות בגודל של גוף
+            # הטקסט, זה מה שמבדיל אותן; אחרת — כל מה שמתחת לקו קטן מהגוף.
+            opens = bool(below) and below[0]['size'] < 8.5 and \
+                re.fullmatch(r'\d{1,3}|\*', below[0]['text'].strip())
+            if not opens and (not small or abs(r.x1 - max(x['x1'] for x in small)) > 20):
+                continue
+            if opens or all(x['size'] < body - 0.5 or x['size'] > body + 4 for x in below):
+                best = r.y0 if best is None else min(best, r.y0)
+    return best if best is not None else unruled_footnotes(page, rows)
+
+
+def unruled_footnotes(page, rows):
+    """דף שבו הקו המפריד לא צויר: מזהים את גוש ההערות מלמטה למעלה.
+
+    גוש ההערות הוא רצף שורות בתחתית העמוד, קטנות מגוף הטקסט, שראשו מספר
+    זעיר (פחות מ-7.5) בשוליים הימניים — כך נראית פתיחת הערה בכל הדפים.
+    מספרי ההפניה בתוך הטקסט גדולים יותר (כ-8) ויושבים באמצע השורה."""
+    foot = page.rect.height - 50
+    sizes = sorted(r['size'] for r in rows)
+    body = sizes[len(sizes) // 2]
+    right = sorted(r['x1'] for r in rows)[int(len(rows) * 0.9)]
+    start = None
+    for r in reversed([r for r in rows if r['y'] <= foot]):
+        if r['size'] >= body - 0.5:
+            break
+        if r['size'] < 7.5 and re.fullmatch(r'\d{1,3}', r['text'].strip()) and r['x1'] > right - 15:
+            start = r['y']
+    return start - 1 if start is not None else None
+
+
+def pymupdf_rect(p1, p2):
+    import pymupdf
+    return pymupdf.Rect(min(p1.x, p2.x), min(p1.y, p2.y) - 0.1, max(p1.x, p2.x), max(p1.y, p2.y) + 0.1)
+
+
+def split_footnotes(rows, rule, foot=792):
+    """מפריד את שורות הערות השוליים מגוף העמוד.
+
+    מתחת לקו: מספר ההערה הוא שורה משלו בגופן זעיר (כ-6.5), ואחריו טקסט ההערה
+    (כ-10). שורה גדולה מגוף הטקסט מתחת לקו היא כותרת תחתונה של העמוד, והיא
+    נשארת בגוף. מחזיר (שורות הגוף, [(מספר, [שורות])])."""
+    if rule is None:
+        return rows, []
+    body = [r for r in rows if r['y'] <= rule]
+    size = sorted(r['size'] for r in body)[len(body) // 2] if body else 12
+    notes = []
+    for r in rows:
+        if r['y'] <= rule:
+            continue
+        text = r['text'].strip()
+        last = notes[-1][0] if notes and isinstance(notes[-1][0], int) else None
+        lead = re.match(r'(\d{1,3}) +(\S.*)', text)
+        if r['size'] > size + 4 or r['y'] > foot:
+            body.append(r)
+        elif re.fullmatch(r'\d{1,3}|\*', text) and r['size'] < 8.5:
+            notes.append((text if text == '*' else int(text), []))
+        # בחלק מהדפים המספר באותה שורה עם ההערה. שורת המשך יכולה גם היא
+        # להתחיל במספר ("40 שנה"), ולכן רק אם זה המספר הבא בתור.
+        elif lead and (last is None or int(lead.group(1)) == last + 1) and \
+                (last is not None or not notes):
+            notes.append((int(lead.group(1)), [lead.group(2)]))
+        elif notes:
+            notes[-1][1].append(r['text'])
+        else:
+            notes.append((None, [r['text']]))
+    return body, [(n, t) for n, t in notes if t]
 
 
 def split_paragraphs(rows):
@@ -121,10 +224,19 @@ def extract(path):
     doc.close()
     os.unlink(tmp)
 
-    paras = [join(p) for page in pages for p in split_paragraphs(page)]
+    paras, footnotes = [], []
+    for rows, rule, foot in pages:
+        body_rows, notes = split_footnotes(rows, rule, foot)
+        paras += [join(p) for p in split_paragraphs(body_rows)]
+        for n, t in notes:
+            # הערה שנמשכת לעמוד הבא: שם היא מופיעה בלי מספר, מתחת לקו ארוך
+            if n is None and footnotes:
+                footnotes[-1]['text'] += ' ' + join(t)
+            else:
+                footnotes.append({'n': n, 'text': join(t)})
     paras = [p for p in paras
              if len(p) >= MIN_PARAGRAPH and len(re.findall(r'[א-תA-Za-z]', p)) >= 3]
-    body = '\n\n'.join(paras)
+    body = '\n\n'.join(paras + [f['text'] for f in footnotes])
     notes = []
     if UNREADABLE in body:
         notes.append(f'{body.count(UNREADABLE)} תווים חסרים כבר בקובץ המקור — הוא מציג '
@@ -136,6 +248,8 @@ def extract(path):
     return {
         'file': os.path.basename(path),
         'paragraphs': paras,
+        # הערות השוליים, לפי הסדר ועם המספור שבדף. מוצגות בסוף, לא באמצע הטקסט.
+        'footnotes': footnotes,
         'chars': len(body),
         'hebrew_ratio': round(
             sum(1 for c in body if 0x05D0 <= ord(c) <= 0x05EA) / max(len(body), 1), 2),
@@ -155,11 +269,13 @@ def main():
         with open(os.path.join(OUT, name + '.json'), 'w') as f:
             json.dump(r, f, ensure_ascii=False, indent=1)
         with open(os.path.join(SITE_OUT, name + '.json'), 'w') as f:
-            json.dump({'paragraphs': r['paragraphs'], 'notes': r['notes']},
+            json.dump({'paragraphs': r['paragraphs'], 'footnotes': r['footnotes'],
+                       'notes': r['notes']},
                       f, ensure_ascii=False)
         total += r['chars']
         flag = '  ← נבדוק' if r['hebrew_ratio'] < 0.5 or r['chars'] < 800 else ''
         print(f"{r['file']:34} {r['chars']:6} תווים  {len(r['paragraphs']):3} פסקאות  "
+              f"{len(r['footnotes']):2} הערות  "
               f"עברית {r['hebrew_ratio']:.0%}{flag}")
     print(f'\n{len(targets)} דפים, {total:,} תווים → {OUT}/')
 
