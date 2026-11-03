@@ -205,6 +205,9 @@ html{scroll-behavior:smooth}
 .parasha-page__actions{display:flex;gap:10px;flex-wrap:wrap}
 .parasha-page__soon{background:var(--surface-card);border:var(--border-card);border-radius:var(--radius-m);padding:var(--sp-5);color:var(--ink-700)}
 .parasha-page__aside{display:flex;flex-direction:column;gap:20px;position:sticky;top:24px}
+/* המקורות יושבים בצד, מתחת לפודקאסט. פתוחים הם ארוכים מגובה המסך, וצד "דביק"
+   היה מסתיר את סופם — לכן כשהם פתוחים הצד נגלל עם העמוד. */
+.parasha-page__aside:has(> .sheet-sources[open]){position:static}
 .parasha-page__podcast:not(:empty){background:var(--surface-card);border:var(--border-card);border-radius:var(--radius-m);padding:var(--sp-5)}
 .parasha-page__comments{background:var(--surface-card);border:var(--border-card);border-radius:var(--radius-m);padding:var(--sp-5)}
 /* כרטיס בסרגל הצד של העמודים הסטטיים שב-/p/ (נוצרים ב-scripts/build-pages.js) */
@@ -290,6 +293,15 @@ html{scroll-behavior:smooth}
 @media (max-width:920px){
   .hero__inner,.site-main__grid,.parasha-page__grid,.hero--stack #hero-side{grid-template-columns:1fr}
   .sidebar,.parasha-page__aside{position:static}
+  /* בטור אחד המקורות עוברים מהצד אל מתחת ל-PDF, לפני הטקסט: שתי העמודות
+     נפרשות לרשת אחת, ו-order קובע את הסדר. המרווח בין הדף לצד נשמר 40px. */
+  .parasha-page__grid{row-gap:20px}
+  .parasha-page__main,.parasha-page__aside{display:contents}
+  .parasha-page__main > .sheet-text,.parasha-page__main > .sheet-text ~ *{order:2}
+  .parasha-page__aside > .sheet-sources{order:1}
+  .parasha-page__aside > *{order:3}
+  .parasha-page__aside > :not(.sheet-sources):first-child,
+  .parasha-page__aside > .sheet-sources:first-child + *{margin-top:20px}
   /* בטור אחד הסרגל היה נקבר מתחת לכל הארכיון — מעלים אותו מעליו */
   .site-main__grid{display:flex;flex-direction:column}
   .sidebar{order:-1}

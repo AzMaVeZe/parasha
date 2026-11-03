@@ -460,24 +460,6 @@ function parashaPage(e) {
       </details>`;
   }
 
-  if (sources) {
-    main += `\n      <details class="sheet-text sheet-sources">
-        <summary>${iconSpan('file-text', 17)}<span>מקורות</span><span class="sheet-text__hint">${sources.length} מקורות מהדף, בנוסח ספריא</span></summary>
-        <div class="sheet-text__body">
-          <p class="sheet-text__note">המקורות שהדף מצטט, לפי סדר הופעתם. הנוסח מתוך <a href="https://www.sefaria.org.il/" target="_blank" rel="noopener">ספריא</a>.</p>
-          <ol class="sources">`;
-    for (const s of sources) {
-      const lic = LICENSE_HE[s.license] || s.license;
-      main += `\n            <li class="source">
-              <h3 class="source__ref"><a href="${esc(s.url)}" target="_blank" rel="noopener">${esc(s.heRef)}</a></h3>
-              <blockquote class="source__text">${s.he.map(x => esc(x)).join(' ')}</blockquote>
-              <p class="source__credit"><bdi>${esc(s.version)}</bdi>${lic && lic !== 'unknown' ? ' · ' + esc(lic) : ''}</p>
-            </li>`;
-    }
-    main += `\n          </ol>
-        </div>
-      </details>`;
-  }
 
   if (e.riddle) {
     const r = e.riddle;
@@ -493,6 +475,26 @@ function parashaPage(e) {
           ${img}${text}
         </div>
       </section>`;
+  }
+
+  let sourcesBox = '';
+  if (sources) {
+    sourcesBox += `\n      <details class="sheet-text sheet-sources">
+        <summary>${iconSpan('file-text', 17)}<span>מקורות</span><span class="sheet-text__hint">${sources.length} מקורות מהדף, בנוסח ספריא</span></summary>
+        <div class="sheet-text__body">
+          <p class="sheet-text__note">המקורות שהדף מצטט, לפי סדר הופעתם. הנוסח מתוך <a href="https://www.sefaria.org.il/" target="_blank" rel="noopener">ספריא</a>.</p>
+          <ol class="sources">`;
+    for (const s of sources) {
+      const lic = LICENSE_HE[s.license] || s.license;
+      sourcesBox += `\n            <li class="source">
+              <h3 class="source__ref"><a href="${esc(s.url)}" target="_blank" rel="noopener">${esc(s.heRef)}</a></h3>
+              <blockquote class="source__text">${s.he.map(x => esc(x)).join(' ')}</blockquote>
+              <p class="source__credit"><bdi>${esc(s.version)}</bdi>${lic && lic !== 'unknown' ? ' · ' + esc(lic) : ''}</p>
+            </li>`;
+    }
+    sourcesBox += `\n          </ol>
+        </div>
+      </details>`;
   }
 
   main += `\n    </div>
@@ -519,6 +521,9 @@ function parashaPage(e) {
         </div>
       </div>`;
   }
+
+  // המקורות: בצד הדף, מתחת לפודקאסט. במסך צר הם עוברים אל מתחת ל-PDF (styles.css).
+  main += sourcesBox;
 
   if (e.sefer.compilation && pdfExists(e.sefer.compilation)) {
     main += `
