@@ -119,6 +119,10 @@ function linkAnchors(par, i, sources) {
   return h;
 }
 const LICENSE_HE = { 'Public Domain': 'נחלת הכלל' };
+// מקור ארוך (סוגיה שלמה, פרק בפירוש) נקטע בגבול מילה, ושאר הנוסח בקישור לספריא.
+// אותו גבול ב-js/site.js.
+const CLIP = 1800;
+const clip = t => (t.length <= CLIP ? t : t.slice(0, t.lastIndexOf(' ', CLIP)) + '…');
 // תמונת השיתוף של העמוד (scripts/make-share.mjs). מה שווטסאפ מציג כששולחים
 // את הקישור; בלעדיה — תמונת האתר הכללית.
 const sharePath = name => 'assets/share/' + slug(name) + '.jpg';
@@ -488,7 +492,7 @@ function parashaPage(e) {
       const lic = LICENSE_HE[s.license] || s.license;
       sourcesBox += `\n            <li class="source">
               <h3 class="source__ref"><a href="${esc(s.url)}" target="_blank" rel="noopener">${esc(s.heRef)}</a></h3>
-              <blockquote class="source__text">${s.he.map(x => esc(x)).join(' ')}</blockquote>
+              <blockquote class="source__text">${esc(clip(s.he.join(' ')))}${s.he.join(' ').length > CLIP ? ` <a href="${esc(s.url)}" target="_blank" rel="noopener">המשך בספריא</a>` : ''}</blockquote>
               <p class="source__credit"><bdi>${esc(s.version)}</bdi>${lic && lic !== 'unknown' ? ' · ' + esc(lic) : ''}</p>
             </li>`;
     }

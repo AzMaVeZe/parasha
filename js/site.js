@@ -774,7 +774,15 @@
         const lic = LICENSE_HE[s.license] || s.license;
         const credit = el('p', 'source__credit');
         credit.append(el('bdi', '', s.version), lic && lic !== 'unknown' ? ' · ' + lic : '');
-        li.append(h, el('blockquote', 'source__text', s.he.join(' ')), credit);
+        // מקור ארוך נקטע בגבול מילה, כמו בעמודים הסטטיים (scripts/build-pages.js)
+        const full = s.he.join(' ');
+        const quote = el('blockquote', 'source__text', full.length <= 1800 ? full : full.slice(0, full.lastIndexOf(' ', 1800)) + '… ');
+        if (full.length > 1800) {
+          const more = document.createElement('a');
+          more.href = s.url; more.target = '_blank'; more.rel = 'noopener'; more.textContent = 'המשך בספריא';
+          quote.append(more);
+        }
+        li.append(h, quote, credit);
         ol.append(li);
       });
       srcBody.append(note, ol);
