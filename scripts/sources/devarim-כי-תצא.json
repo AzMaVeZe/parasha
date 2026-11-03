@@ -1,0 +1,35 @@
+{
+ "reviewed": false,
+ "sources": [
+  {
+   "para": 11,
+   "how": "מובאה",
+   "ref": "Deuteronomy 23:20",
+   "snippet": "לֹא-תַשִּׁיךְ לְאָחִיךָ, נֶשֶׁךְ כֶּסֶף נֶשֶׁךְ אֹכֶל: נֶשֶׁךְ, כָּל-דָּבָר אֲשֶ"
+  },
+  {
+   "para": 15,
+   "how": "מראה מקום",
+   "ref": "Exodus 22:24",
+   "anchor": "שמות כב, כד"
+  },
+  {
+   "para": 15,
+   "how": "מובאה",
+   "ref": "Exodus 22:24 | Bava Metzia 71a:18 | Introductions to the Babylonian Talmud, Bava Metzia, Introduction to Perek V 2",
+   "snippet": "אִם-כֶּסֶף תַּלְוֶה אֶת-עַמִּי, אֶת-הֶעָנִי עִמָּךְ--לֹא-תִהְיֶה לוֹ, כְּנֹשֶׁה;"
+  },
+  {
+   "para": 18,
+   "how": "מראה מקום",
+   "ref": "Leviticus 25:35-37",
+   "anchor": "ויקרא כה, לה-לז"
+  },
+  {
+   "para": 52,
+   "how": "מראה מקום",
+   "ref": "Bava Metzia 69b",
+   "anchor": "בבלי, בבא מציעא סט ע\"ב"
+  }
+ ]
+}
