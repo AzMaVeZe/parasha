@@ -22,7 +22,7 @@
 | [`podcast-distribution.md`](podcast-distribution.md) | הפצת הפודקאסט למדריכים ולחיפוש |
 | [`podcast-prompt.md`](podcast-prompt.md) | הבקשה ל-NotebookLM ליצירת פרק, לכל פרשה בספר שמות |
 | [`sheet-text.md`](sheet-text.md) | חילוץ הטקסט מה-PDF: השיטה, הבדיקות, ומה נשאר |
-| [`sources-review.md`](sources-review.md) | המקורות מספריא: מה נשאר להכרעה |
+| [`sources-review.md`](sources-review.md) | המקורות מספריא: ההכרעות (אושרו) |
 
 ## מצב נוכחי במספרים
 
