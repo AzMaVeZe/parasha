@@ -1,6 +1,6 @@
 """הספר "אללה פרשה" כולו: שער, הקדמה, תוכן עניינים, הפרשות לפי הסדר, והחגים בסוף.
 
-  python3 book/build_book.py [עיצוב] [--sample]
+  python3 book/build_book.py [עיצוב] [--sample] [--size 17x24|b5]
 
 עיצוב: c (ברירת המחדל, ג), c1, c2. עם --sample: רק העמודים הראשונים ושני פרקים, לדוגמה.
 הפלט: book/build/out/book-<עיצוב>[-sample].html, ו-book/render.js הופך אותו ל-PDF.
@@ -138,13 +138,17 @@ p.q { font-family: 'Frank Ruhl Libre', serif; margin: 3mm 0 3mm 6mm; padding-rig
 ''',
 }
 
+# גודל הספר. בבוקפוד יש מוכנים A5, B5 (16.5×23.5), 13.5×21 ו-A4; 17×24 הוא "התאמה אישית".
+SIZES = {'17x24': ('170mm 240mm', '20mm', '22mm', '22mm', '17mm'),
+         'b5': ('165mm 235mm', '19mm', '21mm', '21mm', '16mm')}
+
 BASE_CSS = '''
-@page { size: 170mm 240mm; margin: 20mm 17mm 22mm 17mm;
+@page { size: SIZE; margin: TOP OUTER BOTTOM OUTER;
   @footnote { border-top: 0.4pt solid #888; padding-top: 2mm; margin-top: 3mm; } }
 /* ספר עברי נפתח מימין: עמוד אי-זוגי (Paged.js קורא לו :right) הוא השמאלי בכפולה, והשדרה מימינו */
-@page :right { margin-right: 22mm; margin-left: 17mm;
+@page :right { margin-right: INNER; margin-left: OUTER;
   @top-left { content: counter(page) "   |   " string(chapter); font: 8.5pt 'Assistant'; color: #333; direction: rtl } }
-@page :left { margin-left: 22mm; margin-right: 17mm;
+@page :left { margin-left: INNER; margin-right: OUTER;
   @top-right { content: counter(page) "   |   TITLE"; font: 8.5pt 'Assistant'; color: #333; direction: rtl } }
 @page :blank { @top-left { content: none } @top-right { content: none } }
 @page front { @top-left { content: none } @top-right { content: none } }
@@ -181,7 +185,7 @@ p.d { font-family: 'Assistant'; font-size: .95em; margin-right: 4mm }
 '''
 
 
-def build(design='c', sample=False):
+def build(design='c', sample=False, size='17x24'):
     parts = chapters()
     if sample:
         parts = [{**parts[0], 'chapters': parts[0]['chapters'][:2]}]
@@ -212,7 +216,9 @@ def build(design='c', sample=False):
 <section class="front imprint"><p class="placeholder">[עמוד הזכויות: שנת הוצאה, ISBN, זכויות יוצרים — יושלם לפני ההגשה]</p></section>
 <section class="intro"><h2>הקדמה</h2><p class="placeholder">[ההקדמה של אריאל — תיכתב בהמשך]</p></section>
 <section class="toc"><h2>תוכן העניינים</h2>{"".join(toc)}</section>'''
-    css = BASE_CSS.replace('TITLE', TITLE) + DESIGNS[design]
+    sz, top, bottom, inner, outer = SIZES[size]
+    css = (BASE_CSS.replace('TITLE', TITLE).replace('SIZE', sz).replace('TOP', top).replace('BOTTOM', bottom)
+           .replace('INNER', inner).replace('OUTER', outer)) + DESIGNS[design]
     return f'''<!doctype html>
 <html lang="he"><head><meta charset="utf-8"><title>{esc(TITLE)}</title>
 <link rel="stylesheet" href="file://{BUILD}/fonts/book-fonts.css">
@@ -227,8 +233,10 @@ if __name__ == '__main__':
     args = [a for a in sys.argv[1:] if not a.startswith('--')]
     design = args[0] if args else 'c'
     sample = '--sample' in sys.argv
+    size = sys.argv[sys.argv.index('--size') + 1] if '--size' in sys.argv else '17x24'
+    args = [a for a in args if a not in SIZES]
     os.makedirs(os.path.join(BUILD, 'out'), exist_ok=True)
-    name = f'book-{design}' + ('-sample' if sample else '')
-    open(os.path.join(BUILD, 'out', name + '.html'), 'w', encoding='utf-8').write(build(design, sample))
+    name = f'book-{design}' + ('-sample' if sample else '') + ('' if size == '17x24' else '-' + size)
+    open(os.path.join(BUILD, 'out', name + '.html'), 'w', encoding='utf-8').write(build(design, sample, size))
     n = sum(len(p['chapters']) for p in chapters())
     print(name, '—', n, 'chapters in the TOC')
