@@ -1,0 +1,39 @@
+{
+ "reviewed": "claude",
+ "sources": [
+  {
+   "ref": "Genesis 34:7",
+   "para": 3
+  },
+  {
+   "ref": "Genesis 34:3",
+   "anchor": "לד, ג",
+   "para": 9
+  },
+  {
+   "ref": "Genesis 34:8",
+   "anchor": "לד, ח",
+   "para": 9
+  },
+  {
+   "ref": "Bereshit Rabbah 80:7",
+   "anchor": "בראשית רבה וישלח פז",
+   "fn": 3
+  },
+  {
+   "ref": "Bava Metzia 84a:12",
+   "anchor": "תלמוד בבלי, בבא מציעא פד, ע\"א",
+   "fn": 5
+  },
+  {
+   "ref": "Yisrael Kedoshim 7:1",
+   "anchor": "ישראל קדושים, עמ' 66",
+   "fn": 10
+  },
+  {
+   "ref": "Shenei Luchot HaBerit, Shaar HaOtiyot, Teshukah 19",
+   "anchor": "השל\"ה, סוף שער האותיות אות ת' תשוקה אות יג",
+   "fn": 15
+  }
+ ]
+}

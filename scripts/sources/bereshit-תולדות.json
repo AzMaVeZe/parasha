@@ -1,0 +1,65 @@
+{
+ "reviewed": "claude",
+ "sources": [
+  {
+   "ref": "Genesis 25:22",
+   "para": 12
+  },
+  {
+   "ref": "Sefat Emet, Genesis, Toldot 5:4",
+   "anchor": "שפת אמת, פרשת תולדות (תרל\"ה, ד\"ה חז\"ל)",
+   "fn": 1
+  },
+  {
+   "ref": "II Samuel 22:26-27",
+   "anchor": "שמואל ב כב, כו-כז",
+   "fn": 3
+  },
+  {
+   "ref": "Bereshit Rabbah 63:10",
+   "anchor": "בראשית רבה, סג",
+   "fn": 4
+  },
+  {
+   "ref": "Genesis 25:23",
+   "para": 24
+  },
+  {
+   "ref": "Genesis 27:12",
+   "para": 31
+  },
+  {
+   "ref": "Proverbs 22:6",
+   "para": 33
+  },
+  {
+   "ref": "Genesis 25:19",
+   "para": 35
+  },
+  {
+   "ref": "Genesis 6:9-10",
+   "anchor": "בראשית ו, ט",
+   "fn": 11
+  },
+  {
+   "ref": "Genesis 10:1",
+   "anchor": "בראשית י, א",
+   "fn": 11
+  },
+  {
+   "ref": "Genesis 11:10",
+   "anchor": "בראשית יא, י",
+   "fn": 11
+  },
+  {
+   "ref": "Genesis 36:9",
+   "anchor": "בראשית לו, ט",
+   "fn": 11
+  },
+  {
+   "ref": "Genesis 37:2",
+   "anchor": "בראשית לז, ב",
+   "fn": 11
+  }
+ ]
+}

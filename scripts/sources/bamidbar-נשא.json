@@ -1,0 +1,65 @@
+{
+ "reviewed": "claude",
+ "sources": [
+  {
+   "ref": "Numbers 6:2-8",
+   "para": 1
+  },
+  {
+   "ref": "Nazir 22a:4",
+   "para": 4
+  },
+  {
+   "ref": "Bamidbar Rabbah 10:11",
+   "para": 7
+  },
+  {
+   "ref": "Nedarim 9b:5-7",
+   "anchor": "בבלי נדרים ט",
+   "para": 9
+  },
+  {
+   "ref": "Amos 2:11",
+   "anchor": "עמוס ב, יא",
+   "fn": 0
+  },
+  {
+   "ref": "Lamentations 4:7",
+   "anchor": "איכה ד, ז",
+   "fn": 0
+  },
+  {
+   "ref": "Deuteronomy 23:4",
+   "anchor": "דברים כג, ד",
+   "para": 15
+  },
+  {
+   "ref": "Mishnah Yevamot 8:3",
+   "para": 18
+  },
+  {
+   "ref": "Yevamot 76b:11-77a:2",
+   "anchor": "בבלי, יבמות עו:-עז.",
+   "para": 20
+  },
+  {
+   "ref": "Jerusalem Talmud Yevamot 8:3:3",
+   "anchor": "יבמות ח, ג",
+   "para": 23
+  },
+  {
+   "ref": "Ruth 1:8",
+   "para": 29
+  },
+  {
+   "ref": "Berakhot 28a:5-6",
+   "anchor": "בבלי, ברכות כח.",
+   "para": 37
+  },
+  {
+   "ref": "Shabbat 89a:5",
+   "anchor": "בבלי שבת פט.",
+   "para": 41
+  }
+ ]
+}

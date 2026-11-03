@@ -1,0 +1,108 @@
+{
+ "reviewed": "claude",
+ "sources": [
+  {
+   "ref": "Genesis 42:37",
+   "para": 26
+  },
+  {
+   "ref": "Genesis 42:38",
+   "para": 37
+  },
+  {
+   "ref": "Pirkei Avot 4:18",
+   "anchor": "משנה, מסכת אבות, ד, יח",
+   "fn": 0
+  },
+  {
+   "ref": "Bereshit Rabbah 91:9",
+   "anchor": "בראשית רבה צא, ט",
+   "fn": 2
+  },
+  {
+   "ref": "Genesis 44:32",
+   "anchor": "בראשית מח, לב",
+   "fn": 4
+  },
+  {
+   "ref": "Midrash Tanchuma, Miketz 8:4",
+   "anchor": "מדרש תנחומא בראשית, מב סימן ח",
+   "fn": 5
+  },
+  {
+   "ref": "Genesis 43:9",
+   "para": 47
+  },
+  {
+   "ref": "Genesis 43:2-3",
+   "anchor": "בראשית מג, ב-ג",
+   "fn": 6
+  },
+  {
+   "ref": "Pirkei Avot 4:2",
+   "anchor": "משנה, אבות ד, ב",
+   "fn": 10
+  },
+  {
+   "ref": "Malbim on Deuteronomy 11:27",
+   "anchor": "המלבי\"ם",
+   "fn": 11
+  },
+  {
+   "ref": "Proverbs 6:1-2",
+   "para": 74
+  },
+  {
+   "ref": "Rashi on Genesis 38:1",
+   "anchor": "רש\"י שם",
+   "fn": 13
+  },
+  {
+   "ref": "Bereshit Rabbah 85:1",
+   "anchor": "בראשית רבה פה, א",
+   "fn": 14
+  },
+  {
+   "ref": "Genesis 38:9",
+   "fn": 15
+  },
+  {
+   "ref": "Bereshit Rabbah 85:9",
+   "anchor": "בראשית רבה פה, ט",
+   "fn": 16
+  },
+  {
+   "ref": "Genesis 38:26",
+   "anchor": "בראשית לח, כו",
+   "fn": 17
+  },
+  {
+   "ref": "Midrash Tanchuma, Vayigash 1:4",
+   "anchor": "מדרש תנחומא, בראשית מד, סימן א",
+   "fn": 19
+  },
+  {
+   "ref": "Proverbs 6:3-5",
+   "para": 78
+  },
+  {
+   "ref": "Sotah 10b:9-10",
+   "para": 83
+  },
+  {
+   "ref": "Sifra, Bechukotai, Chapter 7:5",
+   "anchor": "ספרא ויקרא כו, לז",
+   "fn": 23
+  },
+  {
+   "ref": "Sanhedrin 27b:19",
+   "anchor": "סנהדרין כז, ע\"ב",
+   "fn": 23
+  },
+  {
+   "ref": "Shevuot 39a:22",
+   "anchor": "שבועות לט, ע\"א",
+   "fn": 23
+  }
+ ]
+}

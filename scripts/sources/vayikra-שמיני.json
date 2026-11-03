@@ -1,0 +1,79 @@
+{
+ "reviewed": "claude",
+ "sources": [
+  {
+   "ref": "Leviticus 10:3",
+   "anchor": "שמות י, ג",
+   "para": 3
+  },
+  {
+   "ref": "Rashi on Leviticus 10:3:2",
+   "para": 5
+  },
+  {
+   "ref": "Leviticus 10:16",
+   "anchor": "שמות י, טז",
+   "para": 8
+  },
+  {
+   "ref": "Leviticus 10:19",
+   "anchor": "שמות י, יט",
+   "para": 11
+  },
+  {
+   "ref": "Yoma 4a:4-5",
+   "anchor": "בבלי, יומא ד ע\"א",
+   "fn": 0
+  },
+  {
+   "ref": "Megillah 10b:8",
+   "anchor": "בבלי, מגילה י ע\"ב",
+   "fn": 1
+  },
+  {
+   "ref": "Leviticus 10:18",
+   "anchor": "י, יח",
+   "fn": 4
+  },
+  {
+   "ref": "Rashi on Leviticus 10:19:1",
+   "anchor": "רש\"י שם",
+   "fn": 5
+  },
+  {
+   "ref": "Or HaChaim on Leviticus 10:19:1",
+   "para": 15
+  },
+  {
+   "ref": "Leviticus 10:20",
+   "para": 20
+  },
+  {
+   "ref": "Mishnah Tamid 1:4",
+   "anchor": "במסכת תמיד א, ד",
+   "para": 21
+  },
+  {
+   "ref": "Zevachim 101a:12",
+   "para": 31
+  },
+  {
+   "ref": "Zohar, Shmini 6:67-70",
+   "anchor": "זוהר שמיני סז-עה",
+   "fn": 11
+  },
+  {
+   "ref": "Onkelos Genesis 2:7",
+   "fn": 16
+  },
+  {
+   "ref": "Likutei Moharan 38:4:1",
+   "anchor": "ליקוטי מוהר\"ן לח",
+   "fn": 17
+  },
+  {
+   "ref": "Pirkei Avot 3:13",
+   "fn": 18
+  }
+ ]
+}

@@ -1,0 +1,60 @@
+{
+ "reviewed": "claude",
+ "sources": [
+  {
+   "ref": "Mishnah Ta'anit 4:8",
+   "anchor": "משנה, תענית ד, ז",
+   "fn": 0
+  },
+  {
+   "ref": "Taanit 30b:8-31a:4",
+   "anchor": "תלמוד בבלי, תענית כו ע\"ב",
+   "fn": 1
+  },
+  {
+   "ref": "Judges 21:20-21",
+   "fn": 3
+  },
+  {
+   "ref": "II Kings 17:1-2",
+   "para": 19
+  },
+  {
+   "ref": "Nazir 23b:5",
+   "para": 26
+  },
+  {
+   "ref": "Gittin 88a:16-19",
+   "anchor": "תלמוד בבלי, גיטין פח ע\"א",
+   "fn": 6
+  },
+  {
+   "ref": "Deuteronomy 7:12",
+   "para": 35
+  },
+  {
+   "ref": "Rashi on Deuteronomy 7:12:1-2",
+   "para": 37
+  },
+  {
+   "ref": "Ramban on Deuteronomy 7:12:1",
+   "para": 38
+  },
+  {
+   "ref": "Sforno on Deuteronomy 7:12:2",
+   "para": 39
+  },
+  {
+   "ref": "Deuteronomy 7:1",
+   "para": 40
+  },
+  {
+   "ref": "Deuteronomy 7:6-11",
+   "para": 40
+  },
+  {
+   "ref": "Deuteronomy 8:1",
+   "fn": 10
+  }
+ ]
+}

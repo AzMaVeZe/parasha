@@ -1,0 +1,36 @@
+{
+ "reviewed": "claude",
+ "sources": [
+  {
+   "ref": "Numbers 11:26-29",
+   "para": 1
+  },
+  {
+   "ref": "Sanhedrin 17a:4-6",
+   "anchor": "הגמרא במסכת סנהדרין (יז.)",
+   "para": 2
+  },
+  {
+   "ref": "Sanhedrin 17a:9-11",
+   "para": 5
+  },
+  {
+   "ref": "Mishnah Chagigah 2:1",
+   "para": 22
+  },
+  {
+   "ref": "Chagigah 14b:2-4",
+   "anchor": "בבלי, חגיגה יד:",
+   "fn": 3
+  },
+  {
+   "ref": "Bamidbar Rabbah 15:25",
+   "para": 40
+  },
+  {
+   "ref": "Joel 3:1",
+   "anchor": "יואל ג",
+   "para": 40
+  }
+ ]
+}

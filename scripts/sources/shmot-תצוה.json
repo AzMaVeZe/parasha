@@ -1,0 +1,102 @@
+{
+ "reviewed": "claude",
+ "sources": [
+  {
+   "ref": "Exodus 28:2",
+   "para": 1
+  },
+  {
+   "ref": "Genesis 3:21",
+   "para": 4
+  },
+  {
+   "ref": "Genesis 27:15",
+   "para": 4
+  },
+  {
+   "ref": "Genesis 28:20",
+   "para": 4
+  },
+  {
+   "ref": "Genesis 38:14",
+   "para": 5
+  },
+  {
+   "ref": "Genesis 37:3",
+   "para": 6
+  },
+  {
+   "ref": "Genesis 39:12-18",
+   "para": 6
+  },
+  {
+   "ref": "Genesis 41:42",
+   "para": 6
+  },
+  {
+   "ref": "Esther Rabbah 3:13",
+   "para": 11
+  },
+  {
+   "ref": "Avodah Zarah 18a:14-18b:4",
+   "anchor": "תלמוד בבלי, עבודה זרה, יח",
+   "fn": 5
+  },
+  {
+   "ref": "Rashi on Avodah Zarah 18b:4:2",
+   "para": 21
+  },
+  {
+   "ref": "Mishnah Shekalim 5:1",
+   "anchor": "המשנה במסכת שקלים (פ\"ה מ\"א)",
+   "para": 33
+  },
+  {
+   "ref": "Rambam on Mishnah Shekalim 5:1",
+   "anchor": "הרמב\"ם בפירוש המשנה",
+   "para": 35
+  },
+  {
+   "ref": "Zohar, Mishpatim 3:102",
+   "anchor": "זוהר שמות, חלק ב', צט",
+   "fn": 7
+  },
+  {
+   "ref": "Bereshit Rabbah 20:12",
+   "anchor": "בראשית רבה",
+   "fn": 11
+  },
+  {
+   "ref": "Zevachim 17b:6",
+   "anchor": "זבחים יז:",
+   "fn": 12
+  },
+  {
+   "ref": "Sanhedrin 83b:14",
+   "anchor": "סנהדרין פג:",
+   "fn": 12
+  },
+  {
+   "ref": "Peri Tzadik, Vayigash 7:1",
+   "anchor": "הפרי צדיק",
+   "fn": 13
+  },
+  {
+   "ref": "Zohar, Sifra DiTzniuta 2:4",
+   "para": 41
+  },
+  {
+   "ref": "Shenei Luchot HaBerit, Torah Shebikhtav, Tetzaveh, Derekh Chayim 2",
+   "para": 44
+  },
+  {
+   "ref": "Esther Rabbah 3:14",
+   "para": 48
+  },
+  {
+   "ref": "Likutei Moharan 1:5:5",
+   "anchor": "ליקוטי מוהר\"ן א'",
+   "fn": 19
+  }
+ ]
+}

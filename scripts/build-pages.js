@@ -95,6 +95,71 @@ function sheetText(pdf) {
   return t.paragraphs && t.paragraphs.length ? t : null;
 }
 const isQuote = s => (s.match(NIKUD) || []).length > s.length * 0.08;
+
+/* המקורות שהדף מצטט, עם הנוסח מספריא (scripts/sefaria-sources.py). נבדקו ביד
+ * לפני שהגיעו לכאן. מוצגים ב-<details> סגור נוסף, ומראי המקום שבטקסט הופכים
+ * לקישורים לספריא. */
+function sheetSources(pdf) {
+  if (!pdf) return null;
+  const p = path.join(root, pdf.replace('assets/pdfs/', 'assets/sources/').replace(/\.pdf$/i, '.json'));
+  if (!fs.existsSync(p)) return null;
+  const t = JSON.parse(fs.readFileSync(p, 'utf8'));
+  return t.sources && t.sources.length ? t.sources : null;
+}
+// פסקה (או הערת שוליים) מהדף, מוגנת, ובה מראי המקום שלה כקישורים לספריא.
+// here(s): האם המקור s שייך לקטע הזה — לפי s.para בפסקאות, לפי s.fn בהערות.
+function linkAnchors(par, here, sources) {
+  let h = esc(par);
+  for (const s of sources || []) {
+    if (!here(s) || !s.anchor) continue;
+    const a = esc(s.anchor);
+    const at = h.indexOf(a);
+    if (at < 0) continue;
+    h = h.slice(0, at) + `<a class="source-link" href="${esc(s.url)}" target="_blank" rel="noopener">${a}</a>` + h.slice(at + a.length);
+  }
+  return h;
+}
+const LICENSE_HE = { 'Public Domain': 'נחלת הכלל' };
+
+/* דיווח לספריא על המקורות שבדף (Sefaria Linker v3, בלי קישורים).
+ * ה-Linker שולח לספריא את התוכן הראשי של העמוד שבו הוא רץ, ואת מראי המקום שהוא
+ * מוצא בו רושמת ספריא כ"דפי אינטרנט שמצטטים את המקור". בעמוד הדף עצמו הוא היה
+ * סורק גם את "קריאת הדף כטקסט" ומדווח על זיהויים שגויים ("פרק ד'" ← במדבר ד).
+ * לכן הוא רץ בעמוד נפרד, p/<שם>/sources.html, שכל תוכנו הוא רשימת המקורות שנבדקו
+ * (בשמות האנגליים, שספריא מזהה במדויק), והכתובת הקנונית שלו היא עמוד הדף —
+ * וכך הדיווח הוא על עמוד הדף. עמוד הדף טוען אותו ב-iframe נסתר אחרי הטעינה
+ * (js/sefaria-report.js). ל-sources.html יש CSP משלו, שמתיר את www.sefaria.org;
+ * ה-CSP של כל שאר האתר לא השתנה. ראו _headers. */
+const SOURCES_CSP = "default-src 'none'; script-src 'self' https://www.sefaria.org; connect-src https://www.sefaria.org; " +
+  "style-src 'self' 'unsafe-inline'; img-src 'self'; base-uri 'none'; form-action 'none'";
+function sourcesReportPage(e, sources) {
+  return `<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="${esc(SOURCES_CSP)}">
+<meta name="robots" content="noindex, nofollow">
+<title>${esc(metaTitle(e))}</title>
+<meta name="description" content="${esc(metaDescription(e))}">
+<link rel="canonical" href="${esc(e.url)}">
+</head>
+<body>
+<article>
+<h1>${esc(e.title)} — המקורות שבדף</h1>
+<p>המקורות שהדף "${esc(e.title)}" מתוך "${esc(BRAND)}" מאת ${esc(AUTHOR)} מצטט, לפי סדר הופעתם בדף:</p>
+<ul>
+${sources.map(s => `<li>${esc(s.ref)}</li>`).join('\n')}
+</ul>
+</article>
+<script src="/js/sefaria-linker.js"></script>
+</body>
+</html>
+`;
+}
+// מקור ארוך (סוגיה שלמה, פרק בפירוש) נקטע בגבול מילה, ושאר הנוסח בקישור לספריא.
+// אותו גבול ב-js/site.js.
+const CLIP = 1800;
+const clip = t => (t.length <= CLIP ? t : t.slice(0, t.lastIndexOf(' ', CLIP)) + '…');
 // תמונת השיתוף של העמוד (scripts/make-share.mjs). מה שווטסאפ מציג כששולחים
 // את הקישור; בלעדיה — תמונת האתר הכללית.
 const sharePath = name => 'assets/share/' + slug(name) + '.jpg';
@@ -286,6 +351,7 @@ const baseGraph = () => [websiteNode, personNode].concat(podcastNode ? [podcastN
 function parashaPage(e) {
   const url = e.url;
   const text = sheetText(e.pdf);
+  const sources = sheetSources(e.pdf);
   const pdfUrl = e.pdf ? abs(e.pdf) : null;
   const previewUrl = e.preview ? abs(e.preview) : null;
   const seferAnchor = '/#' + e.sefer.id;
@@ -426,22 +492,23 @@ function parashaPage(e) {
         <div class="sheet-text__body">
           <p class="sheet-text__note">הטקסט חולץ אוטומטית מקובץ ה-PDF. הנוסח המחייב הוא <a href="${esc(encodeURI('/' + e.pdf))}">הדף עצמו</a>.</p>`;
     for (const n of text.notes || []) main += `\n          <p class="sheet-text__note">${esc(n)}</p>`;
-    for (const par of text.paragraphs) {
+    text.paragraphs.forEach((par, i) => {
       main += isQuote(par)
-        ? `\n          <blockquote>${esc(par)}</blockquote>`
-        : `\n          <p>${esc(par)}</p>`;
-    }
+        ? `\n          <blockquote>${linkAnchors(par, s => s.para === i, sources)}</blockquote>`
+        : `\n          <p>${linkAnchors(par, s => s.para === i, sources)}</p>`;
+    });
     // הערות השוליים בסוף, ממוספרות כמו בדף — ולא באמצע הטקסט, בין עמוד לעמוד
     if (text.footnotes && text.footnotes.length) {
       main += `\n          <h3 class="sheet-text__fn-title">הערות שוליים</h3>\n          <ol class="sheet-text__fn">`;
-      for (const f of text.footnotes) {
-        main += `\n            <li><span class="sheet-text__fn-n">${esc(f.n ?? '')}</span>${esc(f.text)}</li>`;
-      }
+      text.footnotes.forEach((f, k) => {
+        main += `\n            <li><span class="sheet-text__fn-n">${esc(f.n ?? '')}</span>${linkAnchors(f.text, s => s.fn === k, sources)}</li>`;
+      });
       main += `\n          </ol>`;
     }
     main += `\n        </div>
       </details>`;
   }
+
 
   if (e.riddle) {
     const r = e.riddle;
@@ -457,6 +524,26 @@ function parashaPage(e) {
           ${img}${text}
         </div>
       </section>`;
+  }
+
+  let sourcesBox = '';
+  if (sources) {
+    sourcesBox += `\n      <details class="sheet-text sheet-sources">
+        <summary>${iconSpan('file-text', 17)}<span>מקורות</span><span class="sheet-text__hint">${sources.length} מקורות מהדף, בנוסח ספריא</span></summary>
+        <div class="sheet-text__body">
+          <p class="sheet-text__note">המקורות שהדף מצטט, לפי סדר הופעתם. הנוסח מתוך <a href="https://www.sefaria.org.il/" target="_blank" rel="noopener">ספריא</a>.</p>
+          <ol class="sources">`;
+    for (const s of sources) {
+      const lic = LICENSE_HE[s.license] || s.license;
+      sourcesBox += `\n            <li class="source">
+              <h3 class="source__ref"><a href="${esc(s.url)}" target="_blank" rel="noopener">${esc(s.heRef)}</a></h3>
+              <blockquote class="source__text">${esc(clip(s.he.join(' ')))}${s.he.join(' ').length > CLIP ? ` <a href="${esc(s.url)}" target="_blank" rel="noopener">המשך בספריא</a>` : ''}</blockquote>
+              <p class="source__credit"><bdi>${esc(s.version)}</bdi>${lic && lic !== 'unknown' ? ' · ' + esc(lic) : ''}</p>
+            </li>`;
+    }
+    sourcesBox += `\n          </ol>
+        </div>
+      </details>`;
   }
 
   main += `\n    </div>
@@ -483,6 +570,9 @@ function parashaPage(e) {
         </div>
       </div>`;
   }
+
+  // המקורות: בצד הדף, מתחת לפודקאסט. במסך צר הם עוברים אל מתחת ל-PDF (styles.css).
+  main += sourcesBox;
 
   if (e.sefer.compilation && pdfExists(e.sefer.compilation)) {
     main += `
@@ -516,7 +606,8 @@ function parashaPage(e) {
     imageAlt: e.title + ' — ' + BRAND,
     noindex: !e.indexable,
     jsonld: { '@context': 'https://schema.org', '@graph': graph },
-  }) + '\n' + main + '\n' + footer + '\n<script src="/js/a11y.js"></script>\n<script src="/js/analytics.js"></script>\n</body>\n</html>\n';
+  }) + '\n' + main + '\n' + footer + '\n<script src="/js/a11y.js"></script>\n<script src="/js/analytics.js"></script>' +
+    (sources ? '\n<script src="/js/sefaria-report.js" defer></script>' : '') + '\n</body>\n</html>\n';
 }
 
 /* ---------- מפת הארכיון: /p/ ---------- */
@@ -658,6 +749,8 @@ function write(rel, content) {
 let pages = 0;
 for (const e of entries) {
   write(path.join('p', slug(e.name), 'index.html'), parashaPage(e));
+  const src = sheetSources(e.pdf);
+  if (src) write(path.join('p', slug(e.name), 'sources.html'), sourcesReportPage(e, src));
   pages++;
 }
 write(path.join('p', 'index.html'), indexPage());

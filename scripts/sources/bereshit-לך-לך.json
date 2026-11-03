@@ -1,0 +1,46 @@
+{
+ "reviewed": "claude",
+ "sources": [
+  {
+   "ref": "Genesis 12:1-3",
+   "para": 2
+  },
+  {
+   "ref": "Genesis 11:27-31",
+   "para": 4
+  },
+  {
+   "ref": "Bereshit Rabbah 39:1",
+   "para": 12
+  },
+  {
+   "ref": "Nedarim 32a:14-15",
+   "anchor": "נדרים לב ע\"א",
+   "para": 17
+  },
+  {
+   "ref": "Genesis 14:21",
+   "para": 22
+  },
+  {
+   "ref": "Midrash Lekach Tov, Genesis 14:12:2",
+   "anchor": "פסיקתא זוטרתא (לקח טוב) בראשית פרק יד",
+   "para": 27
+  },
+  {
+   "ref": "Ramban on Exodus 12:40",
+   "anchor": "הרמב\"ן (שמות י\"ב, מ)",
+   "fn": 0
+  },
+  {
+   "ref": "Genesis 15:11-17",
+   "anchor": "(ט\"ו, יא-יז)",
+   "para": 41
+  },
+  {
+   "ref": "Moed Katan 25b:4",
+   "anchor": "מועד קטן כ\"ה ע\"ב",
+   "para": 44
+  }
+ ]
+}

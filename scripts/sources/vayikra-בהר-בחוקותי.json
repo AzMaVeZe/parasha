@@ -1,0 +1,38 @@
+{
+ "reviewed": "claude",
+ "sources": [
+  {
+   "ref": "Leviticus 25:13-17",
+   "anchor": "ויקרא כה, יג-יז",
+   "para": 6
+  },
+  {
+   "ref": "Mishnah Bava Metzia 4:10",
+   "anchor": "מסכת בבא מציעא ד, י",
+   "para": 13
+  },
+  {
+   "ref": "Mishnah Bava Metzia 4:6",
+   "anchor": "ב\"מ ד, ו",
+   "fn": 5
+  },
+  {
+   "ref": "Bava Metzia 58b:7-10",
+   "anchor": "בבלי, בבא מציעא, נח ע\"ב",
+   "para": 18
+  },
+  {
+   "ref": "Mishnah Bava Metzia 4:3",
+   "anchor": "ב\"מ ד, ג",
+   "fn": 9
+  },
+  {
+   "ref": "Leviticus 25:38-42",
+   "para": 33
+  },
+  {
+   "ref": "Bava Metzia 58b:11",
+   "fn": 12
+  }
+ ]
+}
