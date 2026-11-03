@@ -8,6 +8,7 @@
 הטקסט: assets/sheet-text (מה שחולץ מה-PDF). זו טיוטה אוטומטית — ניקוי לפי כללים:
 - מה שאחרי החידה, הפתרון והחתימה נחתך (החידות לא נכנסות לספר).
 - שורות כותרת של עמודי הדף ("לק"י פרשת תרומה תשס"ט") וכיתובי תמונות באנגלית יורדים.
+- פסוק מנוקד שנדבק בחילוץ לטקסט שאחריו נחתך ממנו (split_quote), כך שרק הפסוק מעוצב כמובאה.
 - שורות שנשברו בגלל שני הטורים מתחברות: פסקה שאינה נגמרת בסימן פיסוק מתחברת לבאה.
 - הערות השוליים: בסוף כל פרק, ממוספרות כמו בדף. מקום הסימון בגוף הטקסט אבד בחילוץ,
   ולכן אינן בתחתית העמוד.
@@ -54,6 +55,25 @@ def toc_data():
     return json.loads(subprocess.check_output(['node', '-e', js], cwd=ROOT))
 
 
+def split_quote(p):
+    """פסוק מנוקד ואחריו טקסט רגיל שנדבקו בחילוץ לפסקה אחת ("...קָנִיתִי אִישׁ אֶת-ה'. עד עתה עסקנו...")
+    נחתכים לשניים, בגבול המשפט שבו הניקוד נגמר. כך רק הפסוק מעוצב כמובאה."""
+    sents = re.split(r'(?<=[.:׃;?!])\s+', p)
+    if len(sents) < 2:
+        return [p]
+    voc = lambda t: len(NIKUD.findall(t)) > len(t) * 0.15
+    groups = []
+    for t in sents:
+        if groups and voc(t) == groups[-1][0]:
+            groups[-1][1].append(t)
+        else:
+            groups.append((voc(t), [t]))
+    parts = [' '.join(g[1]) for g in groups]
+    if len(parts) < 2 or min(len(x) for x in parts) < 12:
+        return [p]
+    return parts
+
+
 def clean(paras):
     out = []
     for p in paras:
@@ -64,11 +84,12 @@ def clean(paras):
             break
         if HEADER.match(p) or re.fullmatch(r'\d{1,2}', p) or re.fullmatch(r"אריאל ז'יטניצקי\.?", p):
             continue
-        # כיתובי תמונות שהשתרבבו לטקסט — כמעט תמיד באנגלית ("Vidal Henri by Cain, Gardens...")
-        lat, heb = len(re.findall(r'[A-Za-z]', p)), len(re.findall(r'[\u05D0-\u05EA]', p))
-        if lat > 8 and lat > heb:
-            continue
-        out.append(p)
+        for piece in split_quote(p):
+            # כיתובי תמונות שהשתרבבו לטקסט — כמעט תמיד באנגלית ("Vidal Henri by Cain, Gardens...")
+            lat, heb = len(re.findall(r'[A-Za-z]', piece)), len(re.findall(r'[\u05D0-\u05EA]', piece))
+            if lat > 8 and lat > heb:
+                continue
+            out.append(piece)
     # שורות שנשברו בין טורים: פסקה בלי סימן סוף מתחברת לבאה, אם שתיהן מאותו סוג
     joined = []
     for p in out:
