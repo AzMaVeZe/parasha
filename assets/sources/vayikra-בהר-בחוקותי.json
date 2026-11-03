@@ -13,8 +13,8 @@
    "version": "Miqra according to the Masorah",
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/Leviticus_25:13-17?lang=he",
-   "para": 6,
-   "anchor": "ויקרא כה, יג-יז"
+   "anchor": "ויקרא כה, יג-יז",
+   "para": 6
   },
   {
    "ref": "Mishnah Bava Metzia 4:10",
@@ -25,8 +25,8 @@
    "version": "Torat Emet 357",
    "license": "Public Domain",
    "url": "https://www.sefaria.org.il/Mishnah_Bava_Metzia_4:10?lang=he",
-   "para": 16,
-   "anchor": "מסכת בבא מציעא ד, י"
+   "anchor": "מסכת בבא מציעא ד, י",
+   "para": 13
   },
   {
    "ref": "Mishnah Bava Metzia 4:6",
@@ -37,8 +37,8 @@
    "version": "Torat Emet 357",
    "license": "Public Domain",
    "url": "https://www.sefaria.org.il/Mishnah_Bava_Metzia_4:6?lang=he",
-   "para": 22,
-   "anchor": "ב\"מ ד, ו"
+   "anchor": "ב\"מ ד, ו",
+   "fn": 5
   },
   {
    "ref": "Bava Metzia 58b:7-10",
@@ -52,8 +52,8 @@
    "version": "William Davidson Edition - Vocalized Aramaic",
    "license": "CC-BY-NC",
    "url": "https://www.sefaria.org.il/Bava_Metzia_58b:7-10?lang=he",
-   "para": 27,
-   "anchor": "בבלי, בבא מציעא, נח ע\"ב"
+   "anchor": "בבלי, בבא מציעא, נח ע\"ב",
+   "para": 18
   },
   {
    "ref": "Mishnah Bava Metzia 4:3",
@@ -64,8 +64,8 @@
    "version": "Torat Emet 357",
    "license": "Public Domain",
    "url": "https://www.sefaria.org.il/Mishnah_Bava_Metzia_4:3?lang=he",
-   "para": 39,
-   "anchor": "ב\"מ ד, ג"
+   "anchor": "ב\"מ ד, ג",
+   "fn": 9
   },
   {
    "ref": "Leviticus 25:38-42",
@@ -80,7 +80,7 @@
    "version": "Miqra according to the Masorah",
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/Leviticus_25:38-42?lang=he",
-   "para": 47
+   "para": 33
   },
   {
    "ref": "Bava Metzia 58b:11",
@@ -91,7 +91,7 @@
    "version": "William Davidson Edition - Vocalized Aramaic",
    "license": "CC-BY-NC",
    "url": "https://www.sefaria.org.il/Bava_Metzia_58b:11?lang=he",
-   "para": 56
+   "fn": 12
   }
  ]
 }

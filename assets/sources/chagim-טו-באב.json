@@ -35,8 +35,8 @@
    "version": "Miqra according to the Masorah",
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/Judges_21:17-21?lang=he",
-   "para": 18,
-   "anchor": "בספר שופטים (כא יז-כא)"
+   "anchor": "בספר שופטים (כא יז-כא)",
+   "fn": 1
   },
   {
    "ref": "Avodah Zarah 20a:10",
@@ -47,8 +47,8 @@
    "version": "William Davidson Edition - Vocalized Aramaic",
    "license": "CC-BY-NC",
    "url": "https://www.sefaria.org.il/Avodah_Zarah_20a:10?lang=he",
-   "para": 20,
-   "anchor": "עבודה-זרה כ, א"
+   "anchor": "עבודה-זרה כ, א",
+   "fn": 4
   },
   {
    "ref": "Shabbat 62a:11",
@@ -59,7 +59,7 @@
    "version": "William Davidson Edition - Vocalized Aramaic",
    "license": "CC-BY-NC",
    "url": "https://www.sefaria.org.il/Shabbat_62a:11?lang=he",
-   "para": 29
+   "para": 25
   },
   {
    "ref": "Tashbetz Katan 397:1-2",
@@ -71,7 +71,7 @@
    "version": "Warsaw, 1902",
    "license": "Public Domain",
    "url": "https://www.sefaria.org.il/Tashbetz_Katan_397:1-2?lang=he",
-   "para": 38
+   "fn": 7
   },
   {
    "ref": "Sifrei Bamidbar 115:2",
@@ -82,8 +82,8 @@
    "version": "Wikisource",
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/Sifrei_Bamidbar_115:2?lang=he",
-   "para": 57,
-   "anchor": "ספרי במדבר קטו"
+   "anchor": "ספרי במדבר קטו",
+   "fn": 14
   },
   {
    "ref": "Kiddushin 81b:2-4",
@@ -96,7 +96,7 @@
    "version": "William Davidson Edition - Vocalized Aramaic",
    "license": "CC-BY-NC",
    "url": "https://www.sefaria.org.il/Kiddushin_81b:2-4?lang=he",
-   "para": 64
+   "para": 48
   },
   {
    "ref": "Sotah 17a:15",
@@ -107,7 +107,7 @@
    "version": "William Davidson Edition - Vocalized Aramaic",
    "license": "CC-BY-NC",
    "url": "https://www.sefaria.org.il/Sotah_17a:15?lang=he",
-   "para": 95
+   "para": 79
   },
   {
    "ref": "Pirkei Avot 1:18",
@@ -118,7 +118,7 @@
    "version": "Torat Emet 357",
    "license": "Public Domain",
    "url": "https://www.sefaria.org.il/Pirkei_Avot_1:18?lang=he",
-   "para": 108
+   "para": 89
   },
   {
    "ref": "Tosefta Pesachim 1:3",
@@ -129,8 +129,8 @@
    "version": "Tosefta Pesachim",
    "license": "Public Domain",
    "url": "https://www.sefaria.org.il/Tosefta_Pesachim_1:3?lang=he",
-   "para": 113,
-   "anchor": "תוספתא פסחים פרק א"
+   "anchor": "תוספתא פסחים פרק א",
+   "fn": 24
   },
   {
    "ref": "Jerusalem Talmud Ketubot 5:3:4",
@@ -141,8 +141,8 @@
    "version": "The Jerusalem Talmud, edition by Heinrich W. Guggenheimer. Berlin, De Gruyter, 1999-2015",
    "license": "CC-BY",
    "url": "https://www.sefaria.org.il/Jerusalem_Talmud_Ketubot_5:3:4?lang=he",
-   "para": 113,
-   "anchor": "ירושלמי כתובות ה: ג"
+   "anchor": "ירושלמי כתובות ה: ג",
+   "fn": 24
   },
   {
    "ref": "Tosefta Megillah 3:17",
@@ -153,8 +153,8 @@
    "version": "Tosefta Megillah - Machon Mamre",
    "license": "Public Domain",
    "url": "https://www.sefaria.org.il/Tosefta_Megillah_3:17?lang=he",
-   "para": 113,
-   "anchor": "תוספתא מגילה פרק ג"
+   "anchor": "תוספתא מגילה פרק ג",
+   "fn": 24
   },
   {
    "ref": "Mishnah Makkot 1:10",
@@ -165,8 +165,8 @@
    "version": "Torat Emet 357",
    "license": "Public Domain",
    "url": "https://www.sefaria.org.il/Mishnah_Makkot_1:10?lang=he",
-   "para": 113,
-   "anchor": "מכות א: י"
+   "anchor": "מכות א: י",
+   "fn": 24
   },
   {
    "ref": "Mishnah Eduyot 1:5",
@@ -177,8 +177,8 @@
    "version": "Torat Emet 357",
    "license": "Public Domain",
    "url": "https://www.sefaria.org.il/Mishnah_Eduyot_1:5?lang=he",
-   "para": 115,
-   "anchor": "עדיות א: ה"
+   "anchor": "עדיות א: ה",
+   "fn": 26
   },
   {
    "ref": "Megillah 9b:4",
@@ -189,8 +189,8 @@
    "version": "William Davidson Edition - Vocalized Aramaic",
    "license": "CC-BY-NC",
    "url": "https://www.sefaria.org.il/Megillah_9b:4?lang=he",
-   "para": 116,
-   "anchor": "מגילה ט, ב"
+   "anchor": "מגילה ט, ב",
+   "fn": 27
   }
  ]
 }

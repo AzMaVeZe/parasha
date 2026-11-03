@@ -34,8 +34,8 @@
    "version": "Miqra according to the Masorah",
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/Leviticus_23:23-25?lang=he",
-   "para": 19,
-   "anchor": "ויקרא כג, כג-כה"
+   "anchor": "ויקרא כג, כג-כה",
+   "fn": 2
   },
   {
    "ref": "Likkutei Torah, Re'eh 10:1",
@@ -46,8 +46,8 @@
    "version": "Kehot Publication Society",
    "license": "CC-BY-NC",
    "url": "https://www.sefaria.org.il/Likkutei_Torah,_Re%27eh_10:1?lang=he",
-   "para": 20,
-   "anchor": "ליקוטי תורה פרשת ראה ל\"ב ב"
+   "anchor": "ליקוטי תורה פרשת ראה ל\"ב ב",
+   "fn": 4
   },
   {
    "ref": "Genesis 22:7",
@@ -58,7 +58,7 @@
    "version": "Miqra according to the Masorah",
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/Genesis_22:7?lang=he",
-   "para": 36
+   "para": 29
   },
   {
    "ref": "Olat Reiyah, Akedah 28",
@@ -69,7 +69,7 @@
    "version": "Rav Kook public files",
    "license": "unknown",
    "url": "https://www.sefaria.org.il/Olat_Reiyah,_Akedah_28?lang=he",
-   "para": 40
+   "para": 33
   },
   {
    "ref": "Olat Reiyah, Akedah 29",
@@ -80,7 +80,7 @@
    "version": "Rav Kook public files",
    "license": "unknown",
    "url": "https://www.sefaria.org.il/Olat_Reiyah,_Akedah_29?lang=he",
-   "para": 43
+   "para": 36
   }
  ]
 }

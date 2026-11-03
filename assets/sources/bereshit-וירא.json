@@ -18,8 +18,8 @@
    "version": "Miqra according to the Masorah",
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/Genesis_18:23-32?lang=he",
-   "para": 24,
-   "anchor": "בראשית יח, כג-לב"
+   "anchor": "בראשית יח, כג-לב",
+   "fn": 4
   },
   {
    "ref": "Genesis 18:33",
@@ -30,7 +30,7 @@
    "version": "Miqra according to the Masorah",
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/Genesis_18:33?lang=he",
-   "para": 29
+   "para": 24
   },
   {
    "ref": "Genesis 20:11",
@@ -41,7 +41,7 @@
    "version": "Miqra according to the Masorah",
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/Genesis_20:11?lang=he",
-   "para": 43
+   "para": 35
   },
   {
    "ref": "Genesis 18:17-19",
@@ -54,8 +54,8 @@
    "version": "Miqra according to the Masorah",
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/Genesis_18:17-19?lang=he",
-   "para": 51,
-   "anchor": "בראשית יח, יז-יט"
+   "anchor": "בראשית יח, יז-יט",
+   "fn": 9
   },
   {
    "ref": "Genesis 21:1-2",
@@ -67,8 +67,8 @@
    "version": "Miqra according to the Masorah",
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/Genesis_21:1-2?lang=he",
-   "para": 52,
-   "anchor": "בראשית כא, א-ב"
+   "anchor": "בראשית כא, א-ב",
+   "fn": 10
   }
  ]
 }

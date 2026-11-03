@@ -48,8 +48,8 @@
    "version": "Midrash Rabbah -- TE",
    "license": "CC-BY-NC",
    "url": "https://www.sefaria.org.il/Devarim_Rabbah_8:3?lang=he",
-   "para": 18,
-   "anchor": "מדרש רבה, נצבים אות ג'"
+   "anchor": "מדרש רבה, נצבים אות ג'",
+   "fn": 1
   },
   {
    "ref": "Zikaron leYom Rishon, Part II; Selichot, Sin Guilt and Covenant 16",
@@ -60,8 +60,8 @@
    "version": "Efrat, 2007",
    "license": "CC-BY",
    "url": "https://www.sefaria.org.il/Zikaron_leYom_Rishon,_Part_II%3B_Selichot,_Sin_Guilt_and_Covenant_16?lang=he",
-   "para": 34,
-   "anchor": "הרב שג\"ר, זכרון ליום ראשון"
+   "anchor": "הרב שג\"ר, זכרון ליום ראשון",
+   "fn": 2
   },
   {
    "ref": "Zikaron leYom Rishon, Part II; Selichot, Teshuvah; the Eternal Life 14-16",
@@ -74,8 +74,8 @@
    "version": "Efrat, 2007",
    "license": "CC-BY",
    "url": "https://www.sefaria.org.il/Zikaron_leYom_Rishon,_Part_II%3B_Selichot,_Teshuvah%3B_the_Eternal_Life_14-16?lang=he",
-   "para": 37,
-   "anchor": "(עמ' 31 שם)"
+   "anchor": "(עמ' 31 שם)",
+   "para": 33
   }
  ]
 }

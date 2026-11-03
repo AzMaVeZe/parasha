@@ -15,8 +15,8 @@
   },
   {
    "ref": "Nedarim 32a:14-15",
-   "para": 17,
-   "anchor": "נדרים לב ע\"א"
+   "anchor": "נדרים לב ע\"א",
+   "para": 17
   },
   {
    "ref": "Genesis 14:21",
@@ -24,23 +24,23 @@
   },
   {
    "ref": "Midrash Lekach Tov, Genesis 14:12:2",
-   "para": 27,
-   "anchor": "פסיקתא זוטרתא (לקח טוב) בראשית פרק יד"
+   "anchor": "פסיקתא זוטרתא (לקח טוב) בראשית פרק יד",
+   "para": 27
   },
   {
    "ref": "Ramban on Exodus 12:40",
-   "para": 33,
-   "anchor": "הרמב\"ן (שמות י\"ב, מ)"
+   "anchor": "הרמב\"ן (שמות י\"ב, מ)",
+   "fn": 0
   },
   {
    "ref": "Genesis 15:11-17",
-   "para": 43,
-   "anchor": "(ט\"ו, יא-יז)"
+   "anchor": "(ט\"ו, יא-יז)",
+   "para": 41
   },
   {
    "ref": "Moed Katan 25b:4",
-   "para": 46,
-   "anchor": "מועד קטן כ\"ה ע\"ב"
+   "anchor": "מועד קטן כ\"ה ע\"ב",
+   "para": 44
   }
  ]
 }

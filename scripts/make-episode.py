@@ -5,10 +5,10 @@
 מסמנים רק את הדף של השבוע ומבקשים סקירה קולית — שני מנחים שמנתחים ודנים
 ברעיונות שבדף. הסקריפט עושה את אותו הדבר, ומוסיף את מה שצריך להעלאה:
 
-    scripts/episodes/<דף>/
-        <דף>.m4a        הסקירה הקולית
-        cover.png       כרטיס הפרק (מ-assets/covers, 3000×3000)
-        description.txt כותרת ותיאור, עם הקישור לעמוד הדף באתר
+    scripts/episodes/   (או התיקייה שב---out, למשל ב-Google Drive)
+        פרשת וארא - בין הנכתב לנגלה.m4a   הסקירה הקולית
+        פרשת וארא - כרטיס.png             כרטיס הפרק (מ-assets/covers, 3000×3000)
+        פרשת וארא - תיאור.txt             כותרת ותיאור, עם הקישור לעמוד הדף באתר
 
 את הפרק מעלים ל-Spotify for Creators ביד, ושולחים לClaude את הקישור — הוא
 נכנס לאתר (js/data.js). **כדאי לשמוע כל פרק לפני שהוא עולה:** הוא יוצא בשמך,
@@ -24,6 +24,8 @@
     python scripts/make-episode.py "לך לך"              # פרק אחד
     python scripts/make-episode.py "לך לך" וירא "חיי שרה"
     python scripts/make-episode.py --from "לך לך" --count 3
+    python scripts/make-episode.py --book שמות          # כל ספר שמות, פרק לכל פרשה
+    python scripts/make-episode.py --book שמות --out "<תיקייה ב-Google Drive>"
 
 ל-NotebookLM יש מכסה יומית של סקירות קוליות. כשהיא נגמרת הסקריפט עוצר,
 ומה שכבר הוכן נשאר; למחרת מריצים שוב, ופרקים שכבר הורדו מדולגים.
@@ -39,13 +41,23 @@ import sys
 import unicodedata
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-OUT = os.path.join(ROOT, 'scripts', 'episodes')
+# לאן נשמרים הפרקים. ברירת המחדל בתוך הריפו (מחוץ ל-git); עם --out או
+# PARASHA_EPISODES_DIR אפשר לכוון לתיקייה של Google Drive במחשב, וכך הקבצים
+# עולים לאחסון מעצמם.
+OUT = os.environ.get('PARASHA_EPISODES_DIR') or os.path.join(ROOT, 'scripts', 'episodes')
+BRAND = 'בין הנכתב לנגלה'
+BOOKS = {'בראשית': 'bereshit', 'שמות': 'shmot', 'ויקרא': 'vayikra',
+         'במדבר': 'bamidbar', 'דברים': 'devarim', 'חגים': 'chagim'}
 SITE = 'https://parasha.azma.app'
 
 # הבקשה ל-NotebookLM. אפשר להחליף ב---prompt.
-PROMPT = ('שני מנחים מנתחים ודנים ברעיונות שמופיעים בדף של {title} — רק בדף הזה. '
-          'עקבו אחרי מהלך הטיעון של הכותב, הביאו את הפסוקים והמקורות שהוא מצטט, '
-          'ואל תוסיפו פרשנות שאינה בדף. הדף נכתב על ידי אריאל ז\'יטניצקי.')
+# אותו נוסח מופיע ב-docs/podcast-prompt.md, להעתקה ידנית ל-NotebookLM.
+PROMPT = ('פרק פודקאסט בעברית: שני מנחים בשיחה, שמנתחים ודנים ברעיונות שמופיעים בדף של '
+          '{title} — רק בדף הזה, מתוך המקור שסומן. פתחו בשאלה או בתמיהה שהדף מעלה, '
+          'עקבו אחרי מהלך הטיעון של הכותב שלב אחר שלב, הביאו את הפסוקים, המדרשים '
+          'והפרשנים שהוא מצטט, והגיעו למסקנה שלו. מותר לשאול ולהתווכח, אבל לא להוסיף '
+          'פרשנות או עובדות שאינן בדף. הדף נכתב על ידי אריאל ז\'יטניצקי, '
+          'מתוך הסדרה "בין הנכתב לנגלה".')
 
 CLI = None
 
@@ -92,10 +104,12 @@ def norm(s):
 def load_pages():
     """הפרשות לפי הסדר שב-js/data.js: שם, כותרת, קובץ הדף, והאם כבר יש פרק."""
     src = open(os.path.join(ROOT, 'js', 'data.js'), encoding='utf-8').read()
-    pages, chag = [], False
+    pages, chag, book = [], False, None
     for line in src.splitlines():
-        if "id: 'chagim'" in line:
-            chag = True
+        b = re.search(r"\{ id: '(\w+)'", line)
+        if b:
+            book = b.group(1)
+            chag = book == 'chagim'
         m = re.search(r"name: '([^']+)'.*?pdf: P\('([^']+)\.pdf'\)", line)
         if m and 'parshiot' not in line:
             name = m.group(1)
@@ -103,8 +117,18 @@ def load_pages():
                 'name': name, 'stem': m.group(2),
                 'title': name if chag else 'פרשת ' + name,
                 'has_episode': 'spotify:' in line,
+                'book': book,
             })
+    # דף אחד לשתי פרשות (ויקהל–פקודי): הכותרת מחברת את שתיהן
+    for p in pages:
+        names = [q['name'] for q in pages if q['stem'] == p['stem'] and q['book'] == p['book']]
+        if len(names) > 1 and not chag_of(p):
+            p['title'] = 'פרשת ' + '–'.join(names)
     return pages
+
+
+def chag_of(page):
+    return page['book'] == 'chagim'
 
 
 def notebook_id(arg):
@@ -138,13 +162,15 @@ def find_source(page, srcs):
     return hits
 
 
-def make(page, nb, src_id, prompt, length):
-    folder = os.path.join(OUT, page['stem'])
-    audio = os.path.join(folder, page['stem'] + '.m4a')
+def make(page, nb, src_id, prompt, length, out):
+    # שם הפרשה בראש שם כל קובץ, כולם באותה תיקייה — כך הם מסודרים
+    # ונמצאים בחיפוש באחסון: "פרשת וארא - בין הנכתב לנגלה.m4a"
+    base = os.path.join(out, page['title'])
+    audio = f'{base} - {BRAND}.m4a'
     if os.path.exists(audio):
-        print(f'  כבר קיים: {os.path.relpath(audio, ROOT)}')
+        print(f'  כבר קיים: {audio}')
         return True
-    os.makedirs(folder, exist_ok=True)
+    os.makedirs(out, exist_ok=True)
 
     print(f'  יוצר סקירה קולית (כמה דקות)…')
     code, out = run(['generate', 'audio', '-n', nb, '-s', src_id,
@@ -167,13 +193,13 @@ def make(page, nb, src_id, prompt, length):
 
     cover = os.path.join(ROOT, 'assets', 'covers', page['stem'] + '.png')
     if os.path.exists(cover):
-        shutil.copy(cover, os.path.join(folder, 'cover.png'))
+        shutil.copy(cover, f'{base} - כרטיס.png')
     url = f'{SITE}/p/{page["name"].replace(chr(34), "").replace(" ", "-")}/'
-    with open(os.path.join(folder, 'description.txt'), 'w', encoding='utf-8') as f:
+    with open(f'{base} - תיאור.txt', 'w', encoding='utf-8') as f:
         f.write(f'כותרת:\n{page["title"]}\n\n'
                 f'תיאור:\n{page["title"]} — מתוך "בין הנכתב לנגלה", דפי פרשת השבוע של אריאל ז\'יטניצקי.\n'
                 f'הדף המלא לצפייה, להורדה ולהדפסה: {url}\n')
-    print(f'  מוכן: {os.path.relpath(folder, ROOT)}')
+    print(f'  מוכן: {audio}')
     return True
 
 
@@ -182,6 +208,9 @@ def main():
     ap.add_argument('names', nargs='*', help='שמות פרשות, כמו "לך לך"')
     ap.add_argument('--from', dest='start', help='להתחיל מפרשה זו')
     ap.add_argument('--count', type=int, default=1, help='כמה פרשות מ---from (ברירת מחדל 1)')
+    ap.add_argument('--book', help='כל הפרשות של ספר, למשל --book שמות (מדלג על מה שכבר יש לו פרק)')
+    ap.add_argument('--out', default=OUT, help='תיקיית השמירה, למשל תיקייה ב-Google Drive')
+    ap.add_argument('--prompt-file', help='קובץ טקסט עם הבקשה ל-NotebookLM ({title} = שם הפרשה)')
     ap.add_argument('-n', '--notebook', help='מזהה המחברת (ברירת מחדל: "פרשת השבוע")')
     ap.add_argument('--source', help='מזהה המקור, כשהחיפוש לפי שם מוצא יותר מאחד')
     ap.add_argument('--sources', action='store_true', help='הצגת המקורות שבמחברת')
@@ -201,7 +230,24 @@ def main():
             print(f'  {s.get("id")}  {s.get("title")}')
         return
 
-    if args.start:
+    if args.prompt_file:
+        with open(args.prompt_file, encoding='utf-8') as f:
+            args.prompt = f.read().strip()
+
+    if args.book:
+        book = BOOKS.get(args.book.replace('ספר', '').strip())
+        if not book:
+            sys.exit(f'לא מכיר את הספר "{args.book}". אחד מ: {", ".join(BOOKS)}')
+        chosen, seen = [], set()
+        for p in pages:
+            if p['book'] != book or p['stem'] in seen:
+                continue
+            seen.add(p['stem'])
+            if p['has_episode']:
+                print(f'{p["title"]}: כבר יש פרק באתר, מדלג')
+                continue
+            chosen.append(p)
+    elif args.start:
         first = by_name.get(norm(args.start))
         if not first:
             sys.exit(f'לא מכיר את הפרשה "{args.start}".')
@@ -235,7 +281,7 @@ def main():
             for s in hits:
                 print(f'    {s.get("id")}  {s.get("title")}')
             continue
-        if not make(page, nb, hits[0]['id'], args.prompt, args.length):
+        if not make(page, nb, hits[0]['id'], args.prompt, args.length, args.out):
             break
 
 

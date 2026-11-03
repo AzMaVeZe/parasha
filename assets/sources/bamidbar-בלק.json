@@ -9,8 +9,8 @@
    "version": "William Davidson Edition - Vocalized Aramaic",
    "license": "CC-BY-NC",
    "url": "https://www.sefaria.org.il/Bava_Batra_14b:12?lang=he",
-   "para": 2,
-   "anchor": "בבלי, בבא בתרא יד:"
+   "anchor": "בבלי, בבא בתרא יד:",
+   "para": 2
   },
   {
    "ref": "Micah 6:5",
@@ -74,7 +74,7 @@
    "version": "Miqra according to the Masorah",
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/Micah_6:2?lang=he",
-   "para": 21
+   "para": 19
   },
   {
    "ref": "Joshua 13:22",
@@ -85,8 +85,8 @@
    "version": "Miqra according to the Masorah",
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/Joshua_13:22?lang=he",
-   "para": 28,
-   "anchor": "יהושע כג, כב"
+   "anchor": "יהושע כג, כב",
+   "para": 26
   },
   {
    "ref": "Numbers 24:25",
@@ -97,7 +97,7 @@
    "version": "Miqra according to the Masorah",
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/Numbers_24:25?lang=he",
-   "para": 37
+   "para": 35
   },
   {
    "ref": "Peri Tzadik, Balak 2:2-3",
@@ -109,8 +109,8 @@
    "version": "Pri Tzaddik, Lublin, 1901",
    "license": "Public Domain",
    "url": "https://www.sefaria.org.il/Peri_Tzadik,_Balak_2:2-3?lang=he",
-   "para": 42,
-   "anchor": "פרי צדיק על פרשתנו"
+   "anchor": "פרי צדיק על פרשתנו",
+   "fn": 3
   },
   {
    "ref": "Micah 6:8",
@@ -121,7 +121,7 @@
    "version": "Miqra according to the Masorah",
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/Micah_6:8?lang=he",
-   "para": 44
+   "para": 40
   },
   {
    "ref": "Deuteronomy 23:6",
@@ -132,8 +132,8 @@
    "version": "Miqra according to the Masorah",
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/Deuteronomy_23:6?lang=he",
-   "para": 45,
-   "anchor": "דברים כג"
+   "anchor": "דברים כג",
+   "para": 41
   }
  ]
 }

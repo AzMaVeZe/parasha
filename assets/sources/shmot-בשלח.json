@@ -9,7 +9,7 @@
    "version": "Miqra according to the Masorah",
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/Exodus_22:20?lang=he",
-   "para": 12
+   "fn": 1
   },
   {
    "ref": "Deuteronomy 23:8",
@@ -20,7 +20,7 @@
    "version": "Miqra according to the Masorah",
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/Deuteronomy_23:8?lang=he",
-   "para": 12
+   "fn": 1
   },
   {
    "ref": "Mekhilta DeRabbi Yishmael, Tractate Vayehi Beshalach 3:27",
@@ -31,8 +31,8 @@
    "version": "Beeri Edition, Koren, Jerusalem, 2019",
    "license": "CC-BY-NC",
    "url": "https://www.sefaria.org.il/Mekhilta_DeRabbi_Yishmael,_Tractate_Vayehi_Beshalach_3:27?lang=he",
-   "para": 28,
-   "anchor": "מכילתא דרבי ישמעאל בשלח"
+   "anchor": "מכילתא דרבי ישמעאל בשלח",
+   "fn": 4
   },
   {
    "ref": "Orot, Lights from Darkness, Lights of Rebirth 18",
@@ -43,8 +43,8 @@
    "version": "Wikisource",
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/Orot,_Lights_from_Darkness,_Lights_of_Rebirth_18?lang=he",
-   "para": 70,
-   "anchor": "אורות, עמ' ע-עב"
+   "anchor": "אורות, עמ' ע-עב",
+   "fn": 11
   }
  ]
 }

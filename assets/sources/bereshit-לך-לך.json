@@ -49,8 +49,8 @@
    "version": "William Davidson Edition - Vocalized Aramaic",
    "license": "CC-BY-NC",
    "url": "https://www.sefaria.org.il/Nedarim_32a:14-15?lang=he",
-   "para": 17,
-   "anchor": "נדרים לב ע\"א"
+   "anchor": "נדרים לב ע\"א",
+   "para": 17
   },
   {
    "ref": "Genesis 14:21",
@@ -72,8 +72,8 @@
    "version": "Midrash Lekach Tov on Torah, Vilna 1884",
    "license": "Public Domain",
    "url": "https://www.sefaria.org.il/Midrash_Lekach_Tov,_Genesis_14:12:2?lang=he",
-   "para": 27,
-   "anchor": "פסיקתא זוטרתא (לקח טוב) בראשית פרק יד"
+   "anchor": "פסיקתא זוטרתא (לקח טוב) בראשית פרק יד",
+   "para": 27
   },
   {
    "ref": "Ramban on Exodus 12:40",
@@ -84,8 +84,8 @@
    "version": "Sefaria Vocalized Edition",
    "license": "unknown",
    "url": "https://www.sefaria.org.il/Ramban_on_Exodus_12:40?lang=he",
-   "para": 33,
-   "anchor": "הרמב\"ן (שמות י\"ב, מ)"
+   "anchor": "הרמב\"ן (שמות י\"ב, מ)",
+   "fn": 0
   },
   {
    "ref": "Genesis 15:11-17",
@@ -102,8 +102,8 @@
    "version": "Miqra according to the Masorah",
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/Genesis_15:11-17?lang=he",
-   "para": 43,
-   "anchor": "(ט\"ו, יא-יז)"
+   "anchor": "(ט\"ו, יא-יז)",
+   "para": 41
   },
   {
    "ref": "Moed Katan 25b:4",
@@ -114,8 +114,8 @@
    "version": "William Davidson Edition - Vocalized Aramaic",
    "license": "CC-BY-NC",
    "url": "https://www.sefaria.org.il/Moed_Katan_25b:4?lang=he",
-   "para": 46,
-   "anchor": "מועד קטן כ\"ה ע\"ב"
+   "anchor": "מועד קטן כ\"ה ע\"ב",
+   "para": 44
   }
  ]
 }

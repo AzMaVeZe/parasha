@@ -31,8 +31,8 @@
    "version": "William Davidson Edition - Vocalized Aramaic",
    "license": "CC-BY-NC",
    "url": "https://www.sefaria.org.il/Arakhin_16a:5?lang=he",
-   "para": 17,
-   "anchor": "ערכין טז, א"
+   "anchor": "ערכין טז, א",
+   "fn": 2
   },
   {
    "ref": "Vayikra Rabbah 17:3",
@@ -43,8 +43,8 @@
    "version": "Midrash Rabbah -- TE",
    "license": "CC-BY-NC",
    "url": "https://www.sefaria.org.il/Vayikra_Rabbah_17:3?lang=he",
-   "para": 17,
-   "anchor": "ויקרא רבה יז"
+   "anchor": "ויקרא רבה יז",
+   "fn": 2
   },
   {
    "ref": "Ketubot 77b:6",
@@ -55,8 +55,8 @@
    "version": "William Davidson Edition - Vocalized Aramaic",
    "license": "CC-BY-NC",
    "url": "https://www.sefaria.org.il/Ketubot_77b:6?lang=he",
-   "para": 28,
-   "anchor": "בבלי, כתובות דף עז ע\"ב"
+   "anchor": "בבלי, כתובות דף עז ע\"ב",
+   "fn": 3
   },
   {
    "ref": "Vayikra Rabbah 16:6",
@@ -67,8 +67,8 @@
    "version": "Midrash Rabbah -- TE",
    "license": "CC-BY-NC",
    "url": "https://www.sefaria.org.il/Vayikra_Rabbah_16:6?lang=he",
-   "para": 31,
-   "anchor": "מדרש רבה, ויקרא, פרשה טז (ו)"
+   "anchor": "מדרש רבה, ויקרא, פרשה טז (ו)",
+   "fn": 6
   },
   {
    "ref": "Teshuvot Rashi 207:2",
@@ -79,8 +79,8 @@
    "version": "Teshuvot Rashi vol. I, New York, 1943",
    "license": "unknown",
    "url": "https://www.sefaria.org.il/Teshuvot_Rashi_207:2?lang=he",
-   "para": 32,
-   "anchor": "בשו\"ת רש\"י סימן רז"
+   "anchor": "בשו\"ת רש\"י סימן רז",
+   "fn": 7
   },
   {
    "ref": "Leviticus 15:18",
@@ -91,7 +91,7 @@
    "version": "Miqra according to the Masorah",
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/Leviticus_15:18?lang=he",
-   "para": 40
+   "para": 31
   },
   {
    "ref": "Ecclesiastes 7:14",
@@ -102,7 +102,7 @@
    "version": "Miqra according to the Masorah",
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/Ecclesiastes_7:14?lang=he",
-   "para": 40
+   "para": 31
   },
   {
    "ref": "Sanhedrin 110a:6-7",
@@ -114,8 +114,8 @@
    "version": "William Davidson Edition - Vocalized Aramaic",
    "license": "CC-BY-NC",
    "url": "https://www.sefaria.org.il/Sanhedrin_110a:6-7?lang=he",
-   "para": 45,
-   "anchor": "סנהדרין דף קי ע\"א"
+   "anchor": "סנהדרין דף קי ע\"א",
+   "fn": 10
   },
   {
    "ref": "Responsa Maharashdam, Yoreh Deah 143:2",
@@ -126,8 +126,8 @@
    "version": "She'elot uTeshuvot Maharashdam, Lemberg, 1862",
    "license": "Public Domain",
    "url": "https://www.sefaria.org.il/Responsa_Maharashdam,_Yoreh_Deah_143:2?lang=he",
-   "para": 46,
-   "anchor": "שו\"ת מהרשד\"ם חלק יו\"ד סימן קמג"
+   "anchor": "שו\"ת מהרשד\"ם חלק יו\"ד סימן קמג",
+   "fn": 11
   },
   {
    "ref": "Leviticus 16:1",
@@ -138,7 +138,7 @@
    "version": "Miqra according to the Masorah",
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/Leviticus_16:1?lang=he",
-   "para": 47
+   "fn": 12
   }
  ]
 }

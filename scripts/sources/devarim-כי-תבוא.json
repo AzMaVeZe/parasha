@@ -19,35 +19,35 @@
   },
   {
    "ref": "Midrash Tanchuma, Ki Tavo 1:1",
-   "para": 15,
-   "anchor": "מדרש תנחומא כי תבוא סימן א"
+   "anchor": "מדרש תנחומא כי תבוא סימן א",
+   "fn": 1
   },
   {
    "ref": "Mishnah Yoma 8:9",
-   "para": 16
+   "fn": 3
   },
   {
    "ref": "Deuteronomy 26:5",
-   "para": 19
+   "para": 16
   },
   {
    "ref": "Exodus 23:19",
-   "para": 29,
-   "anchor": "שמות כג יט"
+   "anchor": "שמות כג יט",
+   "fn": 5
   },
   {
    "ref": "Exodus 34:26",
-   "para": 29,
-   "anchor": "שמות לד כו"
+   "anchor": "שמות לד כו",
+   "fn": 5
   },
   {
    "ref": "Genesis 32:29",
-   "para": 31
+   "para": 26
   },
   {
    "ref": "Bereshit Rabbah 60:15",
-   "para": 48,
-   "anchor": "בראשית רבה (ס, טו)"
+   "anchor": "בראשית רבה (ס, טו)",
+   "fn": 6
   }
  ]
 }

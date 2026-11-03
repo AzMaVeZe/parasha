@@ -36,7 +36,7 @@
    "version": "Miqra according to the Masorah",
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/Exodus_32:10?lang=he",
-   "para": 14
+   "fn": 1
   },
   {
    "ref": "Zohar, Pekudei 29:284-285",
@@ -48,8 +48,8 @@
    "version": "Vocalized Zohar, Israel 2013",
    "license": "unknown",
    "url": "https://www.sefaria.org.il/Zohar,_Pekudei_29:284-285?lang=he",
-   "para": 15,
-   "anchor": "זוהר כרך ב (שמות) פקודי (רפד-רפה, דף רכ ע\"א)"
+   "anchor": "זוהר כרך ב (שמות) פקודי (רפד-רפה, דף רכ ע\"א)",
+   "fn": 2
   },
   {
    "ref": "Ecclesiastes 5:9",
@@ -60,7 +60,7 @@
    "version": "Miqra according to the Masorah",
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/Ecclesiastes_5:9?lang=he",
-   "para": 20
+   "para": 17
   },
   {
    "ref": "Exodus 33:13",
@@ -71,7 +71,7 @@
    "version": "Miqra according to the Masorah",
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/Exodus_33:13?lang=he",
-   "para": 25
+   "para": 22
   },
   {
    "ref": "Exodus 33:23",
@@ -82,7 +82,7 @@
    "version": "Miqra according to the Masorah",
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/Exodus_33:23?lang=he",
-   "para": 25
+   "para": 22
   },
   {
    "ref": "Niddah 31b:12",
@@ -93,8 +93,8 @@
    "version": "William Davidson Edition - Vocalized Aramaic",
    "license": "CC-BY-NC",
    "url": "https://www.sefaria.org.il/Niddah_31b:12?lang=he",
-   "para": 26,
-   "anchor": "מסכת נידה לא"
+   "anchor": "מסכת נידה לא",
+   "fn": 3
   },
   {
    "ref": "Sukkah 52b:6",
@@ -105,8 +105,8 @@
    "version": "William Davidson Edition - Vocalized Aramaic",
    "license": "CC-BY-NC",
    "url": "https://www.sefaria.org.il/Sukkah_52b:6?lang=he",
-   "para": 28,
-   "anchor": "בבלי, סוכה נב:"
+   "anchor": "בבלי, סוכה נב:",
+   "fn": 5
   },
   {
    "ref": "Kohelet Rabbah 1:13:1",
@@ -117,8 +117,8 @@
    "version": "Midrash Rabbah -- TE",
    "license": "CC-BY-NC",
    "url": "https://www.sefaria.org.il/Kohelet_Rabbah_1:13:1?lang=he",
-   "para": 28,
-   "anchor": "קהלת רבה א' לד'"
+   "anchor": "קהלת רבה א' לד'",
+   "fn": 5
   },
   {
    "ref": "Jerusalem Talmud Yoma 6:4:5",
@@ -129,8 +129,8 @@
    "version": "The Jerusalem Talmud, edition by Heinrich W. Guggenheimer. Berlin, De Gruyter, 1999-2015",
    "license": "CC-BY",
    "url": "https://www.sefaria.org.il/Jerusalem_Talmud_Yoma_6:4:5?lang=he",
-   "para": 28,
-   "anchor": "ירושלמי יומא ו', ד'"
+   "anchor": "ירושלמי יומא ו', ד'",
+   "fn": 5
   },
   {
    "ref": "Likutei Moharan, Part II 83",
@@ -157,8 +157,8 @@
    "version": "Likutei Moharan Tinyana - rabenubook.com",
    "license": "Public Domain",
    "url": "https://www.sefaria.org.il/Likutei_Moharan,_Part_II_83?lang=he",
-   "para": 29,
-   "anchor": "ליקוטי מוהר\"ן תנינא פג"
+   "anchor": "ליקוטי מוהר\"ן תנינא פג",
+   "fn": 6
   },
   {
    "ref": "Psalms 145:16",
@@ -169,7 +169,7 @@
    "version": "Miqra according to the Masorah",
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/Psalms_145:16?lang=he",
-   "para": 33
+   "para": 26
   },
   {
    "ref": "Midrash Tanchuma, Vayikra 1:1",
@@ -180,8 +180,8 @@
    "version": "Midrash Tanchuma -- Torat Emet",
    "license": "Public Domain",
    "url": "https://www.sefaria.org.il/Midrash_Tanchuma,_Vayikra_1:1?lang=he",
-   "para": 46,
-   "anchor": "מדרש תנחומא פרשת ויקרא סימן א"
+   "anchor": "מדרש תנחומא פרשת ויקרא סימן א",
+   "fn": 9
   },
   {
    "ref": "Sippurei Maasiyot 7",
@@ -205,8 +205,8 @@
    "version": "OYW",
    "license": "Public Domain",
    "url": "https://www.sefaria.org.il/Sippurei_Maasiyot_7?lang=he",
-   "para": 49,
-   "anchor": "ספורי מעשיות משנים קדמוניות, ר' נחמן מברסלב"
+   "anchor": "ספורי מעשיות משנים קדמוניות, ר' נחמן מברסלב",
+   "para": 35
   }
  ]
 }

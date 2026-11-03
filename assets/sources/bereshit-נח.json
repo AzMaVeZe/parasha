@@ -59,8 +59,8 @@
    "version": "Miqra according to the Masorah",
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/Genesis_7:7?lang=he",
-   "para": 22,
-   "anchor": "בראשית ז, ז"
+   "anchor": "בראשית ז, ז",
+   "fn": 3
   },
   {
    "ref": "Rashi on Genesis 6:18:2",
@@ -71,7 +71,7 @@
    "version": "Pentateuch with Rashi's commentary by M. Rosenbaum and A.M. Silbermann, 1929-1934",
    "license": "Public Domain",
    "url": "https://www.sefaria.org.il/Rashi_on_Genesis_6:18:2?lang=he",
-   "para": 25
+   "para": 24
   },
   {
    "ref": "Genesis 8:15-16",
@@ -83,7 +83,7 @@
    "version": "Miqra according to the Masorah",
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/Genesis_8:15-16?lang=he",
-   "para": 28
+   "para": 27
   },
   {
    "ref": "Rashi on Genesis 8:16",
@@ -94,7 +94,7 @@
    "version": "Pentateuch with Rashi's commentary by M. Rosenbaum and A.M. Silbermann, 1929-1934",
    "license": "Public Domain",
    "url": "https://www.sefaria.org.il/Rashi_on_Genesis_8:16?lang=he",
-   "para": 30
+   "para": 28
   },
   {
    "ref": "Genesis 8:18",
@@ -105,7 +105,7 @@
    "version": "Miqra according to the Masorah",
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/Genesis_8:18?lang=he",
-   "para": 34
+   "para": 32
   },
   {
    "ref": "Zohar Chadash, Noach 101",
@@ -116,7 +116,7 @@
    "version": "Zohar Chadash",
    "license": "Public Domain",
    "url": "https://www.sefaria.org.il/Zohar_Chadash,_Noach_101?lang=he",
-   "para": 40
+   "para": 37
   },
   {
    "ref": "Zohar Chadash, Noach 54",
@@ -127,8 +127,8 @@
    "version": "Zohar Chadash",
    "license": "Public Domain",
    "url": "https://www.sefaria.org.il/Zohar_Chadash,_Noach_54?lang=he",
-   "para": 45,
-   "anchor": "זוהר חדש, מדרש הנעלם, נ\"ב"
+   "anchor": "זוהר חדש, מדרש הנעלם, נ\"ב",
+   "fn": 9
   },
   {
    "ref": "Zohar Chadash, Noach 87",
@@ -139,7 +139,7 @@
    "version": "Zohar Chadash",
    "license": "Public Domain",
    "url": "https://www.sefaria.org.il/Zohar_Chadash,_Noach_87?lang=he",
-   "para": 45
+   "fn": 9
   },
   {
    "ref": "Genesis 8:21",
@@ -150,7 +150,7 @@
    "version": "Miqra according to the Masorah",
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/Genesis_8:21?lang=he",
-   "para": 62
+   "para": 50
   },
   {
    "ref": "Zohar Chadash, Noach 109-110",
@@ -162,8 +162,8 @@
    "version": "Zohar Chadash",
    "license": "Public Domain",
    "url": "https://www.sefaria.org.il/Zohar_Chadash,_Noach_109-110?lang=he",
-   "para": 73,
-   "anchor": "זוהר חדש, מאמר נח לא ביקש רחמים על העולם"
+   "anchor": "זוהר חדש, מאמר נח לא ביקש רחמים על העולם",
+   "fn": 13
   }
  ]
 }

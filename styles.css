@@ -228,6 +228,10 @@ html{scroll-behavior:smooth}
 .sheet-text__hint{font-weight:400;font-size:13px;color:var(--text-muted)}
 .sheet-text__body{padding:0 var(--sp-5) var(--sp-5);border-top:1px solid var(--border-subtle)}
 .sheet-text__body>p{max-width:70ch}
+.sheet-text__fn-title{font-size:16px;margin:28px 0 8px;padding-top:14px;border-top:1px solid var(--border-subtle)}
+.sheet-text__fn{list-style:none;margin:0;padding:0;max-width:70ch;font-size:14.5px;color:var(--text-muted);display:grid;gap:6px}
+.sheet-text__fn li{display:grid;grid-template-columns:2.2em 1fr;align-items:baseline}
+.sheet-text__fn-n{font-variant-numeric:tabular-nums;font-weight:600;color:var(--gold-700)}
 .sheet-text__body>blockquote{margin:1em 0;padding-inline-start:16px;border-inline-start:3px solid var(--gold-400);
   font-size:17.5px;color:var(--ink-900);max-width:70ch}
 .sheet-text__note{font-size:13.5px;color:var(--text-muted);margin:12px 0 4px}

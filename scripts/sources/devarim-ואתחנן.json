@@ -7,36 +7,36 @@
   },
   {
    "ref": "Sforno on Deuteronomy 4:41:1",
-   "para": 12,
-   "anchor": "ספורנו דברים ד, מא"
+   "anchor": "ספורנו דברים ד, מא",
+   "fn": 0
   },
   {
    "ref": "Deuteronomy 4:41-43",
-   "para": 13,
-   "anchor": "דברים ד, מא-מג"
+   "anchor": "דברים ד, מא-מג",
+   "fn": 1
   },
   {
    "ref": "Deuteronomy 19:2",
-   "para": 15
+   "fn": 3
   },
   {
    "ref": "Numbers 35:10-11",
-   "para": 15,
-   "anchor": "במדבר לה, י-יא"
+   "anchor": "במדבר לה, י-יא",
+   "fn": 3
   },
   {
    "ref": "Rashi on Deuteronomy 4:41:1",
-   "para": 16,
-   "anchor": "רש\"י דברים ד, מא"
+   "anchor": "רש\"י דברים ד, מא",
+   "fn": 4
   },
   {
    "ref": "Numbers 35:34",
-   "para": 17,
-   "anchor": "במדבר, לה, לד"
+   "anchor": "במדבר, לה, לד",
+   "fn": 5
   },
   {
    "ref": "Exodus 2:14-15",
-   "para": 38
+   "fn": 7
   }
  ]
 }

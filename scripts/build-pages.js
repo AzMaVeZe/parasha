@@ -106,11 +106,12 @@ function sheetSources(pdf) {
   const t = JSON.parse(fs.readFileSync(p, 'utf8'));
   return t.sources && t.sources.length ? t.sources : null;
 }
-// פסקה מהדף, מוגנת, ובה מראי המקום של פסקה זו כקישורים לספריא
-function linkAnchors(par, i, sources) {
+// פסקה (או הערת שוליים) מהדף, מוגנת, ובה מראי המקום שלה כקישורים לספריא.
+// here(s): האם המקור s שייך לקטע הזה — לפי s.para בפסקאות, לפי s.fn בהערות.
+function linkAnchors(par, here, sources) {
   let h = esc(par);
   for (const s of sources || []) {
-    if (s.para !== i || !s.anchor) continue;
+    if (!here(s) || !s.anchor) continue;
     const a = esc(s.anchor);
     const at = h.indexOf(a);
     if (at < 0) continue;
@@ -493,9 +494,17 @@ function parashaPage(e) {
     for (const n of text.notes || []) main += `\n          <p class="sheet-text__note">${esc(n)}</p>`;
     text.paragraphs.forEach((par, i) => {
       main += isQuote(par)
-        ? `\n          <blockquote>${linkAnchors(par, i, sources)}</blockquote>`
-        : `\n          <p>${linkAnchors(par, i, sources)}</p>`;
+        ? `\n          <blockquote>${linkAnchors(par, s => s.para === i, sources)}</blockquote>`
+        : `\n          <p>${linkAnchors(par, s => s.para === i, sources)}</p>`;
     });
+    // הערות השוליים בסוף, ממוספרות כמו בדף — ולא באמצע הטקסט, בין עמוד לעמוד
+    if (text.footnotes && text.footnotes.length) {
+      main += `\n          <h3 class="sheet-text__fn-title">הערות שוליים</h3>\n          <ol class="sheet-text__fn">`;
+      text.footnotes.forEach((f, k) => {
+        main += `\n            <li><span class="sheet-text__fn-n">${esc(f.n ?? '')}</span>${linkAnchors(f.text, s => s.fn === k, sources)}</li>`;
+      });
+      main += `\n          </ol>`;
+    }
     main += `\n        </div>
       </details>`;
   }

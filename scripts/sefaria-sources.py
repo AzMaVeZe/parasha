@@ -172,7 +172,10 @@ def fetch(names):
         out = []
         for s in cur['sources']:
             t = he_text(s['ref'])
-            t['para'] = s['para']
+            # para: מספר הפסקה ב-paragraphs; fn: מספר ההערה ב-footnotes (הערות השוליים שבסוף הטקסט)
+            for k in ('para', 'fn'):
+                if k in s:
+                    t[k] = s[k]
             if s.get('anchor'):
                 t['anchor'] = s['anchor']
             if s.get('note'):

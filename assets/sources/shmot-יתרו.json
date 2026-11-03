@@ -9,8 +9,8 @@
    "version": "Miqra according to the Masorah",
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/Exodus_18:11?lang=he",
-   "para": 1,
-   "anchor": "שמות יח, יא"
+   "anchor": "שמות יח, יא",
+   "para": 1
   },
   {
    "ref": "Genesis 9:6",
@@ -33,7 +33,7 @@
    "version": "Miqra according to the Masorah",
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/Leviticus_24:19-20?lang=he",
-   "para": 20
+   "fn": 3
   },
   {
    "ref": "Exodus 21:23-25",
@@ -46,7 +46,7 @@
    "version": "Miqra according to the Masorah",
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/Exodus_21:23-25?lang=he",
-   "para": 20
+   "fn": 3
   },
   {
    "ref": "I Kings 20:42",
@@ -57,7 +57,7 @@
    "version": "Miqra according to the Masorah",
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/I_Kings_20:42?lang=he",
-   "para": 20
+   "fn": 3
   },
   {
    "ref": "Proverbs 17:13",
@@ -68,7 +68,7 @@
    "version": "Miqra according to the Masorah",
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/Proverbs_17:13?lang=he",
-   "para": 20
+   "fn": 3
   },
   {
    "ref": "Tosefta Sotah 4:1",
@@ -79,8 +79,8 @@
    "version": "Tosefta Sota - Machon Mamre",
    "license": "Public Domain",
    "url": "https://www.sefaria.org.il/Tosefta_Sotah_4:1?lang=he",
-   "para": 21,
-   "anchor": "תוספתא סוטה ד, א"
+   "anchor": "תוספתא סוטה ד, א",
+   "fn": 4
   },
   {
    "ref": "Deuteronomy 19:16-21",
@@ -96,7 +96,7 @@
    "version": "Miqra according to the Masorah",
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/Deuteronomy_19:16-21?lang=he",
-   "para": 22
+   "para": 17
   },
   {
    "ref": "Shabbat 31a:6",
@@ -107,7 +107,7 @@
    "version": "William Davidson Edition - Vocalized Aramaic",
    "license": "CC-BY-NC",
    "url": "https://www.sefaria.org.il/Shabbat_31a:6?lang=he",
-   "para": 31
+   "para": 26
   },
   {
    "ref": "Mishneh Torah, Testimony 18:4",
@@ -118,8 +118,8 @@
    "version": "Torat Emet 363",
    "license": "Public Domain",
    "url": "https://www.sefaria.org.il/Mishneh_Torah,_Testimony_18:4?lang=he",
-   "para": 42,
-   "anchor": "רמב\"ם הלכות עדות י\"ח, ד'"
+   "anchor": "רמב\"ם הלכות עדות י\"ח, ד'",
+   "fn": 6
   }
  ]
 }

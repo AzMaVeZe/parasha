@@ -7,8 +7,8 @@
   },
   {
    "ref": "Exodus 10:5",
-   "para": 1,
-   "anchor": "י', ה'"
+   "anchor": "י', ה'",
+   "para": 1
   },
   {
    "ref": "Exodus 10:17",
@@ -20,16 +20,16 @@
   },
   {
    "ref": "Numbers 15:39",
-   "para": 24
+   "fn": 1
   },
   {
    "ref": "Nedarim 64b:6",
-   "para": 25,
-   "anchor": "נדרים סב ע\"ב"
+   "anchor": "נדרים סב ע\"ב",
+   "fn": 2
   },
   {
    "ref": "Exodus 10:16",
-   "para": 27
+   "fn": 4
   }
  ]
 }

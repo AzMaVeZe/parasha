@@ -32,8 +32,8 @@
    "version": "Vocalized Edition",
    "license": "CC0",
    "url": "https://www.sefaria.org.il/Sforno_on_Exodus_21:1:1?lang=he",
-   "para": 8,
-   "anchor": "ר' עובדיה ספורנו"
+   "anchor": "ר' עובדיה ספורנו",
+   "para": 8
   },
   {
    "ref": "Rashi on Exodus 21:1:1",
@@ -44,8 +44,8 @@
    "version": "Pentateuch with Rashi's commentary by M. Rosenbaum and A.M. Silbermann, 1929-1934",
    "license": "Public Domain",
    "url": "https://www.sefaria.org.il/Rashi_on_Exodus_21:1:1?lang=he",
-   "para": 14,
-   "anchor": "רש\"י על אתר"
+   "anchor": "רש\"י על אתר",
+   "fn": 0
   },
   {
    "ref": "Genesis 9:24-27",
@@ -59,7 +59,7 @@
    "version": "Miqra according to the Masorah",
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/Genesis_9:24-27?lang=he",
-   "para": 16
+   "para": 14
   },
   {
    "ref": "Genesis 9:22",
@@ -70,7 +70,7 @@
    "version": "Miqra according to the Masorah",
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/Genesis_9:22?lang=he",
-   "para": 21
+   "para": 17
   },
   {
    "ref": "Deuteronomy 15:14",
@@ -81,8 +81,8 @@
    "version": "Miqra according to the Masorah",
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/Deuteronomy_15:14?lang=he",
-   "para": 32,
-   "anchor": "דברים, טו י\"ד"
+   "anchor": "דברים, טו י\"ד",
+   "fn": 4
   },
   {
    "ref": "Exodus 21:24",
@@ -93,7 +93,7 @@
    "version": "Miqra according to the Masorah",
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/Exodus_21:24?lang=he",
-   "para": 33
+   "fn": 5
   },
   {
    "ref": "Kiddushin 24a:6",
@@ -104,8 +104,8 @@
    "version": "William Davidson Edition - Vocalized Aramaic",
    "license": "CC-BY-NC",
    "url": "https://www.sefaria.org.il/Kiddushin_24a:6?lang=he",
-   "para": 34,
-   "anchor": "תלמוד בבלי קידושין כד"
+   "anchor": "תלמוד בבלי קידושין כד",
+   "fn": 6
   },
   {
    "ref": "Numbers 16:14",
@@ -116,8 +116,8 @@
    "version": "Miqra according to the Masorah",
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/Numbers_16:14?lang=he",
-   "para": 36,
-   "anchor": "במדבר טז, יד"
+   "anchor": "במדבר טז, יד",
+   "fn": 8
   },
   {
    "ref": "Judges 16:21",
@@ -128,8 +128,8 @@
    "version": "Miqra according to the Masorah",
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/Judges_16:21?lang=he",
-   "para": 36,
-   "anchor": "שופטים טז, כא"
+   "anchor": "שופטים טז, כא",
+   "fn": 8
   },
   {
    "ref": "I Samuel 11:2",
@@ -140,8 +140,8 @@
    "version": "Miqra according to the Masorah",
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/I_Samuel_11:2?lang=he",
-   "para": 36,
-   "anchor": "שמואל א יא, ב"
+   "anchor": "שמואל א יא, ב",
+   "fn": 8
   },
   {
    "ref": "II Kings 25:7",
@@ -152,8 +152,8 @@
    "version": "Miqra according to the Masorah",
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/II_Kings_25:7?lang=he",
-   "para": 36,
-   "anchor": "מלכים ב כה, ז"
+   "anchor": "מלכים ב כה, ז",
+   "fn": 8
   },
   {
    "ref": "Tiferet Yisrael 17:2",
@@ -164,8 +164,8 @@
    "version": "Tiferet Yisrael, with footnotes and annotations by Rabbi Yehoshua D. Hartman, Machon Yerushalyim, 2010",
    "license": "CC-BY-NC",
    "url": "https://www.sefaria.org.il/Tiferet_Yisrael_17:2?lang=he",
-   "para": 46,
-   "anchor": "תפארת ישראל י\"ז"
+   "anchor": "תפארת ישראל י\"ז",
+   "para": 35
   },
   {
    "ref": "Mekhilta DeRabbi Yishmael, Tractate Nezikin 9:14-15",
@@ -177,8 +177,8 @@
    "version": "Beeri Edition, Koren, Jerusalem, 2019",
    "license": "CC-BY-NC",
    "url": "https://www.sefaria.org.il/Mekhilta_DeRabbi_Yishmael,_Tractate_Nezikin_9:14-15?lang=he",
-   "para": 61,
-   "anchor": "רבי ישמעאל במכילתא"
+   "anchor": "רבי ישמעאל במכילתא",
+   "fn": 11
   }
  ]
 }

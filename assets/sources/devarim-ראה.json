@@ -39,8 +39,8 @@
    "version": "Torat Emet 357",
    "license": "Public Domain",
    "url": "https://www.sefaria.org.il/Mishnah_Sheviit_10:2?lang=he",
-   "para": 13,
-   "anchor": "משנה מסכת שביעית י, ב"
+   "anchor": "משנה מסכת שביעית י, ב",
+   "fn": 0
   },
   {
    "ref": "Gittin 36b:9",
@@ -51,8 +51,8 @@
    "version": "William Davidson Edition - Vocalized Aramaic",
    "license": "CC-BY-NC",
    "url": "https://www.sefaria.org.il/Gittin_36b:9?lang=he",
-   "para": 15,
-   "anchor": "בבלי, גיטין לו ע\"ב"
+   "anchor": "בבלי, גיטין לו ע\"ב",
+   "fn": 2
   },
   {
    "ref": "Deuteronomy 15:12-18",
@@ -69,7 +69,7 @@
    "version": "Miqra according to the Masorah",
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/Deuteronomy_15:12-18?lang=he",
-   "para": 18
+   "para": 15
   },
   {
    "ref": "Sanhedrin 71a:16-17",
@@ -81,8 +81,8 @@
    "version": "William Davidson Edition - Vocalized Aramaic",
    "license": "CC-BY-NC",
    "url": "https://www.sefaria.org.il/Sanhedrin_71a:16-17?lang=he",
-   "para": 33,
-   "anchor": "בבלי, סנהדרין עא ע\"א"
+   "anchor": "בבלי, סנהדרין עא ע\"א",
+   "fn": 4
   }
  ]
 }

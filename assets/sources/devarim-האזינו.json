@@ -34,8 +34,8 @@
    "version": "William Davidson Edition - Vocalized Aramaic",
    "license": "CC-BY-NC",
    "url": "https://www.sefaria.org.il/Chagigah_9b:10?lang=he",
-   "para": 18,
-   "anchor": "הגמרא במסכת חגיגה ט:"
+   "anchor": "הגמרא במסכת חגיגה ט:",
+   "fn": 5
   },
   {
    "ref": "Meshekh Chokhmah, Haazinu 14",
@@ -46,7 +46,7 @@
    "version": "Riga, 1927",
    "license": "Public Domain",
    "url": "https://www.sefaria.org.il/Meshekh_Chokhmah,_Haazinu_14?lang=he",
-   "para": 21
+   "para": 16
   },
   {
    "ref": "Genesis 46:29",
@@ -57,7 +57,7 @@
    "version": "Miqra according to the Masorah",
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/Genesis_46:29?lang=he",
-   "para": 30
+   "para": 23
   },
   {
    "ref": "Rashi on Genesis 46:29:3",
@@ -68,7 +68,7 @@
    "version": "Pentateuch with Rashi's commentary by M. Rosenbaum and A.M. Silbermann, 1929-1934",
    "license": "Public Domain",
    "url": "https://www.sefaria.org.il/Rashi_on_Genesis_46:29:3?lang=he",
-   "para": 30
+   "para": 23
   },
   {
    "ref": "Berakhot 24b:18-21",
@@ -82,8 +82,8 @@
    "version": "William Davidson Edition - Vocalized Aramaic",
    "license": "CC-BY-NC",
    "url": "https://www.sefaria.org.il/Berakhot_24b:18-21?lang=he",
-   "para": 34,
-   "anchor": "תלמוד בבלי, ברכות דף כד ע\"ב"
+   "anchor": "תלמוד בבלי, ברכות דף כד ע\"ב",
+   "fn": 8
   },
   {
    "ref": "Devarim Rabbah 10:2",
@@ -94,8 +94,8 @@
    "version": "Midrash Rabbah -- TE",
    "license": "CC-BY-NC",
    "url": "https://www.sefaria.org.il/Devarim_Rabbah_10:2?lang=he",
-   "para": 55,
-   "anchor": "דברים רבה פרשה י' אות ב'"
+   "anchor": "דברים רבה פרשה י' אות ב'",
+   "fn": 13
   }
  ]
 }

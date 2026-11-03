@@ -42,8 +42,8 @@
    "version": "Miqra according to the Masorah",
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/Genesis_26:18?lang=he",
-   "para": 15,
-   "anchor": "כו, יח"
+   "anchor": "כו, יח",
+   "fn": 0
   },
   {
    "ref": "Genesis 24:27",
@@ -54,7 +54,7 @@
    "version": "Miqra according to the Masorah",
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/Genesis_24:27?lang=he",
-   "para": 19
+   "para": 16
   },
   {
    "ref": "Genesis 24:48",
@@ -65,7 +65,7 @@
    "version": "Miqra according to the Masorah",
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/Genesis_24:48?lang=he",
-   "para": 24
+   "para": 21
   },
   {
    "ref": "Rashi on Genesis 24:39",
@@ -76,7 +76,7 @@
    "version": "Pentateuch with Rashi's commentary by M. Rosenbaum and A.M. Silbermann, 1929-1934",
    "license": "Public Domain",
    "url": "https://www.sefaria.org.il/Rashi_on_Genesis_24:39?lang=he",
-   "para": 33
+   "para": 30
   },
   {
    "ref": "Nefesh HaChayim, Gate II 2:2",
@@ -87,7 +87,7 @@
    "version": "Vilna, 1874",
    "license": "Public Domain",
    "url": "https://www.sefaria.org.il/Nefesh_HaChayim,_Gate_II_2:2?lang=he",
-   "para": 34
+   "para": 31
   },
   {
    "ref": "Genesis 24:42-44",
@@ -100,8 +100,8 @@
    "version": "Miqra according to the Masorah",
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/Genesis_24:42-44?lang=he",
-   "para": 35,
-   "anchor": "בראשית כד, מב-מד"
+   "anchor": "בראשית כד, מב-מד",
+   "fn": 3
   },
   {
    "ref": "Mishneh Torah, Marriage 1:1",
@@ -112,8 +112,8 @@
    "version": "Torat Emet 363",
    "license": "Public Domain",
    "url": "https://www.sefaria.org.il/Mishneh_Torah,_Marriage_1:1?lang=he",
-   "para": 36,
-   "anchor": "רמב\"ם, הלכות אישות א, א"
+   "anchor": "רמב\"ם, הלכות אישות א, א",
+   "fn": 6
   },
   {
    "ref": "Yoma 28b:8",
@@ -124,7 +124,7 @@
    "version": "William Davidson Edition - Vocalized Aramaic",
    "license": "CC-BY-NC",
    "url": "https://www.sefaria.org.il/Yoma_28b:8?lang=he",
-   "para": 39
+   "para": 32
   },
   {
    "ref": "Genesis 25:19-20",
@@ -136,7 +136,7 @@
    "version": "Miqra according to the Masorah",
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/Genesis_25:19-20?lang=he",
-   "para": 47
+   "para": 40
   },
   {
    "ref": "Genesis 9:25",
@@ -147,8 +147,8 @@
    "version": "Miqra according to the Masorah",
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/Genesis_9:25?lang=he",
-   "para": 51,
-   "anchor": "בראשית ט, כה"
+   "anchor": "בראשית ט, כה",
+   "fn": 10
   },
   {
    "ref": "Bereshit Rabbah 60:5",
@@ -159,8 +159,8 @@
    "version": "Midrash Rabbah -- TE",
    "license": "CC-BY-NC",
    "url": "https://www.sefaria.org.il/Bereshit_Rabbah_60:5?lang=he",
-   "para": 52,
-   "anchor": "מדרש רבה בראשית, פרשה ס, ה"
+   "anchor": "מדרש רבה בראשית, פרשה ס, ה",
+   "fn": 11
   }
  ]
 }

@@ -3,18 +3,18 @@
  "sources": [
   {
    "ref": "Exodus 7:26",
-   "para": 2,
-   "anchor": "שמות ז 26"
+   "anchor": "שמות ז 26",
+   "para": 2
   },
   {
    "ref": "Exodus 8:5-6",
-   "para": 8,
-   "anchor": "ח, ה-ו"
+   "anchor": "ח, ה-ו",
+   "para": 8
   },
   {
    "ref": "Exodus 8:8",
-   "para": 12,
-   "anchor": "ח, ח"
+   "anchor": "ח, ח",
+   "para": 12
   },
   {
    "ref": "Exodus 3:9",
@@ -30,52 +30,52 @@
   },
   {
    "ref": "Exodus 3:7",
-   "para": 19
+   "para": 18
   },
   {
    "ref": "Exodus 5:15",
-   "para": 19
+   "para": 18
   },
   {
    "ref": "Exodus 14:10-11",
-   "para": 19
+   "para": 18
   },
   {
    "ref": "Exodus 14:15",
-   "para": 19
+   "para": 18
   },
   {
    "ref": "Exodus 22:22",
-   "para": 20
+   "para": 19
   },
   {
    "ref": "Psalms 119:126",
-   "para": 21
+   "para": 20
   },
   {
    "ref": "Exodus 8:9",
-   "para": 21
+   "para": 20
   },
   {
    "ref": "Exodus 8:24-27",
-   "para": 24,
-   "anchor": "ח, כד"
+   "anchor": "ח, כד",
+   "para": 23
   },
   {
    "ref": "Exodus 9:28-29",
-   "para": 39
+   "para": 32
   },
   {
    "ref": "Exodus 9:34",
-   "para": 40
+   "para": 33
   },
   {
    "ref": "Exodus 4:15",
-   "para": 42
+   "para": 35
   },
   {
    "ref": "Kiddushin 31a:11",
-   "para": 49
+   "fn": 8
   }
  ]
 }

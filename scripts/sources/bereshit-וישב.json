@@ -11,75 +11,75 @@
   },
   {
    "ref": "Genesis 37:2",
-   "para": 15
+   "para": 14
   },
   {
    "ref": "Shabbat 145b:10-15",
-   "para": 25,
-   "anchor": "תלמוד בבלי, שבת, דף קמה ע\"ב"
+   "anchor": "תלמוד בבלי, שבת, דף קמה ע\"ב",
+   "fn": 1
   },
   {
    "ref": "Rashi on Shabbat 145b:15:1-4",
-   "para": 25,
-   "anchor": "רש\"י שם"
+   "anchor": "רש\"י שם",
+   "fn": 1
   },
   {
    "ref": "Genesis 34:31",
-   "para": 30
+   "fn": 6
   },
   {
    "ref": "Genesis 40:14",
-   "para": 36
+   "para": 25
   },
   {
    "ref": "Genesis 40:23",
-   "para": 39
+   "para": 28
   },
   {
    "ref": "Genesis 41:1",
-   "para": 49,
-   "anchor": "בראשית מא, א"
+   "anchor": "בראשית מא, א",
+   "fn": 8
   },
   {
    "ref": "Rashi on Genesis 40:23",
-   "para": 50,
-   "anchor": "רש\"י, בראשית מ, כג"
+   "anchor": "רש\"י, בראשית מ, כג",
+   "fn": 9
   },
   {
    "ref": "Bereshit Rabbah 89:2-3",
-   "para": 50,
-   "anchor": "מדרש בראשית רבה פט, ב"
+   "anchor": "מדרש בראשית רבה פט, ב",
+   "fn": 9
   },
   {
    "ref": "Genesis 37:8",
-   "para": 54
+   "fn": 13
   },
   {
    "ref": "Genesis 37:10",
-   "para": 54
+   "fn": 13
   },
   {
    "ref": "Genesis 41:38",
-   "para": 70
+   "para": 49
   },
   {
    "ref": "Genesis 40:16",
-   "para": 83,
-   "anchor": "בראשית מ, טז"
+   "anchor": "בראשית מ, טז",
+   "fn": 16
   },
   {
    "ref": "Sforno on Genesis 40:16",
-   "para": 83,
-   "anchor": "ספורנו בפרושו שם"
+   "anchor": "ספורנו בפרושו שם",
+   "fn": 16
   },
   {
    "ref": "Genesis 41:24",
-   "para": 86
+   "fn": 19
   },
   {
    "ref": "Genesis 37:16",
-   "para": 87,
-   "anchor": "בראשית לז, טז"
+   "anchor": "בראשית לז, טז",
+   "fn": 20
   }
  ]
 }

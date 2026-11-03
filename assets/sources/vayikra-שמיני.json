@@ -9,8 +9,8 @@
    "version": "Miqra according to the Masorah",
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/Leviticus_10:3?lang=he",
-   "para": 3,
-   "anchor": "שמות י, ג"
+   "anchor": "שמות י, ג",
+   "para": 3
   },
   {
    "ref": "Rashi on Leviticus 10:3:2",
@@ -32,8 +32,8 @@
    "version": "Miqra according to the Masorah",
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/Leviticus_10:16?lang=he",
-   "para": 9,
-   "anchor": "שמות י, טז"
+   "anchor": "שמות י, טז",
+   "para": 8
   },
   {
    "ref": "Leviticus 10:19",
@@ -44,8 +44,8 @@
    "version": "Miqra according to the Masorah",
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/Leviticus_10:19?lang=he",
-   "para": 13,
-   "anchor": "שמות י, יט"
+   "anchor": "שמות י, יט",
+   "para": 11
   },
   {
    "ref": "Yoma 4a:4-5",
@@ -57,8 +57,8 @@
    "version": "William Davidson Edition - Vocalized Aramaic",
    "license": "CC-BY-NC",
    "url": "https://www.sefaria.org.il/Yoma_4a:4-5?lang=he",
-   "para": 17,
-   "anchor": "בבלי, יומא ד ע\"א"
+   "anchor": "בבלי, יומא ד ע\"א",
+   "fn": 0
   },
   {
    "ref": "Megillah 10b:8",
@@ -69,8 +69,8 @@
    "version": "William Davidson Edition - Vocalized Aramaic",
    "license": "CC-BY-NC",
    "url": "https://www.sefaria.org.il/Megillah_10b:8?lang=he",
-   "para": 18,
-   "anchor": "בבלי, מגילה י ע\"ב"
+   "anchor": "בבלי, מגילה י ע\"ב",
+   "fn": 1
   },
   {
    "ref": "Leviticus 10:18",
@@ -81,8 +81,8 @@
    "version": "Miqra according to the Masorah",
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/Leviticus_10:18?lang=he",
-   "para": 21,
-   "anchor": "י, יח"
+   "anchor": "י, יח",
+   "fn": 4
   },
   {
    "ref": "Rashi on Leviticus 10:19:1",
@@ -93,8 +93,8 @@
    "version": "Pentateuch with Rashi's commentary by M. Rosenbaum and A.M. Silbermann, 1929-1934",
    "license": "Public Domain",
    "url": "https://www.sefaria.org.il/Rashi_on_Leviticus_10:19:1?lang=he",
-   "para": 22,
-   "anchor": "רש\"י שם"
+   "anchor": "רש\"י שם",
+   "fn": 5
   },
   {
    "ref": "Or HaChaim on Leviticus 10:19:1",
@@ -105,7 +105,7 @@
    "version": "Vocalized Edition",
    "license": "CC0",
    "url": "https://www.sefaria.org.il/Or_HaChaim_on_Leviticus_10:19:1?lang=he",
-   "para": 23
+   "para": 15
   },
   {
    "ref": "Leviticus 10:20",
@@ -116,7 +116,7 @@
    "version": "Miqra according to the Masorah",
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/Leviticus_10:20?lang=he",
-   "para": 28
+   "para": 20
   },
   {
    "ref": "Mishnah Tamid 1:4",
@@ -127,8 +127,8 @@
    "version": "Torat Emet 357",
    "license": "Public Domain",
    "url": "https://www.sefaria.org.il/Mishnah_Tamid_1:4?lang=he",
-   "para": 29,
-   "anchor": "במסכת תמיד א, ד"
+   "anchor": "במסכת תמיד א, ד",
+   "para": 21
   },
   {
    "ref": "Zevachim 101a:12",
@@ -139,7 +139,7 @@
    "version": "William Davidson Edition - Vocalized Aramaic",
    "license": "CC-BY-NC",
    "url": "https://www.sefaria.org.il/Zevachim_101a:12?lang=he",
-   "para": 44
+   "para": 31
   },
   {
    "ref": "Zohar, Shmini 6:67-70",
@@ -153,8 +153,8 @@
    "version": "Vocalized Zohar, Israel 2013",
    "license": "unknown",
    "url": "https://www.sefaria.org.il/Zohar,_Shmini_6:67-70?lang=he",
-   "para": 53,
-   "anchor": "זוהר שמיני סז-עה"
+   "anchor": "זוהר שמיני סז-עה",
+   "fn": 11
   },
   {
    "ref": "Onkelos Genesis 2:7",
@@ -165,7 +165,7 @@
    "version": "Sifsei Chachomim Chumash, Metsudah Publications, 2009",
    "license": "CC-BY-NC",
    "url": "https://www.sefaria.org.il/Onkelos_Genesis_2:7?lang=he",
-   "para": 57
+   "fn": 16
   },
   {
    "ref": "Likutei Moharan 38:4:1",
@@ -176,8 +176,8 @@
    "version": "Likutei Moharan - rabenubook.com",
    "license": "Public Domain",
    "url": "https://www.sefaria.org.il/Likutei_Moharan_38:4:1?lang=he",
-   "para": 58,
-   "anchor": "ליקוטי מוהר\"ן לח"
+   "anchor": "ליקוטי מוהר\"ן לח",
+   "fn": 17
   },
   {
    "ref": "Pirkei Avot 3:13",
@@ -188,7 +188,7 @@
    "version": "Torat Emet 357",
    "license": "Public Domain",
    "url": "https://www.sefaria.org.il/Pirkei_Avot_3:13?lang=he",
-   "para": 59
+   "fn": 18
   }
  ]
 }

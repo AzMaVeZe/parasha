@@ -10,8 +10,8 @@
    "version": "Miqra according to the Masorah",
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/Deuteronomy_23:20-21?lang=he",
-   "para": 10,
-   "anchor": "(כג, כ)"
+   "anchor": "(כג, כ)",
+   "para": 8
   },
   {
    "ref": "Exodus 22:24",
@@ -22,8 +22,8 @@
    "version": "Miqra according to the Masorah",
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/Exodus_22:24?lang=he",
-   "para": 15,
-   "anchor": "שמות כב, כד"
+   "anchor": "שמות כב, כד",
+   "para": 11
   },
   {
    "ref": "Leviticus 25:35-37",
@@ -36,8 +36,8 @@
    "version": "Miqra according to the Masorah",
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/Leviticus_25:35-37?lang=he",
-   "para": 18,
-   "anchor": "ויקרא כה, לה-לז"
+   "anchor": "ויקרא כה, לה-לז",
+   "para": 12
   },
   {
    "ref": "Bava Metzia 69b:4-6",
@@ -50,8 +50,8 @@
    "version": "William Davidson Edition - Vocalized Aramaic",
    "license": "CC-BY-NC",
    "url": "https://www.sefaria.org.il/Bava_Metzia_69b:4-6?lang=he",
-   "para": 52,
-   "anchor": "בבלי, בבא מציעא סט ע\"ב"
+   "anchor": "בבלי, בבא מציעא סט ע\"ב",
+   "fn": 12
   },
   {
    "ref": "Proverbs 22:7",
@@ -62,7 +62,7 @@
    "version": "Miqra according to the Masorah",
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/Proverbs_22:7?lang=he",
-   "para": 71
+   "para": 43
   },
   {
    "ref": "Rashi on Shabbat 63a:26:1",
@@ -73,7 +73,7 @@
    "version": "Vilna Edition",
    "license": "Public Domain",
    "url": "https://www.sefaria.org.il/Rashi_on_Shabbat_63a:26:1?lang=he",
-   "para": 76
+   "para": 48
   },
   {
    "ref": "Shabbat 63a:26",
@@ -84,8 +84,8 @@
    "version": "William Davidson Edition - Vocalized Aramaic",
    "license": "CC-BY-NC",
    "url": "https://www.sefaria.org.il/Shabbat_63a:26?lang=he",
-   "para": 103,
-   "anchor": "בבלי, שבת סג ע\"א"
+   "anchor": "בבלי, שבת סג ע\"א",
+   "fn": 19
   }
  ]
 }

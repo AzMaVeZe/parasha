@@ -9,8 +9,8 @@
    "version": "Miqra according to the Masorah",
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/Exodus_7:26?lang=he",
-   "para": 2,
-   "anchor": "שמות ז 26"
+   "anchor": "שמות ז 26",
+   "para": 2
   },
   {
    "ref": "Exodus 8:5-6",
@@ -22,8 +22,8 @@
    "version": "Miqra according to the Masorah",
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/Exodus_8:5-6?lang=he",
-   "para": 8,
-   "anchor": "ח, ה-ו"
+   "anchor": "ח, ה-ו",
+   "para": 8
   },
   {
    "ref": "Exodus 8:8",
@@ -34,8 +34,8 @@
    "version": "Miqra according to the Masorah",
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/Exodus_8:8?lang=he",
-   "para": 12,
-   "anchor": "ח, ח"
+   "anchor": "ח, ח",
+   "para": 12
   },
   {
    "ref": "Exodus 3:9",
@@ -79,7 +79,7 @@
    "version": "Miqra according to the Masorah",
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/Exodus_3:7?lang=he",
-   "para": 19
+   "para": 18
   },
   {
    "ref": "Exodus 5:15",
@@ -90,7 +90,7 @@
    "version": "Miqra according to the Masorah",
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/Exodus_5:15?lang=he",
-   "para": 19
+   "para": 18
   },
   {
    "ref": "Exodus 14:10-11",
@@ -102,7 +102,7 @@
    "version": "Miqra according to the Masorah",
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/Exodus_14:10-11?lang=he",
-   "para": 19
+   "para": 18
   },
   {
    "ref": "Exodus 14:15",
@@ -113,7 +113,7 @@
    "version": "Miqra according to the Masorah",
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/Exodus_14:15?lang=he",
-   "para": 19
+   "para": 18
   },
   {
    "ref": "Exodus 22:22",
@@ -124,7 +124,7 @@
    "version": "Miqra according to the Masorah",
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/Exodus_22:22?lang=he",
-   "para": 20
+   "para": 19
   },
   {
    "ref": "Psalms 119:126",
@@ -135,7 +135,7 @@
    "version": "Miqra according to the Masorah",
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/Psalms_119:126?lang=he",
-   "para": 21
+   "para": 20
   },
   {
    "ref": "Exodus 8:9",
@@ -146,7 +146,7 @@
    "version": "Miqra according to the Masorah",
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/Exodus_8:9?lang=he",
-   "para": 21
+   "para": 20
   },
   {
    "ref": "Exodus 8:24-27",
@@ -160,8 +160,8 @@
    "version": "Miqra according to the Masorah",
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/Exodus_8:24-27?lang=he",
-   "para": 24,
-   "anchor": "ח, כד"
+   "anchor": "ח, כד",
+   "para": 23
   },
   {
    "ref": "Exodus 9:28-29",
@@ -173,7 +173,7 @@
    "version": "Miqra according to the Masorah",
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/Exodus_9:28-29?lang=he",
-   "para": 39
+   "para": 32
   },
   {
    "ref": "Exodus 9:34",
@@ -184,7 +184,7 @@
    "version": "Miqra according to the Masorah",
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/Exodus_9:34?lang=he",
-   "para": 40
+   "para": 33
   },
   {
    "ref": "Exodus 4:15",
@@ -195,7 +195,7 @@
    "version": "Miqra according to the Masorah",
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/Exodus_4:15?lang=he",
-   "para": 42
+   "para": 35
   },
   {
    "ref": "Kiddushin 31a:11",
@@ -206,7 +206,7 @@
    "version": "William Davidson Edition - Vocalized Aramaic",
    "license": "CC-BY-NC",
    "url": "https://www.sefaria.org.il/Kiddushin_31a:11?lang=he",
-   "para": 49
+   "fn": 8
   }
  ]
 }

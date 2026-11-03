@@ -9,8 +9,8 @@
    "version": "Miqra according to the Masorah",
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/Exodus_1:9?lang=he",
-   "para": 21,
-   "anchor": "שמות א, ט"
+   "anchor": "שמות א, ט",
+   "fn": 0
   },
   {
    "ref": "Bereshit Rabbah 96:1",
@@ -21,8 +21,8 @@
    "version": "Midrash Rabbah -- TE",
    "license": "CC-BY-NC",
    "url": "https://www.sefaria.org.il/Bereshit_Rabbah_96:1?lang=he",
-   "para": 22,
-   "anchor": "בראשית רבה צו, א"
+   "anchor": "בראשית רבה צו, א",
+   "fn": 1
   },
   {
    "ref": "Genesis 37:11",
@@ -33,7 +33,7 @@
    "version": "Miqra according to the Masorah",
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/Genesis_37:11?lang=he",
-   "para": 28
+   "para": 31
   },
   {
    "ref": "Genesis 49:1",
@@ -44,7 +44,7 @@
    "version": "Miqra according to the Masorah",
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/Genesis_49:1?lang=he",
-   "para": 42
+   "para": 44
   },
   {
    "ref": "II Samuel 13:21",
@@ -55,8 +55,8 @@
    "version": "Miqra according to the Masorah",
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/II_Samuel_13:21?lang=he",
-   "para": 56,
-   "anchor": "שמואל ב יג, כא"
+   "anchor": "שמואל ב יג, כא",
+   "fn": 7
   }
  ]
 }

@@ -22,7 +22,7 @@
    "version": "William Davidson Edition - Vocalized Aramaic",
    "license": "CC-BY-NC",
    "url": "https://www.sefaria.org.il/Shabbat_31a:6?lang=he",
-   "para": 19
+   "fn": 4
   },
   {
    "ref": "Leviticus 18:3",
@@ -33,8 +33,8 @@
    "version": "Miqra according to the Masorah",
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/Leviticus_18:3?lang=he",
-   "para": 20,
-   "anchor": "ויקרא יח, ג"
+   "anchor": "ויקרא יח, ג",
+   "fn": 5
   },
   {
    "ref": "Esh Kodesh, Jewish Year 5702, Hanukkah 6",
@@ -45,7 +45,7 @@
    "version": "Jerusalem, 1960",
    "license": "unknown",
    "url": "https://www.sefaria.org.il/Esh_Kodesh,_Jewish_Year_5702,_Hanukkah_6?lang=he",
-   "para": 27
+   "para": 18
   },
   {
    "ref": "Leviticus 19:34",
@@ -56,8 +56,8 @@
    "version": "Miqra according to the Masorah",
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/Leviticus_19:34?lang=he",
-   "para": 39,
-   "anchor": "ויקרא יט, לד"
+   "anchor": "ויקרא יט, לד",
+   "fn": 12
   },
   {
    "ref": "Pesach Haggadah, Magid, The Four Sons 2",
@@ -68,7 +68,7 @@
    "version": "Pesach Haggadah",
    "license": "Public Domain",
    "url": "https://www.sefaria.org.il/Pesach_Haggadah,_Magid,_The_Four_Sons_2?lang=he",
-   "para": 58
+   "para": 42
   },
   {
    "ref": "Pesachim 119b:8-11",
@@ -82,8 +82,8 @@
    "version": "William Davidson Edition - Vocalized Aramaic",
    "license": "CC-BY-NC",
    "url": "https://www.sefaria.org.il/Pesachim_119b:8-11?lang=he",
-   "para": 63,
-   "anchor": "בבלי, פסחים קיט, ב"
+   "anchor": "בבלי, פסחים קיט, ב",
+   "fn": 15
   }
  ]
 }

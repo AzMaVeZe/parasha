@@ -3,8 +3,8 @@
  "sources": [
   {
    "ref": "Numbers 13:32",
-   "para": 1,
-   "anchor": "במדבר יג, לב"
+   "anchor": "במדבר יג, לב",
+   "para": 1
   },
   {
    "ref": "Bamidbar Rabbah 16:13",
@@ -12,13 +12,13 @@
   },
   {
    "ref": "Pirkei Avot 1:6",
-   "para": 10,
-   "anchor": "אבות א, ו"
+   "anchor": "אבות א, ו",
+   "para": 10
   },
   {
    "ref": "Pirkei Avot 2:4",
-   "para": 12,
-   "anchor": "אבות ב, ה"
+   "anchor": "אבות ב, ה",
+   "para": 12
   },
   {
    "ref": "Mei HaShiloach, Volume II, Numbers, Sh'lach 2",
@@ -26,23 +26,23 @@
   },
   {
    "ref": "Numbers 13:30",
-   "para": 23
+   "para": 21
   },
   {
    "ref": "Numbers 14:6-10",
-   "para": 26
+   "para": 24
   },
   {
    "ref": "Mei HaShiloach, Volume II, Numbers, Sh'lach 1",
-   "para": 28
+   "para": 26
   },
   {
    "ref": "Orot HaKodesh 3:1:5:97",
-   "para": 30
+   "para": 28
   },
   {
    "ref": "Exodus 40:34-35",
-   "para": 34
+   "para": 31
   }
  ]
 }

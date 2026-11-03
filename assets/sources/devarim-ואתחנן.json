@@ -24,8 +24,8 @@
    "version": "Vocalized Edition",
    "license": "CC0",
    "url": "https://www.sefaria.org.il/Sforno_on_Deuteronomy_4:41:1?lang=he",
-   "para": 12,
-   "anchor": "ספורנו דברים ד, מא"
+   "anchor": "ספורנו דברים ד, מא",
+   "fn": 0
   },
   {
    "ref": "Deuteronomy 4:41-43",
@@ -38,8 +38,8 @@
    "version": "Miqra according to the Masorah",
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/Deuteronomy_4:41-43?lang=he",
-   "para": 13,
-   "anchor": "דברים ד, מא-מג"
+   "anchor": "דברים ד, מא-מג",
+   "fn": 1
   },
   {
    "ref": "Deuteronomy 19:2",
@@ -50,7 +50,7 @@
    "version": "Miqra according to the Masorah",
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/Deuteronomy_19:2?lang=he",
-   "para": 15
+   "fn": 3
   },
   {
    "ref": "Numbers 35:10-11",
@@ -62,8 +62,8 @@
    "version": "Miqra according to the Masorah",
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/Numbers_35:10-11?lang=he",
-   "para": 15,
-   "anchor": "במדבר לה, י-יא"
+   "anchor": "במדבר לה, י-יא",
+   "fn": 3
   },
   {
    "ref": "Rashi on Deuteronomy 4:41:1",
@@ -74,8 +74,8 @@
    "version": "Pentateuch with Rashi's commentary by M. Rosenbaum and A.M. Silbermann, 1929-1934",
    "license": "Public Domain",
    "url": "https://www.sefaria.org.il/Rashi_on_Deuteronomy_4:41:1?lang=he",
-   "para": 16,
-   "anchor": "רש\"י דברים ד, מא"
+   "anchor": "רש\"י דברים ד, מא",
+   "fn": 4
   },
   {
    "ref": "Numbers 35:34",
@@ -86,8 +86,8 @@
    "version": "Miqra according to the Masorah",
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/Numbers_35:34?lang=he",
-   "para": 17,
-   "anchor": "במדבר, לה, לד"
+   "anchor": "במדבר, לה, לד",
+   "fn": 5
   },
   {
    "ref": "Exodus 2:14-15",
@@ -99,7 +99,7 @@
    "version": "Miqra according to the Masorah",
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/Exodus_2:14-15?lang=he",
-   "para": 38
+   "fn": 7
   }
  ]
 }

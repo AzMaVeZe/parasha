@@ -3,8 +3,8 @@
  "sources": [
   {
    "ref": "Shemot Rabbah 34:2",
-   "para": 1,
-   "anchor": "שמות רבה לד, ב"
+   "anchor": "שמות רבה לד, ב",
+   "para": 1
   },
   {
    "ref": "Zohar, Terumah 61:640",
@@ -16,13 +16,13 @@
   },
   {
    "ref": "Zohar, Bereshit 1:1-2",
-   "para": 14,
-   "anchor": "זוהר פרשת בראשית (דף טו ע\"א)"
+   "anchor": "זוהר פרשת בראשית (דף טו ע\"א)",
+   "fn": 0
   },
   {
    "ref": "Bereshit Rabbah 22:7",
-   "para": 57,
-   "anchor": "בראשית רבה, פרשה כב, ז"
+   "anchor": "בראשית רבה, פרשה כב, ז",
+   "fn": 7
   }
  ]
 }

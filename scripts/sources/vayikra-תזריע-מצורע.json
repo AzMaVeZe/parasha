@@ -11,50 +11,50 @@
   },
   {
    "ref": "Arakhin 16a:5",
-   "para": 17,
-   "anchor": "ערכין טז, א"
+   "anchor": "ערכין טז, א",
+   "fn": 2
   },
   {
    "ref": "Vayikra Rabbah 17:3",
-   "para": 17,
-   "anchor": "ויקרא רבה יז"
+   "anchor": "ויקרא רבה יז",
+   "fn": 2
   },
   {
    "ref": "Ketubot 77b:6",
-   "para": 28,
-   "anchor": "בבלי, כתובות דף עז ע\"ב"
+   "anchor": "בבלי, כתובות דף עז ע\"ב",
+   "fn": 3
   },
   {
    "ref": "Vayikra Rabbah 16:6",
-   "para": 31,
-   "anchor": "מדרש רבה, ויקרא, פרשה טז (ו)"
+   "anchor": "מדרש רבה, ויקרא, פרשה טז (ו)",
+   "fn": 6
   },
   {
    "ref": "Teshuvot Rashi 207:2",
-   "para": 32,
-   "anchor": "בשו\"ת רש\"י סימן רז"
+   "anchor": "בשו\"ת רש\"י סימן רז",
+   "fn": 7
   },
   {
    "ref": "Leviticus 15:18",
-   "para": 40
+   "para": 31
   },
   {
    "ref": "Ecclesiastes 7:14",
-   "para": 40
+   "para": 31
   },
   {
    "ref": "Sanhedrin 110a:6-7",
-   "para": 45,
-   "anchor": "סנהדרין דף קי ע\"א"
+   "anchor": "סנהדרין דף קי ע\"א",
+   "fn": 10
   },
   {
    "ref": "Responsa Maharashdam, Yoreh Deah 143:2",
-   "para": 46,
-   "anchor": "שו\"ת מהרשד\"ם חלק יו\"ד סימן קמג"
+   "anchor": "שו\"ת מהרשד\"ם חלק יו\"ד סימן קמג",
+   "fn": 11
   },
   {
    "ref": "Leviticus 16:1",
-   "para": 47
+   "fn": 12
   }
  ]
 }

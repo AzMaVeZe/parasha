@@ -20,8 +20,8 @@
    "version": "Miqra according to the Masorah",
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/Genesis_27:35?lang=he",
-   "para": 19,
-   "anchor": "בראשית כז, לה"
+   "anchor": "בראשית כז, לה",
+   "fn": 2
   },
   {
    "ref": "Genesis 31:20",
@@ -32,8 +32,8 @@
    "version": "Miqra according to the Masorah",
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/Genesis_31:20?lang=he",
-   "para": 20,
-   "anchor": "בראשית לא, כ"
+   "anchor": "בראשית לא, כ",
+   "fn": 3
   },
   {
    "ref": "Genesis 30:2",
@@ -44,8 +44,8 @@
    "version": "Miqra according to the Masorah",
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/Genesis_30:2?lang=he",
-   "para": 22,
-   "anchor": "בראשית ל, ב"
+   "anchor": "בראשית ל, ב",
+   "fn": 5
   },
   {
    "ref": "Genesis 27:36",
@@ -56,8 +56,8 @@
    "version": "Miqra according to the Masorah",
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/Genesis_27:36?lang=he",
-   "para": 23,
-   "anchor": "בראשית כז, לו"
+   "anchor": "בראשית כז, לו",
+   "fn": 6
   },
   {
    "ref": "II Kings 10:19",
@@ -68,8 +68,8 @@
    "version": "Miqra according to the Masorah",
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/II_Kings_10:19?lang=he",
-   "para": 23,
-   "anchor": "מלכים ב י, יט"
+   "anchor": "מלכים ב י, יט",
+   "fn": 6
   },
   {
    "ref": "Jeremiah 9:3",
@@ -80,8 +80,8 @@
    "version": "Miqra according to the Masorah",
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/Jeremiah_9:3?lang=he",
-   "para": 23,
-   "anchor": "ירמיה ט, ג"
+   "anchor": "ירמיה ט, ג",
+   "fn": 6
   },
   {
    "ref": "Kometz HaMinchah 2:67",
@@ -92,8 +92,8 @@
    "version": "R' Zadok -- Kometz HaMincha",
    "license": "Public Domain",
    "url": "https://www.sefaria.org.il/Kometz_HaMinchah_2:67?lang=he",
-   "para": 24,
-   "anchor": "קומץ המנחה עמ' 60-63"
+   "anchor": "קומץ המנחה עמ' 60-63",
+   "fn": 7
   },
   {
    "ref": "Genesis 31:13",
@@ -104,7 +104,7 @@
    "version": "Miqra according to the Masorah",
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/Genesis_31:13?lang=he",
-   "para": 28
+   "para": 20
   },
   {
    "ref": "Genesis 31:27",
@@ -115,8 +115,8 @@
    "version": "Miqra according to the Masorah",
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/Genesis_31:27?lang=he",
-   "para": 44,
-   "anchor": "בראשית לא, כז"
+   "anchor": "בראשית לא, כז",
+   "fn": 9
   },
   {
    "ref": "Genesis 31:36-37",
@@ -128,8 +128,8 @@
    "version": "Miqra according to the Masorah",
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/Genesis_31:36-37?lang=he",
-   "para": 45,
-   "anchor": "בראשית לא, לו-לז"
+   "anchor": "בראשית לא, לו-לז",
+   "fn": 10
   },
   {
    "ref": "Genesis 25:26",
@@ -140,8 +140,8 @@
    "version": "Miqra according to the Masorah",
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/Genesis_25:26?lang=he",
-   "para": 46,
-   "anchor": "בראשית כה, כו"
+   "anchor": "בראשית כה, כו",
+   "fn": 11
   },
   {
    "ref": "Genesis 2:18",
@@ -152,8 +152,8 @@
    "version": "Miqra according to the Masorah",
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/Genesis_2:18?lang=he",
-   "para": 48,
-   "anchor": "בראשית ב, יח"
+   "anchor": "בראשית ב, יח",
+   "fn": 13
   },
   {
    "ref": "Kiddushin 70a:11",
@@ -164,8 +164,8 @@
    "version": "William Davidson Edition - Vocalized Aramaic",
    "license": "CC-BY-NC",
    "url": "https://www.sefaria.org.il/Kiddushin_70a:11?lang=he",
-   "para": 49,
-   "anchor": "קידושין ע ע\"א"
+   "anchor": "קידושין ע ע\"א",
+   "fn": 14
   },
   {
    "ref": "Proverbs 27:19",
@@ -176,8 +176,8 @@
    "version": "Miqra according to the Masorah",
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/Proverbs_27:19?lang=he",
-   "para": 49,
-   "anchor": "משלי כז, יט"
+   "anchor": "משלי כז, יט",
+   "fn": 14
   },
   {
    "ref": "Genesis 31:7",
@@ -188,8 +188,8 @@
    "version": "Miqra according to the Masorah",
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/Genesis_31:7?lang=he",
-   "para": 50,
-   "anchor": "בראשית לא, ז"
+   "anchor": "בראשית לא, ז",
+   "fn": 15
   },
   {
    "ref": "Genesis 31:41",
@@ -200,8 +200,8 @@
    "version": "Miqra according to the Masorah",
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/Genesis_31:41?lang=he",
-   "para": 51,
-   "anchor": "בראשית לא, מא"
+   "anchor": "בראשית לא, מא",
+   "fn": 16
   },
   {
    "ref": "Genesis 31:43",
@@ -212,8 +212,8 @@
    "version": "Miqra according to the Masorah",
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/Genesis_31:43?lang=he",
-   "para": 52,
-   "anchor": "בראשית לא, מג"
+   "anchor": "בראשית לא, מג",
+   "fn": 17
   },
   {
    "ref": "Genesis 31:51-52",
@@ -225,8 +225,8 @@
    "version": "Miqra according to the Masorah",
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/Genesis_31:51-52?lang=he",
-   "para": 53,
-   "anchor": "בראשית לא, נא-נב"
+   "anchor": "בראשית לא, נא-נב",
+   "fn": 18
   },
   {
    "ref": "Genesis 31:47",
@@ -237,7 +237,7 @@
    "version": "Miqra according to the Masorah",
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/Genesis_31:47?lang=he",
-   "para": 56
+   "para": 37
   },
   {
    "ref": "Genesis 32:1",
@@ -248,7 +248,7 @@
    "version": "Miqra according to the Masorah",
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/Genesis_32:1?lang=he",
-   "para": 65
+   "para": 46
   },
   {
    "ref": "Yisrael Kedoshim 7:27",
@@ -259,8 +259,8 @@
    "version": "R' Zadok -- Yisrael Kedoshim",
    "license": "Public Domain",
    "url": "https://www.sefaria.org.il/Yisrael_Kedoshim_7:27?lang=he",
-   "para": 77,
-   "anchor": "ישראל קדושים עמ' 86"
+   "anchor": "ישראל קדושים עמ' 86",
+   "fn": 22
   },
   {
    "ref": "Zohar, Tetzaveh 10:86",
@@ -271,8 +271,8 @@
    "version": "Vocalized Zohar, Israel 2013",
    "license": "unknown",
    "url": "https://www.sefaria.org.il/Zohar,_Tetzaveh_10:86?lang=he",
-   "para": 78,
-   "anchor": "זוהר תצוה, עמ' קפד"
+   "anchor": "זוהר תצוה, עמ' קפד",
+   "fn": 23
   }
  ]
 }

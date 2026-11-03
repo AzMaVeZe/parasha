@@ -20,8 +20,8 @@
    "version": "Miqra according to the Masorah",
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/Exodus_10:5?lang=he",
-   "para": 1,
-   "anchor": "י', ה'"
+   "anchor": "י', ה'",
+   "para": 1
   },
   {
    "ref": "Exodus 10:17",
@@ -54,7 +54,7 @@
    "version": "Miqra according to the Masorah",
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/Numbers_15:39?lang=he",
-   "para": 24
+   "fn": 1
   },
   {
    "ref": "Nedarim 64b:6",
@@ -65,8 +65,8 @@
    "version": "William Davidson Edition - Vocalized Aramaic",
    "license": "CC-BY-NC",
    "url": "https://www.sefaria.org.il/Nedarim_64b:6?lang=he",
-   "para": 25,
-   "anchor": "נדרים סב ע\"ב"
+   "anchor": "נדרים סב ע\"ב",
+   "fn": 2
   },
   {
    "ref": "Exodus 10:16",
@@ -77,7 +77,7 @@
    "version": "Miqra according to the Masorah",
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/Exodus_10:16?lang=he",
-   "para": 27
+   "fn": 4
   }
  ]
 }

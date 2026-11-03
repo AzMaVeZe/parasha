@@ -10,8 +10,8 @@
    "version": "Miqra according to the Masorah",
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/Leviticus_23:42-43?lang=he",
-   "para": 2,
-   "anchor": "בספר ויקרא (פרק כג, לג-מד)"
+   "anchor": "בספר ויקרא (פרק כג, לג-מד)",
+   "para": 2
   },
   {
    "ref": "Ramban on Leviticus 23:43:1",
@@ -44,8 +44,8 @@
    "version": "William Davidson Edition - Vocalized Aramaic",
    "license": "CC-BY-NC",
    "url": "https://www.sefaria.org.il/Sukkah_11b:15?lang=he",
-   "para": 18,
-   "anchor": "תלמוד בבלי, סוכה דף יא ע\"ב"
+   "anchor": "תלמוד בבלי, סוכה דף יא ע\"ב",
+   "fn": 1
   },
   {
    "ref": "Ecclesiastes 1:4-7",
@@ -59,7 +59,7 @@
    "version": "Miqra according to the Masorah",
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/Ecclesiastes_1:4-7?lang=he",
-   "para": 22
+   "para": 20
   }
  ]
 }

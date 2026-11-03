@@ -20,8 +20,8 @@
    "version": "Miqra according to the Masorah",
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/Genesis_34:3?lang=he",
-   "para": 11,
-   "anchor": "לד, ג"
+   "anchor": "לד, ג",
+   "para": 9
   },
   {
    "ref": "Genesis 34:8",
@@ -32,8 +32,8 @@
    "version": "Miqra according to the Masorah",
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/Genesis_34:8?lang=he",
-   "para": 12,
-   "anchor": "לד, ח"
+   "anchor": "לד, ח",
+   "para": 9
   },
   {
    "ref": "Bereshit Rabbah 80:7",
@@ -44,8 +44,8 @@
    "version": "Midrash Rabbah -- TE",
    "license": "CC-BY-NC",
    "url": "https://www.sefaria.org.il/Bereshit_Rabbah_80:7?lang=he",
-   "para": 27,
-   "anchor": "בראשית רבה וישלח פז"
+   "anchor": "בראשית רבה וישלח פז",
+   "fn": 3
   },
   {
    "ref": "Bava Metzia 84a:12",
@@ -56,8 +56,8 @@
    "version": "William Davidson Edition - Vocalized Aramaic",
    "license": "CC-BY-NC",
    "url": "https://www.sefaria.org.il/Bava_Metzia_84a:12?lang=he",
-   "para": 28,
-   "anchor": "תלמוד בבלי, בבא מציעא פד, ע\"א"
+   "anchor": "תלמוד בבלי, בבא מציעא פד, ע\"א",
+   "fn": 5
   },
   {
    "ref": "Yisrael Kedoshim 7:1",
@@ -68,8 +68,8 @@
    "version": "R' Zadok -- Yisrael Kedoshim",
    "license": "Public Domain",
    "url": "https://www.sefaria.org.il/Yisrael_Kedoshim_7:1?lang=he",
-   "para": 66,
-   "anchor": "ישראל קדושים, עמ' 66"
+   "anchor": "ישראל קדושים, עמ' 66",
+   "fn": 10
   },
   {
    "ref": "Shenei Luchot HaBerit, Shaar HaOtiyot, Teshukah 19",
@@ -80,8 +80,8 @@
    "version": "Shenei Luchot HaBrit, based on Amsterdam, 1698 ed. Part I",
    "license": "Public Domain",
    "url": "https://www.sefaria.org.il/Shenei_Luchot_HaBerit,_Shaar_HaOtiyot,_Teshukah_19?lang=he",
-   "para": 71,
-   "anchor": "השל\"ה, סוף שער האותיות אות ת' תשוקה אות יג"
+   "anchor": "השל\"ה, סוף שער האותיות אות ת' תשוקה אות יג",
+   "fn": 15
   }
  ]
 }

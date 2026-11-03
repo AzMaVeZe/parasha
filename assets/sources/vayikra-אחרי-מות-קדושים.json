@@ -34,7 +34,7 @@
    "version": "Midrash Rabbah -- TE",
    "license": "CC-BY-NC",
    "url": "https://www.sefaria.org.il/Vayikra_Rabbah_20:10?lang=he",
-   "para": 18
+   "fn": 0
   },
   {
    "ref": "Mishnah Yoma 6:6",
@@ -45,8 +45,8 @@
    "version": "Torat Emet 357",
    "license": "Public Domain",
    "url": "https://www.sefaria.org.il/Mishnah_Yoma_6:6?lang=he",
-   "para": 20,
-   "anchor": "משנה יומא ו, ו"
+   "anchor": "משנה יומא ו, ו",
+   "fn": 2
   },
   {
    "ref": "Yoma 67b:9",
@@ -57,8 +57,8 @@
    "version": "William Davidson Edition - Vocalized Aramaic",
    "license": "CC-BY-NC",
    "url": "https://www.sefaria.org.il/Yoma_67b:9?lang=he",
-   "para": 22,
-   "anchor": "יומא סז ע\"ב"
+   "anchor": "יומא סז ע\"ב",
+   "fn": 4
   },
   {
    "ref": "Guide for the Perplexed, Part 3 46:20",
@@ -69,8 +69,8 @@
    "version": "Makbili Edition, Mif'al Mishneh Torah, 2024",
    "license": "unknown",
    "url": "https://www.sefaria.org.il/Guide_for_the_Perplexed,_Part_3_46:20?lang=he",
-   "para": 44,
-   "anchor": "רמב\"ם, מורה נבוכים, חלק ג' מ\"ו"
+   "anchor": "רמב\"ם, מורה נבוכים, חלק ג' מ\"ו",
+   "fn": 5
   },
   {
    "ref": "Ramban on Leviticus 16:8:1",
@@ -81,8 +81,8 @@
    "version": "Vocalized Edition",
    "license": "CC0",
    "url": "https://www.sefaria.org.il/Ramban_on_Leviticus_16:8:1?lang=he",
-   "para": 45,
-   "anchor": "רמב\"ן עה\"ת ויקרא ט\"ז, ח"
+   "anchor": "רמב\"ן עה\"ת ויקרא ט\"ז, ח",
+   "fn": 6
   },
   {
    "ref": "Tzidkat HaTzadik 40",
@@ -93,8 +93,8 @@
    "version": "Tzidkat HaTzadick, Lublin, 1913",
    "license": "Public Domain",
    "url": "https://www.sefaria.org.il/Tzidkat_HaTzadik_40?lang=he",
-   "para": 46,
-   "anchor": "צדקת הצדיק תורה מ'"
+   "anchor": "צדקת הצדיק תורה מ'",
+   "fn": 7
   },
   {
    "ref": "Megillah 7b:7",
@@ -105,7 +105,7 @@
    "version": "William Davidson Edition - Vocalized Aramaic",
    "license": "CC-BY-NC",
    "url": "https://www.sefaria.org.il/Megillah_7b:7?lang=he",
-   "para": 46
+   "fn": 7
   },
   {
    "ref": "Sifra, Acharei Mot, Chapter 2 1",
@@ -116,8 +116,8 @@
    "version": "Venice 1545",
    "license": "unknown",
    "url": "https://www.sefaria.org.il/Sifra,_Acharei_Mot,_Chapter_2_1?lang=he",
-   "para": 49,
-   "anchor": "ספרא, אחרי מות, פרשה ב"
+   "anchor": "ספרא, אחרי מות, פרשה ב",
+   "fn": 10
   },
   {
    "ref": "Yoma 38a:2-3",
@@ -129,8 +129,8 @@
    "version": "William Davidson Edition - Vocalized Aramaic",
    "license": "CC-BY-NC",
    "url": "https://www.sefaria.org.il/Yoma_38a:2-3?lang=he",
-   "para": 51,
-   "anchor": "בבלי, יומא לח ע\"א"
+   "anchor": "בבלי, יומא לח ע\"א",
+   "fn": 12
   },
   {
    "ref": "Vayikra Rabbah 21:4",
@@ -141,7 +141,7 @@
    "version": "Midrash Rabbah -- TE",
    "license": "CC-BY-NC",
    "url": "https://www.sefaria.org.il/Vayikra_Rabbah_21:4?lang=he",
-   "para": 53
+   "para": 35
   },
   {
    "ref": "Vayikra Rabbah 21:5",
@@ -152,7 +152,7 @@
    "version": "Midrash Rabbah -- TE",
    "license": "CC-BY-NC",
    "url": "https://www.sefaria.org.il/Vayikra_Rabbah_21:5?lang=he",
-   "para": 55
+   "para": 37
   },
   {
    "ref": "Ecclesiastes 3:1-8",
@@ -170,7 +170,7 @@
    "version": "Miqra according to the Masorah",
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/Ecclesiastes_3:1-8?lang=he",
-   "para": 57
+   "para": 39
   }
  ]
 }

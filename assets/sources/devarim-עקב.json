@@ -9,8 +9,8 @@
    "version": "Torat Emet 357",
    "license": "Public Domain",
    "url": "https://www.sefaria.org.il/Mishnah_Ta%27anit_4:8?lang=he",
-   "para": 18,
-   "anchor": "משנה, תענית ד, ז"
+   "anchor": "משנה, תענית ד, ז",
+   "fn": 0
   },
   {
    "ref": "Taanit 30b:8-31a:4",
@@ -30,8 +30,8 @@
    "version": "William Davidson Edition - Vocalized Aramaic",
    "license": "CC-BY-NC",
    "url": "https://www.sefaria.org.il/Taanit_30b:8-31a:4?lang=he",
-   "para": 19,
-   "anchor": "תלמוד בבלי, תענית כו ע\"ב"
+   "anchor": "תלמוד בבלי, תענית כו ע\"ב",
+   "fn": 1
   },
   {
    "ref": "Judges 21:20-21",
@@ -43,7 +43,7 @@
    "version": "Miqra according to the Masorah",
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/Judges_21:20-21?lang=he",
-   "para": 21
+   "fn": 3
   },
   {
    "ref": "II Kings 17:1-2",
@@ -55,7 +55,7 @@
    "version": "Miqra according to the Masorah",
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/II_Kings_17:1-2?lang=he",
-   "para": 25
+   "para": 19
   },
   {
    "ref": "Nazir 23b:5",
@@ -66,7 +66,7 @@
    "version": "William Davidson Edition - Vocalized Aramaic",
    "license": "CC-BY-NC",
    "url": "https://www.sefaria.org.il/Nazir_23b:5?lang=he",
-   "para": 32
+   "para": 26
   },
   {
    "ref": "Gittin 88a:16-19",
@@ -80,8 +80,8 @@
    "version": "William Davidson Edition - Vocalized Aramaic",
    "license": "CC-BY-NC",
    "url": "https://www.sefaria.org.il/Gittin_88a:16-19?lang=he",
-   "para": 39,
-   "anchor": "תלמוד בבלי, גיטין פח ע\"א"
+   "anchor": "תלמוד בבלי, גיטין פח ע\"א",
+   "fn": 6
   },
   {
    "ref": "Deuteronomy 7:12",
@@ -92,7 +92,7 @@
    "version": "Miqra according to the Masorah",
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/Deuteronomy_7:12?lang=he",
-   "para": 45
+   "para": 35
   },
   {
    "ref": "Rashi on Deuteronomy 7:12:1-2",
@@ -104,7 +104,7 @@
    "version": "Pentateuch with Rashi's commentary by M. Rosenbaum and A.M. Silbermann, 1929-1934",
    "license": "Public Domain",
    "url": "https://www.sefaria.org.il/Rashi_on_Deuteronomy_7:12:1-2?lang=he",
-   "para": 47
+   "para": 37
   },
   {
    "ref": "Ramban on Deuteronomy 7:12:1",
@@ -115,7 +115,7 @@
    "version": "Vocalized Edition",
    "license": "CC0",
    "url": "https://www.sefaria.org.il/Ramban_on_Deuteronomy_7:12:1?lang=he",
-   "para": 48
+   "para": 38
   },
   {
    "ref": "Sforno on Deuteronomy 7:12:2",
@@ -126,7 +126,7 @@
    "version": "Vocalized Edition",
    "license": "CC0",
    "url": "https://www.sefaria.org.il/Sforno_on_Deuteronomy_7:12:2?lang=he",
-   "para": 49
+   "para": 39
   },
   {
    "ref": "Deuteronomy 7:1",
@@ -137,7 +137,7 @@
    "version": "Miqra according to the Masorah",
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/Deuteronomy_7:1?lang=he",
-   "para": 51
+   "para": 40
   },
   {
    "ref": "Deuteronomy 7:6-11",
@@ -153,7 +153,7 @@
    "version": "Miqra according to the Masorah",
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/Deuteronomy_7:6-11?lang=he",
-   "para": 51
+   "para": 40
   },
   {
    "ref": "Deuteronomy 8:1",
@@ -164,7 +164,7 @@
    "version": "Miqra according to the Masorah",
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/Deuteronomy_8:1?lang=he",
-   "para": 58
+   "fn": 10
   }
  ]
 }

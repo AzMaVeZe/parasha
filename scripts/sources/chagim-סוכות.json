@@ -3,8 +3,8 @@
  "sources": [
   {
    "ref": "Leviticus 23:42-43",
-   "para": 2,
-   "anchor": "בספר ויקרא (פרק כג, לג-מד)"
+   "anchor": "בספר ויקרא (פרק כג, לג-מד)",
+   "para": 2
   },
   {
    "ref": "Ramban on Leviticus 23:43:1",
@@ -16,12 +16,12 @@
   },
   {
    "ref": "Sukkah 11b:15",
-   "para": 18,
-   "anchor": "תלמוד בבלי, סוכה דף יא ע\"ב"
+   "anchor": "תלמוד בבלי, סוכה דף יא ע\"ב",
+   "fn": 1
   },
   {
    "ref": "Ecclesiastes 1:4-7",
-   "para": 22
+   "para": 20
   }
  ]
 }

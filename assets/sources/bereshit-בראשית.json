@@ -9,8 +9,8 @@
    "version": "Midrash Rabbah -- TE",
    "license": "CC-BY-NC",
    "url": "https://www.sefaria.org.il/Shemot_Rabbah_34:2?lang=he",
-   "para": 1,
-   "anchor": "שמות רבה לד, ב"
+   "anchor": "שמות רבה לד, ב",
+   "para": 1
   },
   {
    "ref": "Zohar, Terumah 61:640",
@@ -62,8 +62,8 @@
    "version": "Vocalized Zohar, Israel 2013",
    "license": "unknown",
    "url": "https://www.sefaria.org.il/Zohar,_Bereshit_1:1-2?lang=he",
-   "para": 14,
-   "anchor": "זוהר פרשת בראשית (דף טו ע\"א)"
+   "anchor": "זוהר פרשת בראשית (דף טו ע\"א)",
+   "fn": 0
   },
   {
    "ref": "Bereshit Rabbah 22:7",
@@ -74,8 +74,8 @@
    "version": "Midrash Rabbah -- TE",
    "license": "CC-BY-NC",
    "url": "https://www.sefaria.org.il/Bereshit_Rabbah_22:7?lang=he",
-   "para": 57,
-   "anchor": "בראשית רבה, פרשה כב, ז"
+   "anchor": "בראשית רבה, פרשה כב, ז",
+   "fn": 7
   }
  ]
 }

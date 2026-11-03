@@ -3,8 +3,8 @@
  "sources": [
   {
    "ref": "Bava Batra 14b:12",
-   "para": 2,
-   "anchor": "בבלי, בבא בתרא יד:"
+   "anchor": "בבלי, בבא בתרא יד:",
+   "para": 2
   },
   {
    "ref": "Micah 6:5",
@@ -24,30 +24,30 @@
   },
   {
    "ref": "Micah 6:2",
-   "para": 21
+   "para": 19
   },
   {
    "ref": "Joshua 13:22",
-   "para": 28,
-   "anchor": "יהושע כג, כב"
+   "anchor": "יהושע כג, כב",
+   "para": 26
   },
   {
    "ref": "Numbers 24:25",
-   "para": 37
+   "para": 35
   },
   {
    "ref": "Peri Tzadik, Balak 2:2-3",
-   "para": 42,
-   "anchor": "פרי צדיק על פרשתנו"
+   "anchor": "פרי צדיק על פרשתנו",
+   "fn": 3
   },
   {
    "ref": "Micah 6:8",
-   "para": 44
+   "para": 40
   },
   {
    "ref": "Deuteronomy 23:6",
-   "para": 45,
-   "anchor": "דברים כג"
+   "anchor": "דברים כג",
+   "para": 41
   }
  ]
 }

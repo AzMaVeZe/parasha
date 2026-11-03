@@ -21,8 +21,8 @@
    "version": "Bnei Yisaschar, Piotrkow 1883",
    "license": "Public Domain",
    "url": "https://www.sefaria.org.il/Bnei_Yissaschar,_Tamuz_and_Av_3:1:1-2?lang=he",
-   "para": 18,
-   "anchor": "מאמר צום החמישי, מאמר ג' אות א'"
+   "anchor": "מאמר צום החמישי, מאמר ג' אות א'",
+   "fn": 1
   },
   {
    "ref": "Yevamot 62b:16",
@@ -33,8 +33,8 @@
    "version": "William Davidson Edition - Vocalized Aramaic",
    "license": "CC-BY-NC",
    "url": "https://www.sefaria.org.il/Yevamot_62b:16?lang=he",
-   "para": 18,
-   "anchor": "בבלי יבמות סב, ע\"ב"
+   "anchor": "בבלי יבמות סב, ע\"ב",
+   "fn": 2
   },
   {
    "ref": "Rashi on Yevamot 62b:16:3",
@@ -45,7 +45,7 @@
    "version": "Vilna Edition",
    "license": "Public Domain",
    "url": "https://www.sefaria.org.il/Rashi_on_Yevamot_62b:16:3?lang=he",
-   "para": 18
+   "fn": 2
   },
   {
    "ref": "Yoma 54b:1",
@@ -56,8 +56,8 @@
    "version": "William Davidson Edition - Vocalized Aramaic",
    "license": "CC-BY-NC",
    "url": "https://www.sefaria.org.il/Yoma_54b:1?lang=he",
-   "para": 19,
-   "anchor": "בבלי, יומא נד ע\"ב"
+   "anchor": "בבלי, יומא נד ע\"ב",
+   "fn": 3
   },
   {
    "ref": "Yoma 54a:11",
@@ -68,8 +68,8 @@
    "version": "William Davidson Edition - Vocalized Aramaic",
    "license": "CC-BY-NC",
    "url": "https://www.sefaria.org.il/Yoma_54a:11?lang=he",
-   "para": 19,
-   "anchor": "בבלי, יומא נד ע\"א"
+   "anchor": "בבלי, יומא נד ע\"א",
+   "fn": 4
   }
  ]
 }

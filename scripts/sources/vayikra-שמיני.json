@@ -3,8 +3,8 @@
  "sources": [
   {
    "ref": "Leviticus 10:3",
-   "para": 3,
-   "anchor": "שמות י, ג"
+   "anchor": "שמות י, ג",
+   "para": 3
   },
   {
    "ref": "Rashi on Leviticus 10:3:2",
@@ -12,68 +12,68 @@
   },
   {
    "ref": "Leviticus 10:16",
-   "para": 9,
-   "anchor": "שמות י, טז"
+   "anchor": "שמות י, טז",
+   "para": 8
   },
   {
    "ref": "Leviticus 10:19",
-   "para": 13,
-   "anchor": "שמות י, יט"
+   "anchor": "שמות י, יט",
+   "para": 11
   },
   {
    "ref": "Yoma 4a:4-5",
-   "para": 17,
-   "anchor": "בבלי, יומא ד ע\"א"
+   "anchor": "בבלי, יומא ד ע\"א",
+   "fn": 0
   },
   {
    "ref": "Megillah 10b:8",
-   "para": 18,
-   "anchor": "בבלי, מגילה י ע\"ב"
+   "anchor": "בבלי, מגילה י ע\"ב",
+   "fn": 1
   },
   {
    "ref": "Leviticus 10:18",
-   "para": 21,
-   "anchor": "י, יח"
+   "anchor": "י, יח",
+   "fn": 4
   },
   {
    "ref": "Rashi on Leviticus 10:19:1",
-   "para": 22,
-   "anchor": "רש\"י שם"
+   "anchor": "רש\"י שם",
+   "fn": 5
   },
   {
    "ref": "Or HaChaim on Leviticus 10:19:1",
-   "para": 23
+   "para": 15
   },
   {
    "ref": "Leviticus 10:20",
-   "para": 28
+   "para": 20
   },
   {
    "ref": "Mishnah Tamid 1:4",
-   "para": 29,
-   "anchor": "במסכת תמיד א, ד"
+   "anchor": "במסכת תמיד א, ד",
+   "para": 21
   },
   {
    "ref": "Zevachim 101a:12",
-   "para": 44
+   "para": 31
   },
   {
    "ref": "Zohar, Shmini 6:67-70",
-   "para": 53,
-   "anchor": "זוהר שמיני סז-עה"
+   "anchor": "זוהר שמיני סז-עה",
+   "fn": 11
   },
   {
    "ref": "Onkelos Genesis 2:7",
-   "para": 57
+   "fn": 16
   },
   {
    "ref": "Likutei Moharan 38:4:1",
-   "para": 58,
-   "anchor": "ליקוטי מוהר\"ן לח"
+   "anchor": "ליקוטי מוהר\"ן לח",
+   "fn": 17
   },
   {
    "ref": "Pirkei Avot 3:13",
-   "para": 59
+   "fn": 18
   }
  ]
 }

@@ -9,8 +9,8 @@
    "version": "Miqra according to the Masorah",
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/Numbers_13:32?lang=he",
-   "para": 1,
-   "anchor": "במדבר יג, לב"
+   "anchor": "במדבר יג, לב",
+   "para": 1
   },
   {
    "ref": "Bamidbar Rabbah 16:13",
@@ -32,8 +32,8 @@
    "version": "Torat Emet 357",
    "license": "Public Domain",
    "url": "https://www.sefaria.org.il/Pirkei_Avot_1:6?lang=he",
-   "para": 10,
-   "anchor": "אבות א, ו"
+   "anchor": "אבות א, ו",
+   "para": 10
   },
   {
    "ref": "Pirkei Avot 2:4",
@@ -44,8 +44,8 @@
    "version": "Torat Emet 357",
    "license": "Public Domain",
    "url": "https://www.sefaria.org.il/Pirkei_Avot_2:4?lang=he",
-   "para": 12,
-   "anchor": "אבות ב, ה"
+   "anchor": "אבות ב, ה",
+   "para": 12
   },
   {
    "ref": "Mei HaShiloach, Volume II, Numbers, Sh'lach 2",
@@ -67,7 +67,7 @@
    "version": "Miqra according to the Masorah",
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/Numbers_13:30?lang=he",
-   "para": 23
+   "para": 21
   },
   {
    "ref": "Numbers 14:6-10",
@@ -82,7 +82,7 @@
    "version": "Miqra according to the Masorah",
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/Numbers_14:6-10?lang=he",
-   "para": 26
+   "para": 24
   },
   {
    "ref": "Mei HaShiloach, Volume II, Numbers, Sh'lach 1",
@@ -93,7 +93,7 @@
    "version": "Vocalized Edition",
    "license": "CC-BY-NC",
    "url": "https://www.sefaria.org.il/Mei_HaShiloach,_Volume_II,_Numbers,_Sh%27lach_1?lang=he",
-   "para": 28
+   "para": 26
   },
   {
    "ref": "Orot HaKodesh 3:1:5:97",
@@ -104,7 +104,7 @@
    "version": "Orot HaKodesh -- Wikitext",
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/Orot_HaKodesh_3:1:5:97?lang=he",
-   "para": 30
+   "para": 28
   },
   {
    "ref": "Exodus 40:34-35",
@@ -116,7 +116,7 @@
    "version": "Miqra according to the Masorah",
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/Exodus_40:34-35?lang=he",
-   "para": 34
+   "para": 31
   }
  ]
 }

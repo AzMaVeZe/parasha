@@ -31,7 +31,7 @@
    "version": "Miqra according to the Masorah",
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/Genesis_37:2?lang=he",
-   "para": 15
+   "para": 14
   },
   {
    "ref": "Shabbat 145b:10-15",
@@ -47,8 +47,8 @@
    "version": "William Davidson Edition - Vocalized Aramaic",
    "license": "CC-BY-NC",
    "url": "https://www.sefaria.org.il/Shabbat_145b:10-15?lang=he",
-   "para": 25,
-   "anchor": "תלמוד בבלי, שבת, דף קמה ע\"ב"
+   "anchor": "תלמוד בבלי, שבת, דף קמה ע\"ב",
+   "fn": 1
   },
   {
    "ref": "Rashi on Shabbat 145b:15:1-4",
@@ -62,8 +62,8 @@
    "version": "Vilna Edition",
    "license": "Public Domain",
    "url": "https://www.sefaria.org.il/Rashi_on_Shabbat_145b:15:1-4?lang=he",
-   "para": 25,
-   "anchor": "רש\"י שם"
+   "anchor": "רש\"י שם",
+   "fn": 1
   },
   {
    "ref": "Genesis 34:31",
@@ -74,7 +74,7 @@
    "version": "Miqra according to the Masorah",
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/Genesis_34:31?lang=he",
-   "para": 30
+   "fn": 6
   },
   {
    "ref": "Genesis 40:14",
@@ -85,7 +85,7 @@
    "version": "Miqra according to the Masorah",
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/Genesis_40:14?lang=he",
-   "para": 36
+   "para": 25
   },
   {
    "ref": "Genesis 40:23",
@@ -96,7 +96,7 @@
    "version": "Miqra according to the Masorah",
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/Genesis_40:23?lang=he",
-   "para": 39
+   "para": 28
   },
   {
    "ref": "Genesis 41:1",
@@ -107,8 +107,8 @@
    "version": "Miqra according to the Masorah",
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/Genesis_41:1?lang=he",
-   "para": 49,
-   "anchor": "בראשית מא, א"
+   "anchor": "בראשית מא, א",
+   "fn": 8
   },
   {
    "ref": "Rashi on Genesis 40:23",
@@ -120,8 +120,8 @@
    "version": "Pentateuch with Rashi's commentary by M. Rosenbaum and A.M. Silbermann, 1929-1934",
    "license": "Public Domain",
    "url": "https://www.sefaria.org.il/Rashi_on_Genesis_40:23?lang=he",
-   "para": 50,
-   "anchor": "רש\"י, בראשית מ, כג"
+   "anchor": "רש\"י, בראשית מ, כג",
+   "fn": 9
   },
   {
    "ref": "Bereshit Rabbah 89:2-3",
@@ -133,8 +133,8 @@
    "version": "Midrash Rabbah -- TE",
    "license": "CC-BY-NC",
    "url": "https://www.sefaria.org.il/Bereshit_Rabbah_89:2-3?lang=he",
-   "para": 50,
-   "anchor": "מדרש בראשית רבה פט, ב"
+   "anchor": "מדרש בראשית רבה פט, ב",
+   "fn": 9
   },
   {
    "ref": "Genesis 37:8",
@@ -145,7 +145,7 @@
    "version": "Miqra according to the Masorah",
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/Genesis_37:8?lang=he",
-   "para": 54
+   "fn": 13
   },
   {
    "ref": "Genesis 37:10",
@@ -156,7 +156,7 @@
    "version": "Miqra according to the Masorah",
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/Genesis_37:10?lang=he",
-   "para": 54
+   "fn": 13
   },
   {
    "ref": "Genesis 41:38",
@@ -167,7 +167,7 @@
    "version": "Miqra according to the Masorah",
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/Genesis_41:38?lang=he",
-   "para": 70
+   "para": 49
   },
   {
    "ref": "Genesis 40:16",
@@ -178,8 +178,8 @@
    "version": "Miqra according to the Masorah",
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/Genesis_40:16?lang=he",
-   "para": 83,
-   "anchor": "בראשית מ, טז"
+   "anchor": "בראשית מ, טז",
+   "fn": 16
   },
   {
    "ref": "Sforno on Genesis 40:16",
@@ -190,8 +190,8 @@
    "version": "Vocalized Edition",
    "license": "CC0",
    "url": "https://www.sefaria.org.il/Sforno_on_Genesis_40:16?lang=he",
-   "para": 83,
-   "anchor": "ספורנו בפרושו שם"
+   "anchor": "ספורנו בפרושו שם",
+   "fn": 16
   },
   {
    "ref": "Genesis 41:24",
@@ -202,7 +202,7 @@
    "version": "Miqra according to the Masorah",
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/Genesis_41:24?lang=he",
-   "para": 86
+   "fn": 19
   },
   {
    "ref": "Genesis 37:16",
@@ -213,8 +213,8 @@
    "version": "Miqra according to the Masorah",
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/Genesis_37:16?lang=he",
-   "para": 87,
-   "anchor": "בראשית לז, טז"
+   "anchor": "בראשית לז, טז",
+   "fn": 20
   }
  ]
 }

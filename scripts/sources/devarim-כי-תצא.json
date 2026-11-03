@@ -3,36 +3,36 @@
  "sources": [
   {
    "ref": "Deuteronomy 23:20-21",
-   "para": 10,
-   "anchor": "(כג, כ)"
+   "anchor": "(כג, כ)",
+   "para": 8
   },
   {
    "ref": "Exodus 22:24",
-   "para": 15,
-   "anchor": "שמות כב, כד"
+   "anchor": "שמות כב, כד",
+   "para": 11
   },
   {
    "ref": "Leviticus 25:35-37",
-   "para": 18,
-   "anchor": "ויקרא כה, לה-לז"
+   "anchor": "ויקרא כה, לה-לז",
+   "para": 12
   },
   {
    "ref": "Bava Metzia 69b:4-6",
-   "para": 52,
-   "anchor": "בבלי, בבא מציעא סט ע\"ב"
+   "anchor": "בבלי, בבא מציעא סט ע\"ב",
+   "fn": 12
   },
   {
    "ref": "Proverbs 22:7",
-   "para": 71
+   "para": 43
   },
   {
    "ref": "Rashi on Shabbat 63a:26:1",
-   "para": 76
+   "para": 48
   },
   {
    "ref": "Shabbat 63a:26",
-   "para": 103,
-   "anchor": "בבלי, שבת סג ע\"א"
+   "anchor": "בבלי, שבת סג ע\"א",
+   "fn": 19
   }
  ]
 }

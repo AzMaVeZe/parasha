@@ -3,61 +3,61 @@
  "sources": [
   {
    "ref": "Taanit 29a:18",
-   "para": 9,
-   "anchor": "בבלי, תענית כ\"ט."
+   "anchor": "בבלי, תענית כ\"ט.",
+   "para": 9
   },
   {
    "ref": "Tikkunei Zohar 57b:10",
-   "para": 16,
-   "anchor": "תקוני זוהר נ\"ז"
+   "anchor": "תקוני זוהר נ\"ז",
+   "fn": 0
   },
   {
    "ref": "Torah Ohr, Supplements, Megillat Esther 2:4",
-   "para": 17,
-   "anchor": "תורה אור לאדמו\"ר הזקן, קכא, א"
+   "anchor": "תורה אור לאדמו\"ר הזקן, קכא, א",
+   "fn": 1
   },
   {
    "ref": "Esther 1:7",
-   "para": 18,
-   "anchor": "א, ז"
+   "anchor": "א, ז",
+   "fn": 2
   },
   {
    "ref": "Esther 2:6",
-   "para": 18,
-   "anchor": "ב', ו'"
+   "anchor": "ב', ו'",
+   "fn": 2
   },
   {
    "ref": "Esther 3:15",
-   "para": 18,
-   "anchor": "ג', טו"
+   "anchor": "ג', טו",
+   "fn": 2
   },
   {
    "ref": "Esther 4:1",
-   "para": 18,
-   "anchor": "ד', א'"
+   "anchor": "ד', א'",
+   "fn": 2
   },
   {
    "ref": "Esther 4:3",
-   "para": 18,
-   "anchor": "ד', ג'"
+   "anchor": "ד', ג'",
+   "fn": 2
   },
   {
    "ref": "Esther 7:4",
-   "para": 18,
-   "anchor": "ז', ד'"
+   "anchor": "ז', ד'",
+   "fn": 2
   },
   {
    "ref": "Pur Hu HaGoral; Homilies for Purim, Part II; Purim, Flashes of Fire 16",
-   "para": 20
+   "para": 18
   },
   {
    "ref": "Chagigah 15a:5-7",
-   "para": 33,
-   "anchor": "תלמוד בבלי, חגיגה טו ע\"א"
+   "anchor": "תלמוד בבלי, חגיגה טו ע\"א",
+   "fn": 4
   },
   {
    "ref": "Esther 9:1",
-   "para": 44
+   "para": 39
   }
  ]
 }

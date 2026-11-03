@@ -3,8 +3,8 @@
  "sources": [
   {
    "ref": "Exodus 18:11",
-   "para": 1,
-   "anchor": "שמות יח, יא"
+   "anchor": "שמות יח, יא",
+   "para": 1
   },
   {
    "ref": "Genesis 9:6",
@@ -12,37 +12,37 @@
   },
   {
    "ref": "Leviticus 24:19-20",
-   "para": 20
+   "fn": 3
   },
   {
    "ref": "Exodus 21:23-25",
-   "para": 20
+   "fn": 3
   },
   {
    "ref": "I Kings 20:42",
-   "para": 20
+   "fn": 3
   },
   {
    "ref": "Proverbs 17:13",
-   "para": 20
+   "fn": 3
   },
   {
    "ref": "Tosefta Sotah 4:1",
-   "para": 21,
-   "anchor": "תוספתא סוטה ד, א"
+   "anchor": "תוספתא סוטה ד, א",
+   "fn": 4
   },
   {
    "ref": "Deuteronomy 19:16-21",
-   "para": 22
+   "para": 17
   },
   {
    "ref": "Shabbat 31a:6",
-   "para": 31
+   "para": 26
   },
   {
    "ref": "Mishneh Torah, Testimony 18:4",
-   "para": 42,
-   "anchor": "רמב\"ם הלכות עדות י\"ח, ד'"
+   "anchor": "רמב\"ם הלכות עדות י\"ח, ד'",
+   "fn": 6
   }
  ]
 }

@@ -44,8 +44,8 @@
    "version": "Miqra according to the Masorah",
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/Joshua_24:33?lang=he",
-   "para": 11,
-   "anchor": "יהושע כד, לג"
+   "anchor": "יהושע כד, לג",
+   "para": 11
   },
   {
    "ref": "Numbers 27:15",
@@ -133,7 +133,7 @@
    "version": "Miqra according to the Masorah",
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/Numbers_26:54?lang=he",
-   "para": 18
+   "fn": 1
   },
   {
    "ref": "Onkelos Genesis 2:7",
@@ -144,7 +144,7 @@
    "version": "Sifsei Chachomim Chumash, Metsudah Publications, 2009",
    "license": "CC-BY-NC",
    "url": "https://www.sefaria.org.il/Onkelos_Genesis_2:7?lang=he",
-   "para": 20
+   "para": 18
   },
   {
    "ref": "Deuteronomy 3:23-25",
@@ -157,7 +157,7 @@
    "version": "Miqra according to the Masorah",
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/Deuteronomy_3:23-25?lang=he",
-   "para": 32
+   "para": 30
   },
   {
    "ref": "Numbers 27:16-17",
@@ -169,7 +169,7 @@
    "version": "Miqra according to the Masorah",
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/Numbers_27:16-17?lang=he",
-   "para": 34
+   "para": 32
   },
   {
    "ref": "Guide for the Perplexed, Part 1 27:1",
@@ -180,8 +180,8 @@
    "version": "Makbili Edition, Mif'al Mishneh Torah, 2024",
    "license": "unknown",
    "url": "https://www.sefaria.org.il/Guide_for_the_Perplexed,_Part_1_27:1?lang=he",
-   "para": 35,
-   "anchor": "מורה מבוכים א' כז'"
+   "anchor": "מורה מבוכים א' כז'",
+   "fn": 2
   }
  ]
 }

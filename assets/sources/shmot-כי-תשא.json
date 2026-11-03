@@ -23,8 +23,8 @@
    "version": "Vocalized Zohar, Israel 2013",
    "license": "unknown",
    "url": "https://www.sefaria.org.il/Zohar,_Introduction_4:12-15?lang=he",
-   "para": 10,
-   "anchor": "חלק א דף ב' ע\"א"
+   "anchor": "חלק א דף ב' ע\"א",
+   "fn": 0
   },
   {
    "ref": "Isaiah 40:26",
@@ -35,8 +35,8 @@
    "version": "Miqra according to the Masorah",
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/Isaiah_40:26?lang=he",
-   "para": 11,
-   "anchor": "ישעיה מ, כו"
+   "anchor": "ישעיה מ, כו",
+   "fn": 1
   },
   {
    "ref": "Exodus 32:4",
@@ -47,7 +47,7 @@
    "version": "Miqra according to the Masorah",
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/Exodus_32:4?lang=he",
-   "para": 20
+   "para": 18
   },
   {
    "ref": "Numbers 12:3",
@@ -58,7 +58,7 @@
    "version": "Miqra according to the Masorah",
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/Numbers_12:3?lang=he",
-   "para": 22
+   "para": 20
   }
  ]
 }

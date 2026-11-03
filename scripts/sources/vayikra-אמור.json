@@ -3,28 +3,28 @@
  "sources": [
   {
    "ref": "Leviticus 24:10-12",
-   "para": 0,
-   "anchor": "ויקרא כד, י"
+   "anchor": "ויקרא כד, י",
+   "para": 0
   },
   {
    "ref": "Leviticus 20:9",
-   "para": 4,
-   "anchor": "ויקרא כ, ט"
+   "anchor": "ויקרא כ, ט",
+   "para": 4
   },
   {
    "ref": "Leviticus 24:13-22",
-   "para": 5,
-   "anchor": "ויקרא כד, יג"
+   "anchor": "ויקרא כד, יג",
+   "para": 5
   },
   {
    "ref": "Leviticus 20:7-8",
-   "para": 11,
-   "anchor": "ויקרא כ, ז"
+   "anchor": "ויקרא כ, ז",
+   "para": 11
   },
   {
    "ref": "Proverbs 27:19",
-   "para": 13,
-   "anchor": "משלי כ\"ז, י\"ט"
+   "anchor": "משלי כ\"ז, י\"ט",
+   "para": 13
   },
   {
    "ref": "Ecclesiastes 11:1",
@@ -40,22 +40,22 @@
   },
   {
    "ref": "Ibn Ezra on Leviticus 24:16:1",
-   "para": 15,
-   "anchor": "ראב\"ע כד, יז"
+   "anchor": "ראב\"ע כד, יז",
+   "fn": 1
   },
   {
    "ref": "Exodus 19:6",
-   "para": 16
+   "fn": 2
   },
   {
    "ref": "Vayikra Rabbah 32:8",
-   "para": 32,
-   "anchor": "ויקרא רבה וילנא לב"
+   "anchor": "ויקרא רבה וילנא לב",
+   "para": 29
   },
   {
    "ref": "Toledot Yitzchak on Torah, Leviticus 24:10:1",
-   "para": 35,
-   "anchor": "תולדות יצחק, פרשת אמור"
+   "anchor": "תולדות יצחק, פרשת אמור",
+   "fn": 3
   }
  ]
 }

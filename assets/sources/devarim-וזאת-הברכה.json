@@ -24,8 +24,8 @@
    "version": "Kad HaKemach, Warsaw 1872",
    "license": "Public Domain",
    "url": "https://www.sefaria.org.il/Kad_HaKemach,_Sukkah_1:1-5?lang=he",
-   "para": 17,
-   "anchor": "בכתבי רבנו בחיי"
+   "anchor": "בכתבי רבנו בחיי",
+   "fn": 0
   },
   {
    "ref": "Sukkah 2a:12",
@@ -36,8 +36,8 @@
    "version": "William Davidson Edition - Vocalized Aramaic",
    "license": "CC-BY-NC",
    "url": "https://www.sefaria.org.il/Sukkah_2a:12?lang=he",
-   "para": 18,
-   "anchor": "תלמוד בבלי, סוכה ב ע\"א"
+   "anchor": "תלמוד בבלי, סוכה ב ע\"א",
+   "fn": 1
   },
   {
    "ref": "Genesis 33:17",
@@ -48,8 +48,8 @@
    "version": "Miqra according to the Masorah",
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/Genesis_33:17?lang=he",
-   "para": 19,
-   "anchor": "בראשית לג, יז"
+   "anchor": "בראשית לג, יז",
+   "fn": 2
   },
   {
    "ref": "Bamidbar Rabbah 14:2",
@@ -60,8 +60,8 @@
    "version": "Midrash Rabbah -- TE",
    "license": "CC-BY-NC",
    "url": "https://www.sefaria.org.il/Bamidbar_Rabbah_14:2?lang=he",
-   "para": 19,
-   "anchor": "במדבר רבה פרשה יד"
+   "anchor": "במדבר רבה פרשה יד",
+   "fn": 2
   },
   {
    "ref": "Amos 9:11",
@@ -72,8 +72,8 @@
    "version": "Miqra according to the Masorah",
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/Amos_9:11?lang=he",
-   "para": 20,
-   "anchor": "עמוס ט, יא"
+   "anchor": "עמוס ט, יא",
+   "fn": 3
   },
   {
    "ref": "Sifra, Emor, Chapter 17 5",
@@ -84,8 +84,8 @@
    "version": "Venice 1545",
    "license": "unknown",
    "url": "https://www.sefaria.org.il/Sifra,_Emor,_Chapter_17_5?lang=he",
-   "para": 35,
-   "anchor": "ספרא אמור יז, ה"
+   "anchor": "ספרא אמור יז, ה",
+   "fn": 5
   },
   {
    "ref": "Pirkei Avot 2:13",
@@ -96,8 +96,8 @@
    "version": "Torat Emet 357",
    "license": "Public Domain",
    "url": "https://www.sefaria.org.il/Pirkei_Avot_2:13?lang=he",
-   "para": 38,
-   "anchor": "משנה, אבות ב, ג"
+   "anchor": "משנה, אבות ב, ג",
+   "fn": 8
   },
   {
    "ref": "Mishnah Sukkah 2:9",
@@ -108,8 +108,8 @@
    "version": "Torat Emet 357",
    "license": "Public Domain",
    "url": "https://www.sefaria.org.il/Mishnah_Sukkah_2:9?lang=he",
-   "para": 39,
-   "anchor": "משנה סוכה ב, ט"
+   "anchor": "משנה סוכה ב, ט",
+   "fn": 9
   },
   {
    "ref": "Deuteronomy 33:2",
@@ -120,7 +120,7 @@
    "version": "Miqra according to the Masorah",
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/Deuteronomy_33:2?lang=he",
-   "para": 51
+   "para": 41
   },
   {
    "ref": "Onkelos Deuteronomy 33:2",
@@ -131,7 +131,7 @@
    "version": "Sifsei Chachomim Chumash, Metsudah Publications, 2009",
    "license": "CC-BY-NC",
    "url": "https://www.sefaria.org.il/Onkelos_Deuteronomy_33:2?lang=he",
-   "para": 54
+   "para": 44
   },
   {
    "ref": "Beitzah 25b:7",
@@ -142,8 +142,8 @@
    "version": "William Davidson Edition - Vocalized Aramaic",
    "license": "CC-BY-NC",
    "url": "https://www.sefaria.org.il/Beitzah_25b:7?lang=he",
-   "para": 61,
-   "anchor": "במסכת ביצה כח ע\"ב"
+   "anchor": "במסכת ביצה כח ע\"ב",
+   "para": 46
   },
   {
    "ref": "Shabbat 105a:3",
@@ -154,8 +154,8 @@
    "version": "William Davidson Edition - Vocalized Aramaic",
    "license": "CC-BY-NC",
    "url": "https://www.sefaria.org.il/Shabbat_105a:3?lang=he",
-   "para": 81,
-   "anchor": "בבלי, שבת דף קה."
+   "anchor": "בבלי, שבת דף קה.",
+   "fn": 16
   }
  ]
 }

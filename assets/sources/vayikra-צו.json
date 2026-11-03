@@ -25,8 +25,8 @@
    "version": "Pentateuch with Rashi's commentary by M. Rosenbaum and A.M. Silbermann, 1929-1934",
    "license": "Public Domain",
    "url": "https://www.sefaria.org.il/Rashi_on_Leviticus_6:6:1?lang=he",
-   "para": 12,
-   "anchor": "רש\"י ויקרא ו', ו'"
+   "anchor": "רש\"י ויקרא ו', ו'",
+   "fn": 0
   },
   {
    "ref": "Psalms 74:16",
@@ -37,7 +37,7 @@
    "version": "Miqra according to the Masorah",
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/Psalms_74:16?lang=he",
-   "para": 23
+   "para": 21
   }
  ]
 }

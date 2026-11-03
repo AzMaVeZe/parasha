@@ -3,50 +3,50 @@
  "sources": [
   {
    "ref": "Numbers 35:9-34",
-   "para": 4,
-   "anchor": "במדבר ל\"ה"
+   "anchor": "במדבר ל\"ה",
+   "para": 4
   },
   {
    "ref": "Deuteronomy 19:2-10",
-   "para": 4,
-   "anchor": "דברים י\"ט"
+   "anchor": "דברים י\"ט",
+   "para": 4
   },
   {
    "ref": "Genesis 34:31",
-   "para": 44
+   "para": 42
   },
   {
    "ref": "Genesis 49:7",
-   "para": 47
+   "para": 45
   },
   {
    "ref": "Deuteronomy 33:8-10",
-   "para": 48
+   "para": 46
   },
   {
    "ref": "Mishnah Makkot 2:7",
-   "para": 76
+   "fn": 1
   },
   {
    "ref": "Deuteronomy 4:41",
-   "para": 82
+   "para": 77
   },
   {
    "ref": "Devarim Rabbah 2:30",
-   "para": 83
+   "para": 78
   },
   {
    "ref": "Yalkut Shimoni on Torah 829:1",
-   "para": 84
+   "para": 79
   },
   {
    "ref": "Genesis 4:10-16",
-   "para": 92
+   "para": 87
   },
   {
    "ref": "Genesis 4:17",
-   "para": 94,
-   "anchor": "פרק ד פסוק יז"
+   "anchor": "פרק ד פסוק יז",
+   "para": 88
   }
  ]
 }

@@ -31,8 +31,8 @@
    "version": "Torat Emet 357",
    "license": "Public Domain",
    "url": "https://www.sefaria.org.il/Pirkei_Avot_4:18?lang=he",
-   "para": 41,
-   "anchor": "משנה, מסכת אבות, ד, יח"
+   "anchor": "משנה, מסכת אבות, ד, יח",
+   "fn": 0
   },
   {
    "ref": "Bereshit Rabbah 91:9",
@@ -43,8 +43,8 @@
    "version": "Midrash Rabbah -- TE",
    "license": "CC-BY-NC",
    "url": "https://www.sefaria.org.il/Bereshit_Rabbah_91:9?lang=he",
-   "para": 42,
-   "anchor": "בראשית רבה צא, ט"
+   "anchor": "בראשית רבה צא, ט",
+   "fn": 2
   },
   {
    "ref": "Genesis 44:32",
@@ -55,8 +55,8 @@
    "version": "Miqra according to the Masorah",
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/Genesis_44:32?lang=he",
-   "para": 44,
-   "anchor": "בראשית מח, לב"
+   "anchor": "בראשית מח, לב",
+   "fn": 4
   },
   {
    "ref": "Midrash Tanchuma, Miketz 8:4",
@@ -67,8 +67,8 @@
    "version": "Midrash Tanchuma -- Torat Emet",
    "license": "Public Domain",
    "url": "https://www.sefaria.org.il/Midrash_Tanchuma,_Miketz_8:4?lang=he",
-   "para": 45,
-   "anchor": "מדרש תנחומא בראשית, מב סימן ח"
+   "anchor": "מדרש תנחומא בראשית, מב סימן ח",
+   "fn": 5
   },
   {
    "ref": "Genesis 43:9",
@@ -79,7 +79,7 @@
    "version": "Miqra according to the Masorah",
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/Genesis_43:9?lang=he",
-   "para": 52
+   "para": 47
   },
   {
    "ref": "Genesis 43:2-3",
@@ -91,8 +91,8 @@
    "version": "Miqra according to the Masorah",
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/Genesis_43:2-3?lang=he",
-   "para": 65,
-   "anchor": "בראשית מג, ב-ג"
+   "anchor": "בראשית מג, ב-ג",
+   "fn": 6
   },
   {
    "ref": "Pirkei Avot 4:2",
@@ -103,8 +103,8 @@
    "version": "Torat Emet 357",
    "license": "Public Domain",
    "url": "https://www.sefaria.org.il/Pirkei_Avot_4:2?lang=he",
-   "para": 69,
-   "anchor": "משנה, אבות ד, ב"
+   "anchor": "משנה, אבות ד, ב",
+   "fn": 10
   },
   {
    "ref": "Malbim on Deuteronomy 11:27",
@@ -115,8 +115,8 @@
    "version": "Mikraei Kodesh, Vilna, 1891",
    "license": "Public Domain",
    "url": "https://www.sefaria.org.il/Malbim_on_Deuteronomy_11:27?lang=he",
-   "para": 70,
-   "anchor": "המלבי\"ם"
+   "anchor": "המלבי\"ם",
+   "fn": 11
   },
   {
    "ref": "Proverbs 6:1-2",
@@ -128,7 +128,7 @@
    "version": "Miqra according to the Masorah",
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/Proverbs_6:1-2?lang=he",
-   "para": 86
+   "para": 74
   },
   {
    "ref": "Rashi on Genesis 38:1",
@@ -141,8 +141,8 @@
    "version": "Pentateuch with Rashi's commentary by M. Rosenbaum and A.M. Silbermann, 1929-1934",
    "license": "Public Domain",
    "url": "https://www.sefaria.org.il/Rashi_on_Genesis_38:1?lang=he",
-   "para": 89,
-   "anchor": "רש\"י שם"
+   "anchor": "רש\"י שם",
+   "fn": 13
   },
   {
    "ref": "Bereshit Rabbah 85:1",
@@ -153,8 +153,8 @@
    "version": "Midrash Rabbah -- TE",
    "license": "CC-BY-NC",
    "url": "https://www.sefaria.org.il/Bereshit_Rabbah_85:1?lang=he",
-   "para": 90,
-   "anchor": "בראשית רבה פה, א"
+   "anchor": "בראשית רבה פה, א",
+   "fn": 14
   },
   {
    "ref": "Genesis 38:9",
@@ -165,7 +165,7 @@
    "version": "Miqra according to the Masorah",
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/Genesis_38:9?lang=he",
-   "para": 91
+   "fn": 15
   },
   {
    "ref": "Bereshit Rabbah 85:9",
@@ -176,8 +176,8 @@
    "version": "Midrash Rabbah -- TE",
    "license": "CC-BY-NC",
    "url": "https://www.sefaria.org.il/Bereshit_Rabbah_85:9?lang=he",
-   "para": 92,
-   "anchor": "בראשית רבה פה, ט"
+   "anchor": "בראשית רבה פה, ט",
+   "fn": 16
   },
   {
    "ref": "Genesis 38:26",
@@ -188,8 +188,8 @@
    "version": "Miqra according to the Masorah",
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/Genesis_38:26?lang=he",
-   "para": 93,
-   "anchor": "בראשית לח, כו"
+   "anchor": "בראשית לח, כו",
+   "fn": 17
   },
   {
    "ref": "Midrash Tanchuma, Vayigash 1:4",
@@ -200,8 +200,8 @@
    "version": "Midrash Tanchuma -- Torat Emet",
    "license": "Public Domain",
    "url": "https://www.sefaria.org.il/Midrash_Tanchuma,_Vayigash_1:4?lang=he",
-   "para": 95,
-   "anchor": "מדרש תנחומא, בראשית מד, סימן א"
+   "anchor": "מדרש תנחומא, בראשית מד, סימן א",
+   "fn": 19
   },
   {
    "ref": "Proverbs 6:3-5",
@@ -214,7 +214,7 @@
    "version": "Miqra according to the Masorah",
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/Proverbs_6:3-5?lang=he",
-   "para": 98
+   "para": 78
   },
   {
    "ref": "Sotah 10b:9-10",
@@ -226,7 +226,7 @@
    "version": "William Davidson Edition - Vocalized Aramaic",
    "license": "CC-BY-NC",
    "url": "https://www.sefaria.org.il/Sotah_10b:9-10?lang=he",
-   "para": 103
+   "para": 83
   },
   {
    "ref": "Sifra, Bechukotai, Chapter 7 5",
@@ -237,8 +237,8 @@
    "version": "Venice 1545",
    "license": "unknown",
    "url": "https://www.sefaria.org.il/Sifra,_Bechukotai,_Chapter_7_5?lang=he",
-   "para": 118,
-   "anchor": "ספרא ויקרא כו, לז"
+   "anchor": "ספרא ויקרא כו, לז",
+   "fn": 23
   },
   {
    "ref": "Sanhedrin 27b:19",
@@ -249,8 +249,8 @@
    "version": "William Davidson Edition - Vocalized Aramaic",
    "license": "CC-BY-NC",
    "url": "https://www.sefaria.org.il/Sanhedrin_27b:19?lang=he",
-   "para": 118,
-   "anchor": "סנהדרין כז, ע\"ב"
+   "anchor": "סנהדרין כז, ע\"ב",
+   "fn": 23
   },
   {
    "ref": "Shevuot 39a:22",
@@ -261,8 +261,8 @@
    "version": "William Davidson Edition - Vocalized Aramaic",
    "license": "CC-BY-NC",
    "url": "https://www.sefaria.org.il/Shevuot_39a:22?lang=he",
-   "para": 118,
-   "anchor": "שבועות לט, ע\"א"
+   "anchor": "שבועות לט, ע\"א",
+   "fn": 23
   }
  ]
 }

@@ -7,27 +7,27 @@
   },
   {
    "ref": "Bnei Yissaschar, Tamuz and Av 3:1:1-2",
-   "para": 18,
-   "anchor": "מאמר צום החמישי, מאמר ג' אות א'"
+   "anchor": "מאמר צום החמישי, מאמר ג' אות א'",
+   "fn": 1
   },
   {
    "ref": "Yevamot 62b:16",
-   "para": 18,
-   "anchor": "בבלי יבמות סב, ע\"ב"
+   "anchor": "בבלי יבמות סב, ע\"ב",
+   "fn": 2
   },
   {
    "ref": "Rashi on Yevamot 62b:16:3",
-   "para": 18
+   "fn": 2
   },
   {
    "ref": "Yoma 54b:1",
-   "para": 19,
-   "anchor": "בבלי, יומא נד ע\"ב"
+   "anchor": "בבלי, יומא נד ע\"ב",
+   "fn": 3
   },
   {
    "ref": "Yoma 54a:11",
-   "para": 19,
-   "anchor": "בבלי, יומא נד ע\"א"
+   "anchor": "בבלי, יומא נד ע\"א",
+   "fn": 4
   }
  ]
 }

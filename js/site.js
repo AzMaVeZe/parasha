@@ -789,9 +789,10 @@
       srcBox.hidden = false;
     });
   }
-  // פסקה מהדף, שבה מראה המקום (אם יש) הופך לקישור לספריא
-  function paragraphWithLinks(node, par, i, list) {
-    const marks = (list || []).filter(s => s.para === i && s.anchor && par.includes(s.anchor))
+  // פסקה (או הערת שוליים) מהדף, שבה מראה המקום (אם יש) הופך לקישור לספריא.
+  // here(s): האם המקור שייך לקטע הזה — s.para בפסקאות, s.fn בהערות.
+  function paragraphWithLinks(node, par, here, list) {
+    const marks = (list || []).filter(s => here(s) && s.anchor && par.includes(s.anchor))
       .map(s => ({ at: par.indexOf(s.anchor), s })).sort((x, y) => x.at - y.at);
     let pos = 0;
     marks.forEach(({ at, s }) => {
@@ -829,9 +830,21 @@
           t.paragraphs.forEach((par, i) => {
             const nikud = (par.match(/[֑-ׇ]/g) || []).length;
             const node = document.createElement(nikud > par.length * 0.08 ? 'blockquote' : 'p');
-            paragraphWithLinks(node, par, i, list);
+            paragraphWithLinks(node, par, s => s.para === i, list);
             textBody.append(node);
           });
+          // הערות השוליים בסוף, ממוספרות כמו בדף
+          if (t.footnotes && t.footnotes.length) {
+            textBody.append(el('h3', 'sheet-text__fn-title', 'הערות שוליים'));
+            const ol = el('ol', 'sheet-text__fn');
+            t.footnotes.forEach((f, k) => {
+              const li = document.createElement('li');
+              li.append(el('span', 'sheet-text__fn-n', f.n == null ? '' : String(f.n)));
+              paragraphWithLinks(li, f.text, s => s.fn === k, list);
+              ol.append(li);
+            });
+            textBody.append(ol);
+          }
         })
         .catch(() => { textBody.append(el('p', 'sheet-text__note', 'הטקסט אינו זמין כרגע — הדף המלא נמצא ב-PDF.')); });
     });

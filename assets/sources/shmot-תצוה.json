@@ -120,8 +120,8 @@
    "version": "William Davidson Edition - Vocalized Aramaic",
    "license": "CC-BY-NC",
    "url": "https://www.sefaria.org.il/Avodah_Zarah_18a:14-18b:4?lang=he",
-   "para": 25,
-   "anchor": "תלמוד בבלי, עבודה זרה, יח"
+   "anchor": "תלמוד בבלי, עבודה זרה, יח",
+   "fn": 5
   },
   {
    "ref": "Rashi on Avodah Zarah 18b:4:2",
@@ -132,7 +132,7 @@
    "version": "Vilna Edition",
    "license": "Public Domain",
    "url": "https://www.sefaria.org.il/Rashi_on_Avodah_Zarah_18b:4:2?lang=he",
-   "para": 28
+   "para": 21
   },
   {
    "ref": "Mishnah Shekalim 5:1",
@@ -143,8 +143,8 @@
    "version": "Torat Emet 357",
    "license": "Public Domain",
    "url": "https://www.sefaria.org.il/Mishnah_Shekalim_5:1?lang=he",
-   "para": 40,
-   "anchor": "המשנה במסכת שקלים (פ\"ה מ\"א)"
+   "anchor": "המשנה במסכת שקלים (פ\"ה מ\"א)",
+   "para": 33
   },
   {
    "ref": "Rambam on Mishnah Shekalim 5:1",
@@ -165,8 +165,8 @@
    "version": "Vilna Edition",
    "license": "Public Domain",
    "url": "https://www.sefaria.org.il/Rambam_on_Mishnah_Shekalim_5:1?lang=he",
-   "para": 42,
-   "anchor": "הרמב\"ם בפירוש המשנה"
+   "anchor": "הרמב\"ם בפירוש המשנה",
+   "para": 35
   },
   {
    "ref": "Zohar, Mishpatim 3:102",
@@ -177,8 +177,8 @@
    "version": "Vocalized Zohar, Israel 2013",
    "license": "unknown",
    "url": "https://www.sefaria.org.il/Zohar,_Mishpatim_3:102?lang=he",
-   "para": 47,
-   "anchor": "זוהר שמות, חלק ב', צט"
+   "anchor": "זוהר שמות, חלק ב', צט",
+   "fn": 7
   },
   {
    "ref": "Bereshit Rabbah 20:12",
@@ -189,8 +189,8 @@
    "version": "Midrash Rabbah -- TE",
    "license": "CC-BY-NC",
    "url": "https://www.sefaria.org.il/Bereshit_Rabbah_20:12?lang=he",
-   "para": 50,
-   "anchor": "בראשית רבה"
+   "anchor": "בראשית רבה",
+   "fn": 11
   },
   {
    "ref": "Zevachim 17b:6",
@@ -201,8 +201,8 @@
    "version": "William Davidson Edition - Vocalized Aramaic",
    "license": "CC-BY-NC",
    "url": "https://www.sefaria.org.il/Zevachim_17b:6?lang=he",
-   "para": 51,
-   "anchor": "זבחים יז:"
+   "anchor": "זבחים יז:",
+   "fn": 12
   },
   {
    "ref": "Sanhedrin 83b:14",
@@ -213,8 +213,8 @@
    "version": "William Davidson Edition - Vocalized Aramaic",
    "license": "CC-BY-NC",
    "url": "https://www.sefaria.org.il/Sanhedrin_83b:14?lang=he",
-   "para": 51,
-   "anchor": "סנהדרין פג:"
+   "anchor": "סנהדרין פג:",
+   "fn": 12
   },
   {
    "ref": "Peri Tzadik, Vayigash 7:1",
@@ -225,8 +225,8 @@
    "version": "Pri Tzaddik, Lublin, 1901",
    "license": "Public Domain",
    "url": "https://www.sefaria.org.il/Peri_Tzadik,_Vayigash_7:1?lang=he",
-   "para": 52,
-   "anchor": "הפרי צדיק"
+   "anchor": "הפרי צדיק",
+   "fn": 13
   },
   {
    "ref": "Zohar, Sifra DiTzniuta 2:4",
@@ -237,7 +237,7 @@
    "version": "Vocalized Zohar, Israel 2013",
    "license": "unknown",
    "url": "https://www.sefaria.org.il/Zohar,_Sifra_DiTzniuta_2:4?lang=he",
-   "para": 54
+   "para": 41
   },
   {
    "ref": "Shenei Luchot HaBerit, Torah Shebikhtav, Tetzaveh, Derekh Chayim 2",
@@ -248,7 +248,7 @@
    "version": "Shenei Luchot HaBrit, based on Amsterdam, 1698 ed. Part III",
    "license": "Public Domain",
    "url": "https://www.sefaria.org.il/Shenei_Luchot_HaBerit,_Torah_Shebikhtav,_Tetzaveh,_Derekh_Chayim_2?lang=he",
-   "para": 57
+   "para": 44
   },
   {
    "ref": "Esther Rabbah 3:14",
@@ -259,7 +259,7 @@
    "version": "Midrash Rabbah -- TE",
    "license": "CC-BY-NC",
    "url": "https://www.sefaria.org.il/Esther_Rabbah_3:14?lang=he",
-   "para": 61
+   "para": 48
   },
   {
    "ref": "Likutei Moharan 1:5:5",
@@ -270,8 +270,8 @@
    "version": "Likutei Moharan - rabenubook.com",
    "license": "Public Domain",
    "url": "https://www.sefaria.org.il/Likutei_Moharan_1:5:5?lang=he",
-   "para": 76,
-   "anchor": "ליקוטי מוהר\"ן א'"
+   "anchor": "ליקוטי מוהר\"ן א'",
+   "fn": 19
   }
  ]
 }

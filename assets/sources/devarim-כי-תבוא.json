@@ -57,8 +57,8 @@
    "version": "Midrash Tanchuma -- Torat Emet",
    "license": "Public Domain",
    "url": "https://www.sefaria.org.il/Midrash_Tanchuma,_Ki_Tavo_1:1?lang=he",
-   "para": 15,
-   "anchor": "מדרש תנחומא כי תבוא סימן א"
+   "anchor": "מדרש תנחומא כי תבוא סימן א",
+   "fn": 1
   },
   {
    "ref": "Mishnah Yoma 8:9",
@@ -69,7 +69,7 @@
    "version": "Torat Emet 357",
    "license": "Public Domain",
    "url": "https://www.sefaria.org.il/Mishnah_Yoma_8:9?lang=he",
-   "para": 16
+   "fn": 3
   },
   {
    "ref": "Deuteronomy 26:5",
@@ -80,7 +80,7 @@
    "version": "Miqra according to the Masorah",
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/Deuteronomy_26:5?lang=he",
-   "para": 19
+   "para": 16
   },
   {
    "ref": "Exodus 23:19",
@@ -91,8 +91,8 @@
    "version": "Miqra according to the Masorah",
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/Exodus_23:19?lang=he",
-   "para": 29,
-   "anchor": "שמות כג יט"
+   "anchor": "שמות כג יט",
+   "fn": 5
   },
   {
    "ref": "Exodus 34:26",
@@ -103,8 +103,8 @@
    "version": "Miqra according to the Masorah",
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/Exodus_34:26?lang=he",
-   "para": 29,
-   "anchor": "שמות לד כו"
+   "anchor": "שמות לד כו",
+   "fn": 5
   },
   {
    "ref": "Genesis 32:29",
@@ -115,7 +115,7 @@
    "version": "Miqra according to the Masorah",
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/Genesis_32:29?lang=he",
-   "para": 31
+   "para": 26
   },
   {
    "ref": "Bereshit Rabbah 60:15",
@@ -126,8 +126,8 @@
    "version": "Midrash Rabbah -- TE",
    "license": "CC-BY-NC",
    "url": "https://www.sefaria.org.il/Bereshit_Rabbah_60:15?lang=he",
-   "para": 48,
-   "anchor": "בראשית רבה (ס, טו)"
+   "anchor": "בראשית רבה (ס, טו)",
+   "fn": 6
   }
  ]
 }

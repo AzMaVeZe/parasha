@@ -11,98 +11,98 @@
   },
   {
    "ref": "Pirkei Avot 4:18",
-   "para": 41,
-   "anchor": "משנה, מסכת אבות, ד, יח"
+   "anchor": "משנה, מסכת אבות, ד, יח",
+   "fn": 0
   },
   {
    "ref": "Bereshit Rabbah 91:9",
-   "para": 42,
-   "anchor": "בראשית רבה צא, ט"
+   "anchor": "בראשית רבה צא, ט",
+   "fn": 2
   },
   {
    "ref": "Genesis 44:32",
-   "para": 44,
-   "anchor": "בראשית מח, לב"
+   "anchor": "בראשית מח, לב",
+   "fn": 4
   },
   {
    "ref": "Midrash Tanchuma, Miketz 8:4",
-   "para": 45,
-   "anchor": "מדרש תנחומא בראשית, מב סימן ח"
+   "anchor": "מדרש תנחומא בראשית, מב סימן ח",
+   "fn": 5
   },
   {
    "ref": "Genesis 43:9",
-   "para": 52
+   "para": 47
   },
   {
    "ref": "Genesis 43:2-3",
-   "para": 65,
-   "anchor": "בראשית מג, ב-ג"
+   "anchor": "בראשית מג, ב-ג",
+   "fn": 6
   },
   {
    "ref": "Pirkei Avot 4:2",
-   "para": 69,
-   "anchor": "משנה, אבות ד, ב"
+   "anchor": "משנה, אבות ד, ב",
+   "fn": 10
   },
   {
    "ref": "Malbim on Deuteronomy 11:27",
-   "para": 70,
-   "anchor": "המלבי\"ם"
+   "anchor": "המלבי\"ם",
+   "fn": 11
   },
   {
    "ref": "Proverbs 6:1-2",
-   "para": 86
+   "para": 74
   },
   {
    "ref": "Rashi on Genesis 38:1",
-   "para": 89,
-   "anchor": "רש\"י שם"
+   "anchor": "רש\"י שם",
+   "fn": 13
   },
   {
    "ref": "Bereshit Rabbah 85:1",
-   "para": 90,
-   "anchor": "בראשית רבה פה, א"
+   "anchor": "בראשית רבה פה, א",
+   "fn": 14
   },
   {
    "ref": "Genesis 38:9",
-   "para": 91
+   "fn": 15
   },
   {
    "ref": "Bereshit Rabbah 85:9",
-   "para": 92,
-   "anchor": "בראשית רבה פה, ט"
+   "anchor": "בראשית רבה פה, ט",
+   "fn": 16
   },
   {
    "ref": "Genesis 38:26",
-   "para": 93,
-   "anchor": "בראשית לח, כו"
+   "anchor": "בראשית לח, כו",
+   "fn": 17
   },
   {
    "ref": "Midrash Tanchuma, Vayigash 1:4",
-   "para": 95,
-   "anchor": "מדרש תנחומא, בראשית מד, סימן א"
+   "anchor": "מדרש תנחומא, בראשית מד, סימן א",
+   "fn": 19
   },
   {
    "ref": "Proverbs 6:3-5",
-   "para": 98
+   "para": 78
   },
   {
    "ref": "Sotah 10b:9-10",
-   "para": 103
+   "para": 83
   },
   {
    "ref": "Sifra, Bechukotai, Chapter 7:5",
-   "para": 118,
-   "anchor": "ספרא ויקרא כו, לז"
+   "anchor": "ספרא ויקרא כו, לז",
+   "fn": 23
   },
   {
    "ref": "Sanhedrin 27b:19",
-   "para": 118,
-   "anchor": "סנהדרין כז, ע\"ב"
+   "anchor": "סנהדרין כז, ע\"ב",
+   "fn": 23
   },
   {
    "ref": "Shevuot 39a:22",
-   "para": 118,
-   "anchor": "שבועות לט, ע\"א"
+   "anchor": "שבועות לט, ע\"א",
+   "fn": 23
   }
  ]
 }
