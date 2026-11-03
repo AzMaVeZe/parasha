@@ -1,0 +1,68 @@
+{
+ "reviewed": "claude",
+ "sources": [
+  {
+   "ref": "Leviticus 16:1-3",
+   "para": 1
+  },
+  {
+   "ref": "Leviticus 16:21-22",
+   "para": 10
+  },
+  {
+   "ref": "Vayikra Rabbah 20:10",
+   "fn": 0
+  },
+  {
+   "ref": "Mishnah Yoma 6:6",
+   "anchor": "משנה יומא ו, ו",
+   "fn": 2
+  },
+  {
+   "ref": "Yoma 67b:9",
+   "anchor": "יומא סז ע\"ב",
+   "fn": 4
+  },
+  {
+   "ref": "Guide for the Perplexed, Part 3 46:20",
+   "anchor": "רמב\"ם, מורה נבוכים, חלק ג' מ\"ו",
+   "fn": 5
+  },
+  {
+   "ref": "Ramban on Leviticus 16:8:1",
+   "anchor": "רמב\"ן עה\"ת ויקרא ט\"ז, ח",
+   "fn": 6
+  },
+  {
+   "ref": "Tzidkat HaTzadik 40",
+   "anchor": "צדקת הצדיק תורה מ'",
+   "fn": 7
+  },
+  {
+   "ref": "Megillah 7b:7",
+   "fn": 7
+  },
+  {
+   "ref": "Sifra, Acharei Mot, Chapter 2 1",
+   "anchor": "ספרא, אחרי מות, פרשה ב",
+   "fn": 10
+  },
+  {
+   "ref": "Yoma 38a:2-3",
+   "anchor": "בבלי, יומא לח ע\"א",
+   "fn": 12
+  },
+  {
+   "ref": "Vayikra Rabbah 21:4",
+   "para": 35
+  },
+  {
+   "ref": "Vayikra Rabbah 21:5",
+   "para": 37
+  },
+  {
+   "ref": "Ecclesiastes 3:1-8",
+   "para": 39
+  }
+ ]
+}

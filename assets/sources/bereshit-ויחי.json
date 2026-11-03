@@ -1,0 +1,62 @@
+{
+ "sources": [
+  {
+   "ref": "Exodus 1:9",
+   "heRef": "שמות א׳:ט׳",
+   "he": [
+    "וַיֹּאמֶר אֶל־עַמּוֹ הִנֵּה עַם בְּנֵי יִשְׂרָאֵל רַב וְעָצוּם מִמֶּנּוּ׃"
+   ],
+   "version": "Miqra according to the Masorah",
+   "license": "CC-BY-SA",
+   "url": "https://www.sefaria.org.il/Exodus_1:9?lang=he",
+   "anchor": "שמות א, ט",
+   "fn": 0
+  },
+  {
+   "ref": "Bereshit Rabbah 96:1",
+   "heRef": "בראשית רבה צ״ו:א׳",
+   "he": [
+    "וַיְחִי יַעֲקֹב בְּאֶרֶץ מִצְרַיִם (בראשית מז, כח), לָמָּה פָּרָשָׁה זוֹ סְתוּמָה מִכָּל הַפָּרָשִׁיּוֹת שֶׁל תּוֹרָה, אֶלָּא כֵּיוָן שֶׁנִּפְטַר אָבִינוּ יַעֲקֹב הִתְחִילָה שִׁעְבּוּד מִצְרַיִם עַל יִשְׂרָאֵל. דָּבָר אַחֵר, לָמָּה הִיא סְתוּמָה מִפְּנֵי שֶׁבִּקֵּשׁ יַעֲקֹב אָבִינוּ לְגַלּוֹת אֶת הַקֵּץ וְנִסְתַּם מִמֶּנּוּ. דָּבָר אַחֵר, לָמָּה הִיא סְתוּמָה מִפְּנֵי שֶׁסָּתַם מִמֶּנּוּ כָּל צָרוֹת שֶׁבָּעוֹלָם."
+   ],
+   "version": "Midrash Rabbah -- TE",
+   "license": "CC-BY-NC",
+   "url": "https://www.sefaria.org.il/Bereshit_Rabbah_96:1?lang=he",
+   "anchor": "בראשית רבה צו, א",
+   "fn": 1
+  },
+  {
+   "ref": "Genesis 37:11",
+   "heRef": "בראשית ל״ז:י״א",
+   "he": [
+    "וַיְקַנְאוּ־בוֹ אֶחָיו וְאָבִיו שָׁמַר אֶת־הַדָּבָר׃"
+   ],
+   "version": "Miqra according to the Masorah",
+   "license": "CC-BY-SA",
+   "url": "https://www.sefaria.org.il/Genesis_37:11?lang=he",
+   "para": 31
+  },
+  {
+   "ref": "Genesis 49:1",
+   "heRef": "בראשית מ״ט:א׳",
+   "he": [
+    "וַיִּקְרָא יַעֲקֹב אֶל־בָּנָיו וַיֹּאמֶר הֵאָסְפוּ וְאַגִּידָה לָכֶם אֵת אֲשֶׁר־יִקְרָא אֶתְכֶם בְּאַחֲרִית הַיָּמִים׃"
+   ],
+   "version": "Miqra according to the Masorah",
+   "license": "CC-BY-SA",
+   "url": "https://www.sefaria.org.il/Genesis_49:1?lang=he",
+   "para": 44
+  },
+  {
+   "ref": "II Samuel 13:21",
+   "heRef": "שמואל ב י״ג:כ״א",
+   "he": [
+    "וְהַמֶּלֶךְ דָּוִד שָׁמַע אֵת כׇּל־הַדְּבָרִים הָאֵלֶּה וַיִּחַר לוֹ מְאֹד׃"
+   ],
+   "version": "Miqra according to the Masorah",
+   "license": "CC-BY-SA",
+   "url": "https://www.sefaria.org.il/II_Samuel_13:21?lang=he",
+   "anchor": "שמואל ב יג, כא",
+   "fn": 7
+  }
+ ]
+}

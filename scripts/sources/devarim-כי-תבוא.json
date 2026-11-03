@@ -1,0 +1,53 @@
+{
+ "reviewed": "claude",
+ "sources": [
+  {
+   "ref": "Deuteronomy 26:1-3",
+   "para": 1
+  },
+  {
+   "ref": "Deuteronomy 26:9-11",
+   "para": 1
+  },
+  {
+   "ref": "Berakhot 26b:5",
+   "para": 9
+  },
+  {
+   "ref": "Berakhot 26b:14",
+   "para": 10
+  },
+  {
+   "ref": "Midrash Tanchuma, Ki Tavo 1:1",
+   "anchor": "מדרש תנחומא כי תבוא סימן א",
+   "fn": 1
+  },
+  {
+   "ref": "Mishnah Yoma 8:9",
+   "fn": 3
+  },
+  {
+   "ref": "Deuteronomy 26:5",
+   "para": 16
+  },
+  {
+   "ref": "Exodus 23:19",
+   "anchor": "שמות כג יט",
+   "fn": 5
+  },
+  {
+   "ref": "Exodus 34:26",
+   "anchor": "שמות לד כו",
+   "fn": 5
+  },
+  {
+   "ref": "Genesis 32:29",
+   "para": 26
+  },
+  {
+   "ref": "Bereshit Rabbah 60:15",
+   "anchor": "בראשית רבה (ס, טו)",
+   "fn": 6
+  }
+ ]
+}

@@ -1,0 +1,60 @@
+{
+ "reviewed": "claude",
+ "sources": [
+  {
+   "ref": "Leviticus 12:2",
+   "para": 1
+  },
+  {
+   "ref": "Rashi on Leviticus 13:46:1",
+   "para": 11
+  },
+  {
+   "ref": "Arakhin 16a:5",
+   "anchor": "ערכין טז, א",
+   "fn": 2
+  },
+  {
+   "ref": "Vayikra Rabbah 17:3",
+   "anchor": "ויקרא רבה יז",
+   "fn": 2
+  },
+  {
+   "ref": "Ketubot 77b:6",
+   "anchor": "בבלי, כתובות דף עז ע\"ב",
+   "fn": 3
+  },
+  {
+   "ref": "Vayikra Rabbah 16:6",
+   "anchor": "מדרש רבה, ויקרא, פרשה טז (ו)",
+   "fn": 6
+  },
+  {
+   "ref": "Teshuvot Rashi 207:2",
+   "anchor": "בשו\"ת רש\"י סימן רז",
+   "fn": 7
+  },
+  {
+   "ref": "Leviticus 15:18",
+   "para": 31
+  },
+  {
+   "ref": "Ecclesiastes 7:14",
+   "para": 31
+  },
+  {
+   "ref": "Sanhedrin 110a:6-7",
+   "anchor": "סנהדרין דף קי ע\"א",
+   "fn": 10
+  },
+  {
+   "ref": "Responsa Maharashdam, Yoreh Deah 143:2",
+   "anchor": "שו\"ת מהרשד\"ם חלק יו\"ד סימן קמג",
+   "fn": 11
+  },
+  {
+   "ref": "Leviticus 16:1",
+   "fn": 12
+  }
+ ]
+}

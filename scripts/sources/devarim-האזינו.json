@@ -1,0 +1,40 @@
+{
+ "reviewed": "claude",
+ "sources": [
+  {
+   "ref": "Deuteronomy 32:44-47",
+   "para": 2
+  },
+  {
+   "ref": "Rashi on Deuteronomy 32:47:1",
+   "para": 5
+  },
+  {
+   "ref": "Chagigah 9b:10",
+   "anchor": "הגמרא במסכת חגיגה ט:",
+   "fn": 5
+  },
+  {
+   "ref": "Meshekh Chokhmah, Haazinu 14",
+   "para": 16
+  },
+  {
+   "ref": "Genesis 46:29",
+   "para": 23
+  },
+  {
+   "ref": "Rashi on Genesis 46:29:3",
+   "para": 23
+  },
+  {
+   "ref": "Berakhot 24b:18-21",
+   "anchor": "תלמוד בבלי, ברכות דף כד ע\"ב",
+   "fn": 8
+  },
+  {
+   "ref": "Devarim Rabbah 10:2",
+   "anchor": "דברים רבה פרשה י' אות ב'",
+   "fn": 13
+  }
+ ]
+}

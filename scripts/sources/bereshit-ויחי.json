@@ -1,0 +1,28 @@
+{
+ "reviewed": "claude",
+ "sources": [
+  {
+   "ref": "Exodus 1:9",
+   "anchor": "שמות א, ט",
+   "fn": 0
+  },
+  {
+   "ref": "Bereshit Rabbah 96:1",
+   "anchor": "בראשית רבה צו, א",
+   "fn": 1
+  },
+  {
+   "ref": "Genesis 37:11",
+   "para": 31
+  },
+  {
+   "ref": "Genesis 49:1",
+   "para": 44
+  },
+  {
+   "ref": "II Samuel 13:21",
+   "anchor": "שמואל ב יג, כא",
+   "fn": 7
+  }
+ ]
+}

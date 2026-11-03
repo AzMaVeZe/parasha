@@ -1,0 +1,35 @@
+{
+ "reviewed": "claude",
+ "sources": [
+  {
+   "ref": "Exodus 10:15",
+   "para": 0
+  },
+  {
+   "ref": "Exodus 10:5",
+   "anchor": "י', ה'",
+   "para": 1
+  },
+  {
+   "ref": "Exodus 10:17",
+   "para": 13
+  },
+  {
+   "ref": "Leviticus 11:22",
+   "para": 17
+  },
+  {
+   "ref": "Numbers 15:39",
+   "fn": 1
+  },
+  {
+   "ref": "Nedarim 64b:6",
+   "anchor": "נדרים סב ע\"ב",
+   "fn": 2
+  },
+  {
+   "ref": "Exodus 10:16",
+   "fn": 4
+  }
+ ]
+}

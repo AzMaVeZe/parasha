@@ -1,0 +1,40 @@
+{
+ "reviewed": "claude",
+ "sources": [
+  {
+   "ref": "Numbers 16:1-4",
+   "para": 8
+  },
+  {
+   "ref": "Numbers 16:12-15",
+   "para": 8
+  },
+  {
+   "ref": "Numbers 11:29",
+   "para": 15
+  },
+  {
+   "ref": "I Samuel 8:7",
+   "para": 18
+  },
+  {
+   "ref": "Numbers 16:5",
+   "para": 29
+  },
+  {
+   "ref": "Bamidbar Rabbah 18:19",
+   "anchor": "במדבר רבה יח, יט",
+   "para": 32
+  },
+  {
+   "ref": "Sanhedrin 110a:14",
+   "anchor": "סנהדרין קי.",
+   "fn": 2
+  },
+  {
+   "ref": "Chullin 60b:4",
+   "anchor": "בבלי, חולין ס:",
+   "para": 37
+  }
+ ]
+}

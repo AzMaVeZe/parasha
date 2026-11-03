@@ -1,0 +1,42 @@
+{
+ "reviewed": "claude",
+ "sources": [
+  {
+   "ref": "Deuteronomy 3:23-27",
+   "para": 11
+  },
+  {
+   "ref": "Sforno on Deuteronomy 4:41:1",
+   "anchor": "ספורנו דברים ד, מא",
+   "fn": 0
+  },
+  {
+   "ref": "Deuteronomy 4:41-43",
+   "anchor": "דברים ד, מא-מג",
+   "fn": 1
+  },
+  {
+   "ref": "Deuteronomy 19:2",
+   "fn": 3
+  },
+  {
+   "ref": "Numbers 35:10-11",
+   "anchor": "במדבר לה, י-יא",
+   "fn": 3
+  },
+  {
+   "ref": "Rashi on Deuteronomy 4:41:1",
+   "anchor": "רש\"י דברים ד, מא",
+   "fn": 4
+  },
+  {
+   "ref": "Numbers 35:34",
+   "anchor": "במדבר, לה, לד",
+   "fn": 5
+  },
+  {
+   "ref": "Exodus 2:14-15",
+   "fn": 7
+  }
+ ]
+}

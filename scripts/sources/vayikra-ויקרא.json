@@ -1,0 +1,46 @@
+{
+ "reviewed": "claude",
+ "sources": [
+  {
+   "ref": "Leviticus 4:1-2",
+   "para": 2
+  },
+  {
+   "ref": "Sforno on Leviticus 4:3",
+   "para": 5
+  },
+  {
+   "ref": "Sforno on Leviticus 4:22",
+   "fn": 0
+  },
+  {
+   "ref": "Mishneh Torah, Trespass 8:8",
+   "para": 36
+  },
+  {
+   "ref": "Chullin 60b:4",
+   "anchor": "במסכת חולין דף ס ע\"ב",
+   "para": 38
+  },
+  {
+   "ref": "Guide for the Perplexed, Part 3 46:2",
+   "anchor": "מורה נבוכים חלק ג פרק מ\"ו",
+   "fn": 12
+  },
+  {
+   "ref": "Jerusalem Talmud Pesachim 4:1:7",
+   "anchor": "ירושלמי פסחים פ\"ד ה\"א",
+   "fn": 14
+  },
+  {
+   "ref": "Jerusalem Talmud Taanit 1:6:3",
+   "anchor": "תענית פ\"א ה\"ו",
+   "fn": 14
+  },
+  {
+   "ref": "Rashi on Megillah 22b:3:1",
+   "anchor": "רש\"י מגילה כ\"ב ע\"ב",
+   "fn": 14
+  }
+ ]
+}

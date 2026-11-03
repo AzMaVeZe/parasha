@@ -1,0 +1,40 @@
+{
+ "reviewed": "claude",
+ "sources": [
+  {
+   "ref": "Bava Batra 14b:12",
+   "anchor": "תלמוד בבלי, בבא-בתרא יד ע\"ב",
+   "fn": 0
+  },
+  {
+   "ref": "Shabbat 89a:5",
+   "anchor": "תלמוד בבלי, שבת פט ע\"א",
+   "fn": 2
+  },
+  {
+   "ref": "Menachot 29b:3-5",
+   "anchor": "תלמוד בבלי, מנחות כט ע\"ב",
+   "fn": 4
+  },
+  {
+   "ref": "Be'er HaGolah, Well 4 10:1",
+   "anchor": "באר הגולה, באר רביעי",
+   "fn": 6
+  },
+  {
+   "ref": "Sefer Etz Chaim 8:6:2",
+   "anchor": "עץ חיים, שער הנקודים, פרק ו'",
+   "fn": 7
+  },
+  {
+   "ref": "Machshavot Charutz 17:9",
+   "anchor": "מחשבות חרוץ, פרק יז",
+   "fn": 8
+  },
+  {
+   "ref": "Bava Batra 15a:4",
+   "anchor": "תלמוד בבלי, בבא בתרא, טו ע\"א",
+   "fn": 9
+  }
+ ]
+}

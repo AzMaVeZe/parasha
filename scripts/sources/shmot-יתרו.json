@@ -1,0 +1,48 @@
+{
+ "reviewed": "claude",
+ "sources": [
+  {
+   "ref": "Exodus 18:11",
+   "anchor": "שמות יח, יא",
+   "para": 1
+  },
+  {
+   "ref": "Genesis 9:6",
+   "para": 15
+  },
+  {
+   "ref": "Leviticus 24:19-20",
+   "fn": 3
+  },
+  {
+   "ref": "Exodus 21:23-25",
+   "fn": 3
+  },
+  {
+   "ref": "I Kings 20:42",
+   "fn": 3
+  },
+  {
+   "ref": "Proverbs 17:13",
+   "fn": 3
+  },
+  {
+   "ref": "Tosefta Sotah 4:1",
+   "anchor": "תוספתא סוטה ד, א",
+   "fn": 4
+  },
+  {
+   "ref": "Deuteronomy 19:16-21",
+   "para": 17
+  },
+  {
+   "ref": "Shabbat 31a:6",
+   "para": 26
+  },
+  {
+   "ref": "Mishneh Torah, Testimony 18:4",
+   "anchor": "רמב\"ם הלכות עדות י\"ח, ד'",
+   "fn": 6
+  }
+ ]
+}

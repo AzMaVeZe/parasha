@@ -1,0 +1,67 @@
+{
+ "reviewed": "claude",
+ "sources": [
+  {
+   "ref": "Kad HaKemach, Willow 1:1",
+   "para": 2
+  },
+  {
+   "ref": "Kad HaKemach, Sukkah 1:1-5",
+   "anchor": "בכתבי רבנו בחיי",
+   "fn": 0
+  },
+  {
+   "ref": "Sukkah 2a:12",
+   "anchor": "תלמוד בבלי, סוכה ב ע\"א",
+   "fn": 1
+  },
+  {
+   "ref": "Genesis 33:17",
+   "anchor": "בראשית לג, יז",
+   "fn": 2
+  },
+  {
+   "ref": "Bamidbar Rabbah 14:2",
+   "anchor": "במדבר רבה פרשה יד",
+   "fn": 2
+  },
+  {
+   "ref": "Amos 9:11",
+   "anchor": "עמוס ט, יא",
+   "fn": 3
+  },
+  {
+   "ref": "Sifra, Emor, Chapter 17 5",
+   "anchor": "ספרא אמור יז, ה",
+   "fn": 5
+  },
+  {
+   "ref": "Pirkei Avot 2:13",
+   "anchor": "משנה, אבות ב, ג",
+   "fn": 8
+  },
+  {
+   "ref": "Mishnah Sukkah 2:9",
+   "anchor": "משנה סוכה ב, ט",
+   "fn": 9
+  },
+  {
+   "ref": "Deuteronomy 33:2",
+   "para": 41
+  },
+  {
+   "ref": "Onkelos Deuteronomy 33:2",
+   "para": 44
+  },
+  {
+   "ref": "Beitzah 25b:7",
+   "anchor": "במסכת ביצה כח ע\"ב",
+   "para": 46
+  },
+  {
+   "ref": "Shabbat 105a:3",
+   "anchor": "בבלי, שבת דף קה.",
+   "fn": 16
+  }
+ ]
+}
