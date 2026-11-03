@@ -20,6 +20,7 @@
 | [`riddles.md`](riddles.md) | חילוץ החידות מה-PDF: שיטה, תוצאות, ומה נשאר פתוח |
 | [`services.md`](services.md) | אילו שירותים בשימוש, דרך איזה חשבון, ואיפה הסודות |
 | [`podcast-distribution.md`](podcast-distribution.md) | הפצת הפודקאסט למדריכים ולחיפוש |
+| [`podcast-prompt.md`](podcast-prompt.md) | הבקשה ל-NotebookLM ליצירת פרק, לכל פרשה בספר שמות |
 | [`sheet-text.md`](sheet-text.md) | חילוץ הטקסט מה-PDF: השיטה, הבדיקות, ומה נשאר |
 
 ## מצב נוכחי במספרים
