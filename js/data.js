@@ -35,7 +35,7 @@ window.PARASHA_DATA = [
   { name: 'לך לך', box: B('7taibkmo3b'), pdf: P('bereshit-לך-לך.pdf') },
   { name: 'וירא', box: B('hp2ovnivbq'), pdf: P('bereshit-וירא.pdf') },
   { name: 'חיי שרה', box: B('uaf9u05b67'), pdf: P('bereshit-חיי-שרה.pdf'), spotify: 'https://open.spotify.com/episode/0ppFcEziOE2qSsVbeSlGui' },
-  { name: 'תולדות', box: B('fa9s1rnhmj'), pdf: P('bereshit-תולדות.pdf') },
+  { name: 'תולדות', box: B('fa9s1rnhmj'), pdf: P('bereshit-תולדות.pdf'), spotify: 'https://open.spotify.com/episode/2dUsJVjW7vuDxTDJ0UakaZ' },
   { name: 'ויצא', box: B('t6azco76b4'), pdf: P('bereshit-ויצא.pdf') },
   { name: 'וישלח', box: B('qsydaxq39q'), pdf: P('bereshit-וישלח.pdf') },
   { name: 'וישב', box: B('36zdx81vqr'), pdf: P('bereshit-וישב.pdf') },
