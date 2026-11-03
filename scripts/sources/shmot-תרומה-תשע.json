@@ -1,83 +1,29 @@
 {
- "reviewed": false,
+ "reviewed": "claude",
  "sources": [
   {
-   "para": 4,
-   "how": "מובאה",
    "ref": "Midrash Tanchuma, Terumah 3:1",
-   "snippet": "\"מעשה בטורנוסרופוס ששאל את רבי עקיבא."
+   "para": 4
   },
   {
-   "para": 22,
-   "how": "מובאה",
+   "ref": "Midrash Tanchuma, Terumah 5:2",
+   "para": 18
+  },
+  {
    "ref": "I Chronicles 29:14",
-   "snippet": "\"וְכִי מִי אֲנִי, וּמִי עַמִּי, כִּי-נַעְצֹר כֹּחַ, לְהִתְנַדֵּב כָּזֹאת: כִּי-מ"
+   "para": 22
   },
   {
-   "para": 25,
-   "how": "מראה מקום",
-   "ref": "Midrash Tanchuma, Terumah 25:3",
-   "anchor": "מדרש תנחומא, תרומה, כה, ג"
+   "ref": "Midrash Tanchuma, Nasso 11:1",
+   "para": 34
   },
   {
-   "para": 29,
-   "how": "מראה מקום",
-   "ref": "Midrash Tanchuma, Terumah 25:5",
-   "anchor": "מדרש תנחומא, תרומה, כה, ה"
-  },
-  {
-   "para": 30,
-   "how": "מראה מקום",
-   "ref": "I Chronicles 29:11",
-   "anchor": "דברי הימים א כט יא"
-  },
-  {
-   "para": 34,
-   "how": "מראה מקום",
-   "ref": "Exodus 25:8",
-   "anchor": "שמות כה ח"
-  },
-  {
-   "para": 34,
-   "how": "מראה מקום",
-   "ref": "I Kings 8:27",
-   "anchor": "מלכים א', ח כז"
-  },
-  {
-   "para": 34,
-   "how": "מראה מקום",
-   "ref": "Jeremiah 23:24",
-   "anchor": "ירמיה כג כד"
-  },
-  {
-   "para": 34,
-   "how": "מראה מקום",
-   "ref": "Isaiah 66:1",
-   "anchor": "ישעיה סו א"
-  },
-  {
-   "para": 36,
-   "how": "מראה מקום",
-   "ref": "Jeremiah 23:24",
-   "anchor": "ירמיה כג כד"
-  },
-  {
-   "para": 36,
-   "how": "מראה מקום",
-   "ref": "Job 38:1",
-   "anchor": "איוב לח א"
-  },
-  {
-   "para": 36,
-   "how": "מובאה",
    "ref": "Bereshit Rabbah 4:4",
-   "snippet": "\"כותי אחד שאל את ר' מאיר... אמר לו אפשר אותו שכתוב 'הלא את השמים ואת הארץ אני מל"
+   "para": 36
   },
   {
-   "para": 57,
-   "how": "מובאה",
    "ref": "Exodus 25:9",
-   "snippet": "בפרשתנו ובתורה ככלל ישנו בעצם פתרון קיומי לבעיה הנוראית הזו, הפתרון המופיע בפרשת"
+   "para": 57
   }
  ]
 }

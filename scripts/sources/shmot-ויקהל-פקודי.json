@@ -1,65 +1,73 @@
 {
- "reviewed": false,
+ "reviewed": "claude",
  "sources": [
   {
-   "para": 2,
-   "how": "מובאה",
-   "ref": "Exodus 40:33 | Siddur Edot HaMizrach, Nissan, Learning of the Day 3 | Siddur Edot HaMizrach, Nissan, Learning of the Day 3 | Siddur Edot HaMizrach, Nissan, Learning of the Day 3 | Abarbanel on Torah, Numbers 8:1:10 | Siddur Edot HaMizrach, Nissan, Learning of the Day 3 | Exodus 40:38",
-   "snippet": "וַיָקֶּם אֶת-הֶחָצֵר, סָבִיב לַמִּשְׁכָּן וְלַמִּזְבֵּחַ, וַיִתֵּּן, אֶת-מָסַךְ "
+   "ref": "Exodus 40:33-38",
+   "para": 2
   },
   {
-   "para": 7,
-   "how": "מובאה",
    "ref": "Exodus 39:33",
-   "snippet": "\"וַיָבִּיאוּ אֶת-הַמִּשְׁכָּן אֶל-מֹשֶׁה, אֶת-הָאֹהֶל וְאֶת-כָּל-כֵּלָיו, קְרָסָ"
+   "para": 7
   },
   {
-   "para": 9,
-   "how": "מובאה",
-   "ref": "Siddur Edot HaMizrach, Nissan, Learning of the Day 3",
-   "snippet": "\"וּכְבוֹד יְהוָה, מָלֵא אֶת-הַמִּשְׁכָּן. וְלֹא-יָכֹל מֹשֶׁה, לָבוֹא אֶל-אֹהֶל מ"
-  },
-  {
-   "para": 12,
-   "how": "מובאה",
-   "ref": "Zohar, Pekudei 29:284",
-   "snippet": "\"ויביאו את המשכן אל משה\", אמאי \"ויביאו את המשכן\", בגין דהא בההיא שעתא הוה זווגא "
-  },
-  {
-   "para": 14,
-   "how": "מובאה",
    "ref": "Exodus 32:10",
-   "snippet": "מה שכמעט וקרה אילולא היה מתערב משה: \"וְעַתָּה הַנִּיחָה לִּי, וְיִחַר-אַפִּי בָה"
+   "para": 14
   },
   {
-   "para": 25,
-   "how": "מובאה",
-   "ref": "Notes by Rabbi Yehoshua Hartman on Ohr Chadash, Introduction 363",
-   "snippet": "באותו עניין, לפני כשבוע, משה רוצה 'לגעת' בקב\"ה ממש, להתקרב, לדעת. \"וְעַתָּה אִם-"
+   "ref": "Zohar, Pekudei 29:284-285",
+   "para": 15,
+   "anchor": "זוהר כרך ב (שמות) פקודי (רפד-רפה, דף רכ ע\"א)"
   },
   {
+   "ref": "Ecclesiastes 5:9",
+   "para": 20
+  },
+  {
+   "ref": "Exodus 33:13",
+   "para": 25
+  },
+  {
+   "ref": "Exodus 33:23",
+   "para": 25
+  },
+  {
+   "ref": "Niddah 31b:12",
    "para": 26,
-   "how": "מראה מקום",
-   "ref": "Niddah 31",
-   "anchor": "במסכת נידה לא"
+   "anchor": "מסכת נידה לא"
   },
   {
+   "ref": "Sukkah 52b:6",
    "para": 28,
-   "how": "מראה מקום",
-   "ref": "Sukkah 52b",
    "anchor": "בבלי, סוכה נב:"
   },
   {
+   "ref": "Kohelet Rabbah 1:13:1",
    "para": 28,
-   "how": "מראה מקום",
-   "ref": "Jerusalem Talmud Yoma 6:4",
-   "anchor": "ובירושלמי יומא ו', ד'"
+   "anchor": "קהלת רבה א' לד'"
   },
   {
-   "para": 29,
-   "how": "מראה מקום",
+   "ref": "Jerusalem Talmud Yoma 6:4:5",
+   "para": 28,
+   "anchor": "ירושלמי יומא ו', ד'"
+  },
+  {
    "ref": "Likutei Moharan, Part II 83",
+   "para": 29,
    "anchor": "ליקוטי מוהר\"ן תנינא פג"
+  },
+  {
+   "ref": "Psalms 145:16",
+   "para": 33
+  },
+  {
+   "ref": "Midrash Tanchuma, Vayikra 1:1",
+   "para": 46,
+   "anchor": "מדרש תנחומא פרשת ויקרא סימן א"
+  },
+  {
+   "ref": "Sippurei Maasiyot 7",
+   "para": 49,
+   "anchor": "ספורי מעשיות משנים קדמוניות, ר' נחמן מברסלב"
   }
  ]
 }
