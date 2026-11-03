@@ -228,6 +228,16 @@ html{scroll-behavior:smooth}
 .sheet-text__body>blockquote{margin:1em 0;padding-inline-start:16px;border-inline-start:3px solid var(--gold-400);
   font-size:17.5px;color:var(--ink-900);max-width:70ch}
 .sheet-text__note{font-size:13.5px;color:var(--text-muted);margin:12px 0 4px}
+/* המקורות: עוד <details> באותו עיצוב, ובו רשימה ממוספרת של המקורות מספריא */
+.sources{list-style:none;margin:0;padding:0;counter-reset:src}
+.source{counter-increment:src;padding:14px 0;border-bottom:1px solid var(--border-subtle)}
+.source:last-child{border-bottom:0;padding-bottom:0}
+.source__ref{margin:0 0 6px;font-family:var(--font-body);font-weight:600;font-size:15px;color:var(--text-heading)}
+.source__ref::before{content:counter(src) '. ';color:var(--text-muted);font-weight:400}
+.source__text{margin:0;padding-inline-start:16px;border-inline-start:3px solid var(--gold-400);
+  font-size:17.5px;line-height:1.75;color:var(--ink-900);max-width:70ch}
+.source__credit{font-size:12.5px;color:var(--text-muted);margin:6px 0 0}
+.source-link{text-decoration:underline;text-decoration-style:dotted;text-underline-offset:3px}
 
 /* ---------- תגובות ---------- */
 .comments__list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:12px}

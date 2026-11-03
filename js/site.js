@@ -731,6 +731,72 @@
   const textBox = document.getElementById('parasha-page-text');
   const textBody = document.getElementById('parasha-page-text-body');
   let textLoader = null;                    // המאזין של הדף הנוכחי — מוסר במעבר לדף אחר
+
+  /* המקורות: assets/sources/<שם>.json (scripts/sefaria-sources.py), רק לדפים
+     שהמקורות שלהם נבדקו. נטען מיד, כי הוא קובע אם התיבה מוצגת בכלל, וגם
+     מראי המקום שבטקסט הופכים בעזרתו לקישורים. */
+  const srcBox = document.getElementById('parasha-page-sources');
+  const srcBody = document.getElementById('parasha-page-sources-body');
+  const srcHint = document.getElementById('parasha-page-sources-hint');
+  const LICENSE_HE = { 'Public Domain': 'נחלת הכלל' };
+  let sourcesReady = Promise.resolve(null);
+  let sourcesFor = null;
+  function setupSources(p) {
+    srcBox.hidden = true;
+    srcBox.open = false;
+    srcBody.textContent = '';
+    sourcesFor = p.name;
+    const url = p.pdf ? p.pdf.replace('assets/pdfs/', 'assets/sources/').replace(/\.pdf$/i, '.json') : '';
+    if (!url || !(window.SOURCE_FILES || []).includes(url.replace('assets/sources/', ''))) {
+      sourcesReady = Promise.resolve(null);
+      return;
+    }
+    const name = p.name;
+    sourcesReady = fetch(encodeURI(url))
+      .then(r => (r.ok ? r.json() : null))
+      .then(t => (t && t.sources && t.sources.length ? t.sources : null))
+      .catch(() => null);
+    sourcesReady.then(list => {
+      if (!list || sourcesFor !== name) return;
+      srcHint.textContent = list.length + ' מקורות מהדף, בנוסח ספריא';
+      const note = el('p', 'sheet-text__note');
+      note.append('המקורות שהדף מצטט, לפי סדר הופעתם. הנוסח מתוך ');
+      const a = document.createElement('a');
+      a.href = 'https://www.sefaria.org.il/'; a.target = '_blank'; a.rel = 'noopener'; a.textContent = 'ספריא';
+      note.append(a, '.');
+      const ol = el('ol', 'sources');
+      list.forEach(s => {
+        const li = el('li', 'source');
+        const h = el('h3', 'source__ref');
+        const link = document.createElement('a');
+        link.href = s.url; link.target = '_blank'; link.rel = 'noopener'; link.textContent = s.heRef;
+        h.append(link);
+        const lic = LICENSE_HE[s.license] || s.license;
+        const credit = el('p', 'source__credit');
+        credit.append(el('bdi', '', s.version), lic && lic !== 'unknown' ? ' · ' + lic : '');
+        li.append(h, el('blockquote', 'source__text', s.he.join(' ')), credit);
+        ol.append(li);
+      });
+      srcBody.append(note, ol);
+      srcBox.hidden = false;
+    });
+  }
+  // פסקה מהדף, שבה מראה המקום (אם יש) הופך לקישור לספריא
+  function paragraphWithLinks(node, par, i, list) {
+    const marks = (list || []).filter(s => s.para === i && s.anchor && par.includes(s.anchor))
+      .map(s => ({ at: par.indexOf(s.anchor), s })).sort((x, y) => x.at - y.at);
+    let pos = 0;
+    marks.forEach(({ at, s }) => {
+      if (at < pos) return;
+      node.append(par.slice(pos, at));
+      const a = document.createElement('a');
+      a.className = 'source-link'; a.href = s.url; a.target = '_blank'; a.rel = 'noopener'; a.textContent = s.anchor;
+      node.append(a);
+      pos = at + s.anchor.length;
+    });
+    node.append(par.slice(pos));
+  }
+
   function setupSheetText(p) {
     textBox.hidden = true;
     textBox.open = false;
@@ -743,9 +809,8 @@
       if (!textBox.open) return;
       textBox.removeEventListener('toggle', load);
       textLoader = null;
-      fetch(encodeURI(src))
-        .then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
-        .then(t => {
+      Promise.all([fetch(encodeURI(src)).then(r => { if (!r.ok) throw new Error(r.status); return r.json(); }), sourcesReady])
+        .then(([t, list]) => {
           const note = el('p', 'sheet-text__note');
           note.append('הטקסט חולץ אוטומטית מקובץ ה-PDF. הנוסח המחייב הוא ');
           const a = document.createElement('a');
@@ -753,10 +818,10 @@
           note.append(a, '.');
           textBody.append(note);
           (t.notes || []).forEach(n => textBody.append(el('p', 'sheet-text__note', n)));
-          t.paragraphs.forEach(par => {
+          t.paragraphs.forEach((par, i) => {
             const nikud = (par.match(/[֑-ׇ]/g) || []).length;
             const node = document.createElement(nikud > par.length * 0.08 ? 'blockquote' : 'p');
-            node.textContent = par;
+            paragraphWithLinks(node, par, i, list);
             textBody.append(node);
           });
         })
@@ -816,6 +881,7 @@
     const pod = buildPodcast(p, title);
     if (pod) podcastEl.append(pod);
 
+    setupSources(p);
     setupSheetText(p);
     renderPageComments(p.name);
 

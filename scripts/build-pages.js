@@ -95,6 +95,30 @@ function sheetText(pdf) {
   return t.paragraphs && t.paragraphs.length ? t : null;
 }
 const isQuote = s => (s.match(NIKUD) || []).length > s.length * 0.08;
+
+/* המקורות שהדף מצטט, עם הנוסח מספריא (scripts/sefaria-sources.py). נבדקו ביד
+ * לפני שהגיעו לכאן. מוצגים ב-<details> סגור נוסף, ומראי המקום שבטקסט הופכים
+ * לקישורים לספריא. */
+function sheetSources(pdf) {
+  if (!pdf) return null;
+  const p = path.join(root, pdf.replace('assets/pdfs/', 'assets/sources/').replace(/\.pdf$/i, '.json'));
+  if (!fs.existsSync(p)) return null;
+  const t = JSON.parse(fs.readFileSync(p, 'utf8'));
+  return t.sources && t.sources.length ? t.sources : null;
+}
+// פסקה מהדף, מוגנת, ובה מראי המקום של פסקה זו כקישורים לספריא
+function linkAnchors(par, i, sources) {
+  let h = esc(par);
+  for (const s of sources || []) {
+    if (s.para !== i || !s.anchor) continue;
+    const a = esc(s.anchor);
+    const at = h.indexOf(a);
+    if (at < 0) continue;
+    h = h.slice(0, at) + `<a class="source-link" href="${esc(s.url)}" target="_blank" rel="noopener">${a}</a>` + h.slice(at + a.length);
+  }
+  return h;
+}
+const LICENSE_HE = { 'Public Domain': 'נחלת הכלל' };
 // תמונת השיתוף של העמוד (scripts/make-share.mjs). מה שווטסאפ מציג כששולחים
 // את הקישור; בלעדיה — תמונת האתר הכללית.
 const sharePath = name => 'assets/share/' + slug(name) + '.jpg';
@@ -286,6 +310,7 @@ const baseGraph = () => [websiteNode, personNode].concat(podcastNode ? [podcastN
 function parashaPage(e) {
   const url = e.url;
   const text = sheetText(e.pdf);
+  const sources = sheetSources(e.pdf);
   const pdfUrl = e.pdf ? abs(e.pdf) : null;
   const previewUrl = e.preview ? abs(e.preview) : null;
   const seferAnchor = '/#' + e.sefer.id;
@@ -426,12 +451,31 @@ function parashaPage(e) {
         <div class="sheet-text__body">
           <p class="sheet-text__note">הטקסט חולץ אוטומטית מקובץ ה-PDF. הנוסח המחייב הוא <a href="${esc(encodeURI('/' + e.pdf))}">הדף עצמו</a>.</p>`;
     for (const n of text.notes || []) main += `\n          <p class="sheet-text__note">${esc(n)}</p>`;
-    for (const par of text.paragraphs) {
+    text.paragraphs.forEach((par, i) => {
       main += isQuote(par)
-        ? `\n          <blockquote>${esc(par)}</blockquote>`
-        : `\n          <p>${esc(par)}</p>`;
-    }
+        ? `\n          <blockquote>${linkAnchors(par, i, sources)}</blockquote>`
+        : `\n          <p>${linkAnchors(par, i, sources)}</p>`;
+    });
     main += `\n        </div>
+      </details>`;
+  }
+
+  if (sources) {
+    main += `\n      <details class="sheet-text sheet-sources">
+        <summary>${iconSpan('file-text', 17)}<span>מקורות</span><span class="sheet-text__hint">${sources.length} מקורות מהדף, בנוסח ספריא</span></summary>
+        <div class="sheet-text__body">
+          <p class="sheet-text__note">המקורות שהדף מצטט, לפי סדר הופעתם. הנוסח מתוך <a href="https://www.sefaria.org.il/" target="_blank" rel="noopener">ספריא</a>.</p>
+          <ol class="sources">`;
+    for (const s of sources) {
+      const lic = LICENSE_HE[s.license] || s.license;
+      main += `\n            <li class="source">
+              <h3 class="source__ref"><a href="${esc(s.url)}" target="_blank" rel="noopener">${esc(s.heRef)}</a></h3>
+              <blockquote class="source__text">${s.he.map(x => esc(x)).join(' ')}</blockquote>
+              <p class="source__credit"><bdi>${esc(s.version)}</bdi>${lic && lic !== 'unknown' ? ' · ' + esc(lic) : ''}</p>
+            </li>`;
+    }
+    main += `\n          </ol>
+        </div>
       </details>`;
   }
 
