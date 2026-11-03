@@ -62,8 +62,10 @@ def caption_glyphs(page, expand, rule):
         x0, y0, x1, y1 = info['bbox']
         if x1 - x0 < 30 or y1 - y0 < 30:
             continue
-        # מתחת לקו ההערות — רק גופן זעיר מאוד (8.5 ומטה), שהוא כיתוב ולא הערה.
-        ok = lambda g: g['size'] < body - 1.5 and (rule is None or g['y'] < rule or g['size'] <= 8.6)
+        # מתחת לקו ההערות — רק אותיות בגופן זעיר מאוד (8.5 ומטה), שהן כיתוב ולא הערה.
+        # ספרות שם נשארות: מספר ההערה הזעיר שפותח כל הערה הוא מה שמפריד בין הערה להערה.
+        ok = lambda g: g['size'] < body - 1.5 and (
+            rule is None or g['y'] < rule or (g['size'] <= 8.6 and not g['s'].isdigit()))
         inx = lambda g: x0 - 4 <= g['x'] <= x1 + 4
         below = [g for g in gs if inx(g) and y1 - 2 < g['y'] <= y1 + CAPTION_BELOW and ok(g)]
         inside = [g for g in gs if inx(g) and y0 <= g['y'] <= y1 - 2 and ok(g)]
