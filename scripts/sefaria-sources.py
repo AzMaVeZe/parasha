@@ -7,7 +7,7 @@
                    (find-refs של ספריא) ומובאות בלי מראה מקום (חיפוש טקסט).
                    כותב ל-scripts/sources/<שם>.json, רק אם הקובץ עוד לא קיים:
                    קובץ שכבר נבדק ותוקן ביד לא נדרס.
-  fetch [שם ...]   לכל קובץ ב-scripts/sources/, מוריד מספריא את הטקסט העברי של
+  fetch [שם ...]   לכל קובץ שנבדק ב-scripts/sources/, מוריד מספריא את הטקסט העברי של
                    כל מקור וכותב ל-assets/sources/<שם>.json. זה מה שהאתר מציג.
                    בלי שמות: כל הקבצים.
 
@@ -212,7 +212,10 @@ if __name__ == '__main__':
                 json.dump({'reviewed': False, 'sources': res}, f, ensure_ascii=False, indent=1)
                 f.write('\n')
     elif len(sys.argv) >= 2 and sys.argv[1] == 'fetch':
-        names = sys.argv[2:] or sorted(f[:-5] for f in os.listdir(CURATED_DIR) if f.endswith('.json'))
+        # בלי שמות: רק רשימות שנבדקו ("reviewed" אינו false). טיוטה של find לא מגיעה לאתר.
+        names = sys.argv[2:] or sorted(
+            f[:-5] for f in os.listdir(CURATED_DIR) if f.endswith('.json')
+            and json.load(open(os.path.join(CURATED_DIR, f), encoding='utf-8')).get('reviewed') is not False)
         fetch(names)
     else:
         sys.exit(__doc__)
