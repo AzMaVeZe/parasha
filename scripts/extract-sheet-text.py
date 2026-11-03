@@ -29,7 +29,7 @@ import unicodedata
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from pdf_glyphs import open_fixed          # noqa: E402
-from pdf_layout import lines               # noqa: E402
+from pdf_layout import lines, _glyphs     # noqa: E402
 
 ROOT = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..')
 PDF_DIR = os.path.join(ROOT, 'assets', 'pdfs')
@@ -41,13 +41,63 @@ MIN_PARAGRAPH = 15          # קצר מזה הוא ריהוט עמוד: 'לק"י
 HEB = 'א-ת'
 
 
+CAPTION_BELOW = 26     # עד כמה נקודות מתחת לתמונה יושב הכיתוב שלה
+CAPTION_MAX_LINES = 4  # כיתוב הוא שורה-שתיים; יותר מזה כבר טקסט
+
+
+def caption_glyphs(page, expand, rule):
+    """הגליפים של כיתובי התמונות בעמוד.
+
+    כיתוב ("ג'יימס טיסוט, צרפת, 1836-1902") יושב בתוך התמונה או ממש מתחתיה, בגופן
+    קטן מגוף הטקסט. מכיוון שהשורות נבנות לפי גובה לרוחב כל העמוד, כיתוב שליד הטור
+    השני היה נכנס לאמצע שורה שם — לפעמים לאמצע פסוק. הוא אינו חלק מהדף כטקסט.
+    מה שמתחת לקו הערות השוליים אינו כיתוב, ותמונה זעירה (פחות מ-30 נקודות) אינה תמונה."""
+    gs = _glyphs(page, expand)
+    if not gs:
+        return set()
+    sizes = sorted(round(g['size']) for g in gs)
+    body = max(set(sizes), key=sizes.count)
+    out = set()
+    for info in page.get_image_info():
+        x0, y0, x1, y1 = info['bbox']
+        if x1 - x0 < 30 or y1 - y0 < 30:
+            continue
+        # מתחת לקו ההערות — רק אותיות בגופן זעיר מאוד (8.5 ומטה), שהן כיתוב ולא הערה.
+        # ספרות שם נשארות: מספר ההערה הזעיר שפותח כל הערה הוא מה שמפריד בין הערה להערה.
+        ok = lambda g: g['size'] < body - 1.5 and (
+            rule is None or g['y'] < rule or (g['size'] <= 8.6 and not g['s'].isdigit()))
+        inx = lambda g: x0 - 4 <= g['x'] <= x1 + 4
+        below = [g for g in gs if inx(g) and y1 - 2 < g['y'] <= y1 + CAPTION_BELOW and ok(g)]
+        inside = [g for g in gs if inx(g) and y0 <= g['y'] <= y1 - 2 and ok(g)]
+        # בתוך התמונה: טקסט רגיל שעוקף אותה נוגע לפעמים בתיבה שלה. אם יש שם יותר מדי
+        # שורות, נשאר רק הגופן הזעיר (9 ומטה), שהוא הכיתוב.
+        if len({round(g['y'] / 3) for g in inside}) > CAPTION_MAX_LINES:
+            inside = [g for g in inside if g['size'] <= 9.2]
+        for cand in (below, inside):
+            rows = {round(g['y'] / 3) for g in cand}
+            # טקסט קטן בתוך תמונה של חידה הוא החידה עצמה, לא כיתוב — נשאר
+            text = ''.join(g['s'] for g in sorted(cand, key=lambda g: (round(g['y'] / 3), -g['x'])))
+            if not cand or len(rows) > CAPTION_MAX_LINES or re.search(r'חיד|לקינוח|פתרון|התשובה', text):
+                continue
+            out |= {(round(g['x'], 2), round(g['y'], 2), g['s']) for g in cand}
+    return out
+
+
 def page_lines(doc, expand):
-    """שורות כל עמוד, עמוד־עמוד, וגובה הקו שמפריד את הערות השוליים (או None)."""
+    """שורות כל עמוד, עמוד־עמוד, וגובה הקו שמפריד את הערות השוליים (או None).
+    כיתובי התמונות יורדים (caption_glyphs)."""
     out = []
     for page in doc:
         rows = lines(page, expand)
-        if rows:
-            out.append((rows, footnote_rule(page, rows), page.rect.height - 50))
+        if not rows:
+            continue
+        rule = footnote_rule(page, rows)
+        cap = caption_glyphs(page, expand, rule)
+        if cap:
+            rows = lines(page, expand, skip=lambda g: (round(g['x'], 2), round(g['y'], 2), g['s']) in cap)
+            if not rows:
+                continue
+        out.append((rows, rule, page.rect.height - 50))
     return out
 
 

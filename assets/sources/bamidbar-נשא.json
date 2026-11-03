@@ -26,7 +26,7 @@
    "version": "William Davidson Edition - Vocalized Aramaic",
    "license": "CC-BY-NC",
    "url": "https://www.sefaria.org.il/Nazir_22a:4?lang=he",
-   "para": 4
+   "para": 3
   },
   {
    "ref": "Bamidbar Rabbah 10:11",
@@ -37,7 +37,7 @@
    "version": "Midrash Rabbah -- TE",
    "license": "CC-BY-NC",
    "url": "https://www.sefaria.org.il/Bamidbar_Rabbah_10:11?lang=he",
-   "para": 7
+   "para": 6
   },
   {
    "ref": "Nedarim 9b:5-7",
@@ -51,7 +51,7 @@
    "license": "CC-BY-NC",
    "url": "https://www.sefaria.org.il/Nedarim_9b:5-7?lang=he",
    "anchor": "בבלי נדרים ט",
-   "para": 9
+   "para": 8
   },
   {
    "ref": "Amos 2:11",
@@ -87,7 +87,7 @@
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/Deuteronomy_23:4?lang=he",
    "anchor": "דברים כג, ד",
-   "para": 15
+   "para": 14
   },
   {
    "ref": "Mishnah Yevamot 8:3",
@@ -98,7 +98,7 @@
    "version": "Torat Emet 357",
    "license": "Public Domain",
    "url": "https://www.sefaria.org.il/Mishnah_Yevamot_8:3?lang=he",
-   "para": 18
+   "para": 17
   },
   {
    "ref": "Yevamot 76b:11-77a:2",
@@ -118,7 +118,7 @@
    "license": "CC-BY-NC",
    "url": "https://www.sefaria.org.il/Yevamot_76b:11-77a:2?lang=he",
    "anchor": "בבלי, יבמות עו:-עז.",
-   "para": 20
+   "para": 19
   },
   {
    "ref": "Jerusalem Talmud Yevamot 8:3:3",
@@ -130,7 +130,7 @@
    "license": "CC-BY",
    "url": "https://www.sefaria.org.il/Jerusalem_Talmud_Yevamot_8:3:3?lang=he",
    "anchor": "יבמות ח, ג",
-   "para": 23
+   "para": 22
   },
   {
    "ref": "Ruth 1:8",
@@ -141,7 +141,7 @@
    "version": "Miqra according to the Masorah",
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/Ruth_1:8?lang=he",
-   "para": 29
+   "para": 28
   },
   {
    "ref": "Berakhot 28a:5-6",
@@ -154,7 +154,7 @@
    "license": "CC-BY-NC",
    "url": "https://www.sefaria.org.il/Berakhot_28a:5-6?lang=he",
    "anchor": "בבלי, ברכות כח.",
-   "para": 37
+   "para": 35
   },
   {
    "ref": "Shabbat 89a:5",
@@ -166,7 +166,7 @@
    "license": "CC-BY-NC",
    "url": "https://www.sefaria.org.il/Shabbat_89a:5?lang=he",
    "anchor": "בבלי שבת פט.",
-   "para": 41
+   "para": 39
   }
  ]
 }

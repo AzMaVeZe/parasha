@@ -8,7 +8,8 @@
 כלומר לפי x יורד; סימן ניקוד שייך לאות שהתיבה שלה מכילה את מיקומו; ורצף
 של ספרות או לטינית בתוך שורה עברית נקרא לשמאל־ימין ולכן מוחזר.
 
-הפונקציה `lines(page, expand)` מחזירה את שורות העמוד כמחרוזות.
+הפונקציה `lines(page, expand, skip)` מחזירה את שורות העמוד כמחרוזות. skip(glyph),
+אם ניתנה, מסננת גליפים לפני בניית השורות (כיתובי תמונות, extract-sheet-text.py).
 """
 
 import re
@@ -212,7 +213,7 @@ def _spaced(bases):
     return ''.join(parts)
 
 
-def lines(page, expand):
+def lines(page, expand, skip=None):
     """שורות העמוד, בסדר קריאה.
 
     השורות נבנות מהאותיות בלבד, והניקוד מצורף אליהן אחר כך. הסיבה: יש
@@ -221,6 +222,8 @@ def lines(page, expand):
     הייתה זורקת אותו לשורה השכנה, ו"כְמַעֲשֶׂיךָ" היה יוצא "כְמַעֲשֶׂיך".
     """
     gs = _glyphs(page, expand)
+    if skip:
+        gs = [g for g in gs if not skip(g)]
     if not gs:
         return []
     bases = [g for g in gs if unicodedata.category(g['s'][0]) != 'Mn']
