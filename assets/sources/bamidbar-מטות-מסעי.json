@@ -30,7 +30,7 @@
    "version": "Miqra according to the Masorah",
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/Numbers_31:7-12?lang=he",
-   "para": 4
+   "para": 6
   },
   {
    "ref": "Numbers 31:13-18",
@@ -46,7 +46,7 @@
    "version": "Miqra according to the Masorah",
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/Numbers_31:13-18?lang=he",
-   "para": 6
+   "para": 8
   },
   {
    "ref": "Numbers 31:19-20",
@@ -58,7 +58,7 @@
    "version": "Miqra according to the Masorah",
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/Numbers_31:19-20?lang=he",
-   "para": 10
+   "para": 14
   },
   {
    "ref": "Zohar, Matot 1:1-2",
@@ -70,7 +70,7 @@
    "version": "Vocalized Zohar, Israel 2013",
    "license": "unknown",
    "url": "https://www.sefaria.org.il/Zohar,_Matot_1:1-2?lang=he",
-   "para": 19
+   "para": 25
   },
   {
    "ref": "Bamidbar Rabbah 22:2",
@@ -97,7 +97,7 @@
    "version": "Miqra according to the Masorah",
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/Numbers_31:48-52?lang=he",
-   "para": 23
+   "para": 30
   },
   {
    "ref": "Numbers 31:53",
@@ -108,7 +108,7 @@
    "version": "Miqra according to the Masorah",
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/Numbers_31:53?lang=he",
-   "para": 27
+   "para": 34
   }
  ]
 }

@@ -267,6 +267,66 @@ def join(rows):
     return unicodedata.normalize('NFC', tidy(text)).strip()
 
 
+def is_quote(p):
+    """כמו באתר (build-pages.js, site.js): פסקה מנוקדת מוצגת כמובאה."""
+    return len(re.findall('[%s]' % NIK, p)) > len(p) * 0.08
+
+
+PROSE_RUN = 4   # כך הרבה מילים בלי ניקוד ברצף — זה כבר טקסט, לא מילה לא מנוקדת בתוך פסוק
+
+
+def split_verse(p):
+    """פסוק מנוקד וטקסט רגיל שנדבקו בחילוץ לפסקה אחת ("...קָנִיתִי אִישׁ אֶת-ה'. עד עתה עסקנו...").
+
+    רק בפסקה שמוצגת כמובאה: שם הטקסט שאחרי הפסוק (או לפניו) מעוצב בטעות כמו הפסוק.
+    חותכים בגבול המילים שבין הרצף המנוקד לרצף הלא מנוקד. מילה בודדת בלי ניקוד בתוך
+    פסוק (ה', "(...)") לא נחשבת גבול, ומראה המקום שבסוגריים אחרי הפסוק נשאר איתו.
+    הטקסט עצמו לא משתנה: הפסקה רק מתחלקת לכמה פסקאות.
+    """
+    if not is_quote(p):
+        return [p]
+    words = p.split(' ')
+    voc = [bool(re.search('[%s]' % NIK, w)) for w in words]
+    # מילה עם אותיות. ה' וא-לוהים בלי ניקוד הם חלק מהפסוק, לא טקסט.
+    # {ס} ו-{פ} של הפרשיות הם סימנים, לא טקסט.
+    heb = [bool(re.search('[%s]' % HEB, w))
+           and not re.fullmatch(r'[^%s]*ה[\'׳][^%s]*|\{[פס]\}' % (HEB, HEB), w) for w in words]
+    prose, start = [], None
+    for i in range(len(words) + 1):
+        if i < len(words) and not voc[i]:
+            if start is None and heb[i]:
+                start = i
+            continue
+        if start is not None:
+            end = i
+            while not heb[end - 1]:         # מרכאות פותחות של הפסוק הבא שייכות אליו
+                end -= 1
+            n = sum(heb[start:end])
+            # פתיחה קצרה לפני פסוק ("ונסיים בפסוק:") נחשבת גם היא, אם היא נגמרת בנקודתיים
+            if n >= PROSE_RUN or (start == 0 and n >= 2 and words[end - 1].endswith(':')):
+                before = ' '.join(words[prose[-1][1] if prose else 0:start])
+                if words[start].startswith('(') or before.count('(') > before.count(')'):
+                    # "...פסוק (ויקרא כה, לה-לז) הטקסט" — מראה המקום הולך עם הפסוק
+                    close = next((k for k in range(start, min(start + 5, end)) if ')' in words[k]), None)
+                    if close is not None:
+                        start = close + 1
+                if start < end:
+                    prose.append((start, end))
+            start = None
+    cuts = sorted({k for a, b in prose for k in (a, b) if 0 < k < len(words)})
+    parts = [' '.join(words[a:b]) for a, b in zip([0] + cuts, cuts + [len(words)])]
+    # קטע קצר מדי (שארית של מראה מקום, "לקינוח:") מתחבר לקטע שלפניו
+    out = []
+    for x in parts:
+        if out and len(x) < MIN_PARAGRAPH:
+            out[-1] += ' ' + x
+        elif out and len(out[-1]) < MIN_PARAGRAPH:
+            out[-1] += ' ' + x
+        else:
+            out.append(x)
+    return out
+
+
 def extract(path):
     doc, expand, unknown = open_fixed(path)
     pages = page_lines(doc, expand)
@@ -286,6 +346,7 @@ def extract(path):
                 footnotes.append({'n': n, 'text': join(t)})
     paras = [p for p in paras
              if len(p) >= MIN_PARAGRAPH and len(re.findall(r'[א-תA-Za-z]', p)) >= 3]
+    paras = [x for p in paras for x in split_verse(p)]
     body = '\n\n'.join(paras + [f['text'] for f in footnotes])
     notes = []
     if UNREADABLE in body:
