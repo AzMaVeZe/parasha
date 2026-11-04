@@ -25,7 +25,7 @@ node book/render.js book-c            # ← book/build/out/book-c.pdf (B5; --siz
 ## הכריכה
 
 ```
-python3 book/cover.py --size b5 --pages 303     # ← book/build/out/cover.html
+python3 book/cover.py --size b5                 # ← book/build/out/cover.html
 node book/render-cover.js                        # ← cover.pdf
 ```
 
@@ -37,7 +37,7 @@ node book/render-cover.js                        # ← cover.pdf
 כרטיסי הפודקאסט (הכריכה מודפסת בצבע; עמודי הפנים בשחור-לבן).
 
 **גודל:** בבוקפוד מוכנים A5, B5 (16.5×23.5), 13.5×21 ו-A4. 17×24 הוא "התאמה אישית". `--size b5`
-בונה את הספר ואת הכריכה ב-B5. `samples/אללה-פרשה-טיוטה-B5.pdf` — 302 עמודים, בלי כיתובי התמונות.
+בונה את הספר ואת הכריכה ב-B5. `samples/אללה-פרשה-טיוטה-B5.pdf` — 291 עמודים, בלי כיתובי התמונות ובלי החידות, וכותרת הדף לא חוזרת בראש הפרק. השדרה: 29.2 מ"מ.
 
 ## הדוגמאות
 

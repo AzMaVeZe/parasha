@@ -6,8 +6,11 @@
 הפלט: book/build/out/book-<עיצוב>[-sample].html, ו-book/render.js הופך אותו ל-PDF.
 
 הטקסט: assets/sheet-text (מה שחולץ מה-PDF). זו טיוטה אוטומטית — ניקוי לפי כללים:
-- מה שאחרי החידה, הפתרון והחתימה נחתך (החידות לא נכנסות לספר).
-- שורות כותרת של עמודי הדף ("לק"י פרשת תרומה תשס"ט") וכיתובי תמונות באנגלית יורדים.
+- מה שאחרי החידה, הפתרון והחתימה נחתך (החידות לא נכנסות לספר). החידות מזוהות גם לפי הנוסח
+  שלהן ב-js/riddles.js, כשאין לפניהן "חידה:"; חידה בחצי השני של הדף — ממנה והלאה הכל יורד.
+- שורות כותרת של עמודי הדף ("לק"י פרשת תרומה תשס"ט", "תש"עשבת פרשת וישלח") וכיתובי תמונות
+  באנגלית יורדים. תוספת בשורת הכותרת שבראש הדף ("(וקצת פורים)") נשארת ככותרת משנה.
+- דף אחד בשני מקומות (וזאת הברכה / הושענא רבה) נכנס לספר פעם אחת.
 - פסוק מנוקד שנדבק בחילוץ לטקסט שאחריו נחתך ממנו (split_quote), כך שרק הפסוק מעוצב כמובאה.
 - שורות שנשברו בגלל שני הטורים מתחברות: פסקה שאינה נגמרת בסימן פיסוק מתחברת לבאה.
 - הערות השוליים: בסוף כל פרק, ממוספרות כמו בדף. מקום הסימון בגוף הטקסט אבד בחילוץ,
@@ -29,8 +32,9 @@ AUTHOR = "אריאל ז'יטניצקי"
 
 NIKUD = re.compile(r'[֑-ׇ]')
 TAIL = re.compile(r'פתרון החידה|חידת השבוע|חידה לשבוע|לקינוח|והפעם חידה|את חידת השבוע|שבת שלום|רשימת התפוצה|'
+                  r'חידה לסיום|לסיום חידה|ונסיים בחידה|'
                   r'מותר להעביר|להעביר הלאה|\[כתובת מייל\]')
-HEADER = re.compile(r'^(לק"י\s*)?(שבת\s+)?(פרשת|פרשות)\s.{1,25}\s(תש[^\s]{1,4})$|^תש[^\s]{1,4}\s+שבת\s+פרשת\s.{1,25}$')
+HEADER = re.compile(r'^(לק"י\s*)?(שבת\s+)?(פרשת|פרשות)\s.{1,25}\s(תש[^\s]{1,4})$|^תש[^\s]{1,4}?\s*שבת\s+(פרשת\s)?.{1,25}$')
 ENDS = re.compile(r'[.:?!"״׃)\]…;\']\s*$')
 
 
@@ -74,11 +78,96 @@ def split_quote(p):
     return parts
 
 
-def clean(paras):
-    out = []
-    for p in paras:
+YEAR = r'תש[א-ת]?["״\'][א-ת]'
+
+
+def riddles():
+    """החידות והפתרונות שבדפים (js/riddles.js) — כדי להוריד אותם מהספר גם כשאין לפניהם "חידה:"."""
+    js = "global.window={};require('./js/riddles.js');console.log(JSON.stringify(window.PARASHA_RIDDLES))"
+    data = json.loads(subprocess.check_output(['node', '-e', js], cwd=ROOT))
+    return [t for r in data.values() for t in (r.get('q'), r.get('a')) if t]
+
+
+def words(t):
+    return re.sub(r'[^א-תA-Za-z0-9]+', ' ', NIKUD.sub('', t)).split()
+
+
+def shingles(t, n=4):
+    w = words(t)
+    return {tuple(w[i:i + n]) for i in range(max(1, len(w) - n + 1))}
+
+
+RIDDLE_SH = None
+
+
+def is_riddle(p):
+    """פסקה שרובה (חצי מרצפי ארבע המילים שבה ויותר) לקוח מחידה או מפתרון."""
+    global RIDDLE_SH
+    if RIDDLE_SH is None:
+        RIDDLE_SH = [(shingles(t), ' '.join(words(t))) for t in riddles()]
+    sh, flat = shingles(p), ' '.join(words(p))
+    if len(flat) < 12:
+        return False
+    return any(len(sh & rs) >= 0.5 * len(sh) or (len(words(p)) < 4 and flat in rf) for rs, rf in RIDDLE_SH)
+
+
+def fuzzy(w):
+    return re.sub('[וי]', '', w)
+
+
+def opening(p, names):
+    """שורת הכותרת שבראש הדף ("תש"עשבת פרשת וישלח", "פרשת תצוה (וקצת פורים) תשס"ט").
+
+    לפרק בספר יש כבר כותרת ושנה, ולכן: אם השורה רק חוזרת עליהן — None (יורדת). אם יש בה
+    תוספת משל אריאל — מוחזרת השורה בלי מה שחוזר (שנה, "פרשת X"), ומוצגת ככותרת משנה.
+    פסקה שאינה שורת כותרת — False."""
+    if len(p) > 70 or len(p.split()) > 9 or is_quote(p):
+        return False
+    if not (re.search(YEAR + r'|לק"י|^(שבת\s+)?(פרשת|פרשות)\s', p) or not ENDS.search(p)):
+        return False
+    keep = {fuzzy(w) for n in names for w in n.split()}
+    name = lambda w: fuzzy(re.sub(r'^ו', '', w)) in keep or fuzzy(w) in keep
+    key = lambda w: re.fullmatch(r'ו?(שבת|פרשת|פרשות)', w)
+    dash = lambda w: w in ('-', '–')
+    t = re.sub(r'לק"י|\*|' + YEAR, ' ', p).split()
+    # מההתחלה: "שבת פרשת ויקהל פקודי", "תשעה באב"
+    i = 0
+    while i < len(t) and (key(t[i]) or name(t[i]) or dash(t[i])):
+        i += 1
+    t = t[i:]
+    # מהסוף: "- פרשת נשא", "ופרשת עקב", "– ושבת וזאת הברכה"
+    j = len(t)
+    while j and name(t[j - 1]):
+        j -= 1
+    if j < len(t) and j and key(t[j - 1]):
+        j -= 1
+        while j and (key(t[j - 1]) or dash(t[j - 1])):
+            j -= 1
+        t = t[:j]
+    while t and dash(t[-1]):
+        t.pop()
+    if not t or ('(' not in ' '.join(t) and len([w for w in t if not name(w)]) <= 1):   # "ויהי מקץ"
+        return None
+    return ' '.join(t)
+
+
+def clean(paras, names=()):
+    out, subs = [], []
+    for i, p in enumerate(paras):
         p = p.strip()
         if not p:
+            continue
+        if i < 2 and not out:
+            o = opening(p, names)
+            if o is None:
+                continue
+            if o:
+                subs.append(o)
+                continue
+        if i and is_riddle(p):
+            # חידה בחצי השני של הדף: ממנה והלאה הכל חידה (התמונה, הרמז) וחתימה
+            if i >= len(paras) / 2:
+                break
             continue
         if TAIL.search(p):
             break
@@ -97,12 +186,12 @@ def clean(paras):
             joined[-1] = joined[-1] + ' ' + p
         else:
             joined.append(p)
-    return joined
+    return joined, subs
 
 
 def chapters():
     y = years()
-    parts = []
+    parts, used = [], set()
     for sefer in toc_data():
         seen, chs = {}, []
         for p in sefer['parshiot']:
@@ -112,12 +201,18 @@ def chapters():
             if key in seen:                       # דף אחד לשתי פרשות (ויקהל-פקודי וכו')
                 seen[key]['names'].append(p['name'])
                 continue
+            if key in used:                       # הושענא רבה: אותו דף כמו וזאת הברכה — פעם אחת בספר
+                continue
+            used.add(key)
             f = os.path.join(ROOT, p['pdf'].replace('assets/pdfs/', 'assets/sheet-text/').replace('.pdf', '.json'))
             if not os.path.exists(f):
                 continue
             t = json.load(open(f, encoding='utf-8'))
-            ch = {'names': [p['name']], 'year': y.get(p['name'], ''), 'paras': clean(t['paragraphs']),
-                  'notes': t.get('footnotes', []), 'chag': sefer['id'] == 'chagim', 'id': 'ch-%d' % len(parts) + '-%d' % len(chs)}
+            names = [q['name'] for q in sefer['parshiot'] if q['pdf'] == key]
+            paras, subs = clean(t['paragraphs'], names)
+            ch = {'names': [p['name']], 'year': y.get(p['name'], ''), 'paras': paras, 'subs': subs,
+                  'notes': [n for n in t.get('footnotes', []) if 'החידה' not in n['text']],
+                  'chag': sefer['id'] == 'chagim', 'id': 'ch-%d' % len(parts) + '-%d' % len(chs)}
             seen[key] = ch
             chs.append(ch)
         if chs:
@@ -198,6 +293,7 @@ p.d { font-family: 'Assistant'; font-size: .95em; margin-right: 4mm }
 .part { page: opener; break-before: right; break-after: page; text-align: center; padding-top: 85mm }
 .part h2 { font-family: 'Assistant'; font-weight: 800; font-size: 26pt; margin: 0 }
 .chapter { break-before: page; string-set: chapter attr(data-title) }
+.ch-sub { font: 400 12pt 'Assistant'; color: #333; margin-top: 1mm }
 .notes { margin-top: 6mm; border-top: .5pt solid #999; padding-top: 2mm }
 .notes h4 { font: 700 9pt 'Assistant'; margin: 0 0 1mm; color: #333 }
 .notes ol { list-style: none; margin: 0; padding: 0 }
@@ -222,6 +318,7 @@ def build(design='c', sample=False, size='b5'):   # הוחלט: B5, הגודל �
             kicker = part['name']
             h = [f'<section class="chapter" id="{ch["id"]}" data-title="{esc(title)}">',
                  f'<header class="ch-head"><div class="ch-kicker">{esc(kicker)}</div><h2>{esc(title)}</h2>'
+                 + ''.join(f'<div class="ch-sub">{esc(t)}</div>' for t in ch['subs'])
                  + (f'<div class="ch-year">{esc(ch["year"])}</div>' if ch['year'] else '') + '</header>']
             for i, p in enumerate(ch['paras']):
                 cls = 'q' if is_quote(p) else ('d' if p.startswith('-') else ('first' if i == 0 else ''))
