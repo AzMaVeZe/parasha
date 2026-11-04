@@ -61,7 +61,7 @@
    "version": "Miqra according to the Masorah",
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/Genesis_14:21?lang=he",
-   "para": 24
+   "para": 23
   },
   {
    "ref": "Midrash Lekach Tov, Genesis 14:12:2",
@@ -73,7 +73,7 @@
    "license": "Public Domain",
    "url": "https://www.sefaria.org.il/Midrash_Lekach_Tov,_Genesis_14:12:2?lang=he",
    "anchor": "פסיקתא זוטרתא (לקח טוב) בראשית פרק יד",
-   "para": 31
+   "para": 29
   },
   {
    "ref": "Ramban on Exodus 12:40",
@@ -103,7 +103,7 @@
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/Genesis_15:11-17?lang=he",
    "anchor": "(ט\"ו, יא-יז)",
-   "para": 46
+   "para": 38
   },
   {
    "ref": "Moed Katan 25b:4",
@@ -115,7 +115,7 @@
    "license": "CC-BY-NC",
    "url": "https://www.sefaria.org.il/Moed_Katan_25b:4?lang=he",
    "anchor": "מועד קטן כ\"ה ע\"ב",
-   "para": 49
+   "para": 41
   }
  ]
 }

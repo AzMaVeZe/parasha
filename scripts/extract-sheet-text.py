@@ -283,9 +283,17 @@ def split_verse(p):
     פסוק (ה', "(...)") לא נחשבת גבול, ומראה המקום שבסוגריים אחרי הפסוק נשאר איתו.
     הטקסט עצמו לא משתנה: הפסקה רק מתחלקת לכמה פסקאות.
     """
-    if not is_quote(p):
-        return [p]
     words = p.split(' ')
+    if not is_quote(p):
+        # פסקת טקסט שנפתחת בפסוק שלם ("(ב) וַתֹּסֶף לָלֶדֶת... אֲדָמָה. זה ממשיך...") — הפסוק לבד
+        k = 1 if re.fullmatch(r'\([א-ת]{1,3}\)', words[0]) else 0
+        n = 0
+        while k + n < len(words) and re.search('[%s]' % NIK, words[k + n]) or \
+                k + n < len(words) and re.fullmatch(r'[^%s]*ה[\'׳][^%s]*' % (HEB, HEB), words[k + n]):
+            n += 1
+        if n >= 5 and re.search(r'[.:;׃]["״]?$', words[k + n - 1]) and len(words) - k - n >= PROSE_RUN:
+            return [' '.join(words[:k + n]), ' '.join(words[k + n:])]
+        return [p]
     voc = [bool(re.search('[%s]' % NIK, w)) for w in words]
     # מילה עם אותיות. ה' וא-לוהים בלי ניקוד הם חלק מהפסוק, לא טקסט.
     # {ס} ו-{פ} של הפרשיות הם סימנים, לא טקסט.
@@ -327,6 +335,27 @@ def split_verse(p):
     return out
 
 
+# סוף משפט: נקודה, נקודתיים, סימן שאלה, סוגר, מרכאות סוגרות...
+ENDS = re.compile(r'[.:?!"״׃)\]…;\']\s*$')
+NEW_PART = re.compile(r'(פתרון|חידה|החידה|לקינוח|ונסיים|לסיום)')   # פותח קטע חדש גם אחרי שורה בלי פיסוק
+BROKEN_MIN = 60   # שורת כותרת או כותרת משנה ("משהו קטן על טו באב") קצרה מזה — היא לא מתחברת
+
+
+def join_broken(paras):
+    """משפט שנשבר באמצע בין שני טורים או שני עמודים ("...ורבים מהדברים" / "בהקשר זה מובאים...").
+
+    פסקה ארוכה שאינה נגמרת בסימן סוף מתחברת לפסקה שאחריה — אם שתיהן מאותו סוג (טקסט או
+    פסוק), כדי שפסוק לא יתחבר לפירוש שאחריו."""
+    out = []
+    for p in paras:
+        if out and len(out[-1]) >= BROKEN_MIN and not ENDS.search(out[-1]) \
+                and is_quote(out[-1]) == is_quote(p) and not p.startswith('-') and not NEW_PART.match(p):
+            out[-1] += ' ' + p
+        else:
+            out.append(p)
+    return out
+
+
 def extract(path):
     doc, expand, unknown = open_fixed(path)
     pages = page_lines(doc, expand)
@@ -346,7 +375,7 @@ def extract(path):
                 footnotes.append({'n': n, 'text': join(t)})
     paras = [p for p in paras
              if len(p) >= MIN_PARAGRAPH and len(re.findall(r'[א-תA-Za-z]', p)) >= 3]
-    paras = [x for p in paras for x in split_verse(p)]
+    paras = join_broken([x for p in paras for x in split_verse(p)])
     body = '\n\n'.join(paras + [f['text'] for f in footnotes])
     notes = []
     if UNREADABLE in body:

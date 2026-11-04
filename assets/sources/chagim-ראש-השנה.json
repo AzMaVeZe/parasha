@@ -9,7 +9,7 @@
    "version": "Miqra according to the Masorah",
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/Numbers_29:1?lang=he",
-   "para": 5
+   "para": 4
   },
   {
    "ref": "Rosh Hashanah 16a:14-15",
@@ -21,7 +21,7 @@
    "version": "William Davidson Edition - Vocalized Aramaic",
    "license": "CC-BY-NC",
    "url": "https://www.sefaria.org.il/Rosh_Hashanah_16a:14-15?lang=he",
-   "para": 10
+   "para": 8
   },
   {
    "ref": "Leviticus 23:23-25",
@@ -58,7 +58,7 @@
    "version": "Miqra according to the Masorah",
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/Genesis_22:7?lang=he",
-   "para": 28
+   "para": 19
   },
   {
    "ref": "Olat Reiyah, Akedah 28",
@@ -69,7 +69,7 @@
    "version": "Rav Kook public files",
    "license": "unknown",
    "url": "https://www.sefaria.org.il/Olat_Reiyah,_Akedah_28?lang=he",
-   "para": 32
+   "para": 23
   },
   {
    "ref": "Olat Reiyah, Akedah 29",
@@ -80,7 +80,7 @@
    "version": "Rav Kook public files",
    "license": "unknown",
    "url": "https://www.sefaria.org.il/Olat_Reiyah,_Akedah_29?lang=he",
-   "para": 36
+   "para": 25
   }
  ]
 }
