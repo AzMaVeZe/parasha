@@ -23,7 +23,7 @@
    "version": "Miqra according to the Masorah",
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/Leviticus_16:21-22?lang=he",
-   "para": 10
+   "para": 7
   },
   {
    "ref": "Vayikra Rabbah 20:10",
@@ -141,7 +141,7 @@
    "version": "Midrash Rabbah -- TE",
    "license": "CC-BY-NC",
    "url": "https://www.sefaria.org.il/Vayikra_Rabbah_21:4?lang=he",
-   "para": 34
+   "para": 22
   },
   {
    "ref": "Vayikra Rabbah 21:5",
@@ -152,7 +152,7 @@
    "version": "Midrash Rabbah -- TE",
    "license": "CC-BY-NC",
    "url": "https://www.sefaria.org.il/Vayikra_Rabbah_21:5?lang=he",
-   "para": 36
+   "para": 24
   },
   {
    "ref": "Ecclesiastes 3:1-8",
@@ -170,7 +170,7 @@
    "version": "Miqra according to the Masorah",
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/Ecclesiastes_3:1-8?lang=he",
-   "para": 38
+   "para": 26
   }
  ]
 }

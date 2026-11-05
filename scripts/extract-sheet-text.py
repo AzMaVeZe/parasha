@@ -30,6 +30,7 @@ import unicodedata
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from pdf_glyphs import open_fixed          # noqa: E402
 from pdf_layout import lines, _glyphs     # noqa: E402
+import sheet_fixes                        # noqa: E402
 
 ROOT = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..')
 PDF_DIR = os.path.join(ROOT, 'assets', 'pdfs')
@@ -267,6 +268,119 @@ def join(rows):
     return unicodedata.normalize('NFC', tidy(text)).strip()
 
 
+def is_quote(p):
+    """כמו באתר (build-pages.js, site.js): פסקה מנוקדת מוצגת כמובאה."""
+    return len(re.findall('[%s]' % NIK, p)) > len(p) * 0.08
+
+
+PROSE_RUN = 4   # כך הרבה מילים בלי ניקוד ברצף — זה כבר טקסט, לא מילה לא מנוקדת בתוך פסוק
+
+
+def split_verse(p):
+    """פסוק מנוקד וטקסט רגיל שנדבקו בחילוץ לפסקה אחת ("...קָנִיתִי אִישׁ אֶת-ה'. עד עתה עסקנו...").
+
+    רק בפסקה שמוצגת כמובאה: שם הטקסט שאחרי הפסוק (או לפניו) מעוצב בטעות כמו הפסוק.
+    חותכים בגבול המילים שבין הרצף המנוקד לרצף הלא מנוקד. מילה בודדת בלי ניקוד בתוך
+    פסוק (ה', "(...)") לא נחשבת גבול, ומראה המקום שבסוגריים אחרי הפסוק נשאר איתו.
+    הטקסט עצמו לא משתנה: הפסקה רק מתחלקת לכמה פסקאות.
+    """
+    words = p.split(' ')
+    if not is_quote(p):
+        # פסקת טקסט שנפתחת בפסוק שלם ("(ב) וַתֹּסֶף לָלֶדֶת... אֲדָמָה. זה ממשיך...") — הפסוק לבד
+        k = 1 if re.fullmatch(r'\([א-ת]{1,3}\)', words[0]) else 0
+        n = 0
+        while k + n < len(words) and re.search('[%s]' % NIK, words[k + n]) or \
+                k + n < len(words) and re.fullmatch(r'[^%s]*ה[\'׳][^%s]*' % (HEB, HEB), words[k + n]):
+            n += 1
+        if n >= 5 and re.search(r'[.:;׃]["״]?$', words[k + n - 1]) and len(words) - k - n >= PROSE_RUN:
+            return [' '.join(words[:k + n]), ' '.join(words[k + n:])]
+        return [p]
+    voc = [bool(re.search('[%s]' % NIK, w)) for w in words]
+    # מילה עם אותיות. ה' וא-לוהים בלי ניקוד הם חלק מהפסוק, לא טקסט.
+    # {ס} ו-{פ} של הפרשיות הם סימנים, לא טקסט.
+    heb = [bool(re.search('[%s]' % HEB, w))
+           and not re.fullmatch(r'[^%s]*ה[\'׳][^%s]*|\{[פס]\}' % (HEB, HEB), w) for w in words]
+    prose, start = [], None
+    for i in range(len(words) + 1):
+        if i < len(words) and not voc[i]:
+            if start is None and heb[i]:
+                start = i
+            continue
+        if start is not None:
+            end = i
+            while not heb[end - 1]:         # מרכאות פותחות של הפסוק הבא שייכות אליו
+                end -= 1
+            n = sum(heb[start:end])
+            # פתיחה קצרה לפני פסוק ("ונסיים בפסוק:") נחשבת גם היא, אם היא נגמרת בנקודתיים
+            if n >= PROSE_RUN or (start == 0 and n >= 2 and words[end - 1].endswith(':')):
+                before = ' '.join(words[prose[-1][1] if prose else 0:start])
+                if words[start].startswith('(') or before.count('(') > before.count(')'):
+                    # "...פסוק (ויקרא כה, לה-לז) הטקסט" — מראה המקום הולך עם הפסוק
+                    close = next((k for k in range(start, min(start + 5, end)) if ')' in words[k]), None)
+                    if close is not None:
+                        start = close + 1
+                if start < end:
+                    prose.append((start, end))
+            start = None
+    cuts = sorted({k for a, b in prose for k in (a, b) if 0 < k < len(words)})
+    parts = [' '.join(words[a:b]) for a, b in zip([0] + cuts, cuts + [len(words)])]
+    # קטע קצר מדי (שארית של מראה מקום, "לקינוח:") מתחבר לקטע שלפניו
+    out = []
+    for x in parts:
+        if out and len(x) < MIN_PARAGRAPH:
+            out[-1] += ' ' + x
+        elif out and len(out[-1]) < MIN_PARAGRAPH:
+            out[-1] += ' ' + x
+        else:
+            out.append(x)
+    return out
+
+
+# סוף משפט: נקודה, נקודתיים, סימן שאלה, סוגר, מרכאות סוגרות...
+ENDS = re.compile(r'[.:?!"״׃)\]…;\']\s*$')
+NEW_PART = re.compile(r'(פתרון|חידה|החידה|לקינוח|ונסיים|לסיום)')   # פותח קטע חדש גם אחרי שורה בלי פיסוק
+BROKEN_MIN = 60   # שורת כותרת או כותרת משנה ("משהו קטן על טו באב") קצרה מזה — היא לא מתחברת
+
+
+def join_broken(paras):
+    """משפט שנשבר באמצע בין שני טורים או שני עמודים ("...ורבים מהדברים" / "בהקשר זה מובאים...").
+
+    פסקה ארוכה שאינה נגמרת בסימן סוף מתחברת לפסקה שאחריה — אם שתיהן מאותו סוג (טקסט או
+    פסוק), כדי שפסוק לא יתחבר לפירוש שאחריו."""
+    out = []
+    for p in paras:
+        if out and len(out[-1]) >= BROKEN_MIN and not ENDS.search(out[-1]) \
+                and is_quote(out[-1]) == is_quote(p) and not p.startswith('-') and not NEW_PART.match(p):
+            out[-1] += ' ' + p
+        else:
+            out.append(p)
+    return out
+
+
+# ריהוט עמוד שאינו טקסט: לק"י, שנה, מספר עמוד, "-המשך-", כותרת עמוד, חתימה ופרידה של המייל
+FURNITURE = re.compile(r'^(לק"י\s*)?(ניתן למחזר)?$|^(לק"י\s*)?(שבת\s+)?(פרשת|פרשות)\s.{0,25}$'
+                       r'|^-?\s*המשך\s*-?$|^\d{1,3}$|^שבת שלום,?$|^אשמח לשמוע[.,]?$|^\[כתובת מייל\]$')
+
+
+def keep_fragments(paras):
+    """פסקה קצרה מ-MIN_PARAGRAPH: אם היא ריהוט עמוד — יורדת. אחרת זו שורה אחרונה של פסקה שנשברה
+    (לרוב ליד תמונה: "להציץ דהיינו" / "ולחזור:") — והיא מתחברת לפסקה שלפניה, אם זו לא נגמרה
+    בסימן סוף; אחרת נשארת פסקה בפני עצמה."""
+    out = []
+    for p in paras:
+        if len(re.findall(r'[א-תA-Za-z]', p)) < 3:
+            continue
+        if len(p) >= MIN_PARAGRAPH:
+            out.append(p)
+        elif FURNITURE.match(p.strip()) or re.search(r'תש"?[א-ת]|לק"י', p):
+            continue
+        elif out and not ENDS.search(out[-1]):
+            out[-1] += ' ' + p
+        else:
+            out.append(p)
+    return out
+
+
 def extract(path):
     doc, expand, unknown = open_fixed(path)
     pages = page_lines(doc, expand)
@@ -284,8 +398,14 @@ def extract(path):
                 footnotes[-1]['text'] += ' ' + join(t)
             else:
                 footnotes.append({'n': n, 'text': join(t)})
-    paras = [p for p in paras
-             if len(p) >= MIN_PARAGRAPH and len(re.findall(r'[א-תA-Za-z]', p)) >= 3]
+    paras = keep_fragments(paras)
+    paras = join_broken([x for p in paras for x in split_verse(p)])
+    # תיקונים שנמצאו בהגהה (scripts/sheet_fixes.py): אותיות זרות, אנגלית הפוכה, שאריות המייל,
+    # דגש כפול, וניקוד הפסוקים מול נוסח תקני
+    name = os.path.splitext(os.path.basename(path))[0]
+    paras = [x for x in (sheet_fixes.apply(name, p) for p in paras) if x.strip()]
+    for f in footnotes:
+        f['text'] = sheet_fixes.apply(name, f['text'])
     body = '\n\n'.join(paras + [f['text'] for f in footnotes])
     notes = []
     if UNREADABLE in body:
