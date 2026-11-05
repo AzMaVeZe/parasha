@@ -30,6 +30,7 @@ import unicodedata
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from pdf_glyphs import open_fixed          # noqa: E402
 from pdf_layout import lines, _glyphs     # noqa: E402
+import sheet_fixes                        # noqa: E402
 
 ROOT = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..')
 PDF_DIR = os.path.join(ROOT, 'assets', 'pdfs')
@@ -356,6 +357,30 @@ def join_broken(paras):
     return out
 
 
+# ריהוט עמוד שאינו טקסט: לק"י, שנה, מספר עמוד, "-המשך-", כותרת עמוד, חתימה ופרידה של המייל
+FURNITURE = re.compile(r'^(לק"י\s*)?(ניתן למחזר)?$|^(לק"י\s*)?(שבת\s+)?(פרשת|פרשות)\s.{0,25}$'
+                       r'|^-?\s*המשך\s*-?$|^\d{1,3}$|^שבת שלום,?$|^אשמח לשמוע[.,]?$|^\[כתובת מייל\]$')
+
+
+def keep_fragments(paras):
+    """פסקה קצרה מ-MIN_PARAGRAPH: אם היא ריהוט עמוד — יורדת. אחרת זו שורה אחרונה של פסקה שנשברה
+    (לרוב ליד תמונה: "להציץ דהיינו" / "ולחזור:") — והיא מתחברת לפסקה שלפניה, אם זו לא נגמרה
+    בסימן סוף; אחרת נשארת פסקה בפני עצמה."""
+    out = []
+    for p in paras:
+        if len(re.findall(r'[א-תA-Za-z]', p)) < 3:
+            continue
+        if len(p) >= MIN_PARAGRAPH:
+            out.append(p)
+        elif FURNITURE.match(p.strip()) or re.search(r'תש"?[א-ת]|לק"י', p):
+            continue
+        elif out and not ENDS.search(out[-1]):
+            out[-1] += ' ' + p
+        else:
+            out.append(p)
+    return out
+
+
 def extract(path):
     doc, expand, unknown = open_fixed(path)
     pages = page_lines(doc, expand)
@@ -373,9 +398,14 @@ def extract(path):
                 footnotes[-1]['text'] += ' ' + join(t)
             else:
                 footnotes.append({'n': n, 'text': join(t)})
-    paras = [p for p in paras
-             if len(p) >= MIN_PARAGRAPH and len(re.findall(r'[א-תA-Za-z]', p)) >= 3]
+    paras = keep_fragments(paras)
     paras = join_broken([x for p in paras for x in split_verse(p)])
+    # תיקונים שנמצאו בהגהה (scripts/sheet_fixes.py): אותיות זרות, אנגלית הפוכה, שאריות המייל,
+    # דגש כפול, וניקוד הפסוקים מול נוסח תקני
+    name = os.path.splitext(os.path.basename(path))[0]
+    paras = [x for x in (sheet_fixes.apply(name, p) for p in paras) if x.strip()]
+    for f in footnotes:
+        f['text'] = sheet_fixes.apply(name, f['text'])
     body = '\n\n'.join(paras + [f['text'] for f in footnotes])
     notes = []
     if UNREADABLE in body:
