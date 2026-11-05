@@ -33,6 +33,7 @@ FIXES = {
     'bereshit-נח': [(')out first in first – FIFO(.', '(first in first out – FIFO).'),
                     ('(out last in last – LIFO).', '(last in last out – LIFO).')],
     'bereshit-וישב': [('Ltd Goats&Sheeps Lavan.', 'Lavan Goats&Sheeps Ltd.')],
+    'bereshit-וישלח': [(' Wrestling Jacob Angel the with)Rembrandt( ', ' ')],     # כיתוב תמונה
     'shmot-וארא': [('Strategically Thinking', 'Thinking Strategically'),
                    ('Conflict of Strategy The(.', 'The Strategy of Conflict).')],
     'shmot-יתרו': [('Tat for Tit', 'Tit for Tat')],
