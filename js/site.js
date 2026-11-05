@@ -821,7 +821,7 @@
       Promise.all([fetch(encodeURI(src)).then(r => { if (!r.ok) throw new Error(r.status); return r.json(); }), sourcesReady])
         .then(([t, list]) => {
           const note = el('p', 'sheet-text__note');
-          note.append('הטקסט חולץ אוטומטית מקובץ ה-PDF לאפשר נגישות, לפיכך ייתכנו טעויות ושיבושים והנוסח המלא מופיע ב');
+          note.append('הטקסט חולץ אוטומטית מקובץ ה-PDF כדי לאפשר נגישות, לפיכך ייתכנו טעויות ושיבושים והנוסח המלא מופיע ב');
           const a = document.createElement('a');
           a.href = encodeURI(p.pdf); a.textContent = 'דף עצמו';
           note.append(a, '.');

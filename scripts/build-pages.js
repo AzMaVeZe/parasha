@@ -490,7 +490,7 @@ function parashaPage(e) {
     main += `\n      <details class="sheet-text">
         <summary>${iconSpan('book-open', 17)}<span>קריאת הדף כטקסט</span><span class="sheet-text__hint">בלי לפתוח PDF</span></summary>
         <div class="sheet-text__body">
-          <p class="sheet-text__note">הטקסט חולץ אוטומטית מקובץ ה-PDF לאפשר נגישות, לפיכך ייתכנו טעויות ושיבושים והנוסח המלא מופיע ב<a href="${esc(encodeURI('/' + e.pdf))}">דף עצמו</a>.</p>`;
+          <p class="sheet-text__note">הטקסט חולץ אוטומטית מקובץ ה-PDF כדי לאפשר נגישות, לפיכך ייתכנו טעויות ושיבושים והנוסח המלא מופיע ב<a href="${esc(encodeURI('/' + e.pdf))}">דף עצמו</a>.</p>`;
     for (const n of text.notes || []) main += `\n          <p class="sheet-text__note">${esc(n)}</p>`;
     text.paragraphs.forEach((par, i) => {
       main += isQuote(par)
