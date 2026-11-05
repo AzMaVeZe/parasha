@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /* מייצר את העמודים הסטטיים של הארכיון מתוך js/data.js:
  *
- *   p/<שם>/index.html   עמוד אמיתי לכל דף — 62 עמודים
+ *   p/<שם>/index.html   עמוד אמיתי לכל דף - 62 עמודים
  *   p/index.html        מפת הארכיון: קישורים אמיתיים לכל הדפים
  *   sitemap.xml         כל העמודים שמותר לאנדקס
  *   llms.txt            תיאור האתר למערכות AI
@@ -9,7 +9,7 @@
  * למה: האתר עצמו מנותב ב-hash (‎#p=<שם>‎). מנועי חיפוש אינם רואים מקטע כתובת
  * (fragment) כעמוד נפרד, ולכן 62 הדפים היו עמוד יחיד מבחינתם. העמודים כאן הם
  * כתובות אמיתיות שאפשר לאנדקס, לשתף ולצטט. כתובות ה-hash הישנות ממשיכות לעבוד
- * כשהיו — הן לא נגעו.
+ * כשהיו - הן לא נגעו.
  *
  * להריץ:  node scripts/build-pages.js [תיקיית פלט]     (ברירת מחדל: dist)
  * רץ אוטומטית מתוך scripts/build-site.sh.
@@ -24,8 +24,8 @@ const out = path.resolve(process.argv[2] || path.join(root, 'dist'));
 const SITE = 'https://parasha.azma.app';
 const AUTHOR = 'אריאל ז\'יטניצקי';
 const BRAND = 'בין הנכתב לנגלה';
-const BRAND_FULL = 'בין הנכתב לנגלה — על פרשת השבוע';
-const TAGLINE = 'דפי פרשת השבוע לצפייה, להורדה ולהדפסה לשולחן שבת ולהאזנה';
+const BRAND_FULL = 'בין הנכתב לנגלה - על פרשת השבוע';
+const TAGLINE = 'דפים לפרשות השבוע - לצפייה וקריאה, להורדה ולהדפסה לשולחן שבת, וגם להאזנה';
 
 /* אותו CSP שיושב ב-index.html וב-_headers. שלושתם חייבים להישאר תואמים. */
 const CSP = "default-src 'self'; script-src 'self' https://static.cloudflareinsights.com/beacon.min.js; style-src 'self' 'unsafe-inline'; " +
@@ -54,7 +54,7 @@ const esc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;')
 const slug = name => name.replace(/["'׳״]/g, '').replace(/\s+/g, '-');
 
 // js/site.js מרכיב את אותה כתובת בדפדפן. אם השניים ייפרדו, כל הקישורים
-// בארכיון יובילו ל-404 — ולכן זו שגיאת בנייה ולא הערה בקוד.
+// בארכיון יובילו ל-404 - ולכן זו שגיאת בנייה ולא הערה בקוד.
 const SLUG_SRC = "name.replace(/[\"'׳״]/g, '').replace(/\\s+/g, '-')";
 if (!fs.readFileSync(path.join(root, 'js/site.js'), 'utf8').includes(SLUG_SRC)) {
   console.error('שגיאה: pageSlug ב-js/site.js אינו זהה ל-slug() כאן. הקישורים באתר יישברו.');
@@ -107,7 +107,7 @@ function sheetSources(pdf) {
   return t.sources && t.sources.length ? t.sources : null;
 }
 // פסקה (או הערת שוליים) מהדף, מוגנת, ובה מראי המקום שלה כקישורים לספריא.
-// here(s): האם המקור s שייך לקטע הזה — לפי s.para בפסקאות, לפי s.fn בהערות.
+// here(s): האם המקור s שייך לקטע הזה - לפי s.para בפסקאות, לפי s.fn בהערות.
 function linkAnchors(par, here, sources) {
   let h = esc(par);
   for (const s of sources || []) {
@@ -126,7 +126,7 @@ const LICENSE_HE = { 'Public Domain': 'נחלת הכלל' };
  * מוצא בו רושמת ספריא כ"דפי אינטרנט שמצטטים את המקור". בעמוד הדף עצמו הוא היה
  * סורק גם את "קריאת הדף כטקסט" ומדווח על זיהויים שגויים ("פרק ד'" ← במדבר ד).
  * לכן הוא רץ בעמוד נפרד, p/<שם>/sources.html, שכל תוכנו הוא רשימת המקורות שנבדקו
- * (בשמות האנגליים, שספריא מזהה במדויק), והכתובת הקנונית שלו היא עמוד הדף —
+ * (בשמות האנגליים, שספריא מזהה במדויק), והכתובת הקנונית שלו היא עמוד הדף -
  * וכך הדיווח הוא על עמוד הדף. עמוד הדף טוען אותו ב-iframe נסתר אחרי הטעינה
  * (js/sefaria-report.js). ל-sources.html יש CSP משלו, שמתיר את www.sefaria.org;
  * ה-CSP של כל שאר האתר לא השתנה. ראו _headers. */
@@ -145,7 +145,7 @@ function sourcesReportPage(e, sources) {
 </head>
 <body>
 <article>
-<h1>${esc(e.title)} — המקורות שבדף</h1>
+<h1>${esc(e.title)} - המקורות שבדף</h1>
 <p>המקורות שהדף "${esc(e.title)}" מתוך "${esc(BRAND)}" מאת ${esc(AUTHOR)} מצטט, לפי סדר הופעתם בדף:</p>
 <ul>
 ${sources.map(s => `<li>${esc(s.ref)}</li>`).join('\n')}
@@ -161,7 +161,7 @@ ${sources.map(s => `<li>${esc(s.ref)}</li>`).join('\n')}
 const CLIP = 1800;
 const clip = t => (t.length <= CLIP ? t : t.slice(0, t.lastIndexOf(' ', CLIP)) + '…');
 // תמונת השיתוף של העמוד (scripts/make-share.mjs). מה שווטסאפ מציג כששולחים
-// את הקישור; בלעדיה — תמונת האתר הכללית.
+// את הקישור; בלעדיה - תמונת האתר הכללית.
 const sharePath = name => 'assets/share/' + slug(name) + '.jpg';
 // ?v= לפי תוכן הקובץ: ווטסאפ שומר תמונה לפי הכתובת, כך שתמונה שהוחלפה
 // (למשל כשנוסף לפרשה כרטיס פודקאסט) נטענת מחדש.
@@ -176,9 +176,9 @@ const fileHere = rel => fs.existsSync(path.join(root, rel));
 const episodeId = url => { const m = /open\.spotify\.com\/episode\/([A-Za-z0-9]+)/.exec(url || ''); return m ? m[1] : null; };
 
 /* שיתוף בווטסאפ: תמיד הכתובת הסטטית /p/<שם>/ ולא #p=. ווטסאפ קורא את
- * og:image מהעמוד שבקישור, ומה שאחרי # לא מגיע לשרת — כך כל פרשה מגיעה
+ * og:image מהעמוד שבקישור, ומה שאחרי # לא מגיע לשרת - כך כל פרשה מגיעה
  * עם תמונת השיתוף שלה. js/site.js בונה את אותו קישור בתוך האתר. */
-const waText = (title, url) => title + ' — ' + BRAND + '\n' + url;
+const waText = (title, url) => title + ' - ' + BRAND + '\n' + url;
 const waHref = e => 'https://wa.me/?text=' + encodeURIComponent(waText(e.title, e.url));
 
 const isChag = sefer => sefer.id === 'chagim';
@@ -202,7 +202,7 @@ for (const sefer of DATA) {
       preview,
       episode: episodeId(p.spotify),
       riddle: RIDDLES[p.name] || null,
-      // עמוד בלי דף אינו ראוי לאינדוקס — אין בו תוכן. הוא עדיין נוצר, כדי
+      // עמוד בלי דף אינו ראוי לאינדוקס - אין בו תוכן. הוא עדיין נוצר, כדי
       // שהניווט והקישורים לא ישברו, אבל מסומן noindex ואינו במפת האתר.
       indexable: hasPdf,
     });
@@ -213,24 +213,24 @@ entries.forEach((e, i) => { e.prev = entries[i - 1] || null; e.next = entries[i 
 /* ---------- טקסטים ---------- */
 function metaTitle(e) {
   const kind = isChag(e.sefer) ? 'דף לימוד' : 'דף לשולחן שבת';
-  return e.title + ' — ' + kind + ' · ' + BRAND;
+  return e.title + ' - ' + kind + ' · ' + BRAND;
 }
 function metaDescription(e) {
-  if (!e.pdf) return e.title + ' — ' + BRAND + ', דפי פרשת השבוע מאת ' + AUTHOR + '. הדף לפרשה זו יעלה בקרוב; הארכיון המלא באתר.';
+  if (!e.pdf) return e.title + ' - ' + BRAND + ', דפי פרשת השבוע מאת ' + AUTHOR + '. הדף לפרשה זו יעלה בקרוב; הארכיון המלא באתר.';
   let d = 'דף ' + (isChag(e.sefer) ? '' : 'פרשת ') + e.name + ' מתוך "' + BRAND + '" מאת ' + AUTHOR +
-    ' — לצפייה, להורדה ולהדפסה לשולחן שבת';
+    ' - לצפייה, להורדה ולהדפסה לשולחן שבת';
   d += e.episode ? ', ולהאזנה לפרק הפודקאסט.' : '.';
   return d;
 }
 function introText(e) {
   const parts = [];
   if (e.pdf) {
-    parts.push('"' + e.title + '" — דף מתוך "' + BRAND_FULL + '", סדרת דפי פרשת השבוע של ' + AUTHOR + ': ' +
+    parts.push('"' + e.title + '" - דף מתוך "' + BRAND_FULL + '", סדרת דפי פרשת השבוע של ' + AUTHOR + ': ' +
       'קריאה מחודשת בפסוקים, שאלות, מדרשים והרבה סימני שאלה. הדף מיועד לצפייה, להורדה ולהדפסה לשולחן שבת.');
     if (e.note) parts.push('הדף מוגש ' + e.note + '.');
     if (e.episode) parts.push('על הדף הזה יש גם פרק פודקאסט, להאזנה כאן או בספוטיפיי.');
   } else {
-    parts.push('הדף ל' + e.name + ' טרם עלה לארכיון. שאר הדפים — כל חמשת חומשי תורה והחגים — נמצאים בארכיון המלא.');
+    parts.push('הדף ל' + e.name + ' טרם עלה לארכיון. שאר הדפים - כל חמשת חומשי תורה והחגים - נמצאים בארכיון המלא.');
   }
   return parts;
 }
@@ -273,7 +273,7 @@ function head(o) {
     : 'index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1';
   // כל תמונות השיתוף 1200×630 (scripts/make-share.mjs), ולכן המידות קבועות.
   // ?v= משתנה כשהתמונה מוחלפת: ווטסאפ ופייסבוק שומרים תמונה לפי הכתובת שלה.
-  const image = o.image || abs('assets/og-image.jpg');
+  const image = o.image || abs('assets/og-image.jpg?v=2');
   return `<!DOCTYPE html>
 <html lang="he" dir="rtl">
 <head>
@@ -329,17 +329,17 @@ const websiteNode = {
   url: SITE + '/',
   name: BRAND_FULL,
   alternateName: BRAND,
-  description: TAGLINE + ' — הארכיון המלא לפי חמשת חומשי תורה, חגים ומועדים.',
+  description: TAGLINE + '. הארכיון המלא לפי חמשת חומשי תורה, חגים ומועדים.',
   inLanguage: 'he-IL',
   author: { '@id': SITE + '/#author' },
   publisher: { '@id': SITE + '/#author' },
 };
-/* webFeed מצביע לפיד RSS, לא לעמוד של התוכנית. כל עוד אין פיד — השדה יורד:
+/* webFeed מצביע לפיד RSS, לא לעמוד של התוכנית. כל עוד אין פיד - השדה יורד:
  * כתובת שגויה גרועה מהיעדר השדה, כי מי שמנסה לקרוא אותה כפיד מקבל HTML. */
 const podcastNode = SHOW_URL ? Object.assign({
   '@type': 'PodcastSeries',
   '@id': SITE + '/#podcast',
-  name: BRAND + ' — הפודקאסט',
+  name: BRAND + ' - הפודקאסט',
   description: 'פרקי פודקאסט על דפי פרשת השבוע של ' + AUTHOR + '.',
   url: SHOW_URL,
   inLanguage: 'he-IL',
@@ -428,12 +428,12 @@ function parashaPage(e) {
     graph.push({
       '@type': 'PodcastEpisode',
       '@id': url + '#episode',
-      name: 'פודקאסט — ' + e.title,
+      name: 'פודקאסט - ' + e.title,
       url: epUrl,
       inLanguage: 'he-IL',
       partOfSeries: { '@id': SITE + '/#podcast' },
       author: { '@id': SITE + '/#author' },
-      // בלי associatedMedia: הוא אמור להצביע לקובץ השמע עצמו, ואין לנו כזה —
+      // בלי associatedMedia: הוא אמור להצביע לקובץ השמע עצמו, ואין לנו כזה -
       // הפרקים מתארחים בספוטיפיי, וכתובת הפרק היא עמוד, לא מדיה. ‎url למעלה
       // הוא השדה הנכון לעמוד הפרק.
     });
@@ -497,7 +497,7 @@ function parashaPage(e) {
         ? `\n          <blockquote>${linkAnchors(par, s => s.para === i, sources)}</blockquote>`
         : `\n          <p>${linkAnchors(par, s => s.para === i, sources)}</p>`;
     });
-    // הערות השוליים בסוף, ממוספרות כמו בדף — ולא באמצע הטקסט, בין עמוד לעמוד
+    // הערות השוליים בסוף, ממוספרות כמו בדף - ולא באמצע הטקסט, בין עמוד לעמוד
     if (text.footnotes && text.footnotes.length) {
       main += `\n          <h3 class="sheet-text__fn-title">הערות שוליים</h3>\n          <ol class="sheet-text__fn">`;
       text.footnotes.forEach((f, k) => {
@@ -519,7 +519,7 @@ function parashaPage(e) {
       ? r.q.split('\n').map(line => `<p style="margin:0 0 6px">${esc(line)}</p>`).join('\n          ')
       : '';
     main += `\n      <section class="riddle-box" style="margin-top:8px">
-        <h2 class="riddle-box__title">${iconSpan('lightbulb', 17)}חידה לשולחן שבת — ${esc(e.name)}</h2>
+        <h2 class="riddle-box__title">${iconSpan('lightbulb', 17)}חידה לשולחן שבת - ${esc(e.name)}</h2>
         <div class="riddle-box__body">
           ${img}${text}
         </div>
@@ -556,7 +556,7 @@ function parashaPage(e) {
         <div class="podcast">
           <div class="podcast__title">האזנה לפודקאסט</div>
           <iframe src="https://open.spotify.com/embed/episode/${esc(e.episode)}?utm_source=generator"
-                  title="נגן ספוטיפיי — פודקאסט על ${esc(e.title)}" height="152" loading="lazy"
+                  title="נגן ספוטיפיי - פודקאסט על ${esc(e.title)}" height="152" loading="lazy"
                   style="border-radius:12px" allow="encrypted-media"></iframe>
           <a class="podcast__link" href="https://open.spotify.com/episode/${esc(e.episode)}" target="_blank" rel="noopener noreferrer">פתיחת הפרק בספוטיפיי<span class="visually-hidden"> (נפתח בחלון חדש)</span></a>
         </div>
@@ -598,12 +598,12 @@ function parashaPage(e) {
 
   return head({
     title: metaTitle(e),
-    ogTitle: e.title + ' — ' + BRAND,
+    ogTitle: e.title + ' - ' + BRAND,
     description: metaDescription(e),
     url: url,
     ogType: 'article',
     image: shareImage(e) || undefined,
-    imageAlt: e.title + ' — ' + BRAND,
+    imageAlt: e.title + ' - ' + BRAND,
     noindex: !e.indexable,
     jsonld: { '@context': 'https://schema.org', '@graph': graph },
   }) + '\n' + main + '\n' + footer + '\n<script src="/js/a11y.js"></script>\n<script src="/js/analytics.js"></script>' +
@@ -618,7 +618,7 @@ function indexPage() {
     '@type': 'CollectionPage',
     '@id': url + '#webpage',
     url: url,
-    name: 'כל הדפים — ' + BRAND_FULL,
+    name: 'כל הדפים - ' + BRAND_FULL,
     description: 'מפת הארכיון: קישור לכל אחד מ-' + entries.length + ' דפי פרשת השבוע והחגים של ' + AUTHOR + '.',
     inLanguage: 'he-IL',
     isPartOf: { '@id': SITE + '/#website' },
@@ -676,8 +676,8 @@ function indexPage() {
   main += '\n</main>';
 
   return head({
-    title: 'כל הדפים — ' + BRAND_FULL,
-    description: 'מפת הארכיון: כל ' + entries.length + ' דפי פרשת השבוע והחגים מאת ' + AUTHOR + ' — לכל דף עמוד משלו, לצפייה, להורדה ולהאזנה.',
+    title: 'כל הדפים - ' + BRAND_FULL,
+    description: 'מפת הארכיון: כל ' + entries.length + ' דפי פרשת השבוע והחגים מאת ' + AUTHOR + ' - לכל דף עמוד משלו, לצפייה, להורדה ולהאזנה.',
     url: url,
     jsonld: { '@context': 'https://schema.org', '@graph': graph },
   }) + '\n' + main + '\n' + footer + '\n<script src="/js/a11y.js"></script>\n<script src="/js/analytics.js"></script>\n</body>\n</html>\n';
@@ -695,7 +695,7 @@ function sitemap() {
   urls.push({ loc: SITE + '/accessibility.html', changefreq: 'yearly', priority: '0.3' });
 
   return '<?xml version="1.0" encoding="UTF-8"?>\n' +
-    '<!-- נוצר ע"י scripts/build-pages.js — לא לערוך ידנית -->\n' +
+    '<!-- נוצר ע"י scripts/build-pages.js - לא לערוך ידנית -->\n' +
     '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' +
     urls.map(u => '  <url>\n    <loc>' + esc(u.loc) + '</loc>\n' +
       '    <changefreq>' + u.changefreq + '</changefreq>\n' +
@@ -710,7 +710,7 @@ function llmsTxt() {
   L.push('');
   L.push('> ' + TAGLINE + '. אתר הארכיון של דפי פרשת השבוע שכתב ' + AUTHOR +
     ' והפיץ בדוא"ל לאורך השנים: קריאה מחודשת בפסוקים, שאלות, מדרשים וחידות. ' +
-    entries.length + ' דפים — חמשת חומשי תורה, חגים ומועדים. עברית.');
+    entries.length + ' דפים - חמשת חומשי תורה, חגים ומועדים. עברית.');
   L.push('');
   L.push('האתר סטטי וללא מנוי. לכל דף עמוד HTML משלו תחת /p/, ולצדו קובץ ה-PDF המלא של הדף.');
   L.push('התוכן פתוח לציטוט ולהפניה, בבקשה עם ייחוס ל' + AUTHOR + ' וקישור לעמוד הדף.');
@@ -751,7 +751,7 @@ for (const e of entries) {
   write(path.join('p', slug(e.name), 'index.html'), parashaPage(e));
   const src = sheetSources(e.pdf);
   if (src) write(path.join('p', slug(e.name), 'sources.html'), sourcesReportPage(e, src));
-  // מראה מקום שכבר אינו בפסקה (או בהערה) שלו — אחרי חילוץ מחדש של הטקסט — לא יהפוך לקישור.
+  // מראה מקום שכבר אינו בפסקה (או בהערה) שלו - אחרי חילוץ מחדש של הטקסט - לא יהפוך לקישור.
   // לא מפיל את הבנייה, אבל צועק: מתקנים ב-scripts/sources/ ומריצים fetch.
   const txt = sheetText(e.pdf);
   for (const s of src || []) {
@@ -769,4 +769,4 @@ write('llms.txt', llmsTxt());
 
 const indexable = entries.filter(e => e.indexable).length;
 console.log('build-pages: ' + pages + ' עמודי דף (' + indexable + ' לאינדוקס), p/index.html, sitemap.xml, llms.txt → ' + path.relative(root, out) + '/');
-if (pages !== 62) console.warn('  שימו לב: נוצרו ' + pages + ' עמודים ולא 62 — האם js/data.js השתנה?');
+if (pages !== 62) console.warn('  שימו לב: נוצרו ' + pages + ' עמודים ולא 62 - האם js/data.js השתנה?');

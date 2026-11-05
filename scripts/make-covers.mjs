@@ -25,8 +25,8 @@ const root = path.join(path.dirname(fileURLToPath(import.meta.url)), '..');
 const BYLINE = 'אריאל ז\'יטניצקי';
 const SIZE = 1000;                       // פיקסלים לוגיים; הייצוא מוכפל פי 3
 
-// כרטיס לכל דף שב-js/data.js: דף אחד יכול לשמש שתי פרשות (ויקהל–פקודי), ואז
-// הכותרת מחברת את שתיהן והפסוק הוא של הראשונה. LINES — המשפט לפאנל הכחול,
+// כרטיס לכל דף שב-js/data.js: דף אחד יכול לשמש שתי פרשות (ויקהל-פקודי), ואז
+// הכותרת מחברת את שתיהן והפסוק הוא של הראשונה. LINES - המשפט לפאנל הכחול,
 // לפי שם הקובץ; נכנס רק אחרי שאריאל אישר אותו.
 const LINES = {};
 const ctx = { window: {} };
@@ -38,7 +38,7 @@ for (const sefer of ctx.window.PARASHA_DATA) {
     const file = path.basename(p.pdf, '.pdf');
     const seen = COVERS.find(c => c.file === file);
     if (seen) {
-      if (sefer.id !== 'chagim' && seen.book === sefer.name) seen.title += '–' + p.name;
+      if (sefer.id !== 'chagim' && seen.book === sefer.name) seen.title += '-' + p.name;
       continue;
     }
     COVERS.push({ file, title: p.name.replace(/(?<=[א-ת])"(?=[א-ת])/g, '״'), book: sefer.id === 'chagim' ? '' : sefer.name,
@@ -75,7 +75,7 @@ const dc = c => `<!doctype html>
 <html lang="he" dir="rtl">
 <head>
 <meta charset="utf-8">
-<title>שער הפרק — ${c.title}</title>
+<title>שער הפרק - ${c.title}</title>
 <script src="./support.js"></script>
 </head>
 <body>
@@ -122,7 +122,7 @@ if (dcIdx > -1) {
     await p.goto(pathToFileURL(tmp).href);
     await p.evaluate(async () => {
       await document.fonts.ready;
-      // שם ארוך (אחרי מות–קדושים) מוקטן עד שהוא נכנס בשורה אחת
+      // שם ארוך (אחרי מות-קדושים) מוקטן עד שהוא נכנס בשורה אחת
       for (const el of document.querySelectorAll('[data-fit]')) {
         let size = parseFloat(getComputedStyle(el).fontSize);
         while (el.scrollWidth > el.parentElement.clientWidth && size > 80) el.style.fontSize = (size -= 6) + 'px';

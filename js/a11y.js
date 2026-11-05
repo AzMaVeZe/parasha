@@ -1,11 +1,11 @@
-/* סרגל נגישות צף — ת"י 5568 / WCAG 2.1 AA.
+/* סרגל נגישות צף - ת"י 5568 / WCAG 2.1 AA.
  *
  * עצמאי לגמרי: בונה את הכפתור והחלונית בעצמו, ולכן מספיק לכלול את הקובץ
  * בכל עמוד (index, עמודי /p/ הסטטיים, 404, הצהרת הנגישות). ההעדפות נשמרות
  * ב-localStorage ומוחלות כמחלקות על <html>; העיצוב ב-styles.css.
  *
  * לקח מרכזי מהסקיל (wcag-accessibility-widget): מצב ניגודיות ממומש בדריסת
- * משתני הצבע ולא ב-CSS filter — filter על אב של position:fixed שובר את
+ * משתני הצבע ולא ב-CSS filter - filter על אב של position:fixed שובר את
  * העיגון של כל האלמנטים הצפים.
  */
 (function () {
@@ -55,7 +55,7 @@
     btn.setAttribute('aria-label', 'תפריט נגישות');
     btn.setAttribute('aria-expanded', 'false');
     btn.setAttribute('aria-controls', 'a11y-panel');
-    // סמל הנגישות המקובל, כ-SVG מוטמע — אין תלות בקובץ חיצוני
+    // סמל הנגישות המקובל, כ-SVG מוטמע - אין תלות בקובץ חיצוני
     btn.innerHTML =
       '<svg viewBox="0 0 24 24" width="26" height="26" aria-hidden="true" fill="currentColor">' +
       '<circle cx="12" cy="4.5" r="2.2"/>' +

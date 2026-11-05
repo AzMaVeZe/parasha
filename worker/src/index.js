@@ -1,29 +1,29 @@
 /**
- * בין הנכתב לנגלה — Worker לרשימת התפוצה.
+ * בין הנכתב לנגלה - Worker לרשימת התפוצה.
  *
  * אחראי על:
- *  POST /subscribe    — הרשמה (מייל + יום מועדף), שולח מייל אישור (double opt-in)
- *  GET  /confirm      — אישור ההרשמה מתוך המייל
- *  GET  /unsubscribe  — הסרה מהרשימה
- *  cron               — כל יום שני וחמישי: שולח את דף הפרשה הקרובה לנרשמים של אותו יום
+ *  POST /subscribe    - הרשמה (מייל + יום מועדף), שולח מייל אישור (double opt-in)
+ *  GET  /confirm      - אישור ההרשמה מתוך המייל
+ *  GET  /unsubscribe  - הסרה מהרשימה
+ *  cron               - כל יום שני וחמישי: שולח את דף הפרשה הקרובה לנרשמים של אותו יום
  *
  * וגם על התגובות:
- *  POST /comments     — שליחת תגובה; נכנסת כ"ממתינה" ושולחת לאריאל מייל אישור
- *  GET  /comments     — התגובות המאושרות (?parasha=… לדף בודד, בלי פרמטר = מונים לכרטיסים)
- *  GET  /moderate     — אישור/דחייה מתוך המייל (דורש ADMIN_KEY)
- *  GET  /admin        — דף ניהול בעברית לכל התגובות (דורש ADMIN_KEY)
+ *  POST /comments     - שליחת תגובה; נכנסת כ"ממתינה" ושולחת לאריאל מייל אישור
+ *  GET  /comments     - התגובות המאושרות (?parasha=… לדף בודד, בלי פרמטר = מונים לכרטיסים)
+ *  GET  /moderate     - אישור/דחייה מתוך המייל (דורש ADMIN_KEY)
+ *  GET  /admin        - דף ניהול בעברית לכל התגובות (דורש ADMIN_KEY)
  *
  * סודות (wrangler secret put):  RESEND_API_KEY, ADMIN_KEY
  * משתנים (wrangler.toml vars):  SITE_URL, FROM_EMAIL, REPLY_TO, BRAND, OWNER_EMAIL
  * אחסון:                        KV binding בשם SUBSCRIBERS
  *
  * מפתחות ב-KV:
- *   sub:<email>        — נרשם לרשימת התפוצה
- *   capp:<parasha>     — מערך התגובות המאושרות של פרשה (מה שהאתר קורא)
- *   cpend:<id>         — תגובה בודדת הממתינה לאישור
- *   cindex             — { "<parasha>": <מספר תגובות מאושרות> } למוני הכרטיסים
- *   log:sends          — 30 השליחות האחרונות: מתי, איזה יום, אילו דפים, כמה נשלחו/נכשלו
- * כתובות המייל של המגיבים נשמרות רק ברשומה ובדף הניהול — לעולם לא ב-capp/cindex,
+ *   sub:<email>        - נרשם לרשימת התפוצה
+ *   capp:<parasha>     - מערך התגובות המאושרות של פרשה (מה שהאתר קורא)
+ *   cpend:<id>         - תגובה בודדת הממתינה לאישור
+ *   cindex             - { "<parasha>": <מספר תגובות מאושרות> } למוני הכרטיסים
+ *   log:sends          - 30 השליחות האחרונות: מתי, איזה יום, אילו דפים, כמה נשלחו/נכשלו
+ * כתובות המייל של המגיבים נשמרות רק ברשומה ובדף הניהול - לעולם לא ב-capp/cindex,
  * כלומר לעולם לא מגיעות לדפדפן של הקוראים.
  */
 
@@ -112,7 +112,7 @@ const shell = (env, inner, unsubUrl) => `
 
 /* ---------- לוח שנה: הפרשה/החג הקרוב ---------- */
 
-// מסיר ניקוד וטעמים בלבד — בלי מקף עברי (U+05BE), כדי ש"ניצבים־וילך" יישאר מפוצל
+// מסיר ניקוד וטעמים בלבד - בלי מקף עברי (U+05BE), כדי ש"ניצבים־וילך" יישאר מפוצל
 const stripNikud = s => (s || '').replace(/[֑-ׇֽֿׁׂׅׄ]/g, '');
 const normName = s => stripNikud(s || '').replace(/["'׳״]/g, '')
   .replace(/[־–—-]/g, ' ').replace(/\s+/g, ' ').trim();
@@ -224,7 +224,7 @@ async function sendWeeklyCore(env, day) {
     try {
       await sendEmail(env, {
         to: rec.email,
-        subject: picks.map(p => (p.meta.isChag ? p.name : 'פרשת ' + p.name)).join(' · ') + ' — בין הנכתב לנגלה',
+        subject: picks.map(p => (p.meta.isChag ? p.name : 'פרשת ' + p.name)).join(' · ') + ' - בין הנכתב לנגלה',
         html: shell(env, `<p>שבוע טוב,</p>${blocks}<p style="margin-top:18px">שבת שלום,<br>אריאל</p>`, unsub),
         headers: unsub ? { 'List-Unsubscribe': `<${unsub}>`, 'List-Unsubscribe-Post': 'List-Unsubscribe=One-Click' } : undefined,
       });
@@ -235,7 +235,7 @@ async function sendWeeklyCore(env, day) {
       console.error('send failed', rec.email, e.message);
     }
   }
-  // otherDay — נרשמים שבחרו יום אחר; notActive — טרם אישרו את ההרשמה או הוסרו
+  // otherDay - נרשמים שבחרו יום אחר; notActive - טרם אישרו את ההרשמה או הוסרו
   return { sent, failed, otherDay, notActive, sheets: picks.map(p => p.name), errors };
 }
 
@@ -257,7 +257,7 @@ const adminOk = (url, env) => {
   return !!k && (url.searchParams.get('key') || '').trim() === k;
 };
 
-// מה שנשלח לדפדפן — בלי מייל, בלי מזהה, בלי כתובת IP
+// מה שנשלח לדפדפן - בלי מייל, בלי מזהה, בלי כתובת IP
 const publicComment = c => ({ name: c.name, text: c.text, date: c.date });
 
 async function readIndex(env) {
@@ -266,7 +266,7 @@ async function readIndex(env) {
 
 async function approveComment(env, rec) {
   const list = (await env.SUBSCRIBERS.get(APPROVED_KEY(rec.parasha), 'json')) || [];
-  if (list.some(c => c.id === rec.id)) return list.length;          // אישור כפול — לא מכפילים
+  if (list.some(c => c.id === rec.id)) return list.length;          // אישור כפול - לא מכפילים
   list.push({ id: rec.id, name: rec.name, text: rec.text, date: rec.date });
   await env.SUBSCRIBERS.put(APPROVED_KEY(rec.parasha), JSON.stringify(list));
   const index = await readIndex(env);
@@ -321,7 +321,7 @@ export default {
       try { body = await request.json(); } catch { return json({ error: 'bad json' }, 400, origin); }
       const email = (body.email || '').trim().toLowerCase();
       const day = DAYS[body.day] ? body.day : null;
-      if (body.website) return json({ ok: true }, 200, origin);        // honeypot — בוטים
+      if (body.website) return json({ ok: true }, 200, origin);        // honeypot - בוטים
       if (!validEmail(email)) return json({ error: 'invalid_email' }, 400, origin);
       if (!day) return json({ error: 'invalid_day' }, 400, origin);
 
@@ -345,17 +345,17 @@ export default {
       try {
         await sendEmail(env, {
           to: email,
-          subject: 'אישור הרשמה — בין הנכתב לנגלה',
+          subject: 'אישור הרשמה - בין הנכתב לנגלה',
           html: shell(env, `
             <p>שלום,</p>
             <p>ביקשת לקבל את דף פרשת השבוע בכל יום <strong>${DAYS[day]}</strong>.</p>
             <p>לאישור ההרשמה יש ללחוץ על הכפתור:</p>
             <p><a href="${esc(confirmUrl)}" style="display:inline-block;background:#8F6A10;color:#fff;
                text-decoration:none;padding:11px 22px;border-radius:6px;font-weight:600">אישור ההרשמה</a></p>
-            <p style="font-size:14px;color:#6B675A">אם לא ביקשת להירשם — אפשר פשוט להתעלם מהמייל הזה.</p>`),
+            <p style="font-size:14px;color:#6B675A">אם לא ביקשת להירשם - אפשר פשוט להתעלם מהמייל הזה.</p>`),
         });
       } catch (e) {
-        // ההרשמה נשמרה כ"ממתינה", אבל מייל האישור נכשל — מדווחים במפורש כדי שיהיה מה לאבחן
+        // ההרשמה נשמרה כ"ממתינה", אבל מייל האישור נכשל - מדווחים במפורש כדי שיהיה מה לאבחן
         console.error('confirm mail failed', e.message);
         return json({ error: 'mail_failed', detail: e.message.slice(0, 300) }, 502, origin);
       }
@@ -402,7 +402,7 @@ export default {
       const headers = {
         'content-type': 'application/json; charset=utf-8',
         'access-control-allow-origin': origin,
-        // דקה של מטמון — תגובה מאושרת מופיעה כמעט מיד, בלי להעיר את ה-Worker בכל טעינה
+        // דקה של מטמון - תגובה מאושרת מופיעה כמעט מיד, בלי להעיר את ה-Worker בכל טעינה
         'cache-control': 'public, max-age=60',
       };
       if (!name) {
@@ -427,7 +427,7 @@ export default {
       if (text.length > MAX_COMMENT) return json({ error: 'too_long' }, 400, origin);
       if (email && !validEmail(email)) return json({ error: 'invalid_email' }, 400, origin);
 
-      // הפרשה חייבת להיות אחת מאלה שבאתר — אחרת אפשר להציף את ה-KV במפתחות שרירותיים
+      // הפרשה חייבת להיות אחת מאלה שבאתר - אחרת אפשר להציף את ה-KV במפתחות שרירותיים
       let index;
       try {
         index = await (await fetch(site + '/assets/parashot.json', { cf: { cacheTtl: 3600 } })).json();
@@ -449,14 +449,14 @@ export default {
       // ממתינה שלא אושרה נמחקת מעצמה אחרי 90 יום
       await env.SUBSCRIBERS.put(PENDING_KEY(id), JSON.stringify(rec), { expirationTtl: 60 * 60 * 24 * 90 });
 
-      // מייל אישור לאריאל — כישלון שליחה לא מפיל את התגובה, היא כבר שמורה
+      // מייל אישור לאריאל - כישלון שליחה לא מפיל את התגובה, היא כבר שמורה
       const owner = ownerEmail(env);
       if (owner && adminKey(env)) {
         const link = a => `${env.WORKER_URL}/moderate?id=${encodeURIComponent(id)}&action=${a}&key=${encodeURIComponent(adminKey(env))}`;
         try {
           await sendEmail(env, {
             to: owner,
-            subject: 'תגובה חדשה ממתינה לאישור — ' + parasha,
+            subject: 'תגובה חדשה ממתינה לאישור - ' + parasha,
             html: shell(env, `
               <p><strong>${esc(name)}</strong> כתב/ה תגובה על <strong>${esc(parasha)}</strong>:</p>
               <blockquote style="margin:0 0 16px;padding:12px 16px;background:#F7F2E7;border-inline-start:3px solid #D4A93C;
@@ -631,7 +631,7 @@ challenges: {},
         body: JSON.stringify({
           from: env.FROM_EMAIL,
           to: [to],
-          subject: 'בדיקת שליחה — בין הנכתב לנגלה',
+          subject: 'בדיקת שליחה - בין הנכתב לנגלה',
           html: '<p dir="rtl">זו הודעת בדיקה. אם הגיעה, השליחה תקינה.</p>',
         }),
       });

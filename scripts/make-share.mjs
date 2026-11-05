@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-/* תמונות השיתוף (og:image) — מה שווטסאפ, פייסבוק וטלגרם מציגים כששולחים קישור.
+/* תמונות השיתוף (og:image) - מה שווטסאפ, פייסבוק וטלגרם מציגים כששולחים קישור.
  *
  *   assets/og-image.jpg       לאתר כולו (דף הבית, /p/, עמודים בלי תמונה משלהם)
  *   assets/share/<שם>.jpg     לכל פרשה וחג, לפי slug של העמוד (/p/<שם>/)
@@ -9,7 +9,7 @@
  * והשנה; פאנל כחול משמאל ובו העמוד הראשון של הדף עצמו (assets/previews).
  *
  * הרצה (נדרש playwright):  node scripts/make-share.mjs
- * אחרי הוספת כרטיס ב-make-covers.mjs או דף חדש — להריץ שוב ולבנות.
+ * אחרי הוספת כרטיס ב-make-covers.mjs או דף חדש - להריץ שוב ולבנות.
  */
 import fs from 'node:fs';
 import os from 'node:os';
@@ -67,12 +67,12 @@ const bottomRow = year => `<div style="display:flex;align-items:center;gap:14px;
 </div>`;
 
 function pageCard(pg) {
-  // בחג השם של "הספר" הוא "חגים ומועדים" — כותרת, בלי תגית שחוזרת עליה
+  // בחג השם של "הספר" הוא "חגים ומועדים" - כותרת, בלי תגית שחוזרת עליה
   const start = `${pg.chag ? topRow(pg.book, '') : topRow('פרשת השבוע', pg.book)}
   <div style="display:flex;flex-direction:column;gap:22px">
     <div data-fit style="${serif};font-size:150px;font-weight:900;line-height:1;color:${NAVY};white-space:nowrap">${pg.name}</div>${pg.verse ? `
     <div style="border-inline-start:5px solid ${GOLD};padding-inline-start:20px;${serif};font-size:32px;font-weight:500;line-height:1.35;color:#26241E">${pg.verse}</div>` : `
-    <div style="font-size:30px;color:#4A4636">${BRAND} — ${pg.chag ? 'דף לשולחן החג' : 'דף לשולחן שבת'}</div>`}
+    <div style="font-size:30px;color:#4A4636">${BRAND} - ${pg.chag ? 'דף לשולחן החג' : 'דף לשולחן שבת'}</div>`}
   </div>
   ${bottomRow(pg.year)}`;
   const end = pg.preview
@@ -90,7 +90,7 @@ function siteCard() {
   const start = `${topRow('לק"י', 'פרשת השבוע')}
   <div style="display:flex;flex-direction:column;gap:20px">
     <div style="${serif};font-size:96px;font-weight:900;line-height:1.05;color:${NAVY}">${BRAND}</div>
-    <div style="border-inline-start:5px solid ${GOLD};padding-inline-start:20px;font-size:30px;line-height:1.4;color:#26241E">דפי פרשת השבוע והחגים — לצפייה, להורדה, להדפסה לשולחן שבת ולהאזנה</div>
+    <div style="border-inline-start:5px solid ${GOLD};padding-inline-start:20px;font-size:30px;line-height:1.4;color:#26241E">דפים לפרשות השבוע - לצפייה וקריאה, להורדה ולהדפסה לשולחן שבת, וגם להאזנה</div>
   </div>
   ${bottomRow('')}`;
   const end = fan.map((p, i) => `<div style="position:absolute;${pos[i]}">${sheet(p, 300, rot[i])}</div>`).join('');

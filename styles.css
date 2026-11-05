@@ -146,7 +146,7 @@ html{scroll-behavior:smooth}
 .hero-preview__img{display:block;width:100%;height:320px;object-fit:cover;object-position:top;background:#fff;transition:opacity var(--dur) var(--ease)}
 .hero-preview__imglink:hover .hero-preview__img{opacity:.92}
 .hero-preview__podcast{padding:12px 16px;border-top:1px solid var(--parchment-200)}
-/* גודל רציף לפי רוחב המסך: בנייד צר ~27px, בדסקטופ 44px — בלי קפיצה בין מדרגות.
+/* גודל רציף לפי רוחב המסך: בנייד צר ~27px, בדסקטופ 44px - בלי קפיצה בין מדרגות.
    שורה עברית ארוכה במשקל 900 נעשית קיר; גובה שורה צפוף יותר מרגיע אותה. */
 .hero h1{margin:0;font-size:clamp(27px,6.2vw,44px);font-weight:900;line-height:1.16;letter-spacing:-.01em;
   text-wrap:balance}
@@ -206,7 +206,7 @@ html{scroll-behavior:smooth}
 .parasha-page__soon{background:var(--surface-card);border:var(--border-card);border-radius:var(--radius-m);padding:var(--sp-5);color:var(--ink-700)}
 .parasha-page__aside{display:flex;flex-direction:column;gap:20px;position:sticky;top:24px}
 /* המקורות יושבים בצד, מתחת לפודקאסט. פתוחים הם ארוכים מגובה המסך, וצד "דביק"
-   היה מסתיר את סופם — לכן כשהם פתוחים הצד נגלל עם העמוד. */
+   היה מסתיר את סופם - לכן כשהם פתוחים הצד נגלל עם העמוד. */
 .parasha-page__aside:has(> .sheet-sources[open]){position:static}
 .parasha-page__podcast:not(:empty){background:var(--surface-card);border:var(--border-card);border-radius:var(--radius-m);padding:var(--sp-5)}
 .parasha-page__comments{background:var(--surface-card);border:var(--border-card);border-radius:var(--radius-m);padding:var(--sp-5)}
@@ -214,7 +214,7 @@ html{scroll-behavior:smooth}
 .side-card{background:var(--surface-card);border:var(--border-card);border-radius:var(--radius-m);padding:var(--sp-5)}
 .side-card__title{font-family:var(--font-body);font-weight:600;font-size:14px;color:var(--text-heading);margin:0}
 
-/* ---------- הדף כטקסט (details סגור — נפתח רק בלחיצה) ---------- */
+/* ---------- הדף כטקסט (details סגור - נפתח רק בלחיצה) ---------- */
 .sheet-text{background:var(--surface-card);border:var(--border-card);border-radius:var(--radius-m)}
 .sheet-text summary{display:flex;align-items:center;gap:8px;cursor:pointer;list-style:none;
   padding:14px var(--sp-5);font-family:var(--font-body);font-weight:600;font-size:15px;color:var(--primary)}
@@ -266,7 +266,7 @@ html{scroll-behavior:smooth}
 .comment-form__msg{margin:0;font-size:15px;color:var(--ink-700);min-height:1.2em}
 .comment-form__msg.is-ok{color:#2E6B3E}
 .comment-form__msg.is-error{color:#8A2B2B}
-/* מלכודת בוטים — מוסתרת מבני אדם אך לא מ-display:none שבוטים לומדים לזהות */
+/* מלכודת בוטים - מוסתרת מבני אדם אך לא מ-display:none שבוטים לומדים לזהות */
 .comment-form__hp{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);
   white-space:nowrap;margin:0}
 
@@ -306,7 +306,7 @@ html{scroll-behavior:smooth}
   .parasha-page__aside > *{order:3}
   .parasha-page__aside > :not(.sheet-sources):first-child,
   .parasha-page__aside > .sheet-sources:first-child + *{margin-top:20px}
-  /* בטור אחד הסרגל היה נקבר מתחת לכל הארכיון — מעלים אותו מעליו */
+  /* בטור אחד הסרגל היה נקבר מתחת לכל הארכיון - מעלים אותו מעליו */
   .site-main__grid{display:flex;flex-direction:column}
   .sidebar{order:-1}
   .hero__inner{padding-block:16px 30px}
@@ -327,7 +327,7 @@ html{scroll-behavior:smooth}
 }
 
 @media (max-width:600px){
-  /* כשתוכן התגית נשבר לשתי שורות, רדיוס "גלולה" הופך אותה לכתם — מעגלים פינות במידה */
+  /* כשתוכן התגית נשבר לשתי שורות, רדיוס "גלולה" הופך אותה לכתם - מעגלים פינות במידה */
   .hero-badge{border-radius:14px;padding:9px 14px;font-size:14px;gap:8px}
   .hero-badge__name{font-size:16px}
   .hero__lead{font-size:16px;margin-top:14px}
@@ -341,7 +341,7 @@ html{scroll-behavior:smooth}
 
 /* ---------- סרגל נגישות (js/a11y.js, לפי ת"י 5568) ---------- */
 /* הכפתור צף מימין למטה; "חזרה למעלה" יושב משמאל, כך שאין התנגשות.
-   z נמוך מחלונות ה-PDF וההרשמה (50) — כשמודאל פתוח, הסרגל מאחוריו. */
+   z נמוך מחלונות ה-PDF וההרשמה (50) - כשמודאל פתוח, הסרגל מאחוריו. */
 .a11y{position:fixed;inset-inline-end:auto;right:20px;bottom:20px;z-index:45;font-family:var(--font-body)}
 .a11y__btn{width:48px;height:48px;border-radius:50%;border:2px solid var(--surface-raised);cursor:pointer;
   background:var(--blue-700);color:#fff;display:flex;align-items:center;justify-content:center;
@@ -356,7 +356,7 @@ html{scroll-behavior:smooth}
   font:inherit;font-size:14.5px;color:var(--text-body);background:none;border:0;border-radius:var(--radius-s);
   padding:7px 8px;cursor:pointer;text-align:start}
 .a11y__row:hover{background:var(--blue-100)}
-/* המתג: translateX פיזי בכוונה — הוא אינו מתהפך ב-RTL, ולכן המצב עקבי */
+/* המתג: translateX פיזי בכוונה - הוא אינו מתהפך ב-RTL, ולכן המצב עקבי */
 .a11y__track{flex:none;width:38px;height:22px;border-radius:11px;background:var(--parchment-300);
   position:relative;transition:background var(--dur) var(--ease)}
 .a11y__thumb{position:absolute;top:3px;left:0;width:16px;height:16px;border-radius:50%;background:#fff;
@@ -367,8 +367,8 @@ html{scroll-behavior:smooth}
   border:0;border-top:1px solid var(--border-subtle);margin-top:6px;padding:9px 8px;text-align:start}
 .a11y__decl{font-size:13px;padding:2px 8px 4px}
 
-/* מצבי הנגישות — מוחלים כמחלקות על <html> */
-/* ניגודיות: דריסת משתני הצבע. בלי CSS filter — ראו ההערה ב-js/a11y.js */
+/* מצבי הנגישות - מוחלים כמחלקות על <html> */
+/* ניגודיות: דריסת משתני הצבע. בלי CSS filter - ראו ההערה ב-js/a11y.js */
 html.a11y-contrast{
   --surface-page:#000;--surface-card:#0b0b0b;--surface-raised:#151515;--surface-inverse:#000;
   --text-heading:#fff;--text-body:#fff;--text-muted:#d6d6d6;--text-on-dark:#fff;--text-on-accent:#000;

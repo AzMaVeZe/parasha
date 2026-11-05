@@ -1,4 +1,4 @@
-/* פרשת השבוע — רינדור האתר מתוך PARASHA_DATA (ללא תלות בספריות) */
+/* פרשת השבוע - רינדור האתר מתוך PARASHA_DATA (ללא תלות בספריות) */
 (function () {
   'use strict';
 
@@ -53,7 +53,7 @@
   const modalDownload = document.getElementById('pdf-modal-download');
   let lastFocused = null;
 
-  // במסכי מגע/צרים iframe של PDF שבור (בעיקר iOS) — פותחים בלשונית חדשה
+  // במסכי מגע/צרים iframe של PDF שבור (בעיקר iOS) - פותחים בלשונית חדשה
   const preferNewTab = () => window.matchMedia('(pointer: coarse)').matches || window.innerWidth < 700;
 
   function viewPdf(title, url) {
@@ -112,11 +112,11 @@
 
   /* ---------- כתובת עמוד הדף ----------
      לכל דף יש עמוד HTML אמיתי ב-/p/<שם>/ (נוצר ב-scripts/build-pages.js). זו
-     הכתובת שבקישורים, כדי שמנועי חיפוש ומערכות AI יראו 62 עמודים ולא אחד —
+     הכתובת שבקישורים, כדי שמנועי חיפוש ומערכות AI יראו 62 עמודים ולא אחד -
      מקטע כתובת (‎#p=‎) אינו עמוד נפרד מבחינתם.
      הלחיצה עצמה נשארת בתוך האתר: המאזין למטה מיירט אותה ופותח את עמוד הדף
      בלי טעינה מחדש, בדיוק כשהיה. הכתובות הישנות (‎#p=<שם>‎) לא נגעו וממשיכות
-     לעבוד — יש כאלה במיילים שנשלחו לאורך השנים. */
+     לעבוד - יש כאלה במיילים שנשלחו לאורך השנים. */
   // חייב להישאר זהה ל-slug() שב-scripts/build-pages.js, אחרת הקישורים יובילו ל-404
   const pageSlug = name => name.replace(/["'׳״]/g, '').replace(/\s+/g, '-');
   const pageHref = name => '/p/' + encodeURIComponent(pageSlug(name)) + '/';
@@ -165,7 +165,7 @@
     if (spotifyId) {
       const frame = document.createElement('iframe');
       frame.src = 'https://open.spotify.com/embed/episode/' + spotifyId + '?utm_source=generator';
-      frame.title = 'נגן ספוטיפיי — פודקאסט על ' + title;
+      frame.title = 'נגן ספוטיפיי - פודקאסט על ' + title;
       frame.loading = 'lazy';
       frame.height = 152;
       frame.style.borderRadius = '12px';
@@ -293,7 +293,7 @@
     });
     emptyState.hidden = !(q && total === 0);
     if (!emptyState.hidden) {
-      emptyState.textContent = 'לא נמצאה פרשה בשם "' + search.value.trim() + '" — אפשר לנסות שם אחר.';
+      emptyState.textContent = 'לא נמצאה פרשה בשם "' + search.value.trim() + '" - אפשר לנסות שם אחר.';
     }
     searchStatus.textContent = q ? (total ? 'נמצאו ' + total + ' דפים' : 'לא נמצאו תוצאות') : '';
 
@@ -316,9 +316,9 @@
   document.getElementById('hero-example').addEventListener('click', () => goToParasha(heroName));
 
   /* ---------- פרשת השבוע / החג הקרוב (Hebcal) ---------- */
-  // מסיר ניקוד וטעמים בלבד — בלי מקף עברי (U+05BE), כדי ש"ניצבים־וילך" יישאר מפוצל
+  // מסיר ניקוד וטעמים בלבד - בלי מקף עברי (U+05BE), כדי ש"ניצבים־וילך" יישאר מפוצל
   const stripNikud = s => (s || '').replace(/[֑-ׇֽֿׁׂׅׄ]/g, '');
-  // התאמה מדויקת בלבד, אחרי נרמול — התאמה חלקית תפסה בעבר את "בא" מתוך "תשעה באב"
+  // התאמה מדויקת בלבד, אחרי נרמול - התאמה חלקית תפסה בעבר את "בא" מתוך "תשעה באב"
   const normName = s => stripNikud(s || '').replace(/["'׳״]/g, '').replace(/[־–—-]/g, ' ').replace(/\s+/g, ' ').trim();
   // גישור בין הכתיב החסר של Hebcal לשמות באתר, וכינויי חגים
   const NAME_ALIASES = {
@@ -343,10 +343,10 @@
     const riddles = window.PARASHA_RIDDLES || {};
     const box = document.querySelector('.riddle-box');
     const cur = riddles[currentName];
-    // יש דפים שאין בהם חידה כלל. מסתירים את התיבה — לא ממציאים לה תוכן.
+    // יש דפים שאין בהם חידה כלל. מסתירים את התיבה - לא ממציאים לה תוכן.
     if (!cur) { box.hidden = true; return; }
     box.hidden = false;
-    document.getElementById('riddle-title').textContent = 'חידה לשולחן שבת — ' + currentName;
+    document.getElementById('riddle-title').textContent = 'חידה לשולחן שבת - ' + currentName;
 
     const body = document.getElementById('riddle-body');
     body.textContent = '';
@@ -360,7 +360,7 @@
       im.loading = 'lazy';
       im.addEventListener('error', () => { im.remove(); if (!cur.withText) body.append(cur.q); });
       body.append(im);
-      // withText — הסריקה קטנה מכדי לקרוא ממנה, אבל הנוסח תומלל במלואו
+      // withText - הסריקה קטנה מכדי לקרוא ממנה, אבל הנוסח תומלל במלואו
       if (cur.withText) body.append(el('div', 'riddle-box__text', cur.q));
     } else {
       body.textContent = cur.q;
@@ -401,7 +401,7 @@
     more.href = href;
     more.setAttribute('data-parasha', entry.name);
     bar.append(more);
-    // תמונת העמוד הראשון (קישור לעמוד הדף) — iframe של PDF לא נתמך באנדרואיד
+    // תמונת העמוד הראשון (קישור לעמוד הדף) - iframe של PDF לא נתמך באנדרואיד
     const imgLink = el('a', 'hero-preview__imglink');
     imgLink.href = href;
     imgLink.setAttribute('data-parasha', entry.name);
@@ -413,7 +413,7 @@
     img.addEventListener('error', () => { card.remove(); });
     imgLink.append(img);
     card.append(bar, imgLink);
-    // נגן הפודקאסט מתחת לתצוגה המקדימה; אם אין פרק לדף הזה — קישור לסדרה
+    // נגן הפודקאסט מתחת לתצוגה המקדימה; אם אין פרק לדף הזה - קישור לסדרה
     const pod = buildPodcast(entry, title);
     if (pod) {
       pod.classList.add('hero-preview__podcast');
@@ -464,19 +464,19 @@
         candidates.sort((a, b) => (a.it.date < b.it.date ? -1 : 1));
         const featured = candidates.slice(0, 2);
 
-        // תגיות — אחת לכל דף מוצג (שם קנוני מהאתר כשקיים)
+        // תגיות - אחת לכל דף מוצג (שם קנוני מהאתר כשקיים)
         const badges = document.getElementById('hero-badges');
         featured.forEach(c => badges.append(buildBadge(
           c.cat === 'parashat' ? 'פרשת השבוע' : 'החג הקרוב',
           c.hit ? c.hit.p.name : c.heName, c.dt)));
         badges.hidden = false;
 
-        // חידה — לפי הפרשה אם קיימת, אחרת לפי הפריט הראשון
+        // חידה - לפי הפרשה אם קיימת, אחרת לפי הפריט הראשון
         const parCand = featured.find(c => c.cat === 'parashat') || featured[0];
         const prevHit = prevPar ? findEntry(prevPar.hebrew) : null;
         setRiddle(parCand.hit ? parCand.hit.p.name : null, prevHit ? prevHit.p.name : null);
 
-        // כרטיסים בהירו — עד שניים, כל אחד עם הפודקאסט שלו
+        // כרטיסים בהירו - עד שניים, כל אחד עם הפודקאסט שלו
         const side = document.getElementById('hero-side');
         const quote = side.querySelector('.pasuk-quote');
         let firstCard = null, cardCount = 0;
@@ -493,7 +493,7 @@
           document.getElementById('hero-cta-label').textContent =
             'לדף ' + (firstCard.cat === 'parashat' ? 'פרשת ' : '') + firstCard.hit.p.name;
         }
-        // שני דפים בדסקטופ — פריסה מוערמת (טקסט למעלה, שני כרטיסים זה לצד זה)
+        // שני דפים בדסקטופ - פריסה מוערמת (טקסט למעלה, שני כרטיסים זה לצד זה)
         if (cardCount === 2) document.querySelector('.hero').classList.add('hero--stack');
       }).catch(() => {});
   })();
@@ -552,7 +552,7 @@
       const email = form.email.value.trim();
       const day = form.querySelector('input[name="day"]:checked').value;
       if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) {
-        setMsg('נראה שכתובת הדוא"ל אינה תקינה — אפשר לבדוק שוב?', 'error');
+        setMsg('נראה שכתובת הדוא"ל אינה תקינה - אפשר לבדוק שוב?', 'error');
         form.email.focus();
         return;
       }
@@ -574,10 +574,10 @@
             if (code === 'invalid_email') { setMsg('כתובת הדוא"ל אינה תקינה.', 'error'); return; }
             throw new Error(code || 'failed');
           }
-          if (res.d.state === 'already') setMsg('הכתובת כבר רשומה — הכול מסודר.', 'ok');
+          if (res.d.state === 'already') setMsg('הכתובת כבר רשומה - הכול מסודר.', 'ok');
           else if (res.d.state === 'updated') setMsg('יום הקבלה עודכן. תודה!', 'ok');
           else {
-            setMsg('כמעט סיימנו — שלחנו אליכם מייל לאישור ההרשמה.', 'ok');
+            setMsg('כמעט סיימנו - שלחנו אליכם מייל לאישור ההרשמה.', 'ok');
             form.reset();
             setTimeout(() => { if (!modal.hidden) closeSub(); }, 3500);
           }
@@ -642,11 +642,11 @@
     fetchComments(name).then(items => {
       if (currentParasha !== name) return;        // המשתמש עבר לדף אחר בינתיים
       titleEl.textContent = items.length ? 'תגובות (' + items.length + ')' : 'תגובות';
-      note.textContent = items.length ? '' : 'עדיין אין תגובות לדף הזה — שמחים להיות הראשונים לשמוע מכם.';
+      note.textContent = items.length ? '' : 'עדיין אין תגובות לדף הזה - שמחים להיות הראשונים לשמוע מכם.';
       renderCommentList(list, [...items].reverse());
     }).catch(() => {
       if (currentParasha !== name) return;
-      note.textContent = 'לא הצלחנו לטעון את התגובות כרגע. אפשר לכתוב תגובה — היא תוצג כאן לאחר אישור.';
+      note.textContent = 'לא הצלחנו לטעון את התגובות כרגע. אפשר לכתוב תגובה - היא תוצג כאן לאחר אישור.';
     });
   }
 
@@ -696,7 +696,7 @@
           }
           const errors = {
             rate_limited: 'נשלחו כמה תגובות ברצף. אפשר לנסות שוב בעוד כמה דקות.',
-            too_long: 'התגובה ארוכה מדי — עד 2000 תווים.',
+            too_long: 'התגובה ארוכה מדי - עד 2000 תווים.',
             invalid_email: 'כתובת הדוא"ל אינה תקינה.',
             empty: 'אפשר לכתוב כמה מילים?',
           };
@@ -707,7 +707,7 @@
     });
   })();
 
-  // מונה התגובות בכרטיסים — קריאה אחת שמחזירה את כל המונים
+  // מונה התגובות בכרטיסים - קריאה אחת שמחזירה את כל המונים
   if (COMMENTS_API) {
     fetchWithin(COMMENTS_API + '/comments')
       .then(r => (r.ok ? r.json() : {}))
@@ -724,13 +724,13 @@
   const heroSection = document.querySelector('.hero');
   const archiveMain = document.getElementById('main-content');
   const pageEl = document.getElementById('parasha-page');
-  const SITE_TITLE = 'בין הנכתב לנגלה — על פרשת השבוע מאת אריאל ז\'יטניצקי';
+  const SITE_TITLE = 'בין הנכתב לנגלה - על פרשת השבוע מאת אריאל ז\'יטניצקי';
 
   /* הדף כטקסט: <details> סגור שאינו משנה את מראה העמוד. התוכן נטען רק
      בפתיחה הראשונה, מ-assets/sheet-text (נוצר ב-scripts/extract-sheet-text.py). */
   const textBox = document.getElementById('parasha-page-text');
   const textBody = document.getElementById('parasha-page-text-body');
-  let textLoader = null;                    // המאזין של הדף הנוכחי — מוסר במעבר לדף אחר
+  let textLoader = null;                    // המאזין של הדף הנוכחי - מוסר במעבר לדף אחר
 
   /* המקורות: assets/sources/<שם>.json (scripts/sefaria-sources.py), רק לדפים
      שהמקורות שלהם נבדקו. נטען מיד, כי הוא קובע אם התיבה מוצגת בכלל, וגם
@@ -790,7 +790,7 @@
     });
   }
   // פסקה (או הערת שוליים) מהדף, שבה מראה המקום (אם יש) הופך לקישור לספריא.
-  // here(s): האם המקור שייך לקטע הזה — s.para בפסקאות, s.fn בהערות.
+  // here(s): האם המקור שייך לקטע הזה - s.para בפסקאות, s.fn בהערות.
   function paragraphWithLinks(node, par, here, list) {
     const marks = (list || []).filter(s => here(s) && s.anchor && par.includes(s.anchor))
       .map(s => ({ at: par.indexOf(s.anchor), s })).sort((x, y) => x.at - y.at);
@@ -846,7 +846,7 @@
             textBody.append(ol);
           }
         })
-        .catch(() => { textBody.append(el('p', 'sheet-text__note', 'הטקסט אינו זמין כרגע — הדף המלא נמצא ב-PDF.')); });
+        .catch(() => { textBody.append(el('p', 'sheet-text__note', 'הטקסט אינו זמין כרגע - הדף המלא נמצא ב-PDF.')); });
     });
   }
 
@@ -868,11 +868,11 @@
     const noteEl = document.getElementById('parasha-page-note');
     noteEl.textContent = p.note || '';
     noteEl.hidden = !p.note;
-    // הכתובת הסטטית ולא #p= — ממנה ווטסאפ לוקח את תמונת השיתוף של הפרשה
+    // הכתובת הסטטית ולא #p= - ממנה ווטסאפ לוקח את תמונת השיתוף של הפרשה
     // (אותו קישור כמו waHref ב-scripts/build-pages.js)
     const share = document.getElementById('parasha-page-share');
     share.href = 'https://wa.me/?text=' + encodeURIComponent(
-      title + ' — בין הנכתב לנגלה\nhttps://parasha.azma.app' + pageHref(name));
+      title + ' - בין הנכתב לנגלה\nhttps://parasha.azma.app' + pageHref(name));
     share.setAttribute('aria-label', 'שיתוף ' + title + ' בווטסאפ (נפתח בחלון חדש)');
 
     const doc = document.getElementById('parasha-page-doc');
@@ -906,14 +906,14 @@
     setupSheetText(p);
     renderPageComments(p.name);
 
-    // כרטיס ההרשמה עובר לעמוד הדף (אותו אלמנט — בלי כפילות מזהים)
+    // כרטיס ההרשמה עובר לעמוד הדף (אותו אלמנט - בלי כפילות מזהים)
     const subCard = document.getElementById('subscribe-card');
     if (subCard) document.querySelector('.parasha-page__aside').append(subCard);
 
     heroSection.hidden = true;
     archiveMain.hidden = true;
     pageEl.hidden = false;
-    document.title = title + ' — ' + SITE_TITLE;
+    document.title = title + ' - ' + SITE_TITLE;
     window.scrollTo(0, 0);
     document.getElementById('parasha-back').focus();
   }

@@ -3,15 +3,15 @@ window.SPOTIFY_SHOW_URL = 'https://open.spotify.com/show/033Slu47b23754GaMTuroo'
 
 // פיד ה-RSS של הפודקאסט. ריק עד שיידלק RSS Distribution ב-Spotify for
 // Creators (ראו docs/podcast-distribution.md). זו הכתובת שנכנסת ל-webFeed
-// בנתונים המובנים ול-<link rel="alternate"> — שתיהן חייבות פיד אמיתי, לא
+// בנתונים המובנים ול-<link rel="alternate"> - שתיהן חייבות פיד אמיתי, לא
 // עמוד HTML, אחרת מנועי חיפוש ומדריכי פודקאסטים מנסים לפרסר אותו ונכשלים.
 // כשמדליקים: לעדכן כאן, ואותה כתובת גם ב-index.html (הבנייה תזכיר).
 window.PODCAST_FEED_URL = '';
 
 // כתובת ה-Worker שמטפל בהרשמה לרשימת התפוצה (ראו worker/README.md).
 // לדוגמה: 'https://parasha-newsletter.username.workers.dev'
-// כל עוד ריק — טופס ההרשמה מוסתר ומוצגת הודעת "בקרוב".
-// דרך הכתובת של האתר ולא ישירות ל-workers.dev, שחסום אצל חלק מהגולשים —
+// כל עוד ריק - טופס ההרשמה מוסתר ומוצגת הודעת "בקרוב".
+// דרך הכתובת של האתר ולא ישירות ל-workers.dev, שחסום אצל חלק מהגולשים -
 // ראו functions/api/[[path]].js
 window.SUBSCRIBE_API = '/api';
 // התגובות רצות על אותו Worker (נתיב /comments), ולכן אין כאן מה להגדיר.
@@ -22,9 +22,9 @@ const B = id => 'https://www.box.net/shared/' + id;
 // ב-assets/pdfs (נבדק בזמן טעינה), כך שאפשר להוסיף קבצים בהדרגה בלי לגעת בקוד.
 const P = f => 'assets/pdfs/' + f;
 
-// פודקאסט לכל דף — שני מקורות אפשריים, לפי סדר עדיפות:
-// 1. spotify: 'https://open.spotify.com/episode/...' — מוטמע כנגן ספוטיפיי + קישור לפתיחה באפליקציה.
-// 2. audio: 'שם-קובץ.m4a' או כתובת מלאה — קובץ מקומי מפורש.
+// פודקאסט לכל דף - שני מקורות אפשריים, לפי סדר עדיפות:
+// 1. spotify: 'https://open.spotify.com/episode/...' - מוטמע כנגן ספוטיפיי + קישור לפתיחה באפליקציה.
+// 2. audio: 'שם-קובץ.m4a' או כתובת מלאה - קובץ מקומי מפורש.
 // 3. בלי שדה בכלל: קובץ מקומי לפי שם ה-PDF ב-assets/audio (למשל bereshit-נח.m4a).
 // כפתור "האזנה" מופיע אוטומטית רק כשיש מקור זמין בפועל.
 
