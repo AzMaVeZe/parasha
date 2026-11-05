@@ -7,3 +7,4 @@ scripts/notebook-answers.md
 scripts/episodes/
 book/build/
 __pycache__/
+scripts/.cache/
