@@ -342,7 +342,7 @@ BASE_CSS = '''
 @page :blank { @top-left { content: none } @top-right { content: none } }
 @page front { @top-left { content: none } @top-right { content: none } }
 @page opener { @top-left { content: none } @top-right { content: none } }
-html { font-family: 'David Libre', serif; font-size: 11.5pt; line-height: 1.68; color: #000 }
+html { font-family: 'David Libre', serif; font-size: 11.5pt; line-height: 1.55; color: #000 }   /* 1.55 — אריאל בחר (5.11.2026) */
 body { margin: 0 }
 /* Paged.js מזהה גלישה לעמוד הבא רק כשהעמודות זורמות משמאל לימין: המסמך LTR, התוכן RTL */
 .book, .pagedjs_margin-content, .pagedjs_footnote_area { direction: rtl }
