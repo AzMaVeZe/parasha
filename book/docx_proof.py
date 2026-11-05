@@ -231,6 +231,7 @@ def main():
               '(סקירה ← קבל / דחה). מקומות שדורשים בדיקה שלך מול הדף מודגשים בצהוב, והסיבה בהערה בשוליים. '
               'כללי הבית (גרשיים, מקף עברי, כתיב) כבר הוחלו. כל מה שתשנה כאן ייכנס לספר.', size=11)
     para(doc, '[ההקדמה — תיכתב בהמשך]')
+    para(doc, house.mark('chg', B.INTRO_YEARS, ''))
     for part in parts:
         heading(doc, part['name'], 1, page_break=True)
         for ch in part['chapters']:

@@ -33,6 +33,8 @@ ROOT = os.path.dirname(HERE)
 BUILD = os.path.join(HERE, 'build')
 
 TITLE = 'אללה פרשה'
+# שורה להקדמה (אריאל, החלטה 4): הנוסח נשאר, והשנה מופיעה בראש כל פרק
+INTRO_YEARS = 'הדפים נכתבו בשנים תשס״ט–תש״ע, דף לכל שבוע, וכל פרק נושא את שנת כתיבתו.'
 AUTHOR = "אריאל ז'יטניצקי"
 
 NIKUD = re.compile(r'[֑-ׇ]')
@@ -199,6 +201,13 @@ def clean(paras, names=()):
     return joined, subs
 
 
+# לשבעה דפים אין שנה בדף. "הכל נכתב לפי הסדר" (אריאל): השנה נקבעת לפי הדפים שלפניהם ואחריהם
+YEAR_BY_ORDER = {'וארא': 'תש״ע', 'בא': 'תש״ע',              # אחרי שמות תש״ע
+                 'כי תשא': 'תשס״ט',                          # בין תצוה לויקהל-פקודי, תשס״ט
+                 'צו': 'תשס״ט', 'פורים': 'תשס״ט', 'פסח': 'תשס״ט',   # עם ויקרא–שמיני ותצוה ("וקצת פורים"), תשס״ט
+                 'ואתחנן': 'תשס״ט'}                          # בין דברים לעקב, תשס״ט
+
+
 def chapters():
     y = years()
     parts, used = [], set()
@@ -220,7 +229,10 @@ def chapters():
             t = json.load(open(f, encoding='utf-8'))
             names = [q['name'] for q in sefer['parshiot'] if q['pdf'] == key]
             paras, subs = clean(t['paragraphs'], names)
-            ch = {'names': [p['name']], 'year': y.get(p['name'], ''), 'paras': paras, 'subs': subs,
+            year = y.get(p['name'], '') or YEAR_BY_ORDER.get(p['name'], '')
+            if p['name'] in YEAR_BY_ORDER:          # שנה לפי סדר הכתיבה (אריאל אישר, 5.11.2026) — מסומנת בהגהה
+                year = mark('chk', year, 'השנה לפי סדר הכתיבה, לא מהדף')
+            ch = {'names': [p['name']], 'year': year, 'paras': paras, 'subs': subs,
                   'notes': [n for n in t.get('footnotes', []) if 'החידה' not in n['text']],
                   'chag': sefer['id'] == 'chagim', 'id': 'ch-%d' % len(parts) + '-%d' % len(chs)}
             seen[key] = ch
@@ -414,7 +426,7 @@ def build(design='c', sample=False, size='b5', proof=False, lh=None):   # הוח
             h = [f'<section class="chapter" id="{ch["id"]}" data-title="{esc(title)}">',
                  f'<header class="ch-head"><div class="ch-kicker">{esc(kicker)}</div><h2>{esc(title)}</h2>'
                  + ''.join(f'<div class="ch-sub">{esc(t)}</div>' for t in ch['subs'])
-                 + (f'<div class="ch-year">{esc(ch["year"])}</div>' if ch['year'] else '') + '</header>']
+                 + (f'<div class="ch-year">{para_html(ch["year"], proof)}</div>' if ch['year'] else '') + '</header>']
             for i, p in enumerate(ch['paras']):
                 if p == '\x00TABLE':
                     h.append(shoftim_table())
@@ -432,7 +444,8 @@ def build(design='c', sample=False, size='b5', proof=False, lh=None):   # הוח
     front = f'''
 <section class="front title-page"><h1>{esc(TITLE)}</h1><div class="sub">דפים לפרשת השבוע ולחגים</div><div class="author">{esc(AUTHOR)}</div></section>
 <section class="front imprint"><p class="placeholder">[עמוד הזכויות: שנת הוצאה, ISBN, זכויות יוצרים — יושלם לפני ההגשה]</p></section>
-<section class="intro"><h2>הקדמה</h2><p class="placeholder">[ההקדמה של אריאל — תיכתב בהמשך]</p></section>
+<section class="intro"><h2>הקדמה</h2><p class="placeholder">[ההקדמה של אריאל — תיכתב בהמשך]</p>
+<p>{para_html(mark('chg', INTRO_YEARS, ''), proof)}</p></section>
 <section class="toc"><h2>תוכן העניינים</h2>{"".join(toc)}</section>'''
     about = ('<section class="about"><h2>על המחבר</h2>'
              '<p class="placeholder">[כמה שורות על אריאל — יכתוב אריאל]</p></section>')
