@@ -382,7 +382,9 @@ p.d { font-family: 'Assistant'; font-size: .95em; margin-right: 4mm }
 .title-page h1 { font-family: 'Assistant'; font-weight: 800; font-size: 34pt; margin: 0; letter-spacing: -.01em }
 .title-page .sub { font: 400 12pt 'Assistant'; color: #000; margin-top: 4mm }
 .title-page .author { font: 700 13pt 'Assistant'; margin-top: 70mm }
-.imprint { padding-top: 150mm; font: 9pt 'Assistant'; color: #555; text-align: right }
+/* עמוד הזכויות — הפרטים שחוק הספרים, התשס"א-2000, ס' 3, מחייב (שנות הוצאה והדפסה, המדפיס והמוציא לאור וכתובותיהם, שהספר יצא לאור בישראל) */
+.imprint { padding-top: 120mm; font: 8.5pt 'Assistant'; color: #000; text-align: right }
+.imprint p { margin: 0 0 1.2mm; text-indent: 0 }
 .intro { break-before: right }
 .intro h2, .toc h2 { font-family: 'Assistant'; font-weight: 700; font-size: 1.9em; margin: 20mm 0 8mm }
 .placeholder { color: #777; font-style: normal }
@@ -451,7 +453,16 @@ def build(design='c', sample=False, size='b5', proof=False, lh=None):   # הוח
             body.append('\n'.join(h))
     front = f'''
 <section class="front title-page"><h1>{esc(TITLE)}</h1><div class="sub">דפים לפרשת השבוע ולחגים</div><div class="author">{esc(AUTHOR)}</div></section>
-<section class="front imprint"><p class="placeholder">[עמוד הזכויות: שנת הוצאה, ISBN, זכויות יוצרים — יושלם לפני ההגשה]</p></section>
+<section class="front imprint">
+<p>{esc(TITLE)}</p><p>{esc(AUTHOR)}</p>
+<p>© כל הזכויות שמורות ל{esc(AUTHOR)}, <span class="placeholder">[שנה]</span></p>
+<p>אין להעתיק, לשכפל, לצלם, להקליט, לתרגם, לאחסן במאגר מידע או להפיץ ספר זה או קטעים ממנו בשום צורה ובשום אמצעי, ללא אישור בכתב מהמחבר.</p>
+<p>שנת ההוצאה: <span class="placeholder">[ ]</span> · שנת ההדפסה: <span class="placeholder">[ ]</span></p>
+<p>המוציא לאור: <span class="placeholder">[שם וכתובת]</span></p>
+<p>הדפסה: <span class="placeholder">[שם בית הדפוס וכתובתו]</span></p>
+<p>ISBN <span class="placeholder">[ ]</span></p>
+<p>יצא לאור בישראל</p>
+</section>
 <section class="intro"><h2>הקדמה</h2><p class="placeholder">[ההקדמה של אריאל — תיכתב בהמשך]</p>
 <p>{para_html(mark('chg', INTRO_YEARS, ''), proof)}</p></section>
 <section class="toc"><h2>תוכן העניינים</h2>{"".join(toc)}</section>'''

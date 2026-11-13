@@ -9,5 +9,5 @@ const path = require('path');
   await p.evaluate(() => document.fonts.ready);
   await p.pdf({ path: path.join(out, 'cover.pdf'), preferCSSPageSize: true, printBackground: true });
   await b.close();
-  console.log('cover.pdf');
+  console.log(require('child_process').execFileSync('python3', [path.join(__dirname, 'crop_cover.py')]).toString().trim());
 })();

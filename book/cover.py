@@ -55,8 +55,9 @@ def main():
     page = f'''<!doctype html><html lang="he"><head><meta charset="utf-8">
 <link rel="stylesheet" href="file://{BUILD}/fonts/book-fonts.css">
 <style>
-@page {{ size: {W}mm {H}mm; margin: 0 }}
-html, body {{ margin: 0; width: {W}mm; height: {H}mm }}
+/* הדף גדול במילימטר, ו-crop_cover.py חותך למידה המדויקת — Chromium מעגל גודל דף לנקודות שלמות */
+@page {{ size: {W + 1}mm {H + 1}mm; margin: 0 }}
+html, body {{ margin: 0; width: {W + 1}mm; height: {H + 1}mm }}
 body {{ position: relative; background: {CREAM}; font-family: 'Assistant'; -webkit-print-color-adjust: exact; print-color-adjust: exact }}
 .panel {{ position: absolute; top: 0; height: {H}mm }}
 /* משמאל לימין: חזית | שדרה | גב. כל לוח כולל את הגלישה שבצד החיצוני שלו. */
@@ -98,6 +99,7 @@ h1 {{ font-family: 'Frank Ruhl Libre'; font-weight: 700; color: {NAVY}; font-siz
 </body></html>'''
     os.makedirs(os.path.join(BUILD, 'out'), exist_ok=True)
     open(os.path.join(BUILD, 'out', 'cover.html'), 'w', encoding='utf-8').write(page)
+    open(os.path.join(BUILD, 'out', 'cover.size'), 'w').write(f'{W} {H}')
     print(f'cover: {w}×{h} מ"מ, {pages} עמודים, שדרה {spine} מ"מ, גלישה {bleed} → {W:.1f}×{H:.1f} מ"מ')
 
 
