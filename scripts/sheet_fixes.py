@@ -25,11 +25,14 @@ HEB = 'א-ת'
 
 # (דף, נוסח בדף, נוסח מתוקן)
 FIXES = {
-    'bereshit-מקץ': [(' bo g', ''), ('ראובן: uf)1', 'ראובן:'), ('(!) T (', '(!) ('), (' aj o', ''),
-                    ('הגזמה o להראות', 'הגזמה להראות'), (' t hp', ''), (' ni r', '')],
-    'bereshit-ויחי': [(' c o', ''), (' s 71', ''), (' H F', ''), (' o er', ''), (' it l', ''), (')li e', ')')],
-    'shmot-שמות': [('s... אִישׁ', '... אִישׁ'), ('t ut ', ''), ('iu הפרק', 'הפרק'), ('נוקט or בשמות', 'נוקט בשמות'),
-                   ('ylh של ספרנו', 'של ספרנו'), ("n 'המספר המקראי", "'המספר המקראי")],
+    # אותיות זרות מכיתובים מסובבים שליד הטקסט (כפי שהן יוצאות בחילוץ הנוכחי)
+    'bereshit-מקץ': [(' ream', ''), ('ראובן: uf)1', 'ראובן:'), (' y pR te', ''), (' 8s 2ni 9g', ''), (' ( A do oL le', ''), (' eB e R n', ''),
+                    (' gm e', ''), (' 17lets', '')],
+    'bereshit-ויחי': [(' rfaJ', ''), (' mo b B ht eel', ''), (' gisi uS', ''), (' sn s d', ''), (' alul ts B biar', ''),
+                     (' eo n)', ''), (' 9 Canaan', ''), ('ועוד ועוד...) שאלות', 'ועוד ועוד... שאלות')],
+    'shmot-שמות': [(' 32es D', ''), ("n 'המספר המקראי", "'המספר המקראי")],
+    'shmot-תצוה': [('scaraáM', 'Máscara'), ('הסיוע של רחל ליעקב', 'הסיוע של רבקה ליעקב')],   # רבקה: אושר ע"י אריאל
+    'vayikra-שמיני': [('.it squander can we or it invest can We', 'We can invest it or we can squander it.')],
     'bereshit-נח': [(')out first in first – FIFO(.', '(first in first out – FIFO).'),
                     ('(out last in last – LIFO).', '(last in last out – LIFO).')],
     'bereshit-וישב': [('Ltd Goats&Sheeps Lavan.', 'Lavan Goats&Sheeps Ltd.')],
@@ -47,7 +50,6 @@ FIXES = {
                         ('---------- message Forwarded ---------- >mailto:[כתובת מייל]< Heler Yaniv:From '
                          '2009/9/15:Date (גאולת ישמעאל (ראש השנה:Subject:To', '')],   # כותרת של מייל מועבר
     'bamidbar-נשא': [('- המשך בעמוד הבא - ', '')],
-    'shmot-תצוה': [('הסיוע של רחל ליעקב', 'הסיוע של רבקה ליעקב')],           # אושר ע"י אריאל
 }
 
 
@@ -56,6 +58,41 @@ MAILING = re.compile(
     r'(?:(?:מותר\s*(?:\([^)]*\)\s*)?)?להעביר הלאה(?: בשמחה)?[^|.\n]{0,4}[|.]?\s*)?'
     r'(?:המעוניינים להצטרף לרשימת התפוצה או להיגרע ממנה,|להוספה(?:/| או )ל?הסרה מרשימת התפוצה)'
     r'[^\[]{0,30}\[כתובת מייל\]\.?\s*(?:\|\s*)?(?:(?:וככלל )?אשמח לשמוע(?: \d(?!\d))?)?')
+
+
+# דפים שבהם כיתוב מסובב ליד הטקסט נכנס לשורות כאותיות לטיניות. הצורה המדויקת משתנה בין גרסאות של
+# ספריית ה-PDF ("c o" / "mo b B ht eel"), ולכן כלל כללי — ורק בדפים האלה, כי בדפים אחרים יש
+# משתנים מתמטיים אמיתיים (X, r, a,b).
+GARBAGE_SHEETS = {'bereshit-ויחי', 'bereshit-מקץ', 'shmot-שמות'}
+LATIN_RUN = re.compile(r"[A-Za-z0-9().,'’]+(?: +[A-Za-z0-9().,'’]+)*")
+
+
+def _bad(tok):
+    w = re.sub(r"[^A-Za-z0-9]", '', tok)
+    if not w or w.isdigit():
+        return None                                    # מספר או סימן: לא קובע
+    if re.search(r'\d', w):
+        return True                                    # 17lets, 8s
+    letters = re.sub(r'\d', '', w)
+    if len(letters) <= 2:
+        return True                                    # c, o, ht
+    return not re.fullmatch(r'[A-Z]?[a-z]+|[A-Z]+', letters)   # rfaJ, pR
+
+
+def latin_garbage(name, text):
+    if name not in GARBAGE_SHEETS:
+        return text
+
+    def sub(m):
+        kinds = [k for k in (_bad(t) for t in m.group().split()) if k is not None]
+        if not kinds or not any(kinds) or sum(kinds) < len(kinds) / 2:
+            return m.group()
+        g = m.group()
+        a = re.search(r'[A-Za-z0-9]', g).start()
+        b = len(g) - re.search(r'[A-Za-z0-9]', g[::-1]).start()
+        return g[:a] + g[b:]
+    text = LATIN_RUN.sub(sub, text)
+    return re.sub(r'  +', ' ', text)
 
 
 def fixes(name, text, log=None):
@@ -123,6 +160,34 @@ def _index():
 TOKEN = re.compile(r'[%s%s]+' % (HEB, NIK))
 
 
+# דגש, נקודת שׁ/שׂ, מתג ורפה — מה שמותר להוסיף או להזיז. תנועה אחרת — לא: אז זו כנראה מילה מפסוק אחר
+FREE = set('\u05BC\u05C1\u05C2\u05BD\u05BF')
+
+
+def clusters(w):
+    out = []
+    for c in unicodedata.normalize('NFC', w):
+        if re.match('[%s]' % HEB, c):
+            out.append([c, set()])
+        elif out and NIKUD.match(c):
+            out[-1][1].add(c)
+    return out
+
+
+def compatible(old, new):
+    """ההחלפה רק משלימה ניקוד חסר או מתקנת דגש/נקודה. תנועה שונה (אַל/אֶל) או מילה בלי ניקוד (כתיב) — לא."""
+    a, b = clusters(old), clusters(new)
+    if len(a) != len(b) or not NIKUD.search(new):
+        return False
+    return all(x[0] == y[0] and (x[1] - FREE) <= (y[1] - FREE) for x, y in zip(a, b))
+
+
+def vayi(t):
+    """דגש שזז מהיו"ד של וַיִּ לאות שאחריה: "וַיִשְּׁלַח" ← "וַיִּשְׁלַח" (לא בת׳ — ב"וַיִּתֵּן" שני הדגשים נכונים)."""
+    return re.sub('(?<![%s])ו\u05B7י\u05B4([א-שׁ])([\u05B0-\u05BB]*)\u05BC' % HEB,
+                  lambda m: 'ו\u05B7י\u05B4\u05BC' + m.group(1) + m.group(2), t)
+
+
 def tanakh(text, log=None):
     """ניקוד של כל רצף מילים מנוקדות בטקסט, מול המקום המתאים בתנ"ך."""
     words, sk, tri = _index()
@@ -135,7 +200,11 @@ def tanakh(text, log=None):
             i += 1
             continue
         j = i
-        while j < len(toks) and (voc[j] or skel(toks[j].group()) in ('ה',)):
+        # רצף: מילים מנוקדות, ה׳, ומילה קצרה בלי ניקוד שבאה בין שתי מנוקדות ("לא", "כי")
+        # רצף נגמר גם במרכאה: '"פסוק אחד", "פסוק שני"' הם שני מקומות שונים בתנ"ך
+        while j < len(toks) and (voc[j] or skel(toks[j].group()) in ('ה',)
+                                 or (len(skel(toks[j].group())) <= 3 and j + 1 < len(toks) and voc[j + 1])) \
+                and not (j > i and re.search('["״]', text[toks[j - 1].end():toks[j].start()])):
             j += 1
         run = toks[i:j]
         rs = [skel(t.group()) for t in run]
@@ -151,14 +220,14 @@ def tanakh(text, log=None):
                 for t in run:
                     s = skel(t.group())
                     w = t.group()
-                    if not NIKUD.search(w) or len(s) < 2:
+                    if len(s) < 2:
                         continue
                     hit = next((q for q in range(p, min(p + 12, len(sk))) if sk[q] == s), None)
                     if hit is None:
                         continue
                     p = hit + 1
                     good = words[hit]
-                    if good != unicodedata.normalize('NFC', w) and skel(good) == s:
+                    if good != unicodedata.normalize('NFC', w) and skel(good) == s and compatible(w, good):
                         reps[t.start()] = (t.end(), good, w)
         i = j
     for st in sorted(reps):
@@ -173,8 +242,9 @@ def tanakh(text, log=None):
 
 
 def apply(name, text, log=None):
-    text = fixes(name, text, log)
-    text = dagesh(text)
+    text = fixes(name, latin_garbage(name, text), log)
+    text = text.replace('\u05BA', '\u05B9')          # חולם חסר לו ← חולם, לאחידות
+    text = vayi(dagesh(text))
     if NIKUD.search(text):
         text = tanakh(text, log)
     return text
