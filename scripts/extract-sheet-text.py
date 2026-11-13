@@ -322,7 +322,10 @@ def split_verse(p):
                 if start < end:
                     prose.append((start, end))
             start = None
-    cuts = sorted({k for a, b in prose for k in (a, b) if 0 < k < len(words)})
+    # חותכים רק בגבול משפט: לפני פסוק — אחרי נקודתיים/נקודה; אחרי פסוק — כשהוא נגמר בסימן סוף.
+    # פסוק שמשולב באמצע משפט של אריאל ("מנסה לשכנע (וַיֹּאמְרוּ...)") נשאר בתוך הפסקה.
+    end_ok = lambda k: re.search(r'[.:;!?׃]["״\'׳)]*$', words[k - 1])
+    cuts = sorted({k for a, b in prose for k in (a, b) if 0 < k < len(words) and end_ok(k)})
     parts = [' '.join(words[a:b]) for a, b in zip([0] + cuts, cuts + [len(words)])]
     # קטע קצר מדי (שארית של מראה מקום, "לקינוח:") מתחבר לקטע שלפניו
     out = []
@@ -372,6 +375,8 @@ def keep_fragments(paras):
             continue
         if len(p) >= MIN_PARAGRAPH:
             out.append(p)
+        elif len(re.findall('[א-ת]', p)) < 2:   # שארית לטינית של כיתוב מסובב ("hto", "18 son")
+            continue
         elif FURNITURE.match(p.strip()) or re.search(r'תש"?[א-ת]|לק"י', p):
             continue
         elif out and not ENDS.search(out[-1]):
