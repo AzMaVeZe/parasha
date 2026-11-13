@@ -16,7 +16,7 @@
    "version": "Miqra according to the Masorah",
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/Exodus_2:1-8?lang=he",
-   "para": 5
+   "para": 1
   },
   {
    "ref": "Exodus 2:14",
@@ -27,7 +27,7 @@
    "version": "Miqra according to the Masorah",
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/Exodus_2:14?lang=he",
-   "para": 25
+   "para": 9
   },
   {
    "ref": "Exodus 3:3",
@@ -38,7 +38,7 @@
    "version": "Miqra according to the Masorah",
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/Exodus_3:3?lang=he",
-   "para": 34
+   "para": 12
   },
   {
    "ref": "Exodus 1:1",
@@ -73,7 +73,7 @@
    "version": "Miqra according to the Masorah",
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/Exodus_3:4?lang=he",
-   "para": 36
+   "para": 14
   },
   {
    "ref": "Exodus 3:11",
@@ -84,7 +84,7 @@
    "version": "Miqra according to the Masorah",
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/Exodus_3:11?lang=he",
-   "para": 38
+   "para": 17
   },
   {
    "ref": "Exodus 3:13",
@@ -95,7 +95,7 @@
    "version": "Miqra according to the Masorah",
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/Exodus_3:13?lang=he",
-   "para": 38
+   "para": 19
   },
   {
    "ref": "Exodus 4:1",
@@ -106,7 +106,7 @@
    "version": "Miqra according to the Masorah",
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/Exodus_4:1?lang=he",
-   "para": 39
+   "para": 21
   },
   {
    "ref": "Exodus 4:10",
@@ -117,7 +117,7 @@
    "version": "Miqra according to the Masorah",
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/Exodus_4:10?lang=he",
-   "para": 41
+   "para": 23
   },
   {
    "ref": "Exodus 4:2",
@@ -128,7 +128,7 @@
    "version": "Miqra according to the Masorah",
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/Exodus_4:2?lang=he",
-   "para": 42
+   "para": 24
   },
   {
    "ref": "Exodus 4:11",
@@ -139,7 +139,7 @@
    "version": "Miqra according to the Masorah",
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/Exodus_4:11?lang=he",
-   "para": 43
+   "para": 25
   },
   {
    "ref": "Exodus 4:14",
@@ -150,7 +150,7 @@
    "version": "Miqra according to the Masorah",
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/Exodus_4:14?lang=he",
-   "para": 43
+   "para": 25
   },
   {
    "ref": "Exodus 3:7",
@@ -161,7 +161,7 @@
    "version": "Miqra according to the Masorah",
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/Exodus_3:7?lang=he",
-   "para": 48
+   "para": 32
   },
   {
    "ref": "Exodus 4:18",
@@ -172,7 +172,7 @@
    "version": "Miqra according to the Masorah",
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/Exodus_4:18?lang=he",
-   "para": 58
+   "para": 40
   },
   {
    "ref": "Bava Metzia 71a:3",
@@ -183,7 +183,7 @@
    "version": "William Davidson Edition - Vocalized Aramaic",
    "license": "CC-BY-NC",
    "url": "https://www.sefaria.org.il/Bava_Metzia_71a:3?lang=he",
-   "para": 62
+   "para": 44
   }
  ]
 }

@@ -20,7 +20,7 @@
    "version": "Miqra according to the Masorah",
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/Genesis_3:21?lang=he",
-   "para": 4
+   "para": 3
   },
   {
    "ref": "Genesis 27:15",
@@ -31,7 +31,7 @@
    "version": "Miqra according to the Masorah",
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/Genesis_27:15?lang=he",
-   "para": 4
+   "para": 3
   },
   {
    "ref": "Genesis 28:20",
@@ -42,7 +42,7 @@
    "version": "Miqra according to the Masorah",
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/Genesis_28:20?lang=he",
-   "para": 4
+   "para": 3
   },
   {
    "ref": "Genesis 38:14",
@@ -53,7 +53,7 @@
    "version": "Miqra according to the Masorah",
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/Genesis_38:14?lang=he",
-   "para": 5
+   "para": 4
   },
   {
    "ref": "Genesis 37:3",
@@ -64,7 +64,7 @@
    "version": "Miqra according to the Masorah",
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/Genesis_37:3?lang=he",
-   "para": 6
+   "para": 5
   },
   {
    "ref": "Genesis 39:12-18",
@@ -92,7 +92,7 @@
    "version": "Miqra according to the Masorah",
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/Genesis_41:42?lang=he",
-   "para": 6
+   "para": 7
   },
   {
    "ref": "Esther Rabbah 3:13",
@@ -132,7 +132,7 @@
    "version": "Vilna Edition",
    "license": "Public Domain",
    "url": "https://www.sefaria.org.il/Rashi_on_Avodah_Zarah_18b:4:2?lang=he",
-   "para": 21
+   "para": 18
   },
   {
    "ref": "Mishnah Shekalim 5:1",
@@ -144,7 +144,7 @@
    "license": "Public Domain",
    "url": "https://www.sefaria.org.il/Mishnah_Shekalim_5:1?lang=he",
    "anchor": "המשנה במסכת שקלים (פ\"ה מ\"א)",
-   "para": 33
+   "para": 26
   },
   {
    "ref": "Rambam on Mishnah Shekalim 5:1",
@@ -166,7 +166,7 @@
    "license": "Public Domain",
    "url": "https://www.sefaria.org.il/Rambam_on_Mishnah_Shekalim_5:1?lang=he",
    "anchor": "הרמב\"ם בפירוש המשנה",
-   "para": 35
+   "para": 28
   },
   {
    "ref": "Zohar, Mishpatim 3:102",
@@ -237,7 +237,7 @@
    "version": "Vocalized Zohar, Israel 2013",
    "license": "unknown",
    "url": "https://www.sefaria.org.il/Zohar,_Sifra_DiTzniuta_2:4?lang=he",
-   "para": 41
+   "para": 34
   },
   {
    "ref": "Shenei Luchot HaBerit, Torah Shebikhtav, Tetzaveh, Derekh Chayim 2",
@@ -248,7 +248,7 @@
    "version": "Shenei Luchot HaBrit, based on Amsterdam, 1698 ed. Part III",
    "license": "Public Domain",
    "url": "https://www.sefaria.org.il/Shenei_Luchot_HaBerit,_Torah_Shebikhtav,_Tetzaveh,_Derekh_Chayim_2?lang=he",
-   "para": 44
+   "para": 37
   },
   {
    "ref": "Esther Rabbah 3:14",
@@ -259,7 +259,7 @@
    "version": "Midrash Rabbah -- TE",
    "license": "CC-BY-NC",
    "url": "https://www.sefaria.org.il/Esther_Rabbah_3:14?lang=he",
-   "para": 48
+   "para": 40
   },
   {
    "ref": "Likutei Moharan 1:5:5",

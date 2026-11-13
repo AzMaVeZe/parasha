@@ -58,7 +58,7 @@
    "version": "Miqra according to the Masorah",
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/Numbers_31:19-20?lang=he",
-   "para": 10
+   "para": 12
   },
   {
    "ref": "Zohar, Matot 1:1-2",
@@ -70,7 +70,7 @@
    "version": "Vocalized Zohar, Israel 2013",
    "license": "unknown",
    "url": "https://www.sefaria.org.il/Zohar,_Matot_1:1-2?lang=he",
-   "para": 19
+   "para": 20
   },
   {
    "ref": "Bamidbar Rabbah 22:2",
@@ -108,7 +108,7 @@
    "version": "Miqra according to the Masorah",
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/Numbers_31:53?lang=he",
-   "para": 27
+   "para": 25
   }
  ]
 }
