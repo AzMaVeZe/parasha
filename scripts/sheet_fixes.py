@@ -41,7 +41,26 @@ FIXES = {
                    ('Conflict of Strategy The(.', 'The Strategy of Conflict).')],
     'shmot-יתרו': [('Tat for Tit', 'Tit for Tat')],
     'vayikra-ויקרא': [('Dijkstra.W Edsger', 'Edsger W. Dijkstra')],
-    'vayikra-צו': [('Friedman.D Stewart.', 'Stewart D. Friedman.')],
+    'vayikra-צו': [('Friedman.D Stewart.', 'Stewart D. Friedman.'),
+                   # הערה 2, הוקלדה מחדש מהדף (האנגלית התהפכה בחילוץ)
+                   (",Pediatrics of Department.MD,Stein.K.E Ruth and PhD,Silver.J Ellen,MD,Barros.M Romina,Center Kennedy.F "
+                    "Rose and Montefiore at Hospital s'Children,Medicine of College Einstein Albert York New,Bronx. למתעניינים "
+                    "נאמר שהמחקר פורסם ב:.pp,2009 February 2.No 123.Vol PEDIATRICS)2825‐doi:10.1542/peds.2007(436‐431.",
+                    "Romina M. Barros, MD, Ellen J. Silver, PhD and Ruth E. K. Stein, MD. Department of Pediatrics, Albert "
+                    "Einstein College of Medicine, Children's Hospital at Montefiore and Rose F. Kennedy Center, Bronx, New "
+                    "York. למתעניינים נאמר שהמחקר פורסם ב: PEDIATRICS Vol. 123 No. 2 February 2009, pp. 431-436 "
+                    "(doi:10.1542/peds.2007-2825).")],
+    'vayikra-תזריע-מצורע': [
+        ('ב-948;III Ethics Medical Jewish of Encyclopedia s’Steinberg Avraham.Dr רציתי',
+         'ב-Dr. Avraham Steinberg’s Encyclopedia of Jewish Medical Ethics III;948 רציתי'),
+        ('ובהרחבה: Biblical,Preuss.J the and Leprosy Biblical of Nature The“,Hulse.V.E;375‐323,)1993,London(Medicine '
+         'Talmudic and Exploration Palestine,”Bible the of Translations Modern in Terms Medical Alternative of Use '
+         '105‐87.pp,(1975) 107 Quarterly), לפיכך',
+         'ובהרחבה: J. Preuss, Biblical and Talmudic Medicine (London, 1993), 323-375; E. V. Hulse, “The Nature of '
+         'Biblical Leprosy and the Use of Alternative Medical Terms in Modern Translations of the Bible”, Palestine '
+         'Exploration Quarterly 107 (1975), pp. 87-105), לפיכך')],
+    'bereshit-בראשית': [("Jean-Louis)Paris(vives Lettres Editions,1992,espace'l de invention 'L,Giovannoni.",
+                         "Jean-Louis Giovannoni, L'invention de l'espace, 1992, Editions Lettres vives (Paris).")],
     'devarim-שופטים': [('Review Business Harvard', 'Harvard Business Review'), ('Week Business', 'Business Week'),
                        (')Stories Success Such Be Can Failures Why(.', '(Why Failures Can Be Such Success Stories).')],
     'devarim-כי-תצא': [('(%0.5)', '(0.5%)'), ('%0.75', '0.75%'),
@@ -93,6 +112,31 @@ def latin_garbage(name, text):
         return g[:a] + g[b:]
     text = LATIN_RUN.sub(sub, text)
     return re.sub(r'  +', ' ', text)
+
+
+# פסקאות שהחילוץ ערבב לגמרי (טקסט מסובב שבצד הדף, טבלה), הוקלדו מחדש מהדף.
+# (דף, תחילת הפסקה הראשונה, תחילת האחרונה, הנוסח מהדף)
+PARAS = {
+    'bereshit-מקץ': [('ראובן: יהודה:', 'וְחָטָאתִי לְךָ כָּל-הַיָּמִים', [
+        'ראובן: אֶת-שְׁנֵי בָנַי תָּמִית, אִם-לֹא אֲבִיאֶנּוּ אֵלֶיךָ.',
+        'יהודה: אִם-לֹא הֲבִיאֹתִיו אֵלֶיךָ, וְהִצַּגְתִּיו לְפָנֶיךָ, וְחָטָאתִי לְךָ כָּל-הַיָּמִים.'])],
+    'devarim-כי-תצא': [('תמָם יבְלֵינ', '"אֵוֶָבטרם באתי לבקר', [
+        'ורעיון אחרון לסיום (במסגרת ההכנות לשנה החדשה): נאמר בכמה מקומות כי האדם מקבל את גופו בפיקדון מבורא עולם, '
+        'עד ליום בו יתבקש להשיבו לו. והנה מצאנו כי האדם בימי בגרותו וזקנתו משיב את הפיקדון והוא בלוי כליל, ובקושי '
+        'ערך לגרט. מה יאמר בורא עולם, השב לי את ירידת הערך? לא. הוא נותן את הפיקדון כהלוואה ללא ריבית (ואף הקרן '
+        'אינה מובטחת בשלמותה). אני נוטה להניח שמי שאינו מבקש ריבית מהרש ומהנזקק, הקב"ה לא יבקש אותה גם ממנו...'])],
+}
+
+
+def override(name, paras):
+    for first, last, new in PARAS.get(name, []):
+        # השוואה לפי האותיות בלבד: הניקוד בחילוץ עוד לא תוקן בשלב הזה
+        bare = lambda t: re.sub('[^%s]' % HEB, '', t)
+        i = next((k for k, p in enumerate(paras) if bare(p).startswith(bare(first))), None)
+        j = next((k for k in range(i, len(paras)) if bare(paras[k]).startswith(bare(last))), None) if i is not None else None
+        if i is not None and j is not None:
+            paras = paras[:i] + new + paras[j + 1:]
+    return paras
 
 
 def fixes(name, text, log=None):

@@ -408,7 +408,7 @@ def extract(path):
     # תיקונים שנמצאו בהגהה (scripts/sheet_fixes.py): אותיות זרות, אנגלית הפוכה, שאריות המייל,
     # דגש כפול, וניקוד הפסוקים מול נוסח תקני
     name = os.path.splitext(os.path.basename(path))[0]
-    paras = [x for x in (sheet_fixes.apply(name, p) for p in paras) if x.strip()]
+    paras = [x for x in (sheet_fixes.apply(name, p) for p in sheet_fixes.override(name, paras)) if x.strip()]
     for f in footnotes:
         f['text'] = sheet_fixes.apply(name, f['text'])
     body = '\n\n'.join(paras + [f['text'] for f in footnotes])
