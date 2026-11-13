@@ -191,18 +191,13 @@ def clean(paras, names=()):
                 continue
             out.append(piece)
     # שורות שנשברו בין טורים: פסקה בלי סימן סוף מתחברת לבאה, אם שתיהן מאותו סוג
-    joined = []
-    for p in out:
-        if joined and not ENDS.search(plain(joined[-1])) and is_quote(plain(joined[-1])) == is_quote(plain(p)) \
-                and not p.startswith('-'):
-            joined[-1] = joined[-1] + ' ' + p
-        else:
-            joined.append(p)
-    return joined, subs
+    # משפטים שנשברו בין טורים כבר מחוברים בחילוץ (join_broken), בזהירות יותר מכאן
+    return out, subs
 
 
 # לשבעה דפים אין שנה בדף. "הכל נכתב לפי הסדר" (אריאל): השנה נקבעת לפי הדפים שלפניהם ואחריהם
-YEAR_BY_ORDER = {'וארא': 'תש״ע', 'בא': 'תש״ע',              # אחרי שמות תש״ע
+YEAR_BY_ORDER = {'וארא': 'תש״ע',                            # אחרי שמות תש״ע
+                 'בא': 'תשס״ט',   # בשלח תשס״ט מפנה אליו ("בפרשת בא הזכרנו... סומא"), כלומר הוא נכתב לפניו
                  'כי תשא': 'תשס״ט',                          # בין תצוה לויקהל-פקודי, תשס״ט
                  'צו': 'תשס״ט', 'פורים': 'תשס״ט', 'פסח': 'תשס״ט',   # עם ויקרא–שמיני ותצוה ("וקצת פורים"), תשס״ט
                  'ואתחנן': 'תשס״ט'}                          # בין דברים לעקב, תשס״ט
@@ -248,23 +243,29 @@ def hebnum(n):
     return ('' if n < 10 else 'יכלמנ'[n // 10 - 1]) + ('' if n % 10 == 0 else 'אבגדהוזחט'[n % 10 - 1])
 
 
-def verses(book, ch, a, b):
-    """פסוקים מהנוסח המנוקד התקני, עם מספר פסוק, בלי שם מפורש."""
+def verse_list(book, ch, a, b):
     text = sheet_fixes._book(book)[ch - 1]
     out = []
     for n in range(a, b + 1):
         v = re.sub(r'\{[פס]\}|׃', ' ', text[n - 1]).strip()
-        v = house.shem(v)
-        v = re.sub(r'(?<![א-ת])(א[ְ-ּ]*)(ל[֑-ׇ]*ה[֑-ׇ]*[יו])', r'\1-\2', v)   # אֱ-לֹהֶיךָ
-        out.append(f'<b>{hebnum(n)}</b> {esc(v)}')
-    return ' '.join(out)
+        v = house.elohim(house.shem(v))
+        out.append(f'<b>{hebnum(n)}</b> {esc(house.geresh(v))}')
+    return out
+
+
+def shoftim_table_rows(rows=6):
+    """שני הטורים בכמה שורות, כדי שהטבלה תישבר בין עמודים בלי טור ריק."""
+    num, deut = verse_list('Numbers', 35, 9, 34), verse_list('Deuteronomy', 19, 2, 10)
+    chunk = lambda xs, k: [xs[round(i * len(xs) / k):round((i + 1) * len(xs) / k)] for i in range(k)]
+    return ''.join(f'<tr><td>{" ".join(a)}</td><td>{" ".join(b)}</td></tr>'
+                   for a, b in zip(chunk(num, rows), chunk(deut, rows)))
 
 
 def shoftim_table():
     """הטבלה שבדף שופטים (במדבר לה מול דברים יט) נשזרה בחילוץ שורה בשורה. נבנית מחדש מהנוסח התקני."""
     why = esc('הטבלה נבנתה מחדש מנוסח מנוקד תקני; ההדגשות שבדף לא הועברו — לבדוק מול הדף')
     return ('<table class="parallel"><thead><tr><th>במדבר לה (מסעי)</th><th>דברים יט (שופטים)</th></tr></thead>'
-            f'<tbody><tr><td>{verses("Numbers", 35, 9, 34)}</td><td>{verses("Deuteronomy", 19, 2, 10)}</td></tr></tbody>'
+            f'<tbody>{shoftim_table_rows()}</tbody>'
             f'</table><p class="table-why">[{why}]</p>')
 
 
@@ -287,7 +288,8 @@ def edit(parts):
             i = next(k for k, p in enumerate(c['paras']) if 'רוצח בשגגה' in p)
             c['paras'][i] = 'רוצח בשגגה / סימני שאלה וסימני קריאה'      # בלי כותרות הטורים שנדבקו אליה
             j = i + 1
-            while j < len(c['paras']) and is_quote(plain(c['paras'][j])):
+            # כותרות הטורים ("במדבר ל"ה (מסעי) דברים י"ט (שופטים)") והפסוקים המשוזרים — כולם מוחלפים בטבלה
+            while j < len(c['paras']) and (is_quote(plain(c['paras'][j])) or 'מסעי) דברים' in plain(c['paras'][j])):
                 j += 1
             c['paras'][i + 1:j] = ['\x00TABLE']
         house.checks(c, is_quote)
@@ -296,7 +298,7 @@ def edit(parts):
 
 def ch_title(ch):
     if ch['chag']:
-        return ' ו'.join(ch['names'])
+        return house.gershayim(' ו'.join(ch['names']))
     return ('פרשות ' if len(ch['names']) > 1 else 'פרשת ') + '–'.join(ch['names'])
 
 
@@ -313,11 +315,12 @@ mark.chk { background: #ffe95c; color: inherit }
 DESIGNS = {
     # ג — כפי שנבחר: כותרות באסיסטנט, גוף בדוד, פסוקים בפרנק רוהל עם פס בצד
     'c': '''
-.ch-head { text-align: right; margin: 20mm 0 9mm; border-bottom: 1.2pt solid #111; padding-bottom: 4mm }
-.ch-kicker { font: 700 9pt 'Assistant'; letter-spacing: .12em; color: #555 }
+/* גובה פתיחת הפרק בשורות שלמות (lh), כך שגם בעמוד הפתיחה הטקסט על הגריד */
+.ch-head { text-align: right; box-sizing: border-box; height: 9lh; margin: 0 0 1lh; border-bottom: 1.2pt solid #000; padding-bottom: 4mm; display: flex; flex-direction: column; justify-content: flex-end }
+.ch-kicker { font: 700 9pt 'Assistant'; letter-spacing: .12em; color: #000 }
 .ch-head h2 { font-family: 'Assistant'; font-weight: 700; font-size: 2.3em; margin: 1mm 0 0 }
-.ch-year { font: 10pt 'Assistant'; color: #555 }
-p.q { font-family: 'Frank Ruhl Libre', serif; margin: .5lh 0 .5lh 4mm; padding-right: 4mm; border-right: 1.6pt solid #555 }
+.ch-year { font: 10pt 'Assistant'; color: #000 }
+p.q { font-family: 'Frank Ruhl Libre', serif; margin: 0 0 0 4mm; padding-right: 4mm; border-right: 1.6pt solid #000 }
 ''',
     # ג1 — אוורירי: פתיחת פרק נמוכה בעמוד, שם הפרשה דק וגדול, פסוקים על רקע אפור בהיר
     'c1': '''
@@ -359,7 +362,9 @@ body { margin: 0 }
 /* Paged.js מזהה גלישה לעמוד הבא רק כשהעמודות זורמות משמאל לימין: המסמך LTR, התוכן RTL */
 .book, .pagedjs_margin-content, .pagedjs_footnote_area { direction: rtl }
 /* בלי רווח בין פסקאות אלא הזחה, ומרווחים בשורות שלמות (lh) — כך תחתית כל עמוד מלא באותו גובה */
-p { margin: 0; text-indent: 1.2em; text-align: justify; hyphens: none; orphans: 2; widows: 2 }
+p { margin: 0; text-indent: 1.2em; text-align: justify; hyphens: none; orphans: 1; widows: 2 }
+p.lead { break-after: avoid }   /* "וכך נאמר:" לא נשאר בתחתית העמוד בלי הפסוק */
+table.parallel tr { break-inside: avoid }
 p.first, p.q, p.q + p, p.d, p.li, .ch-head + p, table + p, .about p, .intro p, .front p { text-indent: 0 }
 p.li { padding-right: 3.4mm; text-indent: -3.4mm }
 table.parallel { width: 100%; border-collapse: collapse; margin: .5lh 0; font-family: 'Frank Ruhl Libre', serif; font-size: 9.6pt; line-height: 1.55 }
@@ -375,22 +380,22 @@ p.d { font-family: 'Assistant'; font-size: .95em; margin-right: 4mm }
 .front { page: front; break-after: page; text-align: center }
 .title-page { padding-top: 62mm }
 .title-page h1 { font-family: 'Assistant'; font-weight: 800; font-size: 34pt; margin: 0; letter-spacing: -.01em }
-.title-page .sub { font: 400 12pt 'Assistant'; color: #444; margin-top: 4mm }
+.title-page .sub { font: 400 12pt 'Assistant'; color: #000; margin-top: 4mm }
 .title-page .author { font: 700 13pt 'Assistant'; margin-top: 70mm }
 .imprint { padding-top: 150mm; font: 9pt 'Assistant'; color: #555; text-align: right }
 .intro { break-before: right }
 .intro h2, .toc h2 { font-family: 'Assistant'; font-weight: 700; font-size: 1.9em; margin: 20mm 0 8mm }
 .placeholder { color: #777; font-style: normal }
 .toc { break-before: right; text-align: right }
-.toc h3 { font: 700 10pt 'Assistant'; letter-spacing: .1em; color: #555; margin: 6mm 0 1.5mm; border-bottom: .5pt solid #bbb; padding-bottom: 1mm }
+.toc h3 { font: 700 10pt 'Assistant'; letter-spacing: .1em; color: #000; margin: 6mm 0 1.5mm; border-bottom: .5pt solid #000; padding-bottom: 1mm }
 .toc ol { list-style: none; margin: 0; padding: 0; columns: 2; column-gap: 10mm }
 .toc li { display: flex; gap: 2mm; font-size: 10.5pt; line-height: 1.75; break-inside: avoid }
 .toc li a { color: inherit; text-decoration: none; flex: 1; display: flex }
-.toc li a::after { content: target-counter(attr(href), page); margin-inline-start: auto; font-family: 'Assistant'; font-size: 9.5pt; color: #444 }
+.toc li a::after { content: target-counter(attr(href), page); margin-inline-start: auto; font-family: 'Assistant'; font-size: 9.5pt; color: #000 }
 .part { page: opener; break-before: right; break-after: page; text-align: center; padding-top: 85mm }
 .part h2 { font-family: 'Assistant'; font-weight: 800; font-size: 26pt; margin: 0 }
 .chapter { break-before: page; string-set: chapter attr(data-title) }
-.ch-sub { font: 400 12pt 'Assistant'; color: #333; margin-top: 1mm }
+.ch-sub { font: 400 12pt 'Assistant'; color: #000; margin-top: 1mm }
 .notes { margin-top: 6mm; border-top: .5pt solid #999; padding-top: 2mm }
 .notes h4 { font: 700 9pt 'Assistant'; margin: 0 0 1mm; color: #333 }
 .notes ol { list-style: none; margin: 0; padding: 0; columns: 2; column-gap: 6mm }
@@ -425,15 +430,18 @@ def build(design='c', sample=False, size='b5', proof=False, lh=None):   # הוח
             kicker = part['name']
             h = [f'<section class="chapter" id="{ch["id"]}" data-title="{esc(title)}">',
                  f'<header class="ch-head"><div class="ch-kicker">{esc(kicker)}</div><h2>{esc(title)}</h2>'
-                 + ''.join(f'<div class="ch-sub">{esc(t)}</div>' for t in ch['subs'])
+                 + ''.join(f'<div class="ch-sub">{esc(house.house(t))}</div>' for t in ch['subs'])
                  + (f'<div class="ch-year">{para_html(ch["year"], proof)}</div>' if ch['year'] else '') + '</header>']
             for i, p in enumerate(ch['paras']):
                 if p == '\x00TABLE':
                     h.append(shoftim_table())
                     continue
                 pl = plain(p)
+                nxt = ch['paras'][i + 1] if i + 1 < len(ch['paras']) else ''
                 cls = ('q' if is_quote(pl) else 'd' if pl.startswith(('-', '–')) else
                        'li' if pl.startswith(('•', '·')) else 'first' if i == 0 else '')
+                if cls != 'q' and pl.rstrip().endswith(':') and nxt and is_quote(plain(nxt)):
+                    cls = (cls + ' lead').strip()
                 h.append(f'<p class="{cls}">{para_html(p, proof)}</p>' if cls else f'<p>{para_html(p, proof)}</p>')
             if ch['notes']:
                 h.append('<aside class="notes"><h4>הערות</h4><ol>' + ''.join(

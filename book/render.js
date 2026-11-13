@@ -11,7 +11,7 @@ const { chromium } = require('playwright');
     await p.waitForTimeout(2500);
     // עמוד שפותח פרק (או "על המחבר"): בלי כותרת רצה ומספר עמוד — הכותרת הגדולה כבר שם
     await p.evaluate(() => document.querySelectorAll('.pagedjs_page').forEach(pg => {
-      if (pg.querySelector('.ch-head, .about h2, .legend'))
+      if (pg.querySelector('.ch-head, .about h2, .legend, .intro h2, .toc h2'))
         pg.querySelectorAll('.pagedjs_margin-top .pagedjs_margin-content').forEach(e => { e.style.visibility = 'hidden' })
     }))
     const n = await p.evaluate(() => document.querySelectorAll('.pagedjs_page').length);
