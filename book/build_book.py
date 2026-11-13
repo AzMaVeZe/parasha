@@ -1,4 +1,4 @@
-"""הספר "אללה פרשה" כולו: שער, הקדמה, תוכן עניינים, הפרשות לפי הסדר, והחגים בסוף.
+"""הספר "יש קמח" כולו: שער, הקדמה, תוכן עניינים, הפרשות לפי הסדר, והחגים בסוף.
 
   python3 book/build_book.py [עיצוב] [--sample] [--size b5|17x24]   (ברירת מחדל: b5)
 
@@ -32,10 +32,23 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
 BUILD = os.path.join(HERE, 'build')
 
-TITLE = 'אללה פרשה'
+TITLE = 'יש קמח'                                  # אריאל בחר (13.11.2026)
+SUBTITLE = 'שיחת חולין על פרשת השבוע'
+# טיוטות שכתבתי לבקשת אריאל — מסומנות בהגהה לאישורו. מה שבסוגריים מרובעים: פרטים שרק הוא יודע.
+ABOUT = ("אריאל ז׳יטניצקי [עיסוק, מקום מגורים ומשפחה — להשלים]. הדף הראשון נשלח בדואר האלקטרוני לפחות "
+         "ממניין נמענים — רובם אורחים שהתחמקו מדבר תורה בשולחן השבת, והובטח להם שיקבלו אותו בהמשך השבוע. "
+         "התגובות הטובות \"גררו אחריהן, מסתבר, כתיבה בתדירות גבוהה יותר\", ובשנים תשס״ט–תש״ע יצא דף לכל "
+         "פרשת שבוע ולכל חג, לחברים ולבני משפחה. [המסורת של המשלוח פעם בשנה — להשלים: מה נשלח, מתי ולמי.] "
+         "מהדפים האלה, פרשה אחר פרשה, נולד הספר הזה.")
+NAME_NOTE = ("\"אם אין קמח — אין תורה; אם אין תורה — אין קמח\", אומרת המשנה בפרקי אבות (ג, יז). \"יש קמח\" "
+             "בוחר בצד המעודד של המשפט: יש קמח, ויש גם תורה. ויש בשם גם חתימה קטנה: בשפות הסלאביות "
+             "\"ז׳יטו\" הוא דגן ו\"ז׳יטניצה\" היא אסם התבואה — ומשם, כנראה, שם המשפחה ז׳יטניצקי. "
+             "תת-הכותרת, \"שיחת חולין על פרשת השבוע\", לקוחה מדברי חז״ל: \"שיחת חולין של תלמידי חכמים "
+             "צריכה לימוד\" (בבלי, סוכה כא ע״ב). הדפים האלה נכתבו כשיחה — בגובה העיניים, עם סלנג וקריצה — "
+             "ובכל זאת, ואולי דווקא משום כך, יש בהם תורה.")
 # שורה להקדמה (אריאל, החלטה 4): הנוסח נשאר, והשנה מופיעה בראש כל פרק
 INTRO_YEARS = 'הדפים נכתבו בשנים תשס״ט–תש״ע, דף לכל שבוע, וכל פרק נושא את שנת כתיבתו.'
-AUTHOR = "אריאל ז'יטניצקי"
+AUTHOR = "אריאל ז׳יטניצקי"
 
 NIKUD = re.compile(r'[֑-ׇ]')
 TAIL = re.compile(r'פתרון החידה|חידת השבוע|חידה לשבוע|לקינוח|והפעם חידה|את חידת השבוע|שבת שלום|רשימת התפוצה|'
@@ -178,7 +191,7 @@ def clean(paras, names=()):
             continue
         if TAIL.search(p):
             break
-        if HEADER.match(p) or re.fullmatch(r'\d{1,2}', p) or re.fullmatch(r"אריאל ז'יטניצקי\.?", p):
+        if HEADER.match(p) or re.fullmatch(r'\d{1,2}', p) or re.fullmatch(r"אריאל ז['׳]יטניצקי\.?", p):
             continue
         for piece in split_quote(p):
             # כיתובי תמונות שהשתרבבו לטקסט — כמעט תמיד באנגלית ("Vidal Henri by Cain, Gardens...")
@@ -387,6 +400,7 @@ p.d { font-family: 'Assistant'; font-size: .95em; margin-right: 4mm }
 .imprint p { margin: 0 0 1.2mm; text-indent: 0 }
 .intro { break-before: right }
 .intro h2, .toc h2 { font-family: 'Assistant'; font-weight: 700; font-size: 1.9em; margin: 20mm 0 8mm }
+.intro h2.intro-h { break-before: page }
 .placeholder { color: #777; font-style: normal }
 .toc { break-before: right; text-align: right }
 .toc h3 { font: 700 10pt 'Assistant'; letter-spacing: .1em; color: #000; margin: 6mm 0 1.5mm; border-bottom: .5pt solid #000; padding-bottom: 1mm }
@@ -452,7 +466,7 @@ def build(design='c', sample=False, size='b5', proof=False, lh=None):   # הוח
             h.append('</section>')
             body.append('\n'.join(h))
     front = f'''
-<section class="front title-page"><h1>{esc(TITLE)}</h1><div class="sub">דפים לפרשת השבוע ולחגים</div><div class="author">{esc(AUTHOR)}</div></section>
+<section class="front title-page"><h1>{esc(TITLE)}</h1><div class="sub">{esc(SUBTITLE)}</div><div class="author">{esc(AUTHOR)}</div></section>
 <section class="front imprint">
 <p>{esc(TITLE)}</p><p>{esc(AUTHOR)}</p>
 <p>© כל הזכויות שמורות ל{esc(AUTHOR)}, <span class="placeholder">[שנה]</span></p>
@@ -463,11 +477,12 @@ def build(design='c', sample=False, size='b5', proof=False, lh=None):   # הוח
 <p>ISBN <span class="placeholder">[ ]</span></p>
 <p>יצא לאור בישראל</p>
 </section>
-<section class="intro"><h2>הקדמה</h2><p class="placeholder">[ההקדמה של אריאל — תיכתב בהמשך]</p>
+<section class="intro"><h2>על שם הספר</h2><p>{para_html(mark('chg', NAME_NOTE, ''), proof)}</p>
+<h2 class="intro-h">הקדמה</h2><p class="placeholder">[ההקדמה של אריאל — תיכתב בהמשך]</p>
 <p>{para_html(mark('chg', INTRO_YEARS, ''), proof)}</p></section>
 <section class="toc"><h2>תוכן העניינים</h2>{"".join(toc)}</section>'''
     about = ('<section class="about"><h2>על המחבר</h2>'
-             '<p class="placeholder">[כמה שורות על אריאל — יכתוב אריאל]</p></section>')
+             f'<p>{para_html(mark("chg", ABOUT, ""), proof)}</p></section>')
     legend = ('<section class="front legend"><h2>גרסת הגהה</h2><p><mark class="chg">ירוק</mark> — נוסח שהשתנה בעריכה '
               '(הנוסח הקודם <del>מחוק</del> לפניו). <mark class="chk">צהוב</mark> — מקום שדורש בדיקה שלך מול הדף, '
               'והסיבה <span class="why">[בסוגריים]</span>. כללי הבית (גרשיים, מקף, כתיב) הוחלו בלי סימון.</p></section>'

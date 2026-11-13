@@ -1,4 +1,4 @@
-"""כריכת "אללה פרשה" לבוקפוד: עמוד אחד — חזית, שדרה וגב — כ-PDF.
+"""כריכת "יש קמח" לבוקפוד: עמוד אחד — חזית, שדרה וגב — כ-PDF.
 
   python3 book/cover.py [--size b5|17x24|a5] [--pages N] [--paper 0.1] [--no-bleed]
   node book/render-cover.js        # ← book/build/out/cover.pdf
@@ -22,9 +22,9 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 BUILD = os.path.join(HERE, 'build')
 SIZES = {'b5': (165, 235), '17x24': (170, 240), 'a5': (148, 210)}
 
-TITLE = 'אללה פרשה'
-SUB = 'דפים לפרשת השבוע ולחגים'
-AUTHOR = "אריאל ז'יטניצקי"
+TITLE = 'יש קמח'
+SUB = 'שיחת חולין על פרשת השבוע'
+AUTHOR = "אריאל ז׳יטניצקי"
 # הצבעים של האתר ושל כרטיסי הפודקאסט (tokens/colors.css)
 NAVY, CREAM, GOLD, INK = '#14294D', '#F7F2E7', '#B8860B', '#26241E'
 
@@ -85,9 +85,9 @@ h1 {{ font-family: 'Frank Ruhl Libre'; font-weight: 700; color: {NAVY}; font-siz
   display: flex; align-items: center; justify-content: center; font: 7pt 'Assistant'; color: #999 }}
 </style></head><body>
 <section class="panel front"><div class="navy"></div><div class="inner">
-  <div class="kicker">{e(SUB)}</div><div class="pill">תורה וחגים</div>
+  <div class="kicker"></div><div class="pill">תורה וחגים</div>
   <h1>{e(TITLE)}</h1>
-  <div class="bar">קריאה מחודשת בפסוקים, שאלות ומדרשים</div>
+  <div class="bar">{e(SUB)}</div>
   <div class="author">{e(AUTHOR)}</div>
 </div></section>
 <section class="panel spine"><div class="text"><span class="t">{e(TITLE)}</span><span class="a">{e(AUTHOR)}</span></div></section>

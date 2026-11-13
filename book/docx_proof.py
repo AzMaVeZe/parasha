@@ -1,6 +1,6 @@
 """גרסת ההגהה של הספר כקובץ Word, לעריכה של אריאל.
 
-  python3 book/docx_proof.py        # ← book/build/out/אללה-פרשה-הגהה.docx
+  python3 book/docx_proof.py        # ← book/build/out/יש-קמח-הגהה.docx
 
 אותו טקסט כמו book-c-proof (build_book.edit), ובשני סוגי סימון שמובנים ב-Word:
 - שינוי שעשיתי בעריכה (EDITS) ← "מעקב שינויים": אפשר לקבל או לדחות כל אחד (סקירה ← קבל/דחה).
@@ -227,9 +227,13 @@ def main():
     st.element.rPr.rFonts.set(qn('w:cs'), FONT)
 
     heading(doc, B.TITLE, 0)
+    para(doc, B.SUBTITLE, size=14)
     para(doc, 'גרסת הגהה לעריכה. השינויים שעשיתי בעריכה מופיעים כ"מעקב שינויים" — אפשר לקבל או לדחות כל אחד '
               '(סקירה ← קבל / דחה). מקומות שדורשים בדיקה שלך מול הדף מודגשים בצהוב, והסיבה בהערה בשוליים. '
               'כללי הבית (גרשיים, מקף עברי, כתיב) כבר הוחלו. כל מה שתשנה כאן ייכנס לספר.', size=11)
+    heading(doc, 'על שם הספר', 1)
+    para(doc, house.mark('chg', B.NAME_NOTE, ''))
+    heading(doc, 'הקדמה', 1)
     para(doc, '[ההקדמה — תיכתב בהמשך]')
     para(doc, house.mark('chg', B.INTRO_YEARS, ''))
     for part in parts:
@@ -256,8 +260,8 @@ def main():
                     num = str(n.get('n') or '')
                     para(doc, (num + '. ' if num else '') + n['text'], size=10)
     heading(doc, 'על המחבר', 1, page_break=True)
-    para(doc, '[כמה שורות על אריאל — יכתוב אריאל]')
-    out = os.path.join(B.BUILD, 'out', 'אללה-פרשה-הגהה.docx')
+    para(doc, house.mark('chg', B.ABOUT, ''))
+    out = os.path.join(B.BUILD, 'out', 'יש-קמח-הגהה.docx')
     doc.save(out)
     print(out)
 
