@@ -50,7 +50,7 @@
    "version": "Torat Emet 357",
    "license": "Public Domain",
    "url": "https://www.sefaria.org.il/Mishnah_Chagigah_2:1?lang=he",
-   "para": 22
+   "para": 15
   },
   {
    "ref": "Chagigah 14b:2-4",
@@ -75,7 +75,7 @@
    "version": "Midrash Rabbah -- TE",
    "license": "CC-BY-NC",
    "url": "https://www.sefaria.org.il/Bamidbar_Rabbah_15:25?lang=he",
-   "para": 40
+   "para": 32
   },
   {
    "ref": "Joel 3:1",
@@ -87,7 +87,7 @@
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/Joel_3:1?lang=he",
    "anchor": "יואל ג",
-   "para": 40
+   "para": 32
   }
  ]
 }

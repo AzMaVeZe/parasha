@@ -63,7 +63,7 @@
    "version": "Miqra according to the Masorah",
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/Numbers_22:20-22?lang=he",
-   "para": 16
+   "para": 15
   },
   {
    "ref": "Micah 6:2",
@@ -74,7 +74,7 @@
    "version": "Miqra according to the Masorah",
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/Micah_6:2?lang=he",
-   "para": 18
+   "para": 17
   },
   {
    "ref": "Joshua 13:22",
@@ -86,7 +86,7 @@
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/Joshua_13:22?lang=he",
    "anchor": "יהושע כג, כב",
-   "para": 23
+   "para": 19
   },
   {
    "ref": "Numbers 24:25",
@@ -97,7 +97,7 @@
    "version": "Miqra according to the Masorah",
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/Numbers_24:25?lang=he",
-   "para": 28
+   "para": 23
   },
   {
    "ref": "Peri Tzadik, Balak 2:2-3",
@@ -121,7 +121,7 @@
    "version": "Miqra according to the Masorah",
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/Micah_6:8?lang=he",
-   "para": 33
+   "para": 27
   },
   {
    "ref": "Deuteronomy 23:6",
@@ -133,7 +133,7 @@
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/Deuteronomy_23:6?lang=he",
    "anchor": "דברים כג",
-   "para": 34
+   "para": 31
   }
  ]
 }

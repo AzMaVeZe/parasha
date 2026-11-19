@@ -6,3 +6,4 @@ scripts/notebook-upload/
 scripts/notebook-answers.md
 scripts/episodes/
 __pycache__/
+scripts/.cache/
