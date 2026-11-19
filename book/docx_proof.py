@@ -262,7 +262,7 @@ def main():
                     num = str(n.get('n') or '')
                     para(doc, (num + '. ' if num else '') + n['text'], size=10)
     heading(doc, 'על המחבר', 1, page_break=True)
-    para(doc, house.mark('chg', B.ABOUT, ''))
+    para(doc, B.about_text())
     out = os.path.join(B.BUILD, 'out', 'יש-קמח-הגהה.docx')
     doc.save(out)
     print(out)
