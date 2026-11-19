@@ -16,6 +16,7 @@
 - הערות השוליים: בסוף כל פרק, ממוספרות כמו בדף. מקום הסימון בגוף הטקסט אבד בחילוץ,
   ולכן אינן בתחתית העמוד.
 """
+import glob
 import html
 import json
 import os
@@ -313,7 +314,79 @@ def edit(parts):
                 j += 1
             c['paras'][i + 1:j] = ['\x00TABLE']
         house.checks(c, is_quote)
+    author_edits(chs)
     return parts
+
+
+def merge3(base, current, final):
+    """מיזוג: current הוא base אחרי תיקון קטן (באתר), final הוא base אחרי ההגהה של אריאל.
+    כל שינוי base→current מוחל על final, אם ההקשר שלו (12 תווים מכל צד) נמצא ב-final פעם אחת.
+    מחזיר None אם current רחוק מ-base או שאי אפשר למזג בבטחה."""
+    import difflib
+    if current == base:
+        return None
+    sm = difflib.SequenceMatcher(None, base, current, autojunk=False)
+    if sm.ratio() < 0.97:
+        return None
+    out = final
+    for op, i1, i2, j1, j2 in reversed(sm.get_opcodes()):
+        if op == 'equal':
+            continue
+        left, right = base[max(0, i1 - 12):i1], base[i2:i2 + 12]
+        old, new = left + base[i1:i2] + right, left + current[j1:j2] + right
+        if out.count(old) != 1:
+            if current[max(0, j1 - 6):j2 + 6] in out:
+                continue                         # אריאל כבר תיקן את אותו דבר
+            return None
+        out = out.replace(old, new)
+    return out
+
+
+def author_edits(chs):
+    """ההגהה של אריאל (book/author_edits/*.json, מ-import_proof.py): כל רצף פסקאות שזהה לנוסח
+    שאריאל קיבל לידיו (base) מוחלף בנוסח שלו (final) – כולל פיצול ואיחוד של פסקאות.
+    אחר כך – ההצעות שלי על הנוסח החדש (house.POST_EDITS), מסומנות לאישורו."""
+    norm = lambda t: re.sub(r'\s+', ' ', plain(t)).strip()
+    edits = [e for f in sorted(glob.glob(os.path.join(HERE, 'author_edits', '*.json')))
+             for e in json.load(open(f, encoding='utf-8'))['edits']]
+    for e in edits:
+        base, final, done = e['base'], [house.dashes(x) for x in e['final']], False
+        for c in chs:
+            for lst in (c['paras'],):
+                for k in range(len(lst) - len(base) + 1):
+                    if all(norm(lst[k + i]) == base[i] for i in range(len(base))):
+                        lst[k:k + len(base)] = final
+                        done = True
+                        break
+                if done:
+                    break
+            if not done:
+                for n in c['notes']:
+                    if len(base) == 1 and norm(n['text']) == base[0]:
+                        n['text'] = final[0]
+                        done = True
+            if done:
+                break
+        if not done and len(base) == 1:          # הטקסט בספר השתנה מאז (תיקון באתר) – מיזוג
+            for c in chs:
+                for k, p in enumerate(c['paras']):
+                    merged = merge3(base[0], norm(p), final[0])
+                    if merged:
+                        c['paras'][k], done = merged, True
+                        break
+                if done:
+                    break
+        # לא נמצא – אלא אם הספר כבר מפיק את הנוסח של אריאל (למשל אחרי תיקון בקוד)
+        flat = lambda t: t.replace('-', '')      # "אֶ-ל־קַיִן" של אריאל = "אֶל־קַיִן" שהקוד כבר מתקן
+        if not done and not any(flat(norm(p)) == flat(final[0]) for c in chs for p in c['paras']):
+            print('הגהה של אריאל לא הוחלה:', base[0][:70], file=sys.stderr)
+    for title, old, new in house.POST_EDITS:
+        c = next(c for c in chs if c['title'] == title)
+        hits = [k for k, p in enumerate(c['paras']) if old in p]
+        if len(hits) != 1:
+            print('הצעה לא הוחלה:', title, old, file=sys.stderr)
+            continue
+        c['paras'][hits[0]] = c['paras'][hits[0]].replace(old, mark('chg', new, old), 1)
 
 
 def ch_title(ch):
