@@ -380,13 +380,13 @@ def author_edits(chs):
         flat = lambda t: t.replace('-', '')      # "אֶ-ל־קַיִן" של אריאל = "אֶל־קַיִן" שהקוד כבר מתקן
         if not done and not any(flat(norm(p)) == flat(final[0]) for c in chs for p in c['paras']):
             print('הגהה של אריאל לא הוחלה:', base[0][:70], file=sys.stderr)
-    for title, old, new in house.POST_EDITS:
+    for title, old, new, *ok in house.POST_EDITS:
         c = next(c for c in chs if c['title'] == title)
         hits = [k for k, p in enumerate(c['paras']) if old in p]
         if len(hits) != 1:
             print('הצעה לא הוחלה:', title, old, file=sys.stderr)
             continue
-        c['paras'][hits[0]] = c['paras'][hits[0]].replace(old, mark('chg', new, old), 1)
+        c['paras'][hits[0]] = c['paras'][hits[0]].replace(old, new if ok else mark('chg', new, old), 1)
 
 
 def ch_title(ch):
@@ -426,7 +426,12 @@ DESIGNS = {
 .ch-kicker { font: 700 9pt 'Assistant'; letter-spacing: .12em; color: #000 }
 .ch-head h2 { font-family: 'Assistant'; font-weight: 700; font-size: 2.3em; margin: 1mm 0 0 }
 .ch-year { font: 10pt 'Assistant'; color: #000 }
-p.q { font-family: 'Frank Ruhl Libre', serif; margin: 0 0 0 4mm; padding-right: 4mm; border-right: 1.6pt solid #000 }
+/* פסוקים – גרסה B של מומחי העימוד, אריאל בחר (19.11.2026): חצי שורה לפני הגוש ואחריו (יחד – שורה שלמה,
+   כך שהגוף חוזר לגריד), פסוק קטן מעט על אותו מרווח שורות (יותר לבן לניקוד; גובה האות כמו בדוד),
+   והזחה משני הצדדים. פסוקים צמודים – גוש אחד. book/vjust.js מיישר עמודים שהרווחים הוציאו מהגריד. */
+p.q { font-family: 'Frank Ruhl Libre', serif; font-size: 10.6pt; line-height: 17.825pt; margin: .5lh 3mm 0 6mm; padding-right: 4mm; border-right: 1.6pt solid #000 }
+p.q + p.q { margin-top: 0 !important }   /* Paged.js הופך כלל עם + ל-[data-following] (ספציפיות נמוכה) – לכן important */
+p.q + p:not(.q) { margin-top: .5lh }
 ''',
     # ג1 — אוורירי: פתיחת פרק נמוכה בעמוד, שם הפרשה דק וגדול, פסוקים על רקע אפור בהיר
     'c1': '''
@@ -597,7 +602,8 @@ def build(design='c', sample=False, size='b5', proof=False, lh=None):   # הוח
 {chr(10).join(body)}
 {about}
 </div><script>window.PagedConfig = {{ after: () => {{ window.__pagedDone = true }} }}</script>
-<script src="file://{HERE}/vendor/paged.polyfill.js"></script></body></html>'''
+<script src="file://{HERE}/vendor/paged.polyfill.js"></script>
+<script src="file://{HERE}/vjust.js"></script></body></html>'''
 
 
 if __name__ == '__main__':
