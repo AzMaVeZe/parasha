@@ -4,7 +4,7 @@
 
 אותו טקסט כמו book-c-proof (build_book.edit), ובשני סוגי סימון שמובנים ב-Word:
 - שינוי שעשיתי בעריכה (EDITS) ← "מעקב שינויים": אפשר לקבל או לדחות כל אחד (סקירה ← קבל/דחה).
-- מקום לבדיקה (CHECKS) ← הדגשה צהובה, ובהערה בשוליים — הסיבה.
+- מקום לבדיקה (CHECKS) ← מסגרת מקווקוות ורקע אפור בהיר (נראים גם בשחור-לבן), ובהערה בשוליים — הסיבה.
 כללי הבית (גרשיים, מקף, כתיב) כבר מוחלים, בלי סימון.
 
 עברית ב-Word (ראו hebrew-document-generator): כל פסקה עם <w:bidi/>, הטקסט מפוצל לריצות לפי כתב,
@@ -110,10 +110,12 @@ def rpr(r, font, size, bold=False, rtl=False, highlight=False):
     if bold:
         rPr.append(rPr.makeelement(qn('w:b'), {}))
         rPr.append(rPr.makeelement(qn('w:bCs'), {}))
-    if highlight:
-        rPr.append(rPr.makeelement(qn('w:highlight'), {qn('w:val'): 'yellow'}))
     rPr.append(rPr.makeelement(qn('w:sz'), {qn('w:val'): str(int(size * 2))}))
     rPr.append(rPr.makeelement(qn('w:szCs'), {qn('w:val'): str(int(size * 2))}))
+    if highlight:   # הסדר לפי הסכֵמה של Word: sz, szCs, highlight, bdr, rtl
+        # מודפס גם בשחור-לבן: רקע אפור בהיר ומסגרת מקווקוות סביב הטקסט (כמו ב-PDF)
+        rPr.append(rPr.makeelement(qn('w:highlight'), {qn('w:val'): 'lightGray'}))
+        rPr.append(rPr.makeelement(qn('w:bdr'), {qn('w:val'): 'dashed', qn('w:sz'): '6', qn('w:space'): '0', qn('w:color'): '000000'}))
     if rtl:
         rPr.append(rPr.makeelement(qn('w:rtl'), {}))
 
@@ -229,7 +231,7 @@ def main():
     heading(doc, B.TITLE, 0)
     para(doc, B.SUBTITLE, size=14)
     para(doc, 'גרסת הגהה לעריכה. השינויים שעשיתי בעריכה מופיעים כ"מעקב שינויים" — אפשר לקבל או לדחות כל אחד '
-              '(סקירה ← קבל / דחה). מקומות שדורשים בדיקה שלך מול הדף מודגשים בצהוב, והסיבה בהערה בשוליים. '
+              '(סקירה ← קבל / דחה). מקומות שדורשים בדיקה שלך מול הדף מוקפים במסגרת מקווקוות על רקע אפור, והסיבה בהערה בשוליים. '
               'כללי הבית (גרשיים, מקף עברי, כתיב) כבר הוחלו. כל מה שתשנה כאן ייכנס לספר.', size=11)
     heading(doc, 'על שם הספר', 1)
     para(doc, house.mark('chg', B.NAME_NOTE, ''))

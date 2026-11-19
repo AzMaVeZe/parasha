@@ -35,14 +35,14 @@ BUILD = os.path.join(HERE, 'build')
 TITLE = 'יש קמח'                                  # אריאל בחר (13.11.2026)
 SUBTITLE = 'שיחת חולין על פרשת השבוע'
 # טיוטות שכתבתי לבקשת אריאל — מסומנות בהגהה לאישורו. מה שבסוגריים מרובעים: פרטים שרק הוא יודע.
-ABOUT = ("אריאל ז׳יטניצקי [עיסוק, מקום מגורים ומשפחה — להשלים]. הדף הראשון נשלח בדואר האלקטרוני לפחות "
-         "ממניין נמענים — רובם אורחים שהתחמקו מדבר תורה בשולחן השבת, והובטח להם שיקבלו אותו בהמשך השבוע. "
-         "התגובות הטובות \"גררו אחריהן, מסתבר, כתיבה בתדירות גבוהה יותר\", ובשנים תשס״ט–תש״ע יצא דף לכל "
-         "פרשת שבוע ולכל חג, לחברים ולבני משפחה. [המסורת של המשלוח פעם בשנה — להשלים: מה נשלח, מתי ולמי.] "
-         "מהדפים האלה, פרשה אחר פרשה, נולד הספר הזה.")
+ABOUT = ("אריאל ז׳יטניצקי הוא רואה חשבון ועורך דין, שותף מנהל במשרד ז׳יטניצקי ויינשטיין ושות׳, רואי חשבון, "
+         "ובוגר אוניברסיטת תל אביב. את הדף הראשון שלח בדואר האלקטרוני לפחות ממניין נמענים — רובם אורחים "
+         "שהתחמקו מדבר תורה בשולחן השבת, והובטח להם שיקבלו אותו בהמשך השבוע. התגובות הטובות \"גררו אחריהן, "
+         "מסתבר, כתיבה בתדירות גבוהה יותר\", ובשנים תשס״ט–תש״ע יצא ממנו דף במייל פעם בשבוע — לכל פרשת "
+         "שבוע ולכל חג — לחברים ולבני משפחה. מהדפים האלה, פרשה אחר פרשה, נולד הספר הזה.")
 NAME_NOTE = ("\"אם אין קמח — אין תורה; אם אין תורה — אין קמח\", אומרת המשנה בפרקי אבות (ג, יז). \"יש קמח\" "
-             "בוחר בצד המעודד של המשפט: יש קמח, ויש גם תורה. ויש בשם גם חתימה קטנה: בשפות הסלאביות "
-             "\"ז׳יטו\" הוא דגן ו\"ז׳יטניצה\" היא אסם התבואה — ומשם, כנראה, שם המשפחה ז׳יטניצקי. "
+             "בוחר בצד המעודד של המשפט: יש קמח, ויש גם תורה. ויש בשם גם חתימה קטנה: במשפחה מקובל "
+             "ששם המשפחה ז׳יטניצקי קשור לתבואה — בר, דגן, שיפון; ובשפות הסלאביות \"ז׳יטו\" הוא אכן דגן. "
              "תת-הכותרת, \"שיחת חולין על פרשת השבוע\", לקוחה מדברי חז״ל: \"שיחת חולין של תלמידי חכמים "
              "צריכה לימוד\" (בבלי, סוכה כא ע״ב). הדפים האלה נכתבו כשיחה — בגובה העיניים, עם סלנג וקריצה — "
              "ובכל זאת, ואולי דווקא משום כך, יש בהם תורה.")
@@ -316,12 +316,25 @@ def ch_title(ch):
 
 
 PROOF_CSS = '''
-mark.chg { background: #c9f0c0; color: inherit }
-del { color: #b3261e }
-mark.chk { background: #ffe95c; color: inherit }
-.why, .table-why { display: inline; font: 7.5pt 'Assistant'; color: #9a4d00; text-indent: 0 }
+/* הגהה שמודפסת בשחור-לבן: ההבדל בצורה, לא בצבע.
+   נוסח חדש = קו תחתון רציף; הנוסח הקודם = קו חוצה, אפור וקטן; לבדיקה = מסגרת מקווקוות.
+   ובשוליים, בגובה השורה: עיגול חלול לשינוי, ריבוע מלא לבדיקה — כדי למצוא אותם בדפדוף. */
+mark.chg { background: none; color: inherit; text-decoration: underline 1.1pt; text-underline-offset: 2.5pt; text-decoration-skip-ink: none }
+del { color: #555; font-size: .85em; text-decoration: line-through 1pt }
+mark.chk { background: none; color: inherit; border: .9pt dashed #000; padding: 0 .6mm; border-radius: .6mm;
+  -webkit-box-decoration-break: clone; box-decoration-break: clone }
+.why, .table-why { display: inline; font: 700 7.5pt 'Assistant'; color: #000; text-indent: 0; margin-right: .8mm }
+p, li, td { position: relative }
+mark.chg::before, mark.chk::before { content: ''; position: absolute; right: -6mm; margin-top: .45lh; width: 2.2mm; height: 2.2mm; box-sizing: border-box }
+mark.chg::before { border: .8pt solid #000; border-radius: 50% }
+mark.chk::before { background: #000 }
+.notes li mark::before, td mark::before { right: -3.5mm; width: 1.6mm; height: 1.6mm }
 .legend { padding-top: 60mm; text-align: right }
 .legend h2 { font-family: 'Assistant'; font-size: 1.6em }
+.legend .k { display: inline-block; width: 2.2mm; height: 2.2mm; box-sizing: border-box; margin-left: 1.5mm; vertical-align: middle }
+.legend .k.o { border: .8pt solid #000; border-radius: 50% }
+.legend .k.s { background: #000 }
+.legend mark::before { display: none }
 '''
 
 
@@ -483,9 +496,13 @@ def build(design='c', sample=False, size='b5', proof=False, lh=None):   # הוח
 <section class="toc"><h2>תוכן העניינים</h2>{"".join(toc)}</section>'''
     about = ('<section class="about"><h2>על המחבר</h2>'
              f'<p>{para_html(mark("chg", ABOUT, ""), proof)}</p></section>')
-    legend = ('<section class="front legend"><h2>גרסת הגהה</h2><p><mark class="chg">ירוק</mark> — נוסח שהשתנה בעריכה '
-              '(הנוסח הקודם <del>מחוק</del> לפניו). <mark class="chk">צהוב</mark> — מקום שדורש בדיקה שלך מול הדף, '
-              'והסיבה <span class="why">[בסוגריים]</span>. כללי הבית (גרשיים, מקף, כתיב) הוחלו בלי סימון.</p></section>'
+    legend = ('<section class="front legend"><h2>גרסת הגהה</h2>'
+              '<p><span class="k o"></span><mark class="chg">קו תחתון</mark> — נוסח שהשתנה בעריכה '
+              '(הנוסח הקודם <del>מחוק</del> לפניו).</p>'
+              '<p><span class="k s"></span><mark class="chk">מסגרת מקווקוות</mark> — מקום שדורש בדיקה שלך מול הדף, '
+              'והסיבה <span class="why">[בסוגריים]</span>.</p>'
+              '<p>בשוליים, בגובה השורה: עיגול חלול — שינוי; ריבוע מלא — בדיקה. '
+              'כללי הבית (גרשיים, מקף, כתיב) הוחלו בלי סימון. הקובץ מיועד גם להדפסה בשחור-לבן.</p></section>'
               if proof else '')
     sz, top, bottom, inner, outer = SIZES[size]
     css = (BASE_CSS.replace('TITLE', TITLE).replace('SIZE', sz).replace('TOP', top).replace('BOTTOM', bottom)

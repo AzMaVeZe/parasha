@@ -25,6 +25,16 @@ SIZES = {'b5': (165, 235), '17x24': (170, 240), 'a5': (148, 210)}
 TITLE = 'יש קמח'
 SUB = 'שיחת חולין על פרשת השבוע'
 AUTHOR = "אריאל ז׳יטניצקי"
+# טקסט הגב — טיוטה לאישור אריאל
+BLURB = [
+    "שבוע אחרי שבוע, בשנים תשס״ט–תש״ע, יצא דף אחד במייל: פרשת השבוע, שאלה שלא נותנת מנוח, וקריאה "
+    "צמודה בפסוקים, במדרש ובפרשנים — בגובה העיניים, עם הומור, סלנג וקריצה.",
+    "\"יש קמח\" אוסף את הדפים האלה: פרשות השבוע לפי הסדר, והחגים בסוף. זה לא ספר דרשות ולא ספר מחקר, "
+    "אלא שיחת חולין על פרשת השבוע — ו\"שיחת חולין של תלמידי חכמים צריכה לימוד\", אמרו חז״ל. "
+    "ספר לשולחן השבת, למי שמכין דבר תורה, ולמי שפשוט אוהב לשאול שאלות.",
+]
+BACK_AUTHOR = ("אריאל ז׳יטניצקי הוא רואה חשבון ועורך דין, שותף מנהל במשרד ז׳יטניצקי ויינשטיין ושות׳. "
+               "הדפים התחילו כהבטחה לאורחים שהתחמקו מדבר תורה בשולחן השבת, והפכו למנהג של כל שבוע.")
 # הצבעים של האתר ושל כרטיסי הפודקאסט (tokens/colors.css)
 NAVY, CREAM, GOLD, INK = '#14294D', '#F7F2E7', '#B8860B', '#26241E'
 
@@ -79,8 +89,10 @@ h1 {{ font-family: 'Frank Ruhl Libre'; font-weight: 700; color: {NAVY}; font-siz
 /* השדרה נקראת מלמעלה למטה, וראשי האותיות פונים לחזית: כשהספר מונח על גבו והחזית למעלה, השם קריא */
 .spine .t {{ font: 700 {min(20, max(7, spine * 0.62))}pt 'Frank Ruhl Libre' }}
 .spine .a {{ font: 700 {min(11, max(6, spine * 0.36))}pt 'Assistant'; color: {GOLD} }}
-.blurb {{ font: 400 11.5pt 'David Libre'; line-height: 1.6; color: {INK}; text-align: justify; max-width: {w - 30}mm }}
-.blurb.ph {{ color: #8a8577 }}
+.blurb {{ font: 400 12.5pt 'David Libre'; line-height: 1.6; color: {INK}; text-align: justify; max-width: {w - 30}mm }}
+.blurb {{ margin: 0 0 4mm }}
+.bio {{ position: absolute; right: 0; left: 0; top: {h * 0.66 - 16 + 9}mm; margin: 0; font: 400 11pt 'Assistant';
+  line-height: 1.55; color: {CREAM}; text-align: justify; border-top: .5mm solid {GOLD}; padding-top: 4mm }}
 .barcode {{ position: absolute; left: 0; bottom: 0; width: 45mm; height: 22mm; background: #fff; border: .3mm dashed #999;
   display: flex; align-items: center; justify-content: center; font: 7pt 'Assistant'; color: #999 }}
 </style></head><body>
@@ -92,7 +104,8 @@ h1 {{ font-family: 'Frank Ruhl Libre'; font-weight: 700; color: {NAVY}; font-siz
 </div></section>
 <section class="panel spine"><div class="text"><span class="t">{e(TITLE)}</span><span class="a">{e(AUTHOR)}</span></div></section>
 <section class="panel back"><div class="navy"></div><div class="inner">
-  <p class="blurb ph">[טקסט הגב: כמה שורות על הספר ועל הדפים, ומשפט על המחבר — יכתוב אריאל]</p>
+  {''.join(f'<p class="blurb">{e(t)}</p>' for t in BLURB)}
+  <p class="bio">{e(BACK_AUTHOR)}</p>
   <div class="site">parasha.azma.app</div>
   <div class="barcode">מקום לברקוד</div>
 </div></section>
