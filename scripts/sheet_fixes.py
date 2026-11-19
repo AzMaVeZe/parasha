@@ -60,7 +60,8 @@ FIXES = {
          'Biblical Leprosy and the Use of Alternative Medical Terms in Modern Translations of the Bible”, Palestine '
          'Exploration Quarterly 107 (1975), pp. 87-105), לפיכך')],
     'bereshit-בראשית': [("Jean-Louis)Paris(vives Lettres Editions,1992,espace'l de invention 'L,Giovannoni.",
-                         "Jean-Louis Giovannoni, L'invention de l'espace, 1992, Editions Lettres vives (Paris).")],
+                         "Jean-Louis Giovannoni, L'invention de l'espace, 1992, Editions Lettres vives (Paris)."),
+                        ('קודש אבריך הוא', 'קודשא בריך הוא')],      # אריאל, בהגהת הספר (19.11.2026)
     'devarim-שופטים': [('Review Business Harvard', 'Harvard Business Review'), ('Week Business', 'Business Week'),
                        (')Stories Success Such Be Can Failures Why(.', '(Why Failures Can Be Such Success Stories).')],
     'devarim-כי-תצא': [('(%0.5)', '(0.5%)'), ('%0.75', '0.75%'),
