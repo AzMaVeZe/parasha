@@ -1,6 +1,7 @@
 """קורא קובץ הגהה (Word) שאריאל החזיר, ושומר את השינויים שלו כזוגות: הנוסח בספר ← הנוסח של אריאל.
 
   python3 book/import_proof.py <קובץ.docx> <שם>      # ← book/author_edits/<שם>.json
+  python3 book/import_proof.py --against <הקובץ-ששלחתי.docx> <קובץ.docx> <שם>   # כשנערך בלי מעקב שינויים
 
 בכל פסקה שיש בה שינוי של אריאל (מעקב שינויים):
 - base  — הנוסח שהספר מפיק היום (רשימת פסקאות): השינויים שלי (Claude) מתקבלים, של אריאל נדחים.
@@ -36,7 +37,11 @@ def paragraphs(docx):
         for c in com.iter(W + 'comment'):
             comments[c.get(W + 'id')] = (is_claude(c.get(W + 'author')),
                                          ''.join(t.text or '' for t in c.iter(W + 't')))
-    for p in doc.find(W + 'body').iter(W + 'p'):
+    body = list(doc.find(W + 'body').iter(W + 'p'))
+    if 'word/footnotes.xml' in z.namelist():     # הערות השוליים: כל הערה – פסקה, אחרי גוף הטקסט
+        foot = etree.fromstring(z.read('word/footnotes.xml'))
+        body += [p for fn in foot.iter(W + 'footnote') if int(fn.get(W + 'id')) > 0 for p in fn.iter(W + 'p')]
+    for p in body:
         base, final, ariel, cids = [], [], False, []
         for el in p.iter():
             if el.tag in (W + 't', W + 'delText'):
@@ -96,7 +101,30 @@ def split(group, which):
     return [x for x in out if x]
 
 
+def compare(orig, docx):
+    """כשאריאל ערך בלי מעקב שינויים: השוואה פסקה-פסקה מול הקובץ ששלחתי לו (orig).
+    כל גוש שהשתנה – זוג base (מ-orig) ← final (מהקובץ שלו). גוש שרק נוסף נצמד לפסקה שלפניו."""
+    import difflib
+    a = [norm(b) for b, *_ in paragraphs(orig)]
+    b = [norm(f) for _, f, *_ in paragraphs(docx)]
+    out = []
+    for op, i1, i2, j1, j2 in difflib.SequenceMatcher(None, a, b, autojunk=False).get_opcodes():
+        if op == 'equal':
+            continue
+        if i1 == i2:                             # רק הוספה: עם הפסקה שלפניה, כדי שיהיה מה לחפש בספר
+            i1, j1 = i1 - 1, j1 - 1
+        out.append({'base': [x for x in a[i1:i2] if x], 'final': [x for x in b[j1:j2] if x]})
+    return out
+
+
 def main():
+    if sys.argv[1] == '--against':               # import_proof.py --against <ששלחתי.docx> <שחזר.docx> <שם>
+        orig, docx, name = sys.argv[2:5]
+        edits = compare(orig, docx)
+        out = os.path.join(HERE, 'author_edits', name + '.json')
+        json.dump({'edits': edits, 'comments': []}, open(out, 'w', encoding='utf-8'), ensure_ascii=False, indent=1)
+        print(f'{out}: {len(edits)} שינויים (השוואה מול הקובץ ששלחתי)')
+        return
     docx, name = sys.argv[1], sys.argv[2]
     edits, notes = [], []
     for group in units(paragraphs(docx)):

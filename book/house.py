@@ -29,9 +29,13 @@ def mark(kind, text, note=''):
     return f'{MO}{kind}{len(NOTES) - 1}{MS}{text}{MC}'
 
 
+FN, FE = '\ue010', '\ue011'      # מספר הערת שוליים בגוף הטקסט: FN + מספר + FE (build_book.place_notes)
+FNREF = re.compile(FN + r'([^' + FE + r']*)' + FE)
+
+
 def plain(t):
-    """הטקסט בלי הסימונים."""
-    return re.sub(MO + r'[a-z]+\d+' + MS, '', t).replace(MC, '')
+    """הטקסט בלי הסימונים (ובלי מספרי ההערות)."""
+    return FNREF.sub('', re.sub(MO + r'[a-z]+\d+' + MS, '', t).replace(MC, ''))
 
 
 def render_marks(escaped, proof):

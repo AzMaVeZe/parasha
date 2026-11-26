@@ -120,6 +120,97 @@ def rpr(r, font, size, bold=False, rtl=False, highlight=False):
         rPr.append(rPr.makeelement(qn('w:rtl'), {}))
 
 
+W_NS = 'http://schemas.openxmlformats.org/wordprocessingml/2006/main'
+
+
+class Footnotes:
+    """הערות שוליים אמיתיות של Word (footnotes.xml): ההערה יושבת במקום שבו המספר שלה הופיע בדף.
+    Word ממספר אותן ברצף לאורך הקובץ (סימן מותאם עם המספר המקורי לא נתמך ב-LibreOffice, ולכן לא);
+    הטקסט של כל הערה – כמו בספר, כולל הסימונים."""
+
+    def __init__(self, doc):
+        from lxml import etree
+        self.doc, self.etree = doc, etree
+        self.root = etree.fromstring(
+            f'<w:footnotes xmlns:w="{W_NS}">'
+            '<w:footnote w:type="separator" w:id="-1"><w:p><w:r><w:separator/></w:r></w:p></w:footnote>'
+            '<w:footnote w:type="continuationSeparator" w:id="0"><w:p><w:r><w:continuationSeparator/></w:r></w:p></w:footnote>'
+            '</w:footnotes>')
+        self.next = 1
+        self.texts = {}                           # מספר ההערה בפרק ← הטקסט (מתעדכן לכל פרק)
+
+    def reference(self, p_el, n, size):
+        """ריצת הפניה בפסקה, והערה חדשה בקובץ ההערות. מחזיר False אם אין טקסט להערה."""
+        text = self.texts.get(n)
+        if text is None:
+            return False
+        fid = str(self.next)
+        self.next += 1
+        r = p_el.makeelement(qn('w:r'), {})
+        rPr = r.makeelement(qn('w:rPr'), {})
+        rPr.append(rPr.makeelement(qn('w:vertAlign'), {qn('w:val'): 'superscript'}))
+        r.append(rPr)
+        r.append(r.makeelement(qn('w:footnoteReference'), {qn('w:id'): fid}))
+        p_el.append(r)
+        fn = self.etree.SubElement(self.root, qn('w:footnote'), {qn('w:id'): fid})
+        fp = self.etree.SubElement(fn, qn('w:p'))
+        pPr = self.etree.SubElement(fp, qn('w:pPr'))
+        self.etree.SubElement(pPr, qn('w:bidi'))
+        self.etree.SubElement(pPr, qn('w:jc'), {qn('w:val'): 'both'})
+        ref = self.etree.SubElement(fp, qn('w:r'))
+        rp = self.etree.SubElement(ref, qn('w:rPr'))
+        self.etree.SubElement(rp, qn('w:vertAlign'), {qn('w:val'): 'superscript'})
+        self.etree.SubElement(ref, qn('w:footnoteRef'))
+        sp = self.etree.SubElement(fp, qn('w:r'))
+        t = self.etree.SubElement(sp, qn('w:t'))
+        t.text = ' '
+        t.set('{http://www.w3.org/XML/1998/namespace}space', 'preserve')
+        write_runs(fp, text, FONT, 10)
+        return True
+
+    def save(self):
+        from docx.opc.constants import RELATIONSHIP_TYPE as RT
+        from docx.opc.packuri import PackURI
+        from docx.opc.part import Part
+        part = Part(PackURI('/word/footnotes.xml'),
+                    'application/vnd.openxmlformats-officedocument.wordprocessingml.footnotes+xml',
+                    self.etree.tostring(self.root, xml_declaration=True, encoding='UTF-8', standalone=True),
+                    self.doc.part.package)
+        self.doc.part.relate_to(part, RT.FOOTNOTES)
+
+
+FOOT = [None]                                     # Footnotes של הקובץ הנוכחי
+
+
+def write_runs(p_el, text, font, size):
+    """ריצות טקסט (עם מעקב שינויים) לתוך אלמנט פסקה – להערות השוליים. מקום לבדיקה: הדגשה והסיבה בסוגריים."""
+    has_latin = bool(re.search('[A-Za-z]', house.plain(text)))
+    for seg, chk, rev in segments(text):
+        for piece, is_heb in split_script(seg):
+            rtl = bool(is_heb) and not has_latin
+            r = p_el.makeelement(qn('w:r'), {})
+            rpr(r, font, size, False, rtl, highlight=chk is not None)
+            t = r.makeelement(qn('w:delText' if rev == 'del' else 'w:t'), {})
+            t.text = piece
+            t.set('{http://www.w3.org/XML/1998/namespace}space', 'preserve')
+            r.append(t)
+            if rev in ('ins', 'del'):
+                _rev[0] += 1
+                wrap = p_el.makeelement(qn('w:' + rev), {qn('w:id'): str(_rev[0]), qn('w:author'): AUTHOR, qn('w:date'): NOW})
+                wrap.append(r)
+                p_el.append(wrap)
+            else:
+                p_el.append(r)
+        if chk is not None:
+            r = p_el.makeelement(qn('w:r'), {})
+            rpr(r, font, size - 1, True, True)
+            t = r.makeelement(qn('w:t'), {})
+            t.text = f' [{chk}]'
+            t.set('{http://www.w3.org/XML/1998/namespace}space', 'preserve')
+            r.append(t)
+            p_el.append(r)
+
+
 def rtl_para(p, align=None):
     pPr = p._p.get_or_add_pPr()
     pPr.append(pPr.makeelement(qn('w:bidi'), {}))
@@ -128,29 +219,38 @@ def rtl_para(p, align=None):
 
 
 def write(doc, p, text, font=FONT, size=12, bold=False):
-    """פסקה עם סימונים: ריצות לפי כתב, מעקב שינויים, והדגשה + הערה למקומות לבדיקה."""
+    """פסקה עם סימונים: ריצות לפי כתב, מעקב שינויים, הדגשה + הערה למקומות לבדיקה, והערות שוליים."""
     has_latin = bool(re.search('[A-Za-z]', house.plain(text)))
     pending = {}          # סיבה ← ריצות (להערה אחת על כל קטע לבדיקה)
-    for seg, chk, rev in segments(text):
-        for piece, is_heb in split_script(seg):
-            rtl = bool(is_heb) and not has_latin
-            if rev in ('ins', 'del'):
-                _rev[0] += 1
-                wrap = p._p.makeelement(qn('w:' + rev), {qn('w:id'): str(_rev[0]), qn('w:author'): AUTHOR,
-                                                       qn('w:date'): NOW})
-                r = wrap.makeelement(qn('w:r'), {})
-                rpr(r, font, size, bold, rtl, highlight=chk is not None)
-                t = r.makeelement(qn('w:delText' if rev == 'del' else 'w:t'), {})
-                t.text = piece
-                t.set('{http://www.w3.org/XML/1998/namespace}space', 'preserve')
-                r.append(t)
-                wrap.append(r)
-                p._p.append(wrap)
-            else:
-                run = p.add_run(piece)
-                rpr(run._r, font, size, bold, rtl, highlight=chk is not None)
-                if chk is not None:
-                    pending.setdefault(chk, []).append(run)
+    for seg0, chk, rev in segments(text):
+        bits = re.split(house.FN + '(.*?)' + house.FE, seg0)
+        for k, seg in enumerate(bits):
+            if k % 2:                              # מספר הערה ← הערת שוליים של Word במקום הזה
+                n = int(seg) if seg.isdigit() else seg
+                if not (FOOT[0] and FOOT[0].reference(p._p, n, size)):
+                    run = p.add_run(seg)
+                    rpr(run._r, font, size, bold, False)
+                    run.font.superscript = True
+                continue
+            for piece, is_heb in split_script(seg):
+                rtl = bool(is_heb) and not has_latin
+                if rev in ('ins', 'del'):
+                    _rev[0] += 1
+                    wrap = p._p.makeelement(qn('w:' + rev), {qn('w:id'): str(_rev[0]), qn('w:author'): AUTHOR,
+                                                           qn('w:date'): NOW})
+                    r = wrap.makeelement(qn('w:r'), {})
+                    rpr(r, font, size, bold, rtl, highlight=chk is not None)
+                    t = r.makeelement(qn('w:delText' if rev == 'del' else 'w:t'), {})
+                    t.text = piece
+                    t.set('{http://www.w3.org/XML/1998/namespace}space', 'preserve')
+                    r.append(t)
+                    wrap.append(r)
+                    p._p.append(wrap)
+                else:
+                    run = p.add_run(piece)
+                    rpr(run._r, font, size, bold, rtl, highlight=chk is not None)
+                    if chk is not None:
+                        pending.setdefault(chk, []).append(run)
     for why, runs in pending.items():
         doc.add_comment(runs, text=why, author=AUTHOR, initials='C')
 
@@ -228,6 +328,7 @@ def main():
     st.font.name, st.font.size = FONT, Pt(12)
     st.element.rPr.rFonts.set(qn('w:cs'), FONT)
 
+    FOOT[0] = Footnotes(doc)
     heading(doc, B.TITLE, 0)
     para(doc, B.SUBTITLE, size=14)
     para(doc, 'גרסת הגהה לעריכה. השינויים שעשיתי בעריכה מופיעים כ"מעקב שינויים" — אפשר לקבל או לדחות כל אחד '
@@ -242,6 +343,7 @@ def main():
         heading(doc, part['name'], 1, page_break=True)
         for ch in part['chapters']:
             heading(doc, ch['title'], 2, page_break=True)
+            FOOT[0].texts = {n['n']: n['text'] for n in ch['notes'] if n.get('placed')}
             for sub in ch['subs']:
                 para(doc, sub, size=13)
             if ch['year']:
@@ -253,16 +355,18 @@ def main():
                 pl = house.plain(p)
                 kind = 'q' if B.is_quote(pl) else 'li' if pl.startswith(('•', '·')) else ''
                 para(doc, p, kind)
-            if ch['notes']:
+            rest = [n for n in ch['notes'] if not n.get('placed')]
+            if rest:                               # הערות שלא נמצא להן מקום בטקסט – ברשימה בסוף הפרק
                 h = doc.add_paragraph()
                 rtl_para(h)
-                run = h.add_run('הערות')
+                run = h.add_run('הערות (לא נמצא מקומן בטקסט)')
                 rpr(run._r, FONT, 11, bold=True, rtl=True)
-                for n in ch['notes']:
+                for n in rest:
                     num = str(n.get('n') or '')
                     para(doc, (num + '. ' if num else '') + n['text'], size=10)
     heading(doc, 'על המחבר', 1, page_break=True)
     para(doc, B.about_text())
+    FOOT[0].save()
     out = os.path.join(B.BUILD, 'out', 'יש-קמח-הגהה.docx')
     doc.save(out)
     print(out)

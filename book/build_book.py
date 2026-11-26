@@ -250,7 +250,8 @@ def chapters():
                 year = mark('chk', year, 'השנה לפי סדר הכתיבה, לא מהדף')
             ch = {'names': [p['name']], 'year': year, 'paras': paras, 'subs': subs,
                   'notes': [n for n in t.get('footnotes', []) if 'החידה' not in n['text']],
-                  'chag': sefer['id'] == 'chagim', 'id': 'ch-%d' % len(parts) + '-%d' % len(chs)}
+                  'chag': sefer['id'] == 'chagim', 'id': 'ch-%d' % len(parts) + '-%d' % len(chs),
+                  'sheet': os.path.basename(f)[:-5]}
             seen[key] = ch
             chs.append(ch)
         if chs:
@@ -315,7 +316,82 @@ def edit(parts):
             c['paras'][i + 1:j] = ['\x00TABLE']
         house.checks(c, is_quote)
     author_edits(chs)
+    place_notes(chs)
     return parts
+
+
+ANCHORS = os.path.join(HERE, 'note_anchors.json')
+
+
+def place_notes(chs):
+    """מחזיר את מספרי הערות השוליים למקומם בטקסט (book/note_anchors.py מצא אותם ב-PDF): אחרי
+    האותיות שלפני המספר בדף, ואחרי פיסוק שצמוד אליהן. הערה שלא נמצא לה מקום – נשארת רק ברשימה."""
+    anchors = json.load(open(ANCHORS, encoding='utf-8')) if os.path.exists(ANCHORS) else {}
+    for c in chs:
+        found = anchors.get(c.get('sheet'), {})
+        pos = (0, 0)                              # ההערות לפי הסדר: מחפשים אחרי ההערה הקודמת
+        for note in c['notes']:
+            ctx = found.get(str(note.get('n')))
+            if not ctx:
+                continue
+            hit = _find_anchor(c['paras'], ctx, pos)
+            if hit is None:
+                print('מקום ההערה לא נמצא:', c['title'], note['n'], ctx, file=sys.stderr)
+                continue
+            k, i = hit
+            c['paras'][k] = c['paras'][k][:i] + house.FN + str(note['n']) + house.FE + c['paras'][k][i:]
+            note['placed'] = True
+            pos = (k, i + 1)
+
+
+def _find_anchor(paras, ctx, start):
+    """(פסקה, מקום) מיד אחרי ההקשר, אחרי start. החיפוש לפי אותיות בלבד ועל פני הפרק כולו –
+    הקשר יכול לעבור בין פסקאות (שורה שנשברה לשתיים). מההקשר הארוך לקצר, ואם אין – התאמה קרובה."""
+    letters, where = [], []                       # האותיות הגלויות בפרק ← (פסקה, מקום)
+    for k in range(start[0], len(paras)):
+        p, i = paras[k], 0
+        while i < len(p):
+            ch = p[i]
+            if ch == house.MO:
+                i = p.index(house.MS, i) + 1
+                continue
+            if ch == house.FN:
+                i = p.index(house.FE, i) + 1
+                continue
+            if '\u05d0' <= ch <= '\u05ea' and (k > start[0] or i >= start[1]):
+                letters.append(ch); where.append((k, i))
+            i += 1
+    text = ''.join(letters)
+    j = None
+    for size in (24, 18, 14, 10, 7):
+        key = ctx[-size:]
+        if len(key) == size and key in text:
+            j = text.index(key) + size - 1
+            break
+    if j is None:
+        j = _fuzzy(text, ctx, 0)
+    if j is None:
+        return None
+    k, i = where[j]
+    p, end = paras[k], i + 1
+    while end < len(p) and p[end] in '.,;:!?"\')]׳״…' + house.MC:
+        end += 1
+    return k, end
+
+
+def _fuzzy(text, ctx, lo):
+    """המקום (אות אחרונה) שבו הטקסט הכי דומה להקשר – כשהספר שינה מעט את הנוסח (כתיב, עריכה)."""
+    import difflib
+    if len(ctx) < 12:
+        return None
+    best, at = 0.0, None
+    for tail in (ctx[-5:], ctx[-4:]):
+        for m in re.finditer(re.escape(tail), text[lo:]):
+            e = lo + m.end()
+            r = difflib.SequenceMatcher(None, text[max(0, e - len(ctx)):e], ctx, autojunk=False).ratio()
+            if r > best:
+                best, at = r, e - 1
+    return at if best >= 0.75 else None
 
 
 def merge3(base, current, final):
@@ -515,6 +591,7 @@ p.d { font-family: 'Assistant'; font-size: .95em; margin-right: 4mm }
 .notes ol { list-style: none; margin: 0; padding: 0; columns: 2; column-gap: 6mm }
 .notes li { font-family: 'Assistant'; font-size: 8.6pt; line-height: 1.5; margin-bottom: .8mm; text-align: justify; break-inside: avoid-column }
 .notes .n { font-weight: 700; margin-inline-end: 1.5mm }
+sup.fnref { font: 700 .6em 'Assistant'; vertical-align: .55em; line-height: 0; margin-inline-start: .3mm }
 '''
 
 
@@ -524,7 +601,7 @@ LATIN = re.compile(r"(?<![\ue000A-Za-z])[A-Za-z][A-Za-z0-9 .,;:'’&%()/\-]*[A-Z
 def para_html(p, proof):
     """פסקה: אנגלית בבידוד LTR (שלא תתהפך), ואז הסימונים."""
     p = LATIN.sub(lambda m: '\u2066' + m.group() + '\u2069', p)
-    return render_marks(esc(p), proof)
+    return house.FNREF.sub(r'<sup class="fnref">\1</sup>', render_marks(esc(p), proof))
 
 
 def build(design='c', sample=False, size='b5', proof=False, lh=None):   # הוחלט: B5, הגודל המוכן של בוקפוד
