@@ -321,6 +321,7 @@ def edit(parts):
 
 
 ANCHORS = os.path.join(HERE, 'note_anchors.json')
+FOOTNOTES = False      # --fn: הערות בתחתית העמוד (ברירת המחדל: בסוף הפרק)
 
 
 def place_notes(chs):
@@ -592,6 +593,13 @@ p.d { font-family: 'Assistant'; font-size: .95em; margin-right: 4mm }
 .notes li { font-family: 'Assistant'; font-size: 8.6pt; line-height: 1.5; margin-bottom: .8mm; text-align: justify; break-inside: avoid-column }
 .notes .n { font-weight: 700; margin-inline-end: 1.5mm }
 sup.fnref { font: 700 .6em 'Assistant'; vertical-align: .55em; line-height: 0; margin-inline-start: .3mm }
+/* --fn: הערות בתחתית העמוד. המספר הוא המקורי (sup.fnref), לכן הקריאה והסימון של Paged.js מוסתרים */
+.fn { float: footnote; font: 8.6pt/1.45 'Assistant'; text-align: justify; text-indent: 0; display: block }
+.fn .n { margin-inline-end: 1.5mm }
+[data-footnote-call]::after { content: none !important }
+[data-footnote-marker] { display: block !important; list-style: none !important }
+[data-footnote-marker]::marker { content: none !important }
+@page { @footnote { border-top: .5pt solid #999; padding-top: 1.5mm; margin-top: 3mm } }
 '''
 
 
@@ -623,6 +631,7 @@ def build(design='c', sample=False, size='b5', proof=False, lh=None):   # הוח
                  f'<header class="ch-head"><div class="ch-kicker">{esc(kicker)}</div><h2>{esc(title)}</h2>'
                  + ''.join(f'<div class="ch-sub">{esc(house.house(t))}</div>' for t in ch['subs'])
                  + (f'<div class="ch-year">{para_html(ch["year"], proof)}</div>' if ch['year'] else '') + '</header>']
+            notes_by_n = {str(n['n']): n['text'] for n in ch['notes'] if n.get('placed')}
             for i, p in enumerate(ch['paras']):
                 if p == '\x00TABLE':
                     h.append(shoftim_table())
@@ -633,11 +642,17 @@ def build(design='c', sample=False, size='b5', proof=False, lh=None):   # הוח
                        'li' if pl.startswith(('•', '·')) else 'first' if i == 0 else '')
                 if cls != 'q' and pl.rstrip().endswith(':') and nxt and is_quote(plain(nxt)):
                     cls = (cls + ' lead').strip()
-                h.append(f'<p class="{cls}">{para_html(p, proof)}</p>' if cls else f'<p>{para_html(p, proof)}</p>')
-            if ch['notes']:
+                ph = para_html(p, proof)
+                if FOOTNOTES:                      # הערה בתחתית העמוד: הטקסט שלה צמוד למספר, ו-Paged.js מוריד אותו למטה
+                    ph = re.sub(r'<sup class="fnref">([^<]*)</sup>', lambda m: m.group(0) + (
+                        f'<span class="fn"><b class="n">{m.group(1)}</b>{para_html(notes_by_n[m.group(1)], proof)}</span>'
+                        if m.group(1) in notes_by_n else ''), ph)
+                h.append(f'<p class="{cls}">{ph}</p>' if cls else f'<p>{ph}</p>')
+            rest = [n for n in ch['notes'] if not (FOOTNOTES and n.get('placed'))]
+            if rest:
                 h.append('<aside class="notes"><h4>הערות</h4><ol>' + ''.join(
                     f'<li><span class="n">{esc(str(n.get("n") or ""))}</span>{para_html(n["text"], proof)}</li>'
-                    for n in ch['notes']) + '</ol></aside>')
+                    for n in rest) + '</ol></aside>')
             h.append('</section>')
             body.append('\n'.join(h))
     front = f'''
@@ -693,8 +708,9 @@ if __name__ == '__main__':
     args = [a for a in argv if not a.startswith('--')]
     design = args[0] if args else 'c'
     sample, proof, size, lh = '--sample' in argv, '--proof' in argv, flags['--size'], flags['--lh']
+    FOOTNOTES = '--fn' in argv
     os.makedirs(os.path.join(BUILD, 'out'), exist_ok=True)
     name = (f'book-{design}' + ('-sample' if sample else '') + ('' if size == 'b5' else '-' + size)
-            + ('-proof' if proof else '') + (f'-lh{lh}' if lh else ''))
+            + ('-proof' if proof else '') + (f'-lh{lh}' if lh else '') + ('-fn' if FOOTNOTES else ''))
     open(os.path.join(BUILD, 'out', name + '.html'), 'w', encoding='utf-8').write(build(design, sample, size, proof, lh))
     print(name)
