@@ -9,7 +9,7 @@
    "version": "Midrash Tanchuma -- Torat Emet",
    "license": "Public Domain",
    "url": "https://www.sefaria.org.il/Midrash_Tanchuma,_Terumah_3:1?lang=he",
-   "para": 4
+   "para": 3
   },
   {
    "ref": "Midrash Tanchuma, Terumah 5:2",
@@ -20,7 +20,7 @@
    "version": "Midrash Tanchuma -- Torat Emet",
    "license": "Public Domain",
    "url": "https://www.sefaria.org.il/Midrash_Tanchuma,_Terumah_5:2?lang=he",
-   "para": 17
+   "para": 15
   },
   {
    "ref": "I Chronicles 29:14",
@@ -31,7 +31,7 @@
    "version": "Miqra according to the Masorah",
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/I_Chronicles_29:14?lang=he",
-   "para": 21
+   "para": 18
   },
   {
    "ref": "Midrash Tanchuma, Nasso 11:1",
@@ -42,7 +42,7 @@
    "version": "Midrash Tanchuma -- Torat Emet",
    "license": "Public Domain",
    "url": "https://www.sefaria.org.il/Midrash_Tanchuma,_Nasso_11:1?lang=he",
-   "para": 26
+   "para": 23
   },
   {
    "ref": "Bereshit Rabbah 4:4",
@@ -53,7 +53,7 @@
    "version": "Midrash Rabbah -- TE",
    "license": "CC-BY-NC",
    "url": "https://www.sefaria.org.il/Bereshit_Rabbah_4:4?lang=he",
-   "para": 28
+   "para": 25
   },
   {
    "ref": "Exodus 25:9",
@@ -64,7 +64,7 @@
    "version": "Miqra according to the Masorah",
    "license": "CC-BY-SA",
    "url": "https://www.sefaria.org.il/Exodus_25:9?lang=he",
-   "para": 43
+   "para": 36
   }
  ]
 }
